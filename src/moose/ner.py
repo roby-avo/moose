@@ -1,0 +1,164 @@
+from __future__ import annotations
+
+import json
+from typing import Any
+
+from moose.config import Settings, get_settings
+from moose.prob import choose_argmax
+from moose.prompts import build_table_prompt, build_text_ner_prompt
+from moose.schema import get_coarse_type, get_types
+from moose.validate import validate_ner_response, validate_table_response
+
+
+def _estimate_task_size(task: dict) -> int:
+    return len(json.dumps(task, ensure_ascii=True))
+
+
+def _batch_tasks(
+    tasks: list[dict], max_tasks: int, max_chars: int
+) -> list[list[dict]]:
+    batches: list[list[dict]] = []
+    current: list[dict] = []
+    current_chars = 0
+    for task in tasks:
+        task_size = _estimate_task_size(task)
+        if current and (len(current) + 1 > max_tasks or current_chars + task_size > max_chars):
+            batches.append(current)
+            current = []
+            current_chars = 0
+        current.append(task)
+        current_chars += task_size
+    if current:
+        batches.append(current)
+    return batches
+
+
+async def _run_with_retries(
+    llm_client,
+    prompt: str,
+    validator,
+    max_retries: int,
+) -> Any:
+    last_error: Exception | None = None
+    for attempt in range(max_retries + 1):
+        if attempt == 0:
+            response = await llm_client.generate(prompt)
+        else:
+            correction = (
+                "\n\nThe previous output was invalid: "
+                f"{last_error}. Return ONLY valid JSON following the schema."
+            )
+            response = await llm_client.generate(prompt + correction)
+        try:
+            return validator(response)
+        except Exception as exc:  # noqa: BLE001
+            last_error = exc
+    raise ValueError(f"LLM output invalid after {max_retries} retries: {last_error}")
+
+
+async def run_text_ner(
+    tasks: list[dict],
+    schema: str,
+    llm_client,
+    include_scores: bool = False,
+    settings: Settings | None = None,
+) -> dict:
+    settings = settings or get_settings()
+    type_ids = get_types(schema)
+    type_set = set(type_ids)
+    task_lookup = {task["task_id"]: task for task in tasks}
+    results_by_id: dict[str, dict] = {}
+
+    batches = _batch_tasks(
+        tasks,
+        max_tasks=settings.MOOSE_MAX_TASKS_PER_PROMPT,
+        max_chars=settings.MOOSE_MAX_CHARS_PER_PROMPT,
+    )
+
+    for batch in batches:
+        prompt = build_text_ner_prompt(schema, batch, type_ids)
+
+        def validator(raw_text: str):
+            return validate_ner_response(batch, raw_text, type_set)
+
+        parsed = await _run_with_retries(
+            llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES
+        )
+
+        for item in parsed:
+            text = task_lookup[item.task_id]["text"]
+            entities = []
+            for entity in item.entities:
+                scores = {type_id: float(entity.scores.get(type_id, 0)) for type_id in type_ids}
+                type_id, confidence, distribution = choose_argmax(scores)
+                output = {
+                    "start": entity.start,
+                    "end": entity.end,
+                    "text": text[entity.start : entity.end],
+                    "type_id": type_id,
+                    "confidence": confidence,
+                }
+                if schema == "fine":
+                    output["coarse_type_id"] = get_coarse_type(type_id)
+                if include_scores:
+                    output["distribution"] = distribution
+                entities.append(output)
+            results_by_id[item.task_id] = {"task_id": item.task_id, "entities": entities}
+
+    ordered = [results_by_id[task["task_id"]] for task in tasks]
+    return {"results": ordered}
+
+
+async def run_table_annotate(
+    tasks: list[dict],
+    schema: str,
+    llm_client,
+    include_scores: bool = False,
+    settings: Settings | None = None,
+) -> dict:
+    settings = settings or get_settings()
+    type_ids = get_types(schema)
+    type_set = set(type_ids)
+    task_lookup = {task["task_id"]: task for task in tasks}
+    results_by_id: dict[str, dict] = {}
+
+    batches = _batch_tasks(
+        tasks,
+        max_tasks=settings.MOOSE_MAX_TASKS_PER_PROMPT,
+        max_chars=settings.MOOSE_MAX_CHARS_PER_PROMPT,
+    )
+
+    for batch in batches:
+        prompt = build_table_prompt(schema, batch, type_ids)
+
+        def validator(raw_text: str):
+            return validate_table_response(batch, raw_text, type_set)
+
+        parsed = await _run_with_retries(
+            llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES
+        )
+
+        for item in parsed:
+            task = task_lookup[item.task_id]
+            columns = []
+            for column in item.columns:
+                scores = {type_id: float(column.scores.get(type_id, 0)) for type_id in type_ids}
+                type_id, confidence, distribution = choose_argmax(scores)
+                output = {
+                    "column": column.column,
+                    "type_id": type_id,
+                    "confidence": confidence,
+                }
+                if schema == "fine":
+                    output["coarse_type_id"] = get_coarse_type(type_id)
+                if include_scores:
+                    output["distribution"] = distribution
+                columns.append(output)
+            results_by_id[item.task_id] = {
+                "task_id": item.task_id,
+                "table_id": task["table_id"],
+                "columns": columns,
+            }
+
+    ordered = [results_by_id[task["task_id"]] for task in tasks]
+    return {"results": ordered}
