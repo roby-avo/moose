@@ -1,0 +1,46 @@
+@import url("https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css");
+
+.swagger-ui .topbar {
+  background: #0b2a2f;
+}
+
+.swagger-ui .topbar-wrapper img {
+  display: none;
+}
+
+.swagger-ui .topbar-wrapper .link {
+  display: block;
+  background: url("/static/moose-logo.png") no-repeat left center;
+  background-size: 160px auto;
+}
+
+.swagger-ui .topbar-wrapper .link span {
+  display: none;
+}
+
+.swagger-ui .information-container.wrapper {
+  padding: 12px 0 8px;
+}
+
+.swagger-ui .info {
+  margin: 12px 0 8px;
+}
+
+.swagger-ui .info .title {
+  margin-bottom: 6px;
+}
+
+.swagger-ui .scheme-container {
+  margin: 8px 0 12px;
+  padding: 8px 0;
+}
+
+.swagger-ui .info .title::after {
+  content: "";
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin-top: 8px;
+  background: url("/static/moose-logo.png") no-repeat left center;
+  background-size: contain;
+}

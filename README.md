@@ -1,5 +1,7 @@
 # Moose
 
+![Moose](src/moose_api/static/moose-readme.png)
+
 Moose is a prototype library and API for asynchronous, high-throughput NER and tabular semantic typing. Requests are queued and processed by workers; clients receive a `job_id` immediately and poll for results.
 
 ## Quickstart (local)
@@ -12,6 +14,7 @@ pip install -e .
 export MOOSE_LLM_PROVIDER=ollama
 export MOOSE_MODEL=llama3
 export MOOSE_OLLAMA_HOST=http://localhost:11434
+export MOOSE_API_KEY=your_api_key
 
 uvicorn moose_api.main:app --host 0.0.0.0 --port 8000
 ```
@@ -26,11 +29,13 @@ If you want to set defaults for the container, copy `.env.example` to `.env` and
 
 ## API
 
-Requests can include an `Idempotency-Key` header. If the same payload is sent with the same key, Moose returns the original `job_id`.
+All endpoints require `X-API-Key` or `Authorization: Bearer <key>`.
+Swagger UI is available at `/docs`.
 
 ### Runtime LLM overrides
 
 You can override the provider/model per request by passing an `llm` object in the payload. Any fields not supplied fall back to environment defaults.
+Provider credentials (like `MOOSE_OPENROUTER_API_KEY`) stay in environment variables.
 
 ```json
 {
@@ -38,9 +43,7 @@ You can override the provider/model per request by passing an `llm` object in th
   "tasks": [{"task_id": "t1", "text": "Roberto founded Moose."}],
   "llm": {
     "provider": "openrouter",
-    "model": "anthropic/claude-3.5-sonnet",
-    "openrouter_api_key": "your_api_key",
-    "openrouter_base_url": "https://openrouter.ai/api/v1"
+    "model": "anthropic/claude-3.5-sonnet"
   }
 }
 ```
@@ -48,7 +51,8 @@ You can override the provider/model per request by passing an `llm` object in th
 ### Submit NER job
 
 ```bash
-curl -s http://localhost:8000/v1/ner \
+curl -s http://localhost:8000/ner \
+  -H 'X-API-Key: your_api_key' \
   -H 'Content-Type: application/json' \
   -d '{
     "schema":"coarse",
@@ -61,7 +65,8 @@ curl -s http://localhost:8000/v1/ner \
 ### Submit tabular typing job
 
 ```bash
-curl -s http://localhost:8000/v1/tabular/annotate \
+curl -s http://localhost:8000/tabular/annotate \
+  -H 'X-API-Key: your_api_key' \
   -H 'Content-Type: application/json' \
   -d '{
     "schema":"coarse",
@@ -81,8 +86,19 @@ curl -s http://localhost:8000/v1/tabular/annotate \
 ### Poll job status/results
 
 ```bash
-curl -s http://localhost:8000/v1/jobs/<job_id>
+curl -s http://localhost:8000/jobs/<job_id> \
+  -H 'X-API-Key: your_api_key'
 ```
+
+### List models
+
+```bash
+curl -s http://localhost:8000/models \
+  -H 'X-API-Key: your_api_key'
+```
+
+`/models` returns local Ollama models plus OpenRouter free models (requires `MOOSE_OPENROUTER_API_KEY`).
+You can also query a single provider via `?provider=ollama` or `?provider=openrouter`.
 
 ## Schemas
 
@@ -109,6 +125,8 @@ For each entity/column, the model returns unnormalized non-negative scores for a
 - `MOOSE_OPENROUTER_BASE_URL`: defaults to `https://openrouter.ai/api/v1`
 - `MOOSE_MONGO_URL`: MongoDB connection string
 - `MOOSE_MONGO_DB`: MongoDB database name
+- `MOOSE_MONGO_TIMEOUT_SECS`: MongoDB startup ping timeout (seconds)
+- `MOOSE_API_KEY`: required API key for all endpoints
 - `MOOSE_WORKER_COUNT`: worker concurrency
 - `MOOSE_QUEUE_MAXSIZE`: max queue length for backpressure
 - `MOOSE_MAX_RETRIES`: retries for invalid LLM output

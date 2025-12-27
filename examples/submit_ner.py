@@ -1,9 +1,14 @@
+import os
 import time
 
 import httpx
 
 
 def main():
+    api_key = os.environ.get("MOOSE_API_KEY")
+    if not api_key:
+        raise RuntimeError("MOOSE_API_KEY is required")
+
     payload = {
         "schema": "coarse",
         "tasks": [
@@ -11,14 +16,15 @@ def main():
             {"task_id": "t2", "text": "OpenAI held a conference in San Francisco."},
         ],
     }
+    headers = {"X-API-Key": api_key}
     with httpx.Client() as client:
-        resp = client.post("http://localhost:8000/v1/ner", json=payload)
+        resp = client.post("http://localhost:8000/ner", json=payload, headers=headers)
         resp.raise_for_status()
         job_id = resp.json()["job_id"]
         print("job_id:", job_id)
 
         while True:
-            status = client.get(f"http://localhost:8000/v1/jobs/{job_id}")
+            status = client.get(f"http://localhost:8000/jobs/{job_id}", headers=headers)
             status.raise_for_status()
             data = status.json()
             print("status:", data["status"])

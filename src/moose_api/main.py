@@ -1,9 +1,15 @@
 from __future__ import annotations
 
 import uuid
+from pathlib import Path
 from typing import Any, Literal
 
-from fastapi import FastAPI, Header, HTTPException
+import httpx
+import ollama
+from fastapi import Depends, FastAPI, Header, HTTPException, Security
+from fastapi.openapi.docs import get_swagger_ui_html
+from fastapi.security import APIKeyHeader, HTTPAuthorizationCredentials, HTTPBearer
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from moose.config import Settings, get_settings
@@ -12,7 +18,6 @@ from moose_api.queue import (
     JobRecord,
     WorkerPool,
     build_backends,
-    payload_hash,
     utc_now,
 )
 
@@ -20,10 +25,8 @@ from moose_api.queue import (
 class LLMOverrides(BaseModel):
     provider: Literal["ollama", "openrouter"] | None = None
     model: str | None = None
-    ollama_host: str | None = None
     ollama_token: str | None = None
     openrouter_api_key: str | None = None
-    openrouter_base_url: str | None = None
 
 
 class NERTaskIn(BaseModel):
@@ -51,14 +54,36 @@ class TabularRequest(BaseModel):
     llm: LLMOverrides | None = None
 
 
-app = FastAPI(title="Moose API", version="0.1.0")
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+
+app = FastAPI(title="Moose API", version="0.1.0", docs_url=None, redoc_url=None)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+bearer_scheme = HTTPBearer(auto_error=False)
+
+
+async def require_api_key(
+    api_key: str | None = Security(api_key_header),
+    bearer: HTTPAuthorizationCredentials | None = Security(bearer_scheme),
+) -> None:
+    expected = app.state.settings.MOOSE_API_KEY
+    if not expected:
+        raise HTTPException(status_code=500, detail="API key not configured")
+    token = api_key or (bearer.credentials if bearer else None)
+    if token != expected:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @app.on_event("startup")
 async def startup() -> None:
     settings = get_settings()
+    if not settings.MOOSE_API_KEY:
+        raise RuntimeError("MOOSE_API_KEY is required for the API service")
     job_store, queue_backend, info = await build_backends(settings)
-    llm_client = create_client(settings)
+    llm_client = None
+    if settings.MOOSE_LLM_PROVIDER.lower() != "openrouter" or settings.MOOSE_OPENROUTER_API_KEY:
+        llm_client = create_client(settings)
 
     app.state.settings = settings
     app.state.job_store = job_store
@@ -83,17 +108,10 @@ async def shutdown() -> None:
         mongo_client.close()
 
 
-async def _enqueue_job(endpoint_type: str, payload: dict, idempotency_key: str | None):
+async def _enqueue_job(endpoint_type: str, payload: dict):
     settings: Settings = app.state.settings
     queue_backend = app.state.queue_backend
     job_store = app.state.job_store
-
-    if idempotency_key:
-        existing = await job_store.get_idempotency(idempotency_key)
-        if existing:
-            if existing.get("payload_hash") == payload_hash(payload):
-                return existing.get("job_id")
-            raise HTTPException(status_code=409, detail="Idempotency key conflict")
 
     queue_size = await queue_backend.size()
     if queue_size >= settings.MOOSE_QUEUE_MAXSIZE:
@@ -111,11 +129,6 @@ async def _enqueue_job(endpoint_type: str, payload: dict, idempotency_key: str |
         retries=0,
     )
     await job_store.put_job(job)
-    if idempotency_key:
-        await job_store.set_idempotency(
-            idempotency_key,
-            {"payload_hash": payload_hash(payload), "job_id": job_id},
-        )
     try:
         await queue_backend.enqueue(job_id)
     except Exception as exc:  # noqa: BLE001
@@ -129,37 +142,52 @@ async def _enqueue_job(endpoint_type: str, payload: dict, idempotency_key: str |
     return job_id
 
 
-@app.post("/v1/ner")
+def _build_llm_payload(
+    request_llm: LLMOverrides | None,
+    openrouter_api_key: str | None,
+    ollama_token: str | None,
+) -> dict[str, Any] | None:
+    llm_payload = request_llm.model_dump(exclude_none=True) if request_llm else {}
+    if openrouter_api_key:
+        llm_payload["openrouter_api_key"] = openrouter_api_key
+    if ollama_token:
+        llm_payload["ollama_token"] = ollama_token
+    return llm_payload or None
+
+
+@app.post("/ner", dependencies=[Depends(require_api_key)])
 async def submit_ner(
     request: NERRequest,
-    idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
+    openrouter_api_key: str | None = Header(default=None, alias="X-OpenRouter-API-Key"),
+    ollama_token: str | None = Header(default=None, alias="X-Ollama-Token"),
 ):
     payload = {
         "schema": request.schema,
         "tasks": [task.model_dump() for task in request.tasks],
         "include_scores": request.include_scores,
-        "llm": request.llm.model_dump(exclude_none=True) if request.llm else None,
+        "llm": _build_llm_payload(request.llm, openrouter_api_key, ollama_token),
     }
-    job_id = await _enqueue_job("ner", payload, idempotency_key)
+    job_id = await _enqueue_job("ner", payload)
     return {"job_id": job_id, "status": "queued"}
 
 
-@app.post("/v1/tabular/annotate")
+@app.post("/tabular/annotate", dependencies=[Depends(require_api_key)])
 async def submit_tabular(
     request: TabularRequest,
-    idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
+    openrouter_api_key: str | None = Header(default=None, alias="X-OpenRouter-API-Key"),
+    ollama_token: str | None = Header(default=None, alias="X-Ollama-Token"),
 ):
     payload = {
         "schema": request.schema,
         "tasks": [task.model_dump() for task in request.tasks],
         "include_scores": request.include_scores,
-        "llm": request.llm.model_dump(exclude_none=True) if request.llm else None,
+        "llm": _build_llm_payload(request.llm, openrouter_api_key, ollama_token),
     }
-    job_id = await _enqueue_job("tabular", payload, idempotency_key)
+    job_id = await _enqueue_job("tabular", payload)
     return {"job_id": job_id, "status": "queued"}
 
 
-@app.get("/v1/jobs/{job_id}")
+@app.get("/jobs/{job_id}", dependencies=[Depends(require_api_key)])
 async def get_job(job_id: str):
     job_store = app.state.job_store
     job = await job_store.get_job(job_id)
@@ -178,7 +206,7 @@ async def get_job(job_id: str):
     return response
 
 
-@app.get("/health")
+@app.get("/health", dependencies=[Depends(require_api_key)])
 async def health():
     settings: Settings = app.state.settings
     queue_info = app.state.queue_info
@@ -189,3 +217,83 @@ async def health():
         "worker_count": settings.MOOSE_WORKER_COUNT,
         "queue_backend": queue_info.get("queue_backend"),
     }
+
+
+def _parse_price(value: Any) -> float | None:
+    if value is None:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+@app.get("/models", dependencies=[Depends(require_api_key)])
+async def list_models(
+    provider: Literal["ollama", "openrouter", "all"] = "all",
+    ollama_token: str | None = Header(default=None, alias="X-Ollama-Token"),
+    openrouter_api_key: str | None = Header(default=None, alias="X-OpenRouter-API-Key"),
+):
+    settings: Settings = app.state.settings
+    results: dict[str, Any] = {}
+
+    if provider in {"ollama", "all"}:
+        headers = {}
+        token = ollama_token or settings.MOOSE_OLLAMA_TOKEN
+        if token:
+            headers["Authorization"] = f"Bearer {token}"
+        try:
+            async with httpx.AsyncClient(
+                base_url=settings.MOOSE_OLLAMA_HOST,
+                timeout=settings.MOOSE_TIMEOUT_SECS,
+            ) as client:
+                resp = await client.get("/api/tags", headers=headers)
+                resp.raise_for_status()
+                data = resp.json()
+            models = [item.get("name") for item in data.get("models", []) if item.get("name")]
+            results["ollama"] = {"models": models}
+        except Exception as exc:  # noqa: BLE001
+            results["ollama"] = {"error": str(exc)}
+
+    if provider in {"openrouter", "all"}:
+        api_key = openrouter_api_key or settings.MOOSE_OPENROUTER_API_KEY
+        if not api_key:
+            results["openrouter"] = {"error": "OpenRouter API key not configured"}
+        else:
+            try:
+                headers = {"Authorization": f"Bearer {api_key}"}
+                async with httpx.AsyncClient(
+                    base_url=settings.MOOSE_OPENROUTER_BASE_URL,
+                    timeout=settings.MOOSE_TIMEOUT_SECS,
+                ) as client:
+                    resp = await client.get("/models", headers=headers)
+                    resp.raise_for_status()
+                    data = resp.json()
+                free_models = []
+                for item in data.get("data", []):
+                    pricing = item.get("pricing", {})
+                    prompt_price = _parse_price(pricing.get("prompt"))
+                    completion_price = _parse_price(pricing.get("completion"))
+                    if prompt_price == 0 and completion_price == 0:
+                        free_models.append(
+                            {
+                                "id": item.get("id"),
+                                "name": item.get("name"),
+                                "context_length": item.get("context_length"),
+                            }
+                        )
+                results["openrouter"] = {"models": free_models}
+            except Exception as exc:  # noqa: BLE001
+                results["openrouter"] = {"error": str(exc)}
+
+    return results
+
+
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui():
+    return get_swagger_ui_html(
+        openapi_url=app.openapi_url,
+        title="Moose API Docs",
+        swagger_favicon_url="/static/moose-logo.png",
+        swagger_css_url="/static/docs.css",
+    )

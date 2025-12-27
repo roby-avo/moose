@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import asyncio
-import hashlib
-import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any
@@ -33,11 +31,6 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def payload_hash(payload: dict) -> str:
-    dumped = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
-    return hashlib.sha256(dumped.encode("utf-8")).hexdigest()
-
-
 class JobStore:
     async def get_job(self, job_id: str) -> JobRecord | None:
         raise NotImplementedError
@@ -48,17 +41,9 @@ class JobStore:
     async def update_job(self, job_id: str, **fields: Any) -> None:
         raise NotImplementedError
 
-    async def get_idempotency(self, key: str) -> dict | None:
-        raise NotImplementedError
-
-    async def set_idempotency(self, key: str, value: dict) -> None:
-        raise NotImplementedError
-
-
 class InMemoryJobStore(JobStore):
     def __init__(self) -> None:
         self._jobs: dict[str, JobRecord] = {}
-        self._idempotency: dict[str, dict] = {}
         self._lock = asyncio.Lock()
 
     async def get_job(self, job_id: str) -> JobRecord | None:
@@ -78,25 +63,14 @@ class InMemoryJobStore(JobStore):
                 setattr(job, key, value)
             self._jobs[job_id] = job
 
-    async def get_idempotency(self, key: str) -> dict | None:
-        async with self._lock:
-            return self._idempotency.get(key)
-
-    async def set_idempotency(self, key: str, value: dict) -> None:
-        async with self._lock:
-            self._idempotency[key] = value
-
-
 class MongoJobStore(JobStore):
     def __init__(self, db) -> None:
         self._jobs = db["jobs"]
-        self._idempotency = db["idempotency"]
 
     async def ensure_indexes(self) -> None:
         await self._jobs.create_index("status")
         await self._jobs.create_index("created_at")
         await self._jobs.create_index("job_id", unique=True)
-        await self._idempotency.create_index("_id", unique=True)
 
     def _doc_to_record(self, doc: dict) -> JobRecord:
         if not doc:
@@ -128,17 +102,6 @@ class MongoJobStore(JobStore):
         if not fields:
             return
         await self._jobs.update_one({"_id": job_id}, {"$set": fields})
-
-    async def get_idempotency(self, key: str) -> dict | None:
-        doc = await self._idempotency.find_one({"_id": key})
-        if not doc:
-            return None
-        doc.pop("_id", None)
-        return doc
-
-    async def set_idempotency(self, key: str, value: dict) -> None:
-        await self._idempotency.replace_one({"_id": key}, {"_id": key, **value}, upsert=True)
-
 
 class QueueBackend:
     async def enqueue(self, job_id: str) -> None:
@@ -206,14 +169,10 @@ def _settings_with_overrides(settings: Settings, overrides: dict) -> Settings:
         update["MOOSE_LLM_PROVIDER"] = overrides["provider"]
     if overrides.get("model"):
         update["MOOSE_MODEL"] = overrides["model"]
-    if overrides.get("ollama_host"):
-        update["MOOSE_OLLAMA_HOST"] = overrides["ollama_host"]
-    if overrides.get("ollama_token") is not None:
+    if overrides.get("ollama_token"):
         update["MOOSE_OLLAMA_TOKEN"] = overrides["ollama_token"]
-    if overrides.get("openrouter_api_key") is not None:
+    if overrides.get("openrouter_api_key"):
         update["MOOSE_OPENROUTER_API_KEY"] = overrides["openrouter_api_key"]
-    if overrides.get("openrouter_base_url"):
-        update["MOOSE_OPENROUTER_BASE_URL"] = overrides["openrouter_base_url"]
     if not update:
         return settings
     return settings.model_copy(update=update)
@@ -224,7 +183,7 @@ class WorkerPool:
         self,
         queue: QueueBackend,
         store: JobStore,
-        llm_client: LLMClient,
+        llm_client: LLMClient | None,
         settings: Settings,
     ) -> None:
         self._queue = queue
@@ -261,6 +220,11 @@ class WorkerPool:
                     job_settings = _settings_with_overrides(self._settings, overrides)
                     llm_client = create_client(job_settings)
                     owns_client = True
+                if llm_client is None:
+                    raise RuntimeError(
+                        "LLM client not configured. Provide llm overrides with openrouter_api_key "
+                        "or configure MOOSE_OPENROUTER_API_KEY."
+                    )
                 if job.endpoint_type == "ner":
                     result = await run_text_ner(
                         job.payload["tasks"],
@@ -300,7 +264,12 @@ class WorkerPool:
 async def build_backends(settings: Settings) -> tuple[JobStore, QueueBackend, dict]:
     info: dict[str, Any] = {"queue_backend": "memory"}
     if settings.MOOSE_MONGO_URL:
-        client = motor.AsyncIOMotorClient(settings.MOOSE_MONGO_URL)
+        timeout_ms = max(1, int(settings.MOOSE_MONGO_TIMEOUT_SECS * 1000))
+        client = motor.AsyncIOMotorClient(
+            settings.MOOSE_MONGO_URL,
+            serverSelectionTimeoutMS=timeout_ms,
+            connectTimeoutMS=timeout_ms,
+        )
         try:
             await client.admin.command("ping")
             db = client[settings.MOOSE_MONGO_DB]

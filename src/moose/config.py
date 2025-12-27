@@ -10,7 +10,7 @@ class Settings(BaseSettings):
 
     MOOSE_LLM_PROVIDER: str = "ollama"
     MOOSE_MODEL: str = "llama3"
-    MOOSE_SCHEMA: str = "coarse"
+    MOOSE_API_KEY: str | None = None
     MOOSE_MAX_RETRIES: int = 2
     MOOSE_WORKER_COUNT: int = 4
     MOOSE_QUEUE_MAXSIZE: int = 1000
@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     MOOSE_OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
     MOOSE_MONGO_URL: str | None = None
     MOOSE_MONGO_DB: str = "moose"
+    MOOSE_MONGO_TIMEOUT_SECS: float = 2.0
     MOOSE_MAX_TASKS_PER_PROMPT: int = 10
     MOOSE_MAX_CHARS_PER_PROMPT: int = 12000
     MOOSE_TIMEOUT_SECS: float = 60.0
