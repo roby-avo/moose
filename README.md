@@ -24,6 +24,7 @@ docker compose up --build
 ```
 
 If you want to set defaults for the container, copy `.env.example` to `.env` and adjust values (for example, `MOOSE_OPENROUTER_BASE_URL`).
+To avoid port conflicts, set `MOOSE_API_PORT` and `MOOSE_DEMO_PORT`.
 
 ## Production (Docker Compose)
 
@@ -32,6 +33,8 @@ Use the production compose file to run the API with multiple workers, Mongo pers
 ```bash
 docker compose -f docker-compose.prod.yml up -d --build
 ```
+
+This production compose file also exposes the Streamlit demo. Configure ports via `MOOSE_API_PORT` and `MOOSE_DEMO_PORT` in `.env`.
 
 ### LLM endpoint configuration
 
