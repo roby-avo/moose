@@ -8,8 +8,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="", extra="ignore")
 
-    MOOSE_LLM_PROVIDER: str = "ollama"
-    MOOSE_MODEL: str = "llama3"
+    MOOSE_LLM_PROVIDER: str = "openrouter"
+    MOOSE_MODEL: str = "anthropic/claude-3.5-sonnet"
     MOOSE_API_KEY: str | None = None
     MOOSE_MAX_RETRIES: int = 2
     MOOSE_WORKER_COUNT: int = 4

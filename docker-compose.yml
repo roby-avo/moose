@@ -15,9 +15,13 @@ services:
     image: mongo:7
     ports:
       - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
 
   moose-demo:
-    image: python:3.12-slim
+    build:
+      context: .
+      dockerfile: Dockerfile.demo
     working_dir: /app
     volumes:
       - ./:/app
@@ -27,9 +31,16 @@ services:
       - MOOSE_API_BASE_URL=http://moose-api:8000
     command:
       [
-        "bash",
-        "-lc",
-        "pip install -e '.[demo]' && streamlit run examples/streamlit_app.py --server.address 0.0.0.0 --server.port 8501"
+        "streamlit",
+        "run",
+        "examples/streamlit_app.py",
+        "--server.address",
+        "0.0.0.0",
+        "--server.port",
+        "8501"
       ]
     depends_on:
       - moose-api
+
+volumes:
+  mongo_data:

@@ -9,7 +9,7 @@ class OpenRouterClient(LLMClient):
     def __init__(self, api_key: str | None, base_url: str, model: str, timeout: float) -> None:
         super().__init__(provider="openrouter", model=model)
         if not api_key:
-            raise ValueError("MOOSE_OPENROUTER_API_KEY is required for OpenRouter")
+            raise ValueError("OpenRouter API key is required")
         self._api_key = api_key
         self._base_url = base_url.rstrip("/")
         self._client = httpx.AsyncClient(timeout=timeout, base_url=self._base_url)

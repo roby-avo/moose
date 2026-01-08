@@ -66,6 +66,7 @@ async def run_text_ner(
     settings = settings or get_settings()
     type_ids = get_types(schema)
     type_set = set(type_ids)
+    require_all_scores = schema != "dpv"
     task_lookup = {task["task_id"]: task for task in tasks}
     results_by_id: dict[str, dict] = {}
 
@@ -79,7 +80,12 @@ async def run_text_ner(
         prompt = build_text_ner_prompt(schema, batch, type_ids)
 
         def validator(raw_text: str):
-            return validate_ner_response(batch, raw_text, type_set)
+            return validate_ner_response(
+                batch,
+                raw_text,
+                type_set,
+                require_all_scores=require_all_scores,
+            )
 
         parsed = await _run_with_retries(
             llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES
@@ -119,6 +125,7 @@ async def run_table_annotate(
     settings = settings or get_settings()
     type_ids = get_types(schema)
     type_set = set(type_ids)
+    require_all_scores = schema != "dpv"
     task_lookup = {task["task_id"]: task for task in tasks}
     results_by_id: dict[str, dict] = {}
 
@@ -132,7 +139,12 @@ async def run_table_annotate(
         prompt = build_table_prompt(schema, batch, type_ids)
 
         def validator(raw_text: str):
-            return validate_table_response(batch, raw_text, type_set)
+            return validate_table_response(
+                batch,
+                raw_text,
+                type_set,
+                require_all_scores=require_all_scores,
+            )
 
         parsed = await _run_with_retries(
             llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES

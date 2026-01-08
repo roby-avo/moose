@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import Any, Literal
 
 import httpx
-import ollama
 from fastapi import Depends, FastAPI, Header, HTTPException, Security
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.security import APIKeyHeader, HTTPAuthorizationCredentials, HTTPBearer
@@ -23,10 +22,8 @@ from moose_api.queue import (
 
 
 class LLMOverrides(BaseModel):
-    provider: Literal["ollama", "openrouter"] | None = None
-    model: str | None = None
-    ollama_token: str | None = None
-    openrouter_api_key: str | None = None
+    provider: Literal["openrouter", "ollama"]
+    model: str
 
 
 class NERTaskIn(BaseModel):
@@ -35,10 +32,10 @@ class NERTaskIn(BaseModel):
 
 
 class NERRequest(BaseModel):
-    schema: Literal["coarse", "fine"]
+    schema: Literal["coarse", "fine", "dpv"]
     tasks: list[NERTaskIn] = Field(min_length=1)
     include_scores: bool = False
-    llm: LLMOverrides | None = None
+    llm: LLMOverrides
 
 
 class TabularTaskIn(BaseModel):
@@ -48,15 +45,44 @@ class TabularTaskIn(BaseModel):
 
 
 class TabularRequest(BaseModel):
-    schema: Literal["coarse", "fine"]
+    schema: Literal["coarse", "fine", "dpv"]
     tasks: list[TabularTaskIn] = Field(min_length=1)
     include_scores: bool = False
-    llm: LLMOverrides | None = None
+    llm: LLMOverrides
+
+
+class DpvNERRequest(BaseModel):
+    tasks: list[NERTaskIn] = Field(min_length=1)
+    include_scores: bool = False
+    llm: LLMOverrides
+
+
+class DpvTabularRequest(BaseModel):
+    tasks: list[TabularTaskIn] = Field(min_length=1)
+    include_scores: bool = False
+    llm: LLMOverrides
+
+
+class JobQueuedResponse(BaseModel):
+    job_id: str
+    status: Literal["queued"]
 
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
-app = FastAPI(title="Moose API", version="0.1.0", docs_url=None, redoc_url=None)
+TAG_METADATA = [
+    {"name": "NER", "description": "Named entity recognition endpoints."},
+    {"name": "Tabular", "description": "Tabular semantic typing endpoints."},
+    {"name": "DPV", "description": "DPV classification endpoints."},
+]
+
+app = FastAPI(
+    title="Moose API",
+    version="0.1.0",
+    docs_url=None,
+    redoc_url=None,
+    openapi_tags=TAG_METADATA,
+)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
@@ -75,6 +101,18 @@ async def require_api_key(
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 
+def _require_llm_overrides(
+    request_llm: LLMOverrides,
+    llm_api_key: str | None,
+) -> None:
+    provider = request_llm.provider.lower()
+    if provider == "openrouter" and not llm_api_key:
+        raise HTTPException(
+            status_code=400,
+            detail="LLM API key is required via X-LLM-API-Key for OpenRouter.",
+        )
+
+
 @app.on_event("startup")
 async def startup() -> None:
     settings = get_settings()
@@ -82,7 +120,7 @@ async def startup() -> None:
         raise RuntimeError("MOOSE_API_KEY is required for the API service")
     job_store, queue_backend, info = await build_backends(settings)
     llm_client = None
-    if settings.MOOSE_LLM_PROVIDER.lower() != "openrouter" or settings.MOOSE_OPENROUTER_API_KEY:
+    if settings.MOOSE_LLM_PROVIDER.lower() != "openrouter":
         llm_client = create_client(settings)
 
     app.state.settings = settings
@@ -143,48 +181,107 @@ async def _enqueue_job(endpoint_type: str, payload: dict):
 
 
 def _build_llm_payload(
-    request_llm: LLMOverrides | None,
-    openrouter_api_key: str | None,
-    ollama_token: str | None,
-) -> dict[str, Any] | None:
-    llm_payload = request_llm.model_dump(exclude_none=True) if request_llm else {}
-    if openrouter_api_key:
-        llm_payload["openrouter_api_key"] = openrouter_api_key
-    if ollama_token:
-        llm_payload["ollama_token"] = ollama_token
-    return llm_payload or None
+    request_llm: LLMOverrides,
+    llm_api_key: str | None,
+    llm_endpoint: str | None,
+) -> dict[str, Any]:
+    llm_payload = request_llm.model_dump()
+    if llm_api_key:
+        if request_llm.provider.lower() == "openrouter":
+            llm_payload["openrouter_api_key"] = llm_api_key
+        else:
+            llm_payload["ollama_token"] = llm_api_key
+    if llm_endpoint:
+        llm_payload["endpoint"] = llm_endpoint
+    return llm_payload
 
 
-@app.post("/ner", dependencies=[Depends(require_api_key)])
+@app.post(
+    "/ner",
+    dependencies=[Depends(require_api_key)],
+    tags=["NER"],
+    response_model=JobQueuedResponse,
+)
 async def submit_ner(
     request: NERRequest,
-    openrouter_api_key: str | None = Header(default=None, alias="X-OpenRouter-API-Key"),
-    ollama_token: str | None = Header(default=None, alias="X-Ollama-Token"),
+    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
+    _require_llm_overrides(request.llm, llm_api_key)
     payload = {
         "schema": request.schema,
         "tasks": [task.model_dump() for task in request.tasks],
         "include_scores": request.include_scores,
-        "llm": _build_llm_payload(request.llm, openrouter_api_key, ollama_token),
+        "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("ner", payload)
-    return {"job_id": job_id, "status": "queued"}
+    return JobQueuedResponse(job_id=job_id, status="queued")
 
 
-@app.post("/tabular/annotate", dependencies=[Depends(require_api_key)])
+@app.post(
+    "/dpv/ner",
+    dependencies=[Depends(require_api_key)],
+    tags=["DPV"],
+    response_model=JobQueuedResponse,
+)
+async def submit_dpv_ner(
+    request: DpvNERRequest,
+    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
+):
+    _require_llm_overrides(request.llm, llm_api_key)
+    payload = {
+        "schema": "dpv",
+        "tasks": [task.model_dump() for task in request.tasks],
+        "include_scores": request.include_scores,
+        "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
+    }
+    job_id = await _enqueue_job("ner", payload)
+    return JobQueuedResponse(job_id=job_id, status="queued")
+
+
+@app.post(
+    "/tabular/annotate",
+    dependencies=[Depends(require_api_key)],
+    tags=["Tabular"],
+    response_model=JobQueuedResponse,
+)
 async def submit_tabular(
     request: TabularRequest,
-    openrouter_api_key: str | None = Header(default=None, alias="X-OpenRouter-API-Key"),
-    ollama_token: str | None = Header(default=None, alias="X-Ollama-Token"),
+    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
+    _require_llm_overrides(request.llm, llm_api_key)
     payload = {
         "schema": request.schema,
         "tasks": [task.model_dump() for task in request.tasks],
         "include_scores": request.include_scores,
-        "llm": _build_llm_payload(request.llm, openrouter_api_key, ollama_token),
+        "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular", payload)
-    return {"job_id": job_id, "status": "queued"}
+    return JobQueuedResponse(job_id=job_id, status="queued")
+
+
+@app.post(
+    "/dpv/tabular/annotate",
+    dependencies=[Depends(require_api_key)],
+    tags=["DPV"],
+    response_model=JobQueuedResponse,
+)
+async def submit_dpv_tabular(
+    request: DpvTabularRequest,
+    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
+):
+    _require_llm_overrides(request.llm, llm_api_key)
+    payload = {
+        "schema": "dpv",
+        "tasks": [task.model_dump() for task in request.tasks],
+        "include_scores": request.include_scores,
+        "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
+    }
+    job_id = await _enqueue_job("tabular", payload)
+    return JobQueuedResponse(job_id=job_id, status="queued")
 
 
 @app.get("/jobs/{job_id}", dependencies=[Depends(require_api_key)])
@@ -230,21 +327,22 @@ def _parse_price(value: Any) -> float | None:
 
 @app.get("/models", dependencies=[Depends(require_api_key)])
 async def list_models(
-    provider: Literal["ollama", "openrouter", "all"] = "all",
-    ollama_token: str | None = Header(default=None, alias="X-Ollama-Token"),
-    openrouter_api_key: str | None = Header(default=None, alias="X-OpenRouter-API-Key"),
+    provider: Literal["ollama", "openrouter", "all"] = "openrouter",
+    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     settings: Settings = app.state.settings
     results: dict[str, Any] = {}
-
     if provider in {"ollama", "all"}:
         headers = {}
-        token = ollama_token or settings.MOOSE_OLLAMA_TOKEN
-        if token:
-            headers["Authorization"] = f"Bearer {token}"
+        if llm_api_key:
+            headers["Authorization"] = f"Bearer {llm_api_key}"
+        base_url = settings.MOOSE_OLLAMA_HOST
+        if provider == "ollama" and llm_endpoint:
+            base_url = llm_endpoint
         try:
             async with httpx.AsyncClient(
-                base_url=settings.MOOSE_OLLAMA_HOST,
+                base_url=base_url,
                 timeout=settings.MOOSE_TIMEOUT_SECS,
             ) as client:
                 resp = await client.get("/api/tags", headers=headers)
@@ -256,14 +354,16 @@ async def list_models(
             results["ollama"] = {"error": str(exc)}
 
     if provider in {"openrouter", "all"}:
-        api_key = openrouter_api_key or settings.MOOSE_OPENROUTER_API_KEY
-        if not api_key:
-            results["openrouter"] = {"error": "OpenRouter API key not configured"}
+        if not llm_api_key:
+            results["openrouter"] = {"error": "OpenRouter API key is required"}
         else:
             try:
-                headers = {"Authorization": f"Bearer {api_key}"}
+                base_url = settings.MOOSE_OPENROUTER_BASE_URL
+                if provider == "openrouter" and llm_endpoint:
+                    base_url = llm_endpoint
+                headers = {"Authorization": f"Bearer {llm_api_key}"}
                 async with httpx.AsyncClient(
-                    base_url=settings.MOOSE_OPENROUTER_BASE_URL,
+                    base_url=base_url,
                     timeout=settings.MOOSE_TIMEOUT_SECS,
                 ) as client:
                     resp = await client.get("/models", headers=headers)

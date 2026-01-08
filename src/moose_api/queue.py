@@ -165,6 +165,7 @@ class MongoQueue(QueueBackend):
 
 def _settings_with_overrides(settings: Settings, overrides: dict) -> Settings:
     update: dict[str, Any] = {}
+    provider = overrides.get("provider", settings.MOOSE_LLM_PROVIDER).lower()
     if overrides.get("provider"):
         update["MOOSE_LLM_PROVIDER"] = overrides["provider"]
     if overrides.get("model"):
@@ -173,6 +174,11 @@ def _settings_with_overrides(settings: Settings, overrides: dict) -> Settings:
         update["MOOSE_OLLAMA_TOKEN"] = overrides["ollama_token"]
     if overrides.get("openrouter_api_key"):
         update["MOOSE_OPENROUTER_API_KEY"] = overrides["openrouter_api_key"]
+    if overrides.get("endpoint"):
+        if provider == "openrouter":
+            update["MOOSE_OPENROUTER_BASE_URL"] = overrides["endpoint"]
+        elif provider == "ollama":
+            update["MOOSE_OLLAMA_HOST"] = overrides["endpoint"]
     if not update:
         return settings
     return settings.model_copy(update=update)
@@ -222,8 +228,7 @@ class WorkerPool:
                     owns_client = True
                 if llm_client is None:
                     raise RuntimeError(
-                        "LLM client not configured. Provide llm overrides with openrouter_api_key "
-                        "or configure MOOSE_OPENROUTER_API_KEY."
+                        "LLM client not configured. Provide llm overrides with openrouter_api_key."
                     )
                 if job.endpoint_type == "ner":
                     result = await run_text_ner(

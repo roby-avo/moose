@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import json
+from functools import lru_cache
+from pathlib import Path
+
 COARSE_TYPES = [
     "NER:PERSON",
     "NER:ORGANIZATION",
@@ -41,8 +45,23 @@ FINE_TO_COARSE = {
     "NER:OTHER": "NER:OTHER",
 }
 
+DPV_DATA_PATH = Path(__file__).resolve().parent / "data" / "dpv_full.json"
+
+
+@lru_cache
+def _load_dpv_types() -> list[str]:
+    if not DPV_DATA_PATH.exists():
+        raise FileNotFoundError(
+            "DPV vocabulary not found. Run scripts/fetch_dpv.py to generate it."
+        )
+    with DPV_DATA_PATH.open("r", encoding="utf-8") as handle:
+        data = json.load(handle)
+    return [item["id"] for item in data if "id" in item]
+
 
 def get_types(schema: str) -> list[str]:
+    if schema == "dpv":
+        return _load_dpv_types()
     if schema == "fine":
         return list(FINE_TYPES)
     return list(COARSE_TYPES)

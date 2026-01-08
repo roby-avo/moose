@@ -43,20 +43,30 @@ def extract_json(text: str) -> Any:
     return obj
 
 
-def _validate_scores(scores: dict[str, float], allowed_types: set[str]) -> None:
-    missing = allowed_types.difference(scores.keys())
-    if missing:
-        raise ValueError(f"Missing score keys: {sorted(missing)}")
+def _validate_scores(
+    scores: dict[str, float],
+    allowed_types: set[str],
+    require_all: bool = True,
+) -> None:
+    if require_all:
+        missing = allowed_types.difference(scores.keys())
+        if missing:
+            raise ValueError(f"Missing score keys: {sorted(missing)}")
     for key, value in scores.items():
         if key not in allowed_types:
             raise ValueError(f"Unexpected score key: {key}")
         if value < 0:
             raise ValueError("Scores must be non-negative")
-    if all(value <= 0 for value in scores.values()):
+    if not scores or all(value <= 0 for value in scores.values()):
         raise ValueError("At least one score must be > 0")
 
 
-def validate_ner_response(tasks: list[dict], raw_text: str, allowed_types: set[str]) -> list[NERTaskModel]:
+def validate_ner_response(
+    tasks: list[dict],
+    raw_text: str,
+    allowed_types: set[str],
+    require_all_scores: bool = True,
+) -> list[NERTaskModel]:
     data = extract_json(raw_text)
     adapter = TypeAdapter(list[NERTaskModel])
     parsed = adapter.validate_python(data)
@@ -74,13 +84,16 @@ def validate_ner_response(tasks: list[dict], raw_text: str, allowed_types: set[s
                 raise ValueError("Invalid entity offsets")
             if text[entity.start : entity.end] != entity.text:
                 raise ValueError("Entity text does not match offsets")
-            _validate_scores(entity.scores, allowed_types)
+            _validate_scores(entity.scores, allowed_types, require_all=require_all_scores)
 
     return parsed
 
 
 def validate_table_response(
-    tasks: list[dict], raw_text: str, allowed_types: set[str]
+    tasks: list[dict],
+    raw_text: str,
+    allowed_types: set[str],
+    require_all_scores: bool = True,
 ) -> list[TableTaskModel]:
     data = extract_json(raw_text)
     adapter = TypeAdapter(list[TableTaskModel])
@@ -105,6 +118,6 @@ def validate_table_response(
         if len(output_columns) != len(set(output_columns)):
             raise ValueError("Duplicate columns in table response")
         for column in item.columns:
-            _validate_scores(column.scores, allowed_types)
+            _validate_scores(column.scores, allowed_types, require_all=require_all_scores)
 
     return parsed
