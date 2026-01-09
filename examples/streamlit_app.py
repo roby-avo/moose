@@ -8,7 +8,7 @@ import httpx
 import streamlit as st
 
 from moose.prompts import build_text_ner_prompt
-from moose.schema import get_types
+from moose.schema import get_schema_config, list_schema_names
 
 DEFAULT_BASE_URL = os.getenv("MOOSE_API_BASE_URL", "http://localhost:8000")
 DEFAULT_SAMPLE = (
@@ -127,6 +127,13 @@ def _extract_models(models_payload: dict[str, Any], provider: str) -> list[str]:
     return [model.get("id", "") for model in models if model.get("id")]
 
 
+def _load_schema_names() -> list[str]:
+    try:
+        return list_schema_names()
+    except Exception:  # noqa: BLE001
+        return ["coarse", "fine", "dpv"]
+
+
 st.set_page_config(page_title="Moose API Demo", layout="wide")
 st.title("Moose API Streamlit Demo")
 
@@ -148,6 +155,8 @@ if "last_prompt" not in st.session_state:
     st.session_state["last_prompt"] = ""
 if "debug_prompt" not in st.session_state:
     st.session_state["debug_prompt"] = ""
+
+schema_names = _load_schema_names()
 
 models_error = None
 if fetch_models:
@@ -213,10 +222,15 @@ with tab_ner:
             height=140,
             key="ner_raw_text",
         )
-        schema = st.selectbox("Schema", ["coarse", "fine", "dpv"], key="ner_schema")
+        schema = st.selectbox("Schema", schema_names, key="ner_schema")
         endpoint_mode = st.selectbox(
             "Endpoint",
-            ["Auto (use schema)", "/ner", "/dpv/ner"],
+            [
+                "Auto (schema endpoint)",
+                "/schemas/{schema}/ner",
+                "/ner (schema in body)",
+                "/dpv/ner (legacy)",
+            ],
             key="ner_endpoint_mode",
         )
         include_scores = st.checkbox("Include scores", key="ner_include_scores")
@@ -228,9 +242,10 @@ with tab_ner:
             st.error("Provide at least one task line.")
             st.session_state["last_prompt"] = ""
         else:
-            type_ids = get_types(schema)
+            schema_config = get_schema_config(schema)
+            type_ids = schema_config.load_type_ids()
             st.session_state["last_prompt"] = build_text_ner_prompt(
-                schema, tasks, type_ids
+                schema_config, tasks, type_ids
             )
             if not api_key:
                 st.error("Moose API key is required to submit jobs.")
@@ -240,16 +255,22 @@ with tab_ner:
                 st.error("Model is required. Fetch models or provide a model override.")
             else:
                 llm_payload: dict[str, Any] = {"provider": provider, "model": model_in_use}
-                endpoint = "/dpv/ner" if schema == "dpv" else "/ner"
-                if endpoint_mode != "Auto (use schema)":
-                    endpoint = endpoint_mode
+                endpoint = f"/schemas/{schema}/ner"
+                if endpoint_mode != "Auto (schema endpoint)":
+                    endpoint = endpoint_mode.replace("{schema}", schema)
                 payload: dict[str, Any] = {
                     "tasks": tasks,
                     "include_scores": include_scores,
                     "llm": llm_payload,
                 }
-                if endpoint == "/ner":
+                if endpoint == "/ner (schema in body)" or endpoint == "/ner":
+                    endpoint = "/ner"
                     payload["schema"] = schema
+                elif endpoint == "/dpv/ner (legacy)":
+                    endpoint = "/dpv/ner"
+                if endpoint == "/dpv/ner" and schema != "dpv":
+                    st.error("DPV legacy endpoint requires schema 'dpv'.")
+                    st.stop()
                 extra_headers: dict[str, str] = {}
                 if llm_api_key:
                     extra_headers["X-LLM-API-Key"] = llm_api_key
@@ -286,10 +307,15 @@ with tab_tabular:
             height=160,
             key="tabular_rows_raw",
         )
-        schema = st.selectbox("Schema", ["coarse", "fine", "dpv"], key="tabular_schema")
+        schema = st.selectbox("Schema", schema_names, key="tabular_schema")
         endpoint_mode = st.selectbox(
             "Endpoint",
-            ["Auto (use schema)", "/tabular/annotate", "/dpv/tabular/annotate"],
+            [
+                "Auto (schema endpoint)",
+                "/schemas/{schema}/tabular/annotate",
+                "/tabular/annotate (schema in body)",
+                "/dpv/tabular/annotate (legacy)",
+            ],
             key="tabular_endpoint_mode",
         )
         include_scores = st.checkbox("Include scores", key="tabular_include_scores")
@@ -322,16 +348,22 @@ with tab_tabular:
                     "sampled_rows": sampled_rows,
                 }
             ]
-            endpoint = "/dpv/tabular/annotate" if schema == "dpv" else "/tabular/annotate"
-            if endpoint_mode != "Auto (use schema)":
-                endpoint = endpoint_mode
+            endpoint = f"/schemas/{schema}/tabular/annotate"
+            if endpoint_mode != "Auto (schema endpoint)":
+                endpoint = endpoint_mode.replace("{schema}", schema)
             payload: dict[str, Any] = {
                 "tasks": tasks,
                 "include_scores": include_scores,
                 "llm": llm_payload,
             }
-            if endpoint == "/tabular/annotate":
+            if endpoint == "/tabular/annotate (schema in body)" or endpoint == "/tabular/annotate":
+                endpoint = "/tabular/annotate"
                 payload["schema"] = schema
+            elif endpoint == "/dpv/tabular/annotate (legacy)":
+                endpoint = "/dpv/tabular/annotate"
+            if endpoint == "/dpv/tabular/annotate" and schema != "dpv":
+                st.error("DPV legacy endpoint requires schema 'dpv'.")
+                st.stop()
             extra_headers: dict[str, str] = {}
             if llm_api_key:
                 extra_headers["X-LLM-API-Key"] = llm_api_key
@@ -359,7 +391,7 @@ with tab_prompt:
         height=160,
         key="prompt_raw_text",
     )
-    prompt_schema = st.selectbox("Schema", ["coarse", "fine", "dpv"], key="prompt_schema")
+    prompt_schema = st.selectbox("Schema", schema_names, key="prompt_schema")
     generate_prompt = st.button("Generate prompt")
     if generate_prompt:
         tasks = _build_tasks(prompt_text)
@@ -367,9 +399,10 @@ with tab_prompt:
             st.error("Provide at least one task line.")
             st.session_state["debug_prompt"] = ""
         else:
-            type_ids = get_types(prompt_schema)
+            schema_config = get_schema_config(prompt_schema)
+            type_ids = schema_config.load_type_ids()
             st.session_state["debug_prompt"] = build_text_ner_prompt(
-                prompt_schema, tasks, type_ids
+                schema_config, tasks, type_ids
             )
     if st.session_state.get("debug_prompt"):
         st.code(st.session_state["debug_prompt"], language="text")

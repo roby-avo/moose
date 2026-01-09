@@ -6,7 +6,7 @@ from typing import Any
 from moose.config import Settings, get_settings
 from moose.prob import choose_argmax
 from moose.prompts import build_table_prompt, build_text_ner_prompt
-from moose.schema import get_coarse_type, get_types
+from moose.schema import get_schema_config
 from moose.validate import validate_ner_response, validate_table_response
 
 
@@ -64,9 +64,10 @@ async def run_text_ner(
     settings: Settings | None = None,
 ) -> dict:
     settings = settings or get_settings()
-    type_ids = get_types(schema)
+    schema_config = get_schema_config(schema)
+    type_ids = schema_config.load_type_ids()
     type_set = set(type_ids)
-    require_all_scores = schema != "dpv"
+    require_all_scores = schema_config.require_all_scores
     task_lookup = {task["task_id"]: task for task in tasks}
     results_by_id: dict[str, dict] = {}
 
@@ -77,7 +78,7 @@ async def run_text_ner(
     )
 
     for batch in batches:
-        prompt = build_text_ner_prompt(schema, batch, type_ids)
+        prompt = build_text_ner_prompt(schema_config, batch, type_ids)
 
         def validator(raw_text: str):
             return validate_ner_response(
@@ -104,8 +105,8 @@ async def run_text_ner(
                     "type_id": type_id,
                     "confidence": confidence,
                 }
-                if schema == "fine":
-                    output["coarse_type_id"] = get_coarse_type(type_id)
+                if schema_config.coarse_mapping:
+                    output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
                 if include_scores:
                     output["distribution"] = distribution
                 entities.append(output)
@@ -123,9 +124,10 @@ async def run_table_annotate(
     settings: Settings | None = None,
 ) -> dict:
     settings = settings or get_settings()
-    type_ids = get_types(schema)
+    schema_config = get_schema_config(schema)
+    type_ids = schema_config.load_type_ids()
     type_set = set(type_ids)
-    require_all_scores = schema != "dpv"
+    require_all_scores = schema_config.require_all_scores
     task_lookup = {task["task_id"]: task for task in tasks}
     results_by_id: dict[str, dict] = {}
 
@@ -136,7 +138,7 @@ async def run_table_annotate(
     )
 
     for batch in batches:
-        prompt = build_table_prompt(schema, batch, type_ids)
+        prompt = build_table_prompt(schema_config, batch, type_ids)
 
         def validator(raw_text: str):
             return validate_table_response(
@@ -161,8 +163,8 @@ async def run_table_annotate(
                     "type_id": type_id,
                     "confidence": confidence,
                 }
-                if schema == "fine":
-                    output["coarse_type_id"] = get_coarse_type(type_id)
+                if schema_config.coarse_mapping:
+                    output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
                 if include_scores:
                     output["distribution"] = distribution
                 columns.append(output)

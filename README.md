@@ -56,10 +56,21 @@ Swagger UI is available at `/docs`.
 
 ### DPV endpoints
 
-For convenience, the API exposes DPV-specific endpoints that fix `schema` to `dpv`:
+For convenience (legacy), the API exposes DPV-specific endpoints that fix `schema` to `dpv`:
 
 - `POST /dpv/ner`
 - `POST /dpv/tabular/annotate`
+
+Preferred: use the schema-specific endpoints below for any vocabulary.
+
+### Schema endpoints
+
+Use the schema name in the path to target any registered vocabulary:
+
+- `POST /schemas/{schema}/ner`
+- `POST /schemas/{schema}/tabular/annotate`
+
+You can also keep using `POST /ner` and `POST /tabular/annotate` with `schema` in the body.
 
 ### Runtime LLM configuration (required)
 
@@ -147,7 +158,25 @@ You can query a single provider via `?provider=ollama` or `?provider=openrouter`
 
 - `coarse`: PERSON, ORGANIZATION, LOCATION, EVENT, WORK_OF_ART, PRODUCT, DATE_TIME, NUMBER, MONEY, PERCENT, LAW_OR_REGULATION, OTHER.
 - `fine`: minimal fine-grained types with parent mapping; responses also include `coarse_type_id`.
-- `dpv`: full DPV vocabulary IDs (loaded from `src/moose/data/dpv_full.json`).
+- `dpv`: full DPV vocabulary IDs (loaded from `src/moose/data/dpv_full.json` via the registry).
+
+Custom vocabularies are configured in `src/moose/data/vocabularies.json`. Add a new entry
+with a `name`, `type_source` (a JSON file in `src/moose/data`), and optional prompt and
+score settings. The vocabulary JSON can be a list of string IDs or objects containing an
+`id` field.
+
+Example registry entry:
+
+```json
+{
+  "name": "my-vocab",
+  "label": "My Vocab",
+  "type_source": "my_vocab.json",
+  "score_mode": "sparse",
+  "text_intro": "You are a My Vocab annotation engine.",
+  "table_intro": "You are a My Vocab classification engine for tabular data."
+}
+```
 
 ## Confidence
 

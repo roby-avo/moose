@@ -9,10 +9,11 @@ from fastapi import Depends, FastAPI, Header, HTTPException, Security
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.security import APIKeyHeader, HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from moose.config import Settings, get_settings
 from moose.llm import create_client
+from moose.schema import get_schema_config
 from moose_api.queue import (
     JobRecord,
     WorkerPool,
@@ -31,11 +32,26 @@ class NERTaskIn(BaseModel):
     text: str
 
 
-class NERRequest(BaseModel):
-    schema: Literal["coarse", "fine", "dpv"]
+class BaseNERRequest(BaseModel):
     tasks: list[NERTaskIn] = Field(min_length=1)
     include_scores: bool = False
     llm: LLMOverrides
+
+
+class NERRequest(BaseNERRequest):
+    schema: str = Field(
+        description="Schema/vocabulary name to annotate against.",
+        examples=["coarse", "fine", "dpv"],
+    )
+
+    @field_validator("schema")
+    @classmethod
+    def validate_schema(cls, value: str) -> str:
+        try:
+            get_schema_config(value)
+        except ValueError as exc:
+            raise ValueError(str(exc)) from exc
+        return value
 
 
 class TabularTaskIn(BaseModel):
@@ -44,23 +60,42 @@ class TabularTaskIn(BaseModel):
     sampled_rows: list[dict[str, Any]] = Field(min_length=1)
 
 
-class TabularRequest(BaseModel):
-    schema: Literal["coarse", "fine", "dpv"]
+class BaseTabularRequest(BaseModel):
     tasks: list[TabularTaskIn] = Field(min_length=1)
     include_scores: bool = False
     llm: LLMOverrides
 
 
-class DpvNERRequest(BaseModel):
-    tasks: list[NERTaskIn] = Field(min_length=1)
-    include_scores: bool = False
-    llm: LLMOverrides
+class TabularRequest(BaseTabularRequest):
+    schema: str = Field(
+        description="Schema/vocabulary name to annotate against.",
+        examples=["coarse", "fine", "dpv"],
+    )
+
+    @field_validator("schema")
+    @classmethod
+    def validate_schema(cls, value: str) -> str:
+        try:
+            get_schema_config(value)
+        except ValueError as exc:
+            raise ValueError(str(exc)) from exc
+        return value
 
 
-class DpvTabularRequest(BaseModel):
-    tasks: list[TabularTaskIn] = Field(min_length=1)
-    include_scores: bool = False
-    llm: LLMOverrides
+class SchemaNERRequest(BaseNERRequest):
+    pass
+
+
+class SchemaTabularRequest(BaseTabularRequest):
+    pass
+
+
+class DpvNERRequest(BaseNERRequest):
+    pass
+
+
+class DpvTabularRequest(BaseTabularRequest):
+    pass
 
 
 class JobQueuedResponse(BaseModel):
@@ -73,6 +108,7 @@ STATIC_DIR = Path(__file__).resolve().parent / "static"
 TAG_METADATA = [
     {"name": "NER", "description": "Named entity recognition endpoints."},
     {"name": "Tabular", "description": "Tabular semantic typing endpoints."},
+    {"name": "Schemas", "description": "Schema-specific annotation endpoints."},
     {"name": "DPV", "description": "DPV classification endpoints."},
 ]
 
@@ -111,6 +147,13 @@ def _require_llm_overrides(
             status_code=400,
             detail="LLM API key is required via X-LLM-API-Key for OpenRouter.",
         )
+
+
+def _ensure_schema_available(schema: str) -> None:
+    try:
+        get_schema_config(schema)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 @app.on_event("startup")
@@ -219,10 +262,35 @@ async def submit_ner(
 
 
 @app.post(
+    "/schemas/{schema}/ner",
+    dependencies=[Depends(require_api_key)],
+    tags=["Schemas"],
+    response_model=JobQueuedResponse,
+)
+async def submit_schema_ner(
+    schema: str,
+    request: SchemaNERRequest,
+    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
+):
+    _require_llm_overrides(request.llm, llm_api_key)
+    _ensure_schema_available(schema)
+    payload = {
+        "schema": schema,
+        "tasks": [task.model_dump() for task in request.tasks],
+        "include_scores": request.include_scores,
+        "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
+    }
+    job_id = await _enqueue_job("ner", payload)
+    return JobQueuedResponse(job_id=job_id, status="queued")
+
+
+@app.post(
     "/dpv/ner",
     dependencies=[Depends(require_api_key)],
     tags=["DPV"],
     response_model=JobQueuedResponse,
+    deprecated=True,
 )
 async def submit_dpv_ner(
     request: DpvNERRequest,
@@ -230,6 +298,7 @@ async def submit_dpv_ner(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
+    _ensure_schema_available("dpv")
     payload = {
         "schema": "dpv",
         "tasks": [task.model_dump() for task in request.tasks],
@@ -263,10 +332,35 @@ async def submit_tabular(
 
 
 @app.post(
+    "/schemas/{schema}/tabular/annotate",
+    dependencies=[Depends(require_api_key)],
+    tags=["Schemas"],
+    response_model=JobQueuedResponse,
+)
+async def submit_schema_tabular(
+    schema: str,
+    request: SchemaTabularRequest,
+    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
+):
+    _require_llm_overrides(request.llm, llm_api_key)
+    _ensure_schema_available(schema)
+    payload = {
+        "schema": schema,
+        "tasks": [task.model_dump() for task in request.tasks],
+        "include_scores": request.include_scores,
+        "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
+    }
+    job_id = await _enqueue_job("tabular", payload)
+    return JobQueuedResponse(job_id=job_id, status="queued")
+
+
+@app.post(
     "/dpv/tabular/annotate",
     dependencies=[Depends(require_api_key)],
     tags=["DPV"],
     response_model=JobQueuedResponse,
+    deprecated=True,
 )
 async def submit_dpv_tabular(
     request: DpvTabularRequest,
@@ -274,6 +368,7 @@ async def submit_dpv_tabular(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
+    _ensure_schema_available("dpv")
     payload = {
         "schema": "dpv",
         "tasks": [task.model_dump() for task in request.tasks],

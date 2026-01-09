@@ -2,23 +2,30 @@ from __future__ import annotations
 
 import json
 
+from moose.schema import SchemaConfig
 
-def build_text_ner_prompt(schema: str, tasks: list[dict], type_ids: list[str]) -> str:
+
+def _format_intro(text: str) -> str:
+    return f"{text.rstrip()}\n"
+
+
+def build_text_ner_prompt(
+    schema: SchemaConfig, tasks: list[dict], type_ids: list[str]
+) -> str:
     payload = [{"task_id": t["task_id"], "text": t["text"]} for t in tasks]
     types = ", ".join(type_ids)
-    if schema == "dpv":
-        intro = "You are a DPV annotation engine.\n"
+    intro = _format_intro(schema.text_intro)
+    if schema.require_all_scores:
+        score_rule = "- Scores must be non-negative floats for every allowed type_id (include all keys).\n"
+    else:
         score_rule = (
             "- Scores must be non-negative floats for selected type_ids only; "
             "omit unrelated types (missing keys treated as 0).\n"
         )
-    else:
-        intro = "You are a high-precision NER engine.\n"
-        score_rule = "- Scores must be non-negative floats for every allowed type_id (include all keys).\n"
     return "".join(
         [
             intro,
-            f"Schema: {schema}\n",
+            f"Schema: {schema.name}\n",
             f"Allowed type_ids: {types}\n",
             "Return ONLY valid JSON.\n",
             "Output format (JSON array):\n",
@@ -47,7 +54,9 @@ def build_text_ner_prompt(schema: str, tasks: list[dict], type_ids: list[str]) -
     )
 
 
-def build_table_prompt(schema: str, tasks: list[dict], type_ids: list[str]) -> str:
+def build_table_prompt(
+    schema: SchemaConfig, tasks: list[dict], type_ids: list[str]
+) -> str:
     payload = [
         {
             "task_id": t["task_id"],
@@ -57,19 +66,18 @@ def build_table_prompt(schema: str, tasks: list[dict], type_ids: list[str]) -> s
         for t in tasks
     ]
     types = ", ".join(type_ids)
-    if schema == "dpv":
-        intro = "You are a DPV classification engine for tabular data.\n"
+    intro = _format_intro(schema.table_intro)
+    if schema.require_all_scores:
+        score_rule = "- Scores must be non-negative floats for every allowed type_id (include all keys).\n"
+    else:
         score_rule = (
             "- Scores must be non-negative floats for selected type_ids only; "
             "omit unrelated types (missing keys treated as 0).\n"
         )
-    else:
-        intro = "You are a semantic typing engine for tabular data.\n"
-        score_rule = "- Scores must be non-negative floats for every allowed type_id (include all keys).\n"
     return "".join(
         [
             intro,
-            f"Schema: {schema}\n",
+            f"Schema: {schema.name}\n",
             f"Allowed type_ids: {types}\n",
             "Return ONLY valid JSON.\n",
             "Output format (JSON array):\n",

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "dpv",
+    "label": "DPV",
+    "description": "Data Privacy Vocabulary (W3C).",
+    "type_source": "dpv_full.json",
+    "score_mode": "sparse",
+    "text_intro": "You are a DPV annotation engine.",
+    "table_intro": "You are a DPV classification engine for tabular data."
+  }
+]
