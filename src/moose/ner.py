@@ -86,6 +86,8 @@ async def run_text_ner(
                 raw_text,
                 type_set,
                 require_all_scores=require_all_scores,
+                type_aliases=schema_config.type_aliases,
+                type_alias_prefixes=schema_config.type_alias_prefixes,
             )
 
         parsed = await _run_with_retries(
@@ -146,6 +148,8 @@ async def run_table_annotate(
                 raw_text,
                 type_set,
                 require_all_scores=require_all_scores,
+                type_aliases=schema_config.type_aliases,
+                type_alias_prefixes=schema_config.type_alias_prefixes,
             )
 
         parsed = await _run_with_retries(

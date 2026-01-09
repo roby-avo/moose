@@ -6,6 +6,9 @@
     "type_source": "dpv_full.json",
     "score_mode": "sparse",
     "text_intro": "You are a DPV annotation engine.",
-    "table_intro": "You are a DPV classification engine for tabular data."
+    "table_intro": "You are a DPV classification engine for tabular data.",
+    "type_alias_prefixes": {
+      "dpv-pd:": "dpv:"
+    }
   }
 ]

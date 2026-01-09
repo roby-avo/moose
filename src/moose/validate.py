@@ -61,11 +61,44 @@ def _validate_scores(
         raise ValueError("At least one score must be > 0")
 
 
+def _normalize_scores(
+    scores: dict[str, float],
+    allowed_types: set[str],
+    type_aliases: dict[str, str] | None = None,
+    type_alias_prefixes: dict[str, str] | None = None,
+) -> dict[str, float]:
+    if not type_aliases and not type_alias_prefixes:
+        return scores
+    normalized = dict(scores)
+    if type_aliases:
+        for alias, canonical in type_aliases.items():
+            if alias in normalized and canonical in allowed_types:
+                value = normalized.pop(alias)
+                current = normalized.get(canonical)
+                normalized[canonical] = value if current is None else max(current, value)
+    if type_alias_prefixes:
+        for alias_prefix, canonical_prefix in type_alias_prefixes.items():
+            for key in list(normalized.keys()):
+                if key in allowed_types:
+                    continue
+                if key.startswith(alias_prefix):
+                    candidate = canonical_prefix + key[len(alias_prefix) :]
+                    if candidate in allowed_types:
+                        value = normalized.pop(key)
+                        current = normalized.get(candidate)
+                        normalized[candidate] = value if current is None else max(
+                            current, value
+                        )
+    return normalized
+
+
 def validate_ner_response(
     tasks: list[dict],
     raw_text: str,
     allowed_types: set[str],
     require_all_scores: bool = True,
+    type_aliases: dict[str, str] | None = None,
+    type_alias_prefixes: dict[str, str] | None = None,
 ) -> list[NERTaskModel]:
     data = extract_json(raw_text)
     adapter = TypeAdapter(list[NERTaskModel])
@@ -84,6 +117,15 @@ def validate_ner_response(
                 raise ValueError("Invalid entity offsets")
             if text[entity.start : entity.end] != entity.text:
                 raise ValueError("Entity text does not match offsets")
+            normalized = _normalize_scores(
+                entity.scores,
+                allowed_types,
+                type_aliases=type_aliases,
+                type_alias_prefixes=type_alias_prefixes,
+            )
+            if normalized is not entity.scores:
+                entity.scores.clear()
+                entity.scores.update(normalized)
             _validate_scores(entity.scores, allowed_types, require_all=require_all_scores)
 
     return parsed
@@ -94,6 +136,8 @@ def validate_table_response(
     raw_text: str,
     allowed_types: set[str],
     require_all_scores: bool = True,
+    type_aliases: dict[str, str] | None = None,
+    type_alias_prefixes: dict[str, str] | None = None,
 ) -> list[TableTaskModel]:
     data = extract_json(raw_text)
     adapter = TypeAdapter(list[TableTaskModel])
@@ -118,6 +162,15 @@ def validate_table_response(
         if len(output_columns) != len(set(output_columns)):
             raise ValueError("Duplicate columns in table response")
         for column in item.columns:
+            normalized = _normalize_scores(
+                column.scores,
+                allowed_types,
+                type_aliases=type_aliases,
+                type_alias_prefixes=type_alias_prefixes,
+            )
+            if normalized is not column.scores:
+                column.scores.clear()
+                column.scores.update(normalized)
             _validate_scores(column.scores, allowed_types, require_all=require_all_scores)
 
     return parsed

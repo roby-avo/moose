@@ -65,6 +65,8 @@ class SchemaConfig:
     type_ids: tuple[str, ...] | None = None
     data_path: Path | None = None
     coarse_mapping: dict[str, str] | None = None
+    type_aliases: dict[str, str] | None = None
+    type_alias_prefixes: dict[str, str] | None = None
 
     def load_type_ids(self) -> list[str]:
         if self.type_ids is not None:
@@ -121,6 +123,21 @@ def _parse_score_mode(entry: dict[str, Any]) -> bool:
     if score_mode not in {"dense", "sparse"}:
         raise ValueError(f"Invalid score_mode: {score_mode}")
     return score_mode == "dense"
+
+
+def _parse_alias_mapping(value: Any, label: str) -> dict[str, str] | None:
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ValueError(f"{label} must be a JSON object.")
+    mapping: dict[str, str] = {}
+    for key, val in value.items():
+        if not isinstance(key, str) or not key.strip():
+            raise ValueError(f"{label} keys must be non-empty strings.")
+        if not isinstance(val, str) or not val.strip():
+            raise ValueError(f"{label} values must be non-empty strings.")
+        mapping[key.strip()] = val.strip()
+    return mapping or None
 
 
 def _load_vocab_registry_entries() -> list[dict[str, Any]]:
@@ -183,6 +200,10 @@ def _schema_registry() -> dict[str, SchemaConfig]:
             text_intro=_normalize_intro(entry.get("text_intro"), DEFAULT_TEXT_INTRO),
             table_intro=_normalize_intro(entry.get("table_intro"), DEFAULT_TABLE_INTRO),
             data_path=data_path,
+            type_aliases=_parse_alias_mapping(entry.get("type_aliases"), "type_aliases"),
+            type_alias_prefixes=_parse_alias_mapping(
+                entry.get("type_alias_prefixes"), "type_alias_prefixes"
+            ),
         )
     return registry
 
