@@ -149,11 +149,25 @@ def _require_llm_overrides(
         )
 
 
-def _ensure_schema_available(schema: str) -> None:
+def _ensure_schema_supported(
+    schema: str,
+    require_text: bool = False,
+    require_table: bool = False,
+) -> None:
     try:
-        get_schema_config(schema)
+        config = get_schema_config(schema)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if require_text and not config.supports_text:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Schema '{schema}' does not support text annotation.",
+        )
+    if require_table and not config.supports_table:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Schema '{schema}' does not support tabular annotation.",
+        )
 
 
 @app.on_event("startup")
@@ -251,6 +265,7 @@ async def submit_ner(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
+    _ensure_schema_supported(request.schema, require_text=True)
     payload = {
         "schema": request.schema,
         "tasks": [task.model_dump() for task in request.tasks],
@@ -274,7 +289,7 @@ async def submit_schema_ner(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_available(schema)
+    _ensure_schema_supported(schema, require_text=True)
     payload = {
         "schema": schema,
         "tasks": [task.model_dump() for task in request.tasks],
@@ -298,7 +313,7 @@ async def submit_dpv_ner(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_available("dpv")
+    _ensure_schema_supported("dpv", require_text=True)
     payload = {
         "schema": "dpv",
         "tasks": [task.model_dump() for task in request.tasks],
@@ -321,6 +336,7 @@ async def submit_tabular(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
+    _ensure_schema_supported(request.schema, require_table=True)
     payload = {
         "schema": request.schema,
         "tasks": [task.model_dump() for task in request.tasks],
@@ -344,7 +360,7 @@ async def submit_schema_tabular(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_available(schema)
+    _ensure_schema_supported(schema, require_table=True)
     payload = {
         "schema": schema,
         "tasks": [task.model_dump() for task in request.tasks],
@@ -368,7 +384,7 @@ async def submit_dpv_tabular(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_available("dpv")
+    _ensure_schema_supported("dpv", require_table=True)
     payload = {
         "schema": "dpv",
         "tasks": [task.model_dump() for task in request.tasks],

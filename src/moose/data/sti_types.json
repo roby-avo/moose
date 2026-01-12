@@ -1,0 +1,16 @@
+[
+  "NE:PERSON",
+  "NE:ORGANIZATION",
+  "NE:LOCATION",
+  "NE:OTHER",
+  "LIT:STRING",
+  "LIT:NUMBER",
+  "LIT:DATETIME",
+  "xsd:string",
+  "xsd:boolean",
+  "xsd:integer",
+  "xsd:decimal",
+  "xsd:date",
+  "xsd:dateTime",
+  "xsd:anyURI"
+]

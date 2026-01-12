@@ -5,9 +5,17 @@ from typing import Any
 
 from moose.config import Settings, get_settings
 from moose.prob import choose_argmax
-from moose.prompts import build_table_prompt, build_text_ner_prompt
+from moose.prompts import (
+    build_table_prompt,
+    build_text_ner_prompt,
+    build_type_selection_prompt,
+)
 from moose.schema import get_schema_config
-from moose.validate import validate_ner_response, validate_table_response
+from moose.validate import (
+    validate_ner_response,
+    validate_table_response,
+    validate_type_selection_response,
+)
 
 
 def _estimate_task_size(task: dict) -> int:
@@ -31,6 +39,66 @@ def _batch_tasks(
     if current:
         batches.append(current)
     return batches
+
+
+def _batch_type_ids_for_prompt(
+    schema_config,
+    tasks: list[dict],
+    type_ids: list[str],
+    mode: str,
+    max_chars: int,
+) -> list[list[str]]:
+    batches: list[list[str]] = []
+    current: list[str] = []
+    for type_id in type_ids:
+        candidate = current + [type_id]
+        prompt = build_type_selection_prompt(schema_config, tasks, candidate, mode)
+        if current and len(prompt) > max_chars:
+            batches.append(current)
+            current = [type_id]
+        else:
+            current = candidate
+    if current:
+        batches.append(current)
+    return batches
+
+
+async def _select_type_ids(
+    schema_config,
+    tasks: list[dict],
+    type_ids: list[str],
+    llm_client,
+    settings: Settings,
+    mode: str,
+) -> list[str]:
+    if not schema_config.prefilter_types:
+        return type_ids
+    selected: set[str] = set()
+    type_batches = _batch_type_ids_for_prompt(
+        schema_config,
+        tasks,
+        type_ids,
+        mode,
+        settings.MOOSE_MAX_CHARS_PER_PROMPT,
+    )
+    for type_batch in type_batches:
+        prompt = build_type_selection_prompt(schema_config, tasks, type_batch, mode)
+
+        def validator(raw_text: str):
+            return validate_type_selection_response(
+                raw_text,
+                set(type_batch),
+                type_aliases=schema_config.type_aliases,
+                type_alias_prefixes=schema_config.type_alias_prefixes,
+            )
+
+        extracted = await _run_with_retries(
+            llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES
+        )
+        selected.update(extracted)
+    if not selected:
+        return type_ids
+    return [type_id for type_id in type_ids if type_id in selected]
 
 
 async def _run_with_retries(
@@ -65,8 +133,9 @@ async def run_text_ner(
 ) -> dict:
     settings = settings or get_settings()
     schema_config = get_schema_config(schema)
+    if not schema_config.supports_text:
+        raise ValueError(f"Schema '{schema}' does not support text annotation.")
     type_ids = schema_config.load_type_ids()
-    type_set = set(type_ids)
     require_all_scores = schema_config.require_all_scores
     task_lookup = {task["task_id"]: task for task in tasks}
     results_by_id: dict[str, dict] = {}
@@ -78,7 +147,16 @@ async def run_text_ner(
     )
 
     for batch in batches:
-        prompt = build_text_ner_prompt(schema_config, batch, type_ids)
+        selected_type_ids = await _select_type_ids(
+            schema_config,
+            batch,
+            type_ids,
+            llm_client,
+            settings,
+            mode="text",
+        )
+        type_set = set(selected_type_ids)
+        prompt = build_text_ner_prompt(schema_config, batch, selected_type_ids)
 
         def validator(raw_text: str):
             return validate_ner_response(
@@ -98,7 +176,10 @@ async def run_text_ner(
             text = task_lookup[item.task_id]["text"]
             entities = []
             for entity in item.entities:
-                scores = {type_id: float(entity.scores.get(type_id, 0)) for type_id in type_ids}
+                scores = {
+                    type_id: float(entity.scores.get(type_id, 0))
+                    for type_id in selected_type_ids
+                }
                 type_id, confidence, distribution = choose_argmax(scores)
                 output = {
                     "start": entity.start,
@@ -127,8 +208,9 @@ async def run_table_annotate(
 ) -> dict:
     settings = settings or get_settings()
     schema_config = get_schema_config(schema)
+    if not schema_config.supports_table:
+        raise ValueError(f"Schema '{schema}' does not support tabular annotation.")
     type_ids = schema_config.load_type_ids()
-    type_set = set(type_ids)
     require_all_scores = schema_config.require_all_scores
     task_lookup = {task["task_id"]: task for task in tasks}
     results_by_id: dict[str, dict] = {}
@@ -140,7 +222,16 @@ async def run_table_annotate(
     )
 
     for batch in batches:
-        prompt = build_table_prompt(schema_config, batch, type_ids)
+        selected_type_ids = await _select_type_ids(
+            schema_config,
+            batch,
+            type_ids,
+            llm_client,
+            settings,
+            mode="table",
+        )
+        type_set = set(selected_type_ids)
+        prompt = build_table_prompt(schema_config, batch, selected_type_ids)
 
         def validator(raw_text: str):
             return validate_table_response(
@@ -160,7 +251,10 @@ async def run_table_annotate(
             task = task_lookup[item.task_id]
             columns = []
             for column in item.columns:
-                scores = {type_id: float(column.scores.get(type_id, 0)) for type_id in type_ids}
+                scores = {
+                    type_id: float(column.scores.get(type_id, 0))
+                    for type_id in selected_type_ids
+                }
                 type_id, confidence, distribution = choose_argmax(scores)
                 output = {
                     "column": column.column,

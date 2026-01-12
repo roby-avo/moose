@@ -67,6 +67,9 @@ class SchemaConfig:
     coarse_mapping: dict[str, str] | None = None
     type_aliases: dict[str, str] | None = None
     type_alias_prefixes: dict[str, str] | None = None
+    prefilter_types: bool = False
+    supports_text: bool = True
+    supports_table: bool = True
 
     def load_type_ids(self) -> list[str]:
         if self.type_ids is not None:
@@ -140,6 +143,30 @@ def _parse_alias_mapping(value: Any, label: str) -> dict[str, str] | None:
     return mapping or None
 
 
+def _parse_coarse_mapping(value: Any) -> dict[str, str] | None:
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ValueError("coarse_mapping must be a JSON object.")
+    mapping: dict[str, str] = {}
+    for key, val in value.items():
+        if not isinstance(key, str) or not key.strip():
+            raise ValueError("coarse_mapping keys must be non-empty strings.")
+        if not isinstance(val, str) or not val.strip():
+            raise ValueError("coarse_mapping values must be non-empty strings.")
+        mapping[key.strip()] = val.strip()
+    return mapping or None
+
+
+def _parse_bool_field(entry: dict[str, Any], key: str, default: bool) -> bool:
+    value = entry.get(key)
+    if value is None:
+        return default
+    if not isinstance(value, bool):
+        raise ValueError(f"{key} must be a boolean.")
+    return value
+
+
 def _load_vocab_registry_entries() -> list[dict[str, Any]]:
     if not VOCAB_REGISTRY_PATH.exists():
         return []
@@ -204,6 +231,10 @@ def _schema_registry() -> dict[str, SchemaConfig]:
             type_alias_prefixes=_parse_alias_mapping(
                 entry.get("type_alias_prefixes"), "type_alias_prefixes"
             ),
+            coarse_mapping=_parse_coarse_mapping(entry.get("coarse_mapping")),
+            prefilter_types=_parse_bool_field(entry, "prefilter_types", False),
+            supports_text=_parse_bool_field(entry, "supports_text", True),
+            supports_table=_parse_bool_field(entry, "supports_table", True),
         )
     return registry
 

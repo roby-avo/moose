@@ -92,6 +92,55 @@ def _normalize_scores(
     return normalized
 
 
+def _normalize_type_id(
+    value: str,
+    allowed_types: set[str],
+    type_aliases: dict[str, str] | None = None,
+    type_alias_prefixes: dict[str, str] | None = None,
+) -> str | None:
+    if value in allowed_types:
+        return value
+    if type_aliases and value in type_aliases:
+        candidate = type_aliases[value]
+        if candidate in allowed_types:
+            return candidate
+    if type_alias_prefixes:
+        for alias_prefix, canonical_prefix in type_alias_prefixes.items():
+            if value.startswith(alias_prefix):
+                candidate = canonical_prefix + value[len(alias_prefix) :]
+                if candidate in allowed_types:
+                    return candidate
+    return None
+
+
+def validate_type_selection_response(
+    raw_text: str,
+    allowed_types: set[str],
+    type_aliases: dict[str, str] | None = None,
+    type_alias_prefixes: dict[str, str] | None = None,
+) -> list[str]:
+    data = extract_json(raw_text)
+    if not isinstance(data, list):
+        raise ValueError("Type selection must be a JSON array.")
+    selected: list[str] = []
+    seen: set[str] = set()
+    for item in data:
+        if not isinstance(item, str):
+            raise ValueError("Type selection items must be strings.")
+        normalized = _normalize_type_id(
+            item.strip(),
+            allowed_types,
+            type_aliases=type_aliases,
+            type_alias_prefixes=type_alias_prefixes,
+        )
+        if not normalized:
+            continue
+        if normalized not in seen:
+            selected.append(normalized)
+            seen.add(normalized)
+    return selected
+
+
 def validate_ner_response(
     tasks: list[dict],
     raw_text: str,

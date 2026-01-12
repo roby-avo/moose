@@ -9,6 +9,9 @@ def _format_intro(text: str) -> str:
     return f"{text.rstrip()}\n"
 
 
+TYPE_SELECT_INTRO = "You are a type inventory selector for semantic typing."
+
+
 def build_text_ner_prompt(
     schema: SchemaConfig, tasks: list[dict], type_ids: list[str]
 ) -> str:
@@ -47,6 +50,50 @@ def build_text_ner_prompt(
             "- The text must match the exact substring from the input text.\n",
             score_rule,
             "- At least one score must be > 0 per entity.\n",
+            "No extra text around the JSON.\n\n",
+            "Input tasks JSON:\n",
+            f"{json.dumps(payload, ensure_ascii=True)}",
+        ]
+    )
+
+
+def build_type_selection_prompt(
+    schema: SchemaConfig,
+    tasks: list[dict],
+    type_ids: list[str],
+    mode: str,
+) -> str:
+    if mode == "text":
+        payload = [{"task_id": t["task_id"], "text": t["text"]} for t in tasks]
+        mode_hint = "text"
+    elif mode == "table":
+        payload = [
+            {
+                "task_id": t["task_id"],
+                "table_id": t["table_id"],
+                "sampled_rows": t["sampled_rows"],
+            }
+            for t in tasks
+        ]
+        mode_hint = "tabular"
+    else:
+        raise ValueError(f"Unknown selection mode: {mode}")
+    types = ", ".join(type_ids)
+    intro = _format_intro(TYPE_SELECT_INTRO)
+    return "".join(
+        [
+            intro,
+            f"Schema: {schema.name}\n",
+            f"Input mode: {mode_hint}\n",
+            f"Allowed type_ids (subset): {types}\n",
+            "Return ONLY valid JSON.\n",
+            "Output format (JSON array):\n",
+            "[\"type_id\", \"type_id\"]\n",
+            "Rules:\n",
+            "- Only include type_ids from the allowed list.\n",
+            "- Be recall-oriented: include all types that could apply.\n",
+            "- Return unique type_ids only.\n",
+            "- If none apply, return an empty list [].\n",
             "No extra text around the JSON.\n\n",
             "Input tasks JSON:\n",
             f"{json.dumps(payload, ensure_ascii=True)}",

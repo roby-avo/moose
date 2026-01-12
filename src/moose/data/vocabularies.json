@@ -7,8 +7,38 @@
     "score_mode": "sparse",
     "text_intro": "You are a DPV annotation engine.",
     "table_intro": "You are a DPV classification engine for tabular data.",
+    "prefilter_types": true,
     "type_alias_prefixes": {
       "dpv-pd:": "dpv:"
+    }
+  },
+  {
+    "name": "sti",
+    "label": "STI Column Types",
+    "description": "Coarse Semantic Table Interpretation column typing.",
+    "type_source": "sti_types.json",
+    "score_mode": "sparse",
+    "text_intro": "You are a semantic typing engine for tabular data.",
+    "table_intro": "You are a column type classifier for semantic table interpretation. Assign one type per column using the column header and value distribution. Use NE:* only for named entities. For literals, prefer the most specific xsd:* datatype; if unsure, use the high-level LIT:STRING, LIT:NUMBER, or LIT:DATETIME. Do not perform entity linking. Use NE:OTHER when the column does not clearly fit the other types.",
+    "supports_text": false,
+    "type_alias_prefixes": {
+      "XSD:": "xsd:"
+    },
+    "coarse_mapping": {
+      "NE:PERSON": "NE:PERSON",
+      "NE:ORGANIZATION": "NE:ORGANIZATION",
+      "NE:LOCATION": "NE:LOCATION",
+      "NE:OTHER": "NE:OTHER",
+      "LIT:STRING": "LIT:STRING",
+      "LIT:NUMBER": "LIT:NUMBER",
+      "LIT:DATETIME": "LIT:DATETIME",
+      "xsd:string": "LIT:STRING",
+      "xsd:boolean": "LIT:STRING",
+      "xsd:integer": "LIT:NUMBER",
+      "xsd:decimal": "LIT:NUMBER",
+      "xsd:date": "LIT:DATETIME",
+      "xsd:dateTime": "LIT:DATETIME",
+      "xsd:anyURI": "LIT:STRING"
     }
   }
 ]
