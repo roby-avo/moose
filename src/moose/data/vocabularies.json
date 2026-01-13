@@ -19,7 +19,7 @@
     "type_source": "sti_types.json",
     "score_mode": "sparse",
     "text_intro": "You are a semantic typing engine for tabular data.",
-    "table_intro": "You are a column type classifier for semantic table interpretation. Assign one type per column using the column header and value distribution. Use NE:* only for named entities. For literals, prefer the most specific xsd:* datatype; use ext:* for common syntactic patterns (email, ipv4/ipv6, phone, uuid); if unsure, use the high-level LIT:STRING, LIT:NUMBER, or LIT:DATETIME. Do not perform entity linking. Use NE:OTHER when the column does not clearly fit the other types.",
+    "table_intro": "You are a column type classifier for semantic table interpretation. Assign one type per column using the column header and value distribution. First decide NE vs LIT: use NE:* for columns whose values are names of real-world entities that could be linked in a KG (people, organizations, locations, works/titles, products, brands). Use NE:OTHER for entity names that are not PERSON/ORGANIZATION/LOCATION (e.g., movie titles). Use LIT:* only for non-entity attributes like numbers, dates, durations, codes, or descriptive text that is not an entity name. For literals, prefer the most specific xsd:* datatype; use ext:* for common syntactic patterns (email, ipv4/ipv6, phone, uuid, url, postal/country/currency codes); if unsure, use the high-level LIT:STRING, LIT:NUMBER, or LIT:DATETIME. Do not perform entity linking.",
     "supports_text": false,
     "type_alias_prefixes": {
       "XSD:": "xsd:",
