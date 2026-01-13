@@ -12,5 +12,18 @@
   "xsd:decimal",
   "xsd:date",
   "xsd:dateTime",
-  "xsd:anyURI"
+  "xsd:anyURI",
+  "ext:email",
+  "ext:ipv4",
+  "ext:ipv6",
+  "ext:phone",
+  "ext:uuid",
+  "ext:url",
+  "ext:postalCode",
+  "ext:countryCode",
+  "ext:currencyCode",
+  "ext:lat",
+  "ext:lon",
+  "ext:percentage",
+  "ext:duration"
 ]

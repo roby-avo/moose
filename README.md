@@ -158,7 +158,7 @@ You can query a single provider via `?provider=ollama` or `?provider=openrouter`
 
 - `coarse`: PERSON, ORGANIZATION, LOCATION, EVENT, WORK_OF_ART, PRODUCT, DATE_TIME, NUMBER, MONEY, PERCENT, LAW_OR_REGULATION, OTHER.
 - `fine`: minimal fine-grained types with parent mapping; responses also include `coarse_type_id`.
-- `sti`: column type classification inventory for STI (NE:* plus high-level LIT:* and standard `xsd:*` literal subtypes; see `src/moose/data/sti_types.json`). Tabular-only; text NER endpoints reject it. For xsd literals, responses include `coarse_type_id` with the matching LIT:STRING/NUMBER/DATETIME.
+- `sti`: column type classification inventory for STI (NE:* plus high-level LIT:* and a compact `xsd:*` set, with `ext:*` syntactic patterns like email/IP/phone/UUID; see `src/moose/data/sti_types.json`). Tabular-only; text NER endpoints reject it. For literal subtypes, responses include `coarse_type_id` with the matching LIT:STRING/NUMBER/DATETIME.
 - `dpv`: full DPV vocabulary IDs (loaded from `src/moose/data/dpv_full.json` via the registry).
 
 Custom vocabularies are configured in `src/moose/data/vocabularies.json`. Add a new entry

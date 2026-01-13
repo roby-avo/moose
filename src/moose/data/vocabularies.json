@@ -19,10 +19,11 @@
     "type_source": "sti_types.json",
     "score_mode": "sparse",
     "text_intro": "You are a semantic typing engine for tabular data.",
-    "table_intro": "You are a column type classifier for semantic table interpretation. Assign one type per column using the column header and value distribution. Use NE:* only for named entities. For literals, prefer the most specific xsd:* datatype; if unsure, use the high-level LIT:STRING, LIT:NUMBER, or LIT:DATETIME. Do not perform entity linking. Use NE:OTHER when the column does not clearly fit the other types.",
+    "table_intro": "You are a column type classifier for semantic table interpretation. Assign one type per column using the column header and value distribution. Use NE:* only for named entities. For literals, prefer the most specific xsd:* datatype; use ext:* for common syntactic patterns (email, ipv4/ipv6, phone, uuid); if unsure, use the high-level LIT:STRING, LIT:NUMBER, or LIT:DATETIME. Do not perform entity linking. Use NE:OTHER when the column does not clearly fit the other types.",
     "supports_text": false,
     "type_alias_prefixes": {
-      "XSD:": "xsd:"
+      "XSD:": "xsd:",
+      "EXT:": "ext:"
     },
     "coarse_mapping": {
       "NE:PERSON": "NE:PERSON",
@@ -38,7 +39,20 @@
       "xsd:decimal": "LIT:NUMBER",
       "xsd:date": "LIT:DATETIME",
       "xsd:dateTime": "LIT:DATETIME",
-      "xsd:anyURI": "LIT:STRING"
+      "xsd:anyURI": "LIT:STRING",
+      "ext:email": "LIT:STRING",
+      "ext:ipv4": "LIT:STRING",
+      "ext:ipv6": "LIT:STRING",
+      "ext:phone": "LIT:STRING",
+      "ext:uuid": "LIT:STRING",
+      "ext:url": "LIT:STRING",
+      "ext:postalCode": "LIT:STRING",
+      "ext:countryCode": "LIT:STRING",
+      "ext:currencyCode": "LIT:STRING",
+      "ext:lat": "LIT:NUMBER",
+      "ext:lon": "LIT:NUMBER",
+      "ext:percentage": "LIT:NUMBER",
+      "ext:duration": "LIT:DATETIME"
     }
   }
 ]

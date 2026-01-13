@@ -2,10 +2,21 @@ services:
   moose-api:
     build: .
     ports:
-      - "${MOOSE_API_PORT:-8000}:8000"
+      - "${MOOSE_API_PORT:-8000}:${MOOSE_API_PORT:-8000}"
     volumes:
       - ./src:/app/src
-    command: ["uvicorn", "moose_api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--reload-dir", "/app/src"]
+    command:
+      [
+        "uvicorn",
+        "moose_api.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "${MOOSE_API_PORT:-8000}",
+        "--reload",
+        "--reload-dir",
+        "/app/src"
+      ]
     env_file:
       - .env
     depends_on:
@@ -24,9 +35,9 @@ services:
     volumes:
       - ./:/app
     ports:
-      - "${MOOSE_DEMO_PORT:-8501}:8501"
+      - "${MOOSE_DEMO_PORT:-8501}:${MOOSE_DEMO_PORT:-8501}"
     environment:
-      - MOOSE_API_BASE_URL=${MOOSE_API_BASE_URL:-http://moose-api:8000}
+      - MOOSE_API_BASE_URL=http://moose-api:${MOOSE_API_PORT:-8000}
     command:
       [
         "streamlit",
@@ -35,7 +46,7 @@ services:
         "--server.address",
         "0.0.0.0",
         "--server.port",
-        "8501"
+        "${MOOSE_DEMO_PORT:-8501}"
       ]
     depends_on:
       - moose-api

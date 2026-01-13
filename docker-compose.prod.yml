@@ -4,11 +4,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "${MOOSE_API_PORT:-8000}:8000"
+      - "${MOOSE_API_PORT:-8000}:${MOOSE_API_PORT:-8000}"
     env_file:
       - .env
     environment:
-      - MOOSE_MONGO_URL=${MOOSE_MONGO_URL:-mongodb://mongo:27017}
+      - MOOSE_MONGO_URL=${MOOSE_MONGO_URL:-mongodb://mongo}
       - MOOSE_OPENROUTER_BASE_URL=${MOOSE_OPENROUTER_BASE_URL:-https://openrouter.ai/api/v1}
     command:
       [
@@ -17,7 +17,7 @@ services:
         "--host",
         "0.0.0.0",
         "--port",
-        "8000",
+        "${MOOSE_API_PORT:-8000}",
         "--workers",
         "${MOOSE_WEB_CONCURRENCY:-4}",
         "--proxy-headers",
@@ -34,7 +34,7 @@ services:
           "CMD",
           "python",
           "-c",
-          "import os,urllib.request; req=urllib.request.Request('http://localhost:8000/health', headers={'X-API-Key': os.environ.get('MOOSE_API_KEY','')}); urllib.request.urlopen(req, timeout=2).read()",
+          "import os,urllib.request; req=urllib.request.Request('http://localhost:${MOOSE_API_PORT:-8000}/health', headers={'X-API-Key': os.environ.get('MOOSE_API_KEY','')}); urllib.request.urlopen(req, timeout=2).read()",
         ]
       interval: 10s
       timeout: 3s
@@ -56,11 +56,11 @@ services:
       context: .
       dockerfile: Dockerfile.demo
     ports:
-      - "${MOOSE_DEMO_PORT:-8501}:8501"
+      - "${MOOSE_DEMO_PORT:-8501}:${MOOSE_DEMO_PORT:-8501}"
     env_file:
       - .env
     environment:
-      - MOOSE_API_BASE_URL=${MOOSE_API_BASE_URL:-http://moose-api:8000}
+      - MOOSE_API_BASE_URL=http://moose-api:${MOOSE_API_PORT:-8000}
     command:
       [
         "streamlit",
@@ -69,7 +69,7 @@ services:
         "--server.address",
         "0.0.0.0",
         "--server.port",
-        "8501"
+        "${MOOSE_DEMO_PORT:-8501}"
       ]
     depends_on:
       - moose-api
