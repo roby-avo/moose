@@ -1,0 +1,3017 @@
+[
+  {
+    "id": "schema:3DModel",
+    "iri": "https://schema.org/3DModel",
+    "label": "3DModel"
+  },
+  {
+    "id": "schema:APIReference",
+    "iri": "https://schema.org/APIReference",
+    "label": "APIReference"
+  },
+  {
+    "id": "schema:AboutPage",
+    "iri": "https://schema.org/AboutPage",
+    "label": "AboutPage"
+  },
+  {
+    "id": "schema:Accommodation",
+    "iri": "https://schema.org/Accommodation",
+    "label": "Accommodation"
+  },
+  {
+    "id": "schema:AccountingService",
+    "iri": "https://schema.org/AccountingService",
+    "label": "AccountingService"
+  },
+  {
+    "id": "schema:AdministrativeArea",
+    "iri": "https://schema.org/AdministrativeArea",
+    "label": "AdministrativeArea"
+  },
+  {
+    "id": "schema:AdultEntertainment",
+    "iri": "https://schema.org/AdultEntertainment",
+    "label": "AdultEntertainment"
+  },
+  {
+    "id": "schema:AdultOrientedEnumeration",
+    "iri": "https://schema.org/AdultOrientedEnumeration",
+    "label": "AdultOrientedEnumeration"
+  },
+  {
+    "id": "schema:AdvertiserContentArticle",
+    "iri": "https://schema.org/AdvertiserContentArticle",
+    "label": "AdvertiserContentArticle"
+  },
+  {
+    "id": "schema:AggregateRating",
+    "iri": "https://schema.org/AggregateRating",
+    "label": "AggregateRating"
+  },
+  {
+    "id": "schema:Airline",
+    "iri": "https://schema.org/Airline",
+    "label": "Airline"
+  },
+  {
+    "id": "schema:Airport",
+    "iri": "https://schema.org/Airport",
+    "label": "Airport"
+  },
+  {
+    "id": "schema:AlignmentObject",
+    "iri": "https://schema.org/AlignmentObject",
+    "label": "AlignmentObject"
+  },
+  {
+    "id": "schema:AmpStory",
+    "iri": "https://schema.org/AmpStory",
+    "label": "AmpStory"
+  },
+  {
+    "id": "schema:AmusementPark",
+    "iri": "https://schema.org/AmusementPark",
+    "label": "AmusementPark"
+  },
+  {
+    "id": "schema:AnalysisNewsArticle",
+    "iri": "https://schema.org/AnalysisNewsArticle",
+    "label": "AnalysisNewsArticle"
+  },
+  {
+    "id": "schema:AnatomicalStructure",
+    "iri": "https://schema.org/AnatomicalStructure",
+    "label": "AnatomicalStructure"
+  },
+  {
+    "id": "schema:AnatomicalSystem",
+    "iri": "https://schema.org/AnatomicalSystem",
+    "label": "AnatomicalSystem"
+  },
+  {
+    "id": "schema:AnimalShelter",
+    "iri": "https://schema.org/AnimalShelter",
+    "label": "AnimalShelter"
+  },
+  {
+    "id": "schema:Answer",
+    "iri": "https://schema.org/Answer",
+    "label": "Answer"
+  },
+  {
+    "id": "schema:Apartment",
+    "iri": "https://schema.org/Apartment",
+    "label": "Apartment"
+  },
+  {
+    "id": "schema:ApartmentComplex",
+    "iri": "https://schema.org/ApartmentComplex",
+    "label": "ApartmentComplex"
+  },
+  {
+    "id": "schema:Aquarium",
+    "iri": "https://schema.org/Aquarium",
+    "label": "Aquarium"
+  },
+  {
+    "id": "schema:ArchiveComponent",
+    "iri": "https://schema.org/ArchiveComponent",
+    "label": "ArchiveComponent"
+  },
+  {
+    "id": "schema:ArchiveOrganization",
+    "iri": "https://schema.org/ArchiveOrganization",
+    "label": "ArchiveOrganization"
+  },
+  {
+    "id": "schema:ArtGallery",
+    "iri": "https://schema.org/ArtGallery",
+    "label": "ArtGallery"
+  },
+  {
+    "id": "schema:Article",
+    "iri": "https://schema.org/Article",
+    "label": "Article"
+  },
+  {
+    "id": "schema:AskPublicNewsArticle",
+    "iri": "https://schema.org/AskPublicNewsArticle",
+    "label": "AskPublicNewsArticle"
+  },
+  {
+    "id": "schema:Atlas",
+    "iri": "https://schema.org/Atlas",
+    "label": "Atlas"
+  },
+  {
+    "id": "schema:Attorney",
+    "iri": "https://schema.org/Attorney",
+    "label": "Attorney"
+  },
+  {
+    "id": "schema:Audience",
+    "iri": "https://schema.org/Audience",
+    "label": "Audience"
+  },
+  {
+    "id": "schema:AudioObject",
+    "iri": "https://schema.org/AudioObject",
+    "label": "AudioObject"
+  },
+  {
+    "id": "schema:AudioObjectSnapshot",
+    "iri": "https://schema.org/AudioObjectSnapshot",
+    "label": "AudioObjectSnapshot"
+  },
+  {
+    "id": "schema:Audiobook",
+    "iri": "https://schema.org/Audiobook",
+    "label": "Audiobook"
+  },
+  {
+    "id": "schema:AutoBodyShop",
+    "iri": "https://schema.org/AutoBodyShop",
+    "label": "AutoBodyShop"
+  },
+  {
+    "id": "schema:AutoDealer",
+    "iri": "https://schema.org/AutoDealer",
+    "label": "AutoDealer"
+  },
+  {
+    "id": "schema:AutoPartsStore",
+    "iri": "https://schema.org/AutoPartsStore",
+    "label": "AutoPartsStore"
+  },
+  {
+    "id": "schema:AutoRental",
+    "iri": "https://schema.org/AutoRental",
+    "label": "AutoRental"
+  },
+  {
+    "id": "schema:AutoRepair",
+    "iri": "https://schema.org/AutoRepair",
+    "label": "AutoRepair"
+  },
+  {
+    "id": "schema:AutoWash",
+    "iri": "https://schema.org/AutoWash",
+    "label": "AutoWash"
+  },
+  {
+    "id": "schema:AutomatedTeller",
+    "iri": "https://schema.org/AutomatedTeller",
+    "label": "AutomatedTeller"
+  },
+  {
+    "id": "schema:AutomotiveBusiness",
+    "iri": "https://schema.org/AutomotiveBusiness",
+    "label": "AutomotiveBusiness"
+  },
+  {
+    "id": "schema:BackgroundNewsArticle",
+    "iri": "https://schema.org/BackgroundNewsArticle",
+    "label": "BackgroundNewsArticle"
+  },
+  {
+    "id": "schema:Bakery",
+    "iri": "https://schema.org/Bakery",
+    "label": "Bakery"
+  },
+  {
+    "id": "schema:BankOrCreditUnion",
+    "iri": "https://schema.org/BankOrCreditUnion",
+    "label": "BankOrCreditUnion"
+  },
+  {
+    "id": "schema:BarOrPub",
+    "iri": "https://schema.org/BarOrPub",
+    "label": "BarOrPub"
+  },
+  {
+    "id": "schema:Barcode",
+    "iri": "https://schema.org/Barcode",
+    "label": "Barcode"
+  },
+  {
+    "id": "schema:Beach",
+    "iri": "https://schema.org/Beach",
+    "label": "Beach"
+  },
+  {
+    "id": "schema:BeautySalon",
+    "iri": "https://schema.org/BeautySalon",
+    "label": "BeautySalon"
+  },
+  {
+    "id": "schema:BedAndBreakfast",
+    "iri": "https://schema.org/BedAndBreakfast",
+    "label": "BedAndBreakfast"
+  },
+  {
+    "id": "schema:BedDetails",
+    "iri": "https://schema.org/BedDetails",
+    "label": "BedDetails"
+  },
+  {
+    "id": "schema:BedType",
+    "iri": "https://schema.org/BedType",
+    "label": "BedType"
+  },
+  {
+    "id": "schema:BikeStore",
+    "iri": "https://schema.org/BikeStore",
+    "label": "BikeStore"
+  },
+  {
+    "id": "schema:Blog",
+    "iri": "https://schema.org/Blog",
+    "label": "Blog"
+  },
+  {
+    "id": "schema:BlogPosting",
+    "iri": "https://schema.org/BlogPosting",
+    "label": "BlogPosting"
+  },
+  {
+    "id": "schema:BoardingPolicyType",
+    "iri": "https://schema.org/BoardingPolicyType",
+    "label": "BoardingPolicyType"
+  },
+  {
+    "id": "schema:BoatTerminal",
+    "iri": "https://schema.org/BoatTerminal",
+    "label": "BoatTerminal"
+  },
+  {
+    "id": "schema:BodyOfWater",
+    "iri": "https://schema.org/BodyOfWater",
+    "label": "BodyOfWater"
+  },
+  {
+    "id": "schema:Book",
+    "iri": "https://schema.org/Book",
+    "label": "Book"
+  },
+  {
+    "id": "schema:BookFormatType",
+    "iri": "https://schema.org/BookFormatType",
+    "label": "BookFormatType"
+  },
+  {
+    "id": "schema:BookSeries",
+    "iri": "https://schema.org/BookSeries",
+    "label": "BookSeries"
+  },
+  {
+    "id": "schema:BookStore",
+    "iri": "https://schema.org/BookStore",
+    "label": "BookStore"
+  },
+  {
+    "id": "schema:Boolean",
+    "iri": "https://schema.org/Boolean",
+    "label": "Boolean"
+  },
+  {
+    "id": "schema:BowlingAlley",
+    "iri": "https://schema.org/BowlingAlley",
+    "label": "BowlingAlley"
+  },
+  {
+    "id": "schema:Brand",
+    "iri": "https://schema.org/Brand",
+    "label": "Brand"
+  },
+  {
+    "id": "schema:BreadcrumbList",
+    "iri": "https://schema.org/BreadcrumbList",
+    "label": "BreadcrumbList"
+  },
+  {
+    "id": "schema:Brewery",
+    "iri": "https://schema.org/Brewery",
+    "label": "Brewery"
+  },
+  {
+    "id": "schema:Bridge",
+    "iri": "https://schema.org/Bridge",
+    "label": "Bridge"
+  },
+  {
+    "id": "schema:BroadcastEvent",
+    "iri": "https://schema.org/BroadcastEvent",
+    "label": "BroadcastEvent"
+  },
+  {
+    "id": "schema:BroadcastService",
+    "iri": "https://schema.org/BroadcastService",
+    "label": "BroadcastService"
+  },
+  {
+    "id": "schema:BuddhistTemple",
+    "iri": "https://schema.org/BuddhistTemple",
+    "label": "BuddhistTemple"
+  },
+  {
+    "id": "schema:BusOrCoach",
+    "iri": "https://schema.org/BusOrCoach",
+    "label": "BusOrCoach"
+  },
+  {
+    "id": "schema:BusStation",
+    "iri": "https://schema.org/BusStation",
+    "label": "BusStation"
+  },
+  {
+    "id": "schema:BusStop",
+    "iri": "https://schema.org/BusStop",
+    "label": "BusStop"
+  },
+  {
+    "id": "schema:BusinessEvent",
+    "iri": "https://schema.org/BusinessEvent",
+    "label": "BusinessEvent"
+  },
+  {
+    "id": "schema:CDCPMDRecord",
+    "iri": "https://schema.org/CDCPMDRecord",
+    "label": "CDCPMDRecord"
+  },
+  {
+    "id": "schema:CafeOrCoffeeShop",
+    "iri": "https://schema.org/CafeOrCoffeeShop",
+    "label": "CafeOrCoffeeShop"
+  },
+  {
+    "id": "schema:Campground",
+    "iri": "https://schema.org/Campground",
+    "label": "Campground"
+  },
+  {
+    "id": "schema:CampingPitch",
+    "iri": "https://schema.org/CampingPitch",
+    "label": "CampingPitch"
+  },
+  {
+    "id": "schema:Canal",
+    "iri": "https://schema.org/Canal",
+    "label": "Canal"
+  },
+  {
+    "id": "schema:Car",
+    "iri": "https://schema.org/Car",
+    "label": "Car"
+  },
+  {
+    "id": "schema:CarUsageType",
+    "iri": "https://schema.org/CarUsageType",
+    "label": "CarUsageType"
+  },
+  {
+    "id": "schema:Casino",
+    "iri": "https://schema.org/Casino",
+    "label": "Casino"
+  },
+  {
+    "id": "schema:CategoryCode",
+    "iri": "https://schema.org/CategoryCode",
+    "label": "CategoryCode"
+  },
+  {
+    "id": "schema:CategoryCodeSet",
+    "iri": "https://schema.org/CategoryCodeSet",
+    "label": "CategoryCodeSet"
+  },
+  {
+    "id": "schema:CatholicChurch",
+    "iri": "https://schema.org/CatholicChurch",
+    "label": "CatholicChurch"
+  },
+  {
+    "id": "schema:Cemetery",
+    "iri": "https://schema.org/Cemetery",
+    "label": "Cemetery"
+  },
+  {
+    "id": "schema:Certification",
+    "iri": "https://schema.org/Certification",
+    "label": "Certification"
+  },
+  {
+    "id": "schema:CertificationStatusEnumeration",
+    "iri": "https://schema.org/CertificationStatusEnumeration",
+    "label": "CertificationStatusEnumeration"
+  },
+  {
+    "id": "schema:Chapter",
+    "iri": "https://schema.org/Chapter",
+    "label": "Chapter"
+  },
+  {
+    "id": "schema:CheckoutPage",
+    "iri": "https://schema.org/CheckoutPage",
+    "label": "CheckoutPage"
+  },
+  {
+    "id": "schema:ChildCare",
+    "iri": "https://schema.org/ChildCare",
+    "label": "ChildCare"
+  },
+  {
+    "id": "schema:ChildrensEvent",
+    "iri": "https://schema.org/ChildrensEvent",
+    "label": "ChildrensEvent"
+  },
+  {
+    "id": "schema:Church",
+    "iri": "https://schema.org/Church",
+    "label": "Church"
+  },
+  {
+    "id": "schema:City",
+    "iri": "https://schema.org/City",
+    "label": "City"
+  },
+  {
+    "id": "schema:CityHall",
+    "iri": "https://schema.org/CityHall",
+    "label": "CityHall"
+  },
+  {
+    "id": "schema:CivicStructure",
+    "iri": "https://schema.org/CivicStructure",
+    "label": "CivicStructure"
+  },
+  {
+    "id": "schema:Claim",
+    "iri": "https://schema.org/Claim",
+    "label": "Claim"
+  },
+  {
+    "id": "schema:ClaimReview",
+    "iri": "https://schema.org/ClaimReview",
+    "label": "ClaimReview"
+  },
+  {
+    "id": "schema:Clip",
+    "iri": "https://schema.org/Clip",
+    "label": "Clip"
+  },
+  {
+    "id": "schema:ClothingStore",
+    "iri": "https://schema.org/ClothingStore",
+    "label": "ClothingStore"
+  },
+  {
+    "id": "schema:Code",
+    "iri": "https://schema.org/Code",
+    "label": "Code"
+  },
+  {
+    "id": "schema:Collection",
+    "iri": "https://schema.org/Collection",
+    "label": "Collection"
+  },
+  {
+    "id": "schema:CollectionPage",
+    "iri": "https://schema.org/CollectionPage",
+    "label": "CollectionPage"
+  },
+  {
+    "id": "schema:CollegeOrUniversity",
+    "iri": "https://schema.org/CollegeOrUniversity",
+    "label": "CollegeOrUniversity"
+  },
+  {
+    "id": "schema:ComedyClub",
+    "iri": "https://schema.org/ComedyClub",
+    "label": "ComedyClub"
+  },
+  {
+    "id": "schema:ComedyEvent",
+    "iri": "https://schema.org/ComedyEvent",
+    "label": "ComedyEvent"
+  },
+  {
+    "id": "schema:ComicCoverArt",
+    "iri": "https://schema.org/ComicCoverArt",
+    "label": "ComicCoverArt"
+  },
+  {
+    "id": "schema:ComicIssue",
+    "iri": "https://schema.org/ComicIssue",
+    "label": "ComicIssue"
+  },
+  {
+    "id": "schema:ComicSeries",
+    "iri": "https://schema.org/ComicSeries",
+    "label": "ComicSeries"
+  },
+  {
+    "id": "schema:ComicStory",
+    "iri": "https://schema.org/ComicStory",
+    "label": "ComicStory"
+  },
+  {
+    "id": "schema:Comment",
+    "iri": "https://schema.org/Comment",
+    "label": "Comment"
+  },
+  {
+    "id": "schema:CompleteDataFeed",
+    "iri": "https://schema.org/CompleteDataFeed",
+    "label": "CompleteDataFeed"
+  },
+  {
+    "id": "schema:ComputerLanguage",
+    "iri": "https://schema.org/ComputerLanguage",
+    "label": "ComputerLanguage"
+  },
+  {
+    "id": "schema:ComputerStore",
+    "iri": "https://schema.org/ComputerStore",
+    "label": "ComputerStore"
+  },
+  {
+    "id": "schema:ConferenceEvent",
+    "iri": "https://schema.org/ConferenceEvent",
+    "label": "ConferenceEvent"
+  },
+  {
+    "id": "schema:Consortium",
+    "iri": "https://schema.org/Consortium",
+    "label": "Consortium"
+  },
+  {
+    "id": "schema:ContactPage",
+    "iri": "https://schema.org/ContactPage",
+    "label": "ContactPage"
+  },
+  {
+    "id": "schema:ContactPoint",
+    "iri": "https://schema.org/ContactPoint",
+    "label": "ContactPoint"
+  },
+  {
+    "id": "schema:Continent",
+    "iri": "https://schema.org/Continent",
+    "label": "Continent"
+  },
+  {
+    "id": "schema:ConvenienceStore",
+    "iri": "https://schema.org/ConvenienceStore",
+    "label": "ConvenienceStore"
+  },
+  {
+    "id": "schema:Conversation",
+    "iri": "https://schema.org/Conversation",
+    "label": "Conversation"
+  },
+  {
+    "id": "schema:Cooperative",
+    "iri": "https://schema.org/Cooperative",
+    "label": "Cooperative"
+  },
+  {
+    "id": "schema:Corporation",
+    "iri": "https://schema.org/Corporation",
+    "label": "Corporation"
+  },
+  {
+    "id": "schema:CorrectionComment",
+    "iri": "https://schema.org/CorrectionComment",
+    "label": "CorrectionComment"
+  },
+  {
+    "id": "schema:Country",
+    "iri": "https://schema.org/Country",
+    "label": "Country"
+  },
+  {
+    "id": "schema:Course",
+    "iri": "https://schema.org/Course",
+    "label": "Course"
+  },
+  {
+    "id": "schema:CourseInstance",
+    "iri": "https://schema.org/CourseInstance",
+    "label": "CourseInstance"
+  },
+  {
+    "id": "schema:Courthouse",
+    "iri": "https://schema.org/Courthouse",
+    "label": "Courthouse"
+  },
+  {
+    "id": "schema:CoverArt",
+    "iri": "https://schema.org/CoverArt",
+    "label": "CoverArt"
+  },
+  {
+    "id": "schema:CovidTestingFacility",
+    "iri": "https://schema.org/CovidTestingFacility",
+    "label": "CovidTestingFacility"
+  },
+  {
+    "id": "schema:CreativeWork",
+    "iri": "https://schema.org/CreativeWork",
+    "label": "CreativeWork"
+  },
+  {
+    "id": "schema:CreativeWorkSeason",
+    "iri": "https://schema.org/CreativeWorkSeason",
+    "label": "CreativeWorkSeason"
+  },
+  {
+    "id": "schema:CreativeWorkSeries",
+    "iri": "https://schema.org/CreativeWorkSeries",
+    "label": "CreativeWorkSeries"
+  },
+  {
+    "id": "schema:Crematorium",
+    "iri": "https://schema.org/Crematorium",
+    "label": "Crematorium"
+  },
+  {
+    "id": "schema:CriticReview",
+    "iri": "https://schema.org/CriticReview",
+    "label": "CriticReview"
+  },
+  {
+    "id": "schema:CssSelectorType",
+    "iri": "https://schema.org/CssSelectorType",
+    "label": "CssSelectorType"
+  },
+  {
+    "id": "schema:DanceEvent",
+    "iri": "https://schema.org/DanceEvent",
+    "label": "DanceEvent"
+  },
+  {
+    "id": "schema:DanceGroup",
+    "iri": "https://schema.org/DanceGroup",
+    "label": "DanceGroup"
+  },
+  {
+    "id": "schema:DataCatalog",
+    "iri": "https://schema.org/DataCatalog",
+    "label": "DataCatalog"
+  },
+  {
+    "id": "schema:DataDownload",
+    "iri": "https://schema.org/DataDownload",
+    "label": "DataDownload"
+  },
+  {
+    "id": "schema:DataFeed",
+    "iri": "https://schema.org/DataFeed",
+    "label": "DataFeed"
+  },
+  {
+    "id": "schema:DataFeedItem",
+    "iri": "https://schema.org/DataFeedItem",
+    "label": "DataFeedItem"
+  },
+  {
+    "id": "schema:Dataset",
+    "iri": "https://schema.org/Dataset",
+    "label": "Dataset"
+  },
+  {
+    "id": "schema:Date",
+    "iri": "https://schema.org/Date",
+    "label": "Date"
+  },
+  {
+    "id": "schema:DateTime",
+    "iri": "https://schema.org/DateTime",
+    "label": "DateTime"
+  },
+  {
+    "id": "schema:DaySpa",
+    "iri": "https://schema.org/DaySpa",
+    "label": "DaySpa"
+  },
+  {
+    "id": "schema:DefenceEstablishment",
+    "iri": "https://schema.org/DefenceEstablishment",
+    "label": "DefenceEstablishment"
+  },
+  {
+    "id": "schema:DefinedRegion",
+    "iri": "https://schema.org/DefinedRegion",
+    "label": "DefinedRegion"
+  },
+  {
+    "id": "schema:DefinedTerm",
+    "iri": "https://schema.org/DefinedTerm",
+    "label": "DefinedTerm"
+  },
+  {
+    "id": "schema:DefinedTermSet",
+    "iri": "https://schema.org/DefinedTermSet",
+    "label": "DefinedTermSet"
+  },
+  {
+    "id": "schema:DeliveryEvent",
+    "iri": "https://schema.org/DeliveryEvent",
+    "label": "DeliveryEvent"
+  },
+  {
+    "id": "schema:DeliveryMethod",
+    "iri": "https://schema.org/DeliveryMethod",
+    "label": "DeliveryMethod"
+  },
+  {
+    "id": "schema:Demand",
+    "iri": "https://schema.org/Demand",
+    "label": "Demand"
+  },
+  {
+    "id": "schema:Dentist",
+    "iri": "https://schema.org/Dentist",
+    "label": "Dentist"
+  },
+  {
+    "id": "schema:DepartmentStore",
+    "iri": "https://schema.org/DepartmentStore",
+    "label": "DepartmentStore"
+  },
+  {
+    "id": "schema:DiagnosticLab",
+    "iri": "https://schema.org/DiagnosticLab",
+    "label": "DiagnosticLab"
+  },
+  {
+    "id": "schema:Diet",
+    "iri": "https://schema.org/Diet",
+    "label": "Diet"
+  },
+  {
+    "id": "schema:DietarySupplement",
+    "iri": "https://schema.org/DietarySupplement",
+    "label": "DietarySupplement"
+  },
+  {
+    "id": "schema:DigitalDocument",
+    "iri": "https://schema.org/DigitalDocument",
+    "label": "DigitalDocument"
+  },
+  {
+    "id": "schema:DigitalDocumentPermission",
+    "iri": "https://schema.org/DigitalDocumentPermission",
+    "label": "DigitalDocumentPermission"
+  },
+  {
+    "id": "schema:DiscussionForumPosting",
+    "iri": "https://schema.org/DiscussionForumPosting",
+    "label": "DiscussionForumPosting"
+  },
+  {
+    "id": "schema:Distance",
+    "iri": "https://schema.org/Distance",
+    "label": "Distance"
+  },
+  {
+    "id": "schema:Distillery",
+    "iri": "https://schema.org/Distillery",
+    "label": "Distillery"
+  },
+  {
+    "id": "schema:DoseSchedule",
+    "iri": "https://schema.org/DoseSchedule",
+    "label": "DoseSchedule"
+  },
+  {
+    "id": "schema:Drawing",
+    "iri": "https://schema.org/Drawing",
+    "label": "Drawing"
+  },
+  {
+    "id": "schema:DriveWheelConfigurationValue",
+    "iri": "https://schema.org/DriveWheelConfigurationValue",
+    "label": "DriveWheelConfigurationValue"
+  },
+  {
+    "id": "schema:Drug",
+    "iri": "https://schema.org/Drug",
+    "label": "Drug"
+  },
+  {
+    "id": "schema:DrugClass",
+    "iri": "https://schema.org/DrugClass",
+    "label": "DrugClass"
+  },
+  {
+    "id": "schema:DrugLegalStatus",
+    "iri": "https://schema.org/DrugLegalStatus",
+    "label": "DrugLegalStatus"
+  },
+  {
+    "id": "schema:DrugPregnancyCategory",
+    "iri": "https://schema.org/DrugPregnancyCategory",
+    "label": "DrugPregnancyCategory"
+  },
+  {
+    "id": "schema:DrugPrescriptionStatus",
+    "iri": "https://schema.org/DrugPrescriptionStatus",
+    "label": "DrugPrescriptionStatus"
+  },
+  {
+    "id": "schema:DrugStrength",
+    "iri": "https://schema.org/DrugStrength",
+    "label": "DrugStrength"
+  },
+  {
+    "id": "schema:DryCleaningOrLaundry",
+    "iri": "https://schema.org/DryCleaningOrLaundry",
+    "label": "DryCleaningOrLaundry"
+  },
+  {
+    "id": "schema:Duration",
+    "iri": "https://schema.org/Duration",
+    "label": "Duration"
+  },
+  {
+    "id": "schema:EducationEvent",
+    "iri": "https://schema.org/EducationEvent",
+    "label": "EducationEvent"
+  },
+  {
+    "id": "schema:EducationalOccupationalCredential",
+    "iri": "https://schema.org/EducationalOccupationalCredential",
+    "label": "EducationalOccupationalCredential"
+  },
+  {
+    "id": "schema:EducationalOrganization",
+    "iri": "https://schema.org/EducationalOrganization",
+    "label": "EducationalOrganization"
+  },
+  {
+    "id": "schema:Electrician",
+    "iri": "https://schema.org/Electrician",
+    "label": "Electrician"
+  },
+  {
+    "id": "schema:ElectronicsStore",
+    "iri": "https://schema.org/ElectronicsStore",
+    "label": "ElectronicsStore"
+  },
+  {
+    "id": "schema:ElementarySchool",
+    "iri": "https://schema.org/ElementarySchool",
+    "label": "ElementarySchool"
+  },
+  {
+    "id": "schema:EmailMessage",
+    "iri": "https://schema.org/EmailMessage",
+    "label": "EmailMessage"
+  },
+  {
+    "id": "schema:Embassy",
+    "iri": "https://schema.org/Embassy",
+    "label": "Embassy"
+  },
+  {
+    "id": "schema:EmergencyService",
+    "iri": "https://schema.org/EmergencyService",
+    "label": "EmergencyService"
+  },
+  {
+    "id": "schema:EmployerReview",
+    "iri": "https://schema.org/EmployerReview",
+    "label": "EmployerReview"
+  },
+  {
+    "id": "schema:EmploymentAgency",
+    "iri": "https://schema.org/EmploymentAgency",
+    "label": "EmploymentAgency"
+  },
+  {
+    "id": "schema:Energy",
+    "iri": "https://schema.org/Energy",
+    "label": "Energy"
+  },
+  {
+    "id": "schema:EnergyConsumptionDetails",
+    "iri": "https://schema.org/EnergyConsumptionDetails",
+    "label": "EnergyConsumptionDetails"
+  },
+  {
+    "id": "schema:EngineSpecification",
+    "iri": "https://schema.org/EngineSpecification",
+    "label": "EngineSpecification"
+  },
+  {
+    "id": "schema:EntertainmentBusiness",
+    "iri": "https://schema.org/EntertainmentBusiness",
+    "label": "EntertainmentBusiness"
+  },
+  {
+    "id": "schema:Episode",
+    "iri": "https://schema.org/Episode",
+    "label": "Episode"
+  },
+  {
+    "id": "schema:Event",
+    "iri": "https://schema.org/Event",
+    "label": "Event"
+  },
+  {
+    "id": "schema:EventAttendanceModeEnumeration",
+    "iri": "https://schema.org/EventAttendanceModeEnumeration",
+    "label": "EventAttendanceModeEnumeration"
+  },
+  {
+    "id": "schema:EventSeries",
+    "iri": "https://schema.org/EventSeries",
+    "label": "EventSeries"
+  },
+  {
+    "id": "schema:EventStatusType",
+    "iri": "https://schema.org/EventStatusType",
+    "label": "EventStatusType"
+  },
+  {
+    "id": "schema:EventVenue",
+    "iri": "https://schema.org/EventVenue",
+    "label": "EventVenue"
+  },
+  {
+    "id": "schema:ExerciseGym",
+    "iri": "https://schema.org/ExerciseGym",
+    "label": "ExerciseGym"
+  },
+  {
+    "id": "schema:ExercisePlan",
+    "iri": "https://schema.org/ExercisePlan",
+    "label": "ExercisePlan"
+  },
+  {
+    "id": "schema:ExhibitionEvent",
+    "iri": "https://schema.org/ExhibitionEvent",
+    "label": "ExhibitionEvent"
+  },
+  {
+    "id": "schema:FAQPage",
+    "iri": "https://schema.org/FAQPage",
+    "label": "FAQPage"
+  },
+  {
+    "id": "schema:FastFoodRestaurant",
+    "iri": "https://schema.org/FastFoodRestaurant",
+    "label": "FastFoodRestaurant"
+  },
+  {
+    "id": "schema:Festival",
+    "iri": "https://schema.org/Festival",
+    "label": "Festival"
+  },
+  {
+    "id": "schema:FinancialService",
+    "iri": "https://schema.org/FinancialService",
+    "label": "FinancialService"
+  },
+  {
+    "id": "schema:FireStation",
+    "iri": "https://schema.org/FireStation",
+    "label": "FireStation"
+  },
+  {
+    "id": "schema:FloorPlan",
+    "iri": "https://schema.org/FloorPlan",
+    "label": "FloorPlan"
+  },
+  {
+    "id": "schema:Florist",
+    "iri": "https://schema.org/Florist",
+    "label": "Florist"
+  },
+  {
+    "id": "schema:FoodEstablishment",
+    "iri": "https://schema.org/FoodEstablishment",
+    "label": "FoodEstablishment"
+  },
+  {
+    "id": "schema:FoodEvent",
+    "iri": "https://schema.org/FoodEvent",
+    "label": "FoodEvent"
+  },
+  {
+    "id": "schema:FundingAgency",
+    "iri": "https://schema.org/FundingAgency",
+    "label": "FundingAgency"
+  },
+  {
+    "id": "schema:FundingScheme",
+    "iri": "https://schema.org/FundingScheme",
+    "label": "FundingScheme"
+  },
+  {
+    "id": "schema:FurnitureStore",
+    "iri": "https://schema.org/FurnitureStore",
+    "label": "FurnitureStore"
+  },
+  {
+    "id": "schema:Game",
+    "iri": "https://schema.org/Game",
+    "label": "Game"
+  },
+  {
+    "id": "schema:GamePlayMode",
+    "iri": "https://schema.org/GamePlayMode",
+    "label": "GamePlayMode"
+  },
+  {
+    "id": "schema:GameServer",
+    "iri": "https://schema.org/GameServer",
+    "label": "GameServer"
+  },
+  {
+    "id": "schema:GardenStore",
+    "iri": "https://schema.org/GardenStore",
+    "label": "GardenStore"
+  },
+  {
+    "id": "schema:GasStation",
+    "iri": "https://schema.org/GasStation",
+    "label": "GasStation"
+  },
+  {
+    "id": "schema:GatedResidenceCommunity",
+    "iri": "https://schema.org/GatedResidenceCommunity",
+    "label": "GatedResidenceCommunity"
+  },
+  {
+    "id": "schema:GenderType",
+    "iri": "https://schema.org/GenderType",
+    "label": "GenderType"
+  },
+  {
+    "id": "schema:GeneralContractor",
+    "iri": "https://schema.org/GeneralContractor",
+    "label": "GeneralContractor"
+  },
+  {
+    "id": "schema:GeoCoordinates",
+    "iri": "https://schema.org/GeoCoordinates",
+    "label": "GeoCoordinates"
+  },
+  {
+    "id": "schema:GeoShape",
+    "iri": "https://schema.org/GeoShape",
+    "label": "GeoShape"
+  },
+  {
+    "id": "schema:GeospatialGeometry",
+    "iri": "https://schema.org/GeospatialGeometry",
+    "label": "GeospatialGeometry"
+  },
+  {
+    "id": "schema:GolfCourse",
+    "iri": "https://schema.org/GolfCourse",
+    "label": "GolfCourse"
+  },
+  {
+    "id": "schema:GovernmentBuilding",
+    "iri": "https://schema.org/GovernmentBuilding",
+    "label": "GovernmentBuilding"
+  },
+  {
+    "id": "schema:GovernmentOffice",
+    "iri": "https://schema.org/GovernmentOffice",
+    "label": "GovernmentOffice"
+  },
+  {
+    "id": "schema:GovernmentOrganization",
+    "iri": "https://schema.org/GovernmentOrganization",
+    "label": "GovernmentOrganization"
+  },
+  {
+    "id": "schema:GovernmentService",
+    "iri": "https://schema.org/GovernmentService",
+    "label": "GovernmentService"
+  },
+  {
+    "id": "schema:Grant",
+    "iri": "https://schema.org/Grant",
+    "label": "Grant"
+  },
+  {
+    "id": "schema:GroceryStore",
+    "iri": "https://schema.org/GroceryStore",
+    "label": "GroceryStore"
+  },
+  {
+    "id": "schema:Guide",
+    "iri": "https://schema.org/Guide",
+    "label": "Guide"
+  },
+  {
+    "id": "schema:HVACBusiness",
+    "iri": "https://schema.org/HVACBusiness",
+    "label": "HVACBusiness"
+  },
+  {
+    "id": "schema:Hackathon",
+    "iri": "https://schema.org/Hackathon",
+    "label": "Hackathon"
+  },
+  {
+    "id": "schema:HairSalon",
+    "iri": "https://schema.org/HairSalon",
+    "label": "HairSalon"
+  },
+  {
+    "id": "schema:HardwareStore",
+    "iri": "https://schema.org/HardwareStore",
+    "label": "HardwareStore"
+  },
+  {
+    "id": "schema:HealthAndBeautyBusiness",
+    "iri": "https://schema.org/HealthAndBeautyBusiness",
+    "label": "HealthAndBeautyBusiness"
+  },
+  {
+    "id": "schema:HealthAspectEnumeration",
+    "iri": "https://schema.org/HealthAspectEnumeration",
+    "label": "HealthAspectEnumeration"
+  },
+  {
+    "id": "schema:HealthClub",
+    "iri": "https://schema.org/HealthClub",
+    "label": "HealthClub"
+  },
+  {
+    "id": "schema:HealthInsurancePlan",
+    "iri": "https://schema.org/HealthInsurancePlan",
+    "label": "HealthInsurancePlan"
+  },
+  {
+    "id": "schema:HealthTopicContent",
+    "iri": "https://schema.org/HealthTopicContent",
+    "label": "HealthTopicContent"
+  },
+  {
+    "id": "schema:HighSchool",
+    "iri": "https://schema.org/HighSchool",
+    "label": "HighSchool"
+  },
+  {
+    "id": "schema:HinduTemple",
+    "iri": "https://schema.org/HinduTemple",
+    "label": "HinduTemple"
+  },
+  {
+    "id": "schema:HobbyShop",
+    "iri": "https://schema.org/HobbyShop",
+    "label": "HobbyShop"
+  },
+  {
+    "id": "schema:HomeAndConstructionBusiness",
+    "iri": "https://schema.org/HomeAndConstructionBusiness",
+    "label": "HomeAndConstructionBusiness"
+  },
+  {
+    "id": "schema:HomeGoodsStore",
+    "iri": "https://schema.org/HomeGoodsStore",
+    "label": "HomeGoodsStore"
+  },
+  {
+    "id": "schema:Hospital",
+    "iri": "https://schema.org/Hospital",
+    "label": "Hospital"
+  },
+  {
+    "id": "schema:Hostel",
+    "iri": "https://schema.org/Hostel",
+    "label": "Hostel"
+  },
+  {
+    "id": "schema:Hotel",
+    "iri": "https://schema.org/Hotel",
+    "label": "Hotel"
+  },
+  {
+    "id": "schema:HotelRoom",
+    "iri": "https://schema.org/HotelRoom",
+    "label": "HotelRoom"
+  },
+  {
+    "id": "schema:House",
+    "iri": "https://schema.org/House",
+    "label": "House"
+  },
+  {
+    "id": "schema:HousePainter",
+    "iri": "https://schema.org/HousePainter",
+    "label": "HousePainter"
+  },
+  {
+    "id": "schema:HowTo",
+    "iri": "https://schema.org/HowTo",
+    "label": "HowTo"
+  },
+  {
+    "id": "schema:HowToDirection",
+    "iri": "https://schema.org/HowToDirection",
+    "label": "HowToDirection"
+  },
+  {
+    "id": "schema:HowToSection",
+    "iri": "https://schema.org/HowToSection",
+    "label": "HowToSection"
+  },
+  {
+    "id": "schema:HowToStep",
+    "iri": "https://schema.org/HowToStep",
+    "label": "HowToStep"
+  },
+  {
+    "id": "schema:HowToSupply",
+    "iri": "https://schema.org/HowToSupply",
+    "label": "HowToSupply"
+  },
+  {
+    "id": "schema:HowToTip",
+    "iri": "https://schema.org/HowToTip",
+    "label": "HowToTip"
+  },
+  {
+    "id": "schema:HowToTool",
+    "iri": "https://schema.org/HowToTool",
+    "label": "HowToTool"
+  },
+  {
+    "id": "schema:HyperToc",
+    "iri": "https://schema.org/HyperToc",
+    "label": "HyperToc"
+  },
+  {
+    "id": "schema:HyperTocEntry",
+    "iri": "https://schema.org/HyperTocEntry",
+    "label": "HyperTocEntry"
+  },
+  {
+    "id": "schema:IPTCDigitalSourceEnumeration",
+    "iri": "https://schema.org/IPTCDigitalSourceEnumeration",
+    "label": "IPTCDigitalSourceEnumeration"
+  },
+  {
+    "id": "schema:IceCreamShop",
+    "iri": "https://schema.org/IceCreamShop",
+    "label": "IceCreamShop"
+  },
+  {
+    "id": "schema:ImageGallery",
+    "iri": "https://schema.org/ImageGallery",
+    "label": "ImageGallery"
+  },
+  {
+    "id": "schema:ImageObject",
+    "iri": "https://schema.org/ImageObject",
+    "label": "ImageObject"
+  },
+  {
+    "id": "schema:ImageObjectSnapshot",
+    "iri": "https://schema.org/ImageObjectSnapshot",
+    "label": "ImageObjectSnapshot"
+  },
+  {
+    "id": "schema:IndividualPhysician",
+    "iri": "https://schema.org/IndividualPhysician",
+    "label": "IndividualPhysician"
+  },
+  {
+    "id": "schema:IndividualProduct",
+    "iri": "https://schema.org/IndividualProduct",
+    "label": "IndividualProduct"
+  },
+  {
+    "id": "schema:InsuranceAgency",
+    "iri": "https://schema.org/InsuranceAgency",
+    "label": "InsuranceAgency"
+  },
+  {
+    "id": "schema:Intangible",
+    "iri": "https://schema.org/Intangible",
+    "label": "Intangible"
+  },
+  {
+    "id": "schema:Integer",
+    "iri": "https://schema.org/Integer",
+    "label": "Integer"
+  },
+  {
+    "id": "schema:InteractionCounter",
+    "iri": "https://schema.org/InteractionCounter",
+    "label": "InteractionCounter"
+  },
+  {
+    "id": "schema:InternetCafe",
+    "iri": "https://schema.org/InternetCafe",
+    "label": "InternetCafe"
+  },
+  {
+    "id": "schema:ItemList",
+    "iri": "https://schema.org/ItemList",
+    "label": "ItemList"
+  },
+  {
+    "id": "schema:ItemListOrderType",
+    "iri": "https://schema.org/ItemListOrderType",
+    "label": "ItemListOrderType"
+  },
+  {
+    "id": "schema:ItemPage",
+    "iri": "https://schema.org/ItemPage",
+    "label": "ItemPage"
+  },
+  {
+    "id": "schema:JewelryStore",
+    "iri": "https://schema.org/JewelryStore",
+    "label": "JewelryStore"
+  },
+  {
+    "id": "schema:LakeBodyOfWater",
+    "iri": "https://schema.org/LakeBodyOfWater",
+    "label": "LakeBodyOfWater"
+  },
+  {
+    "id": "schema:Landform",
+    "iri": "https://schema.org/Landform",
+    "label": "Landform"
+  },
+  {
+    "id": "schema:LandmarksOrHistoricalBuildings",
+    "iri": "https://schema.org/LandmarksOrHistoricalBuildings",
+    "label": "LandmarksOrHistoricalBuildings"
+  },
+  {
+    "id": "schema:Language",
+    "iri": "https://schema.org/Language",
+    "label": "Language"
+  },
+  {
+    "id": "schema:LearningResource",
+    "iri": "https://schema.org/LearningResource",
+    "label": "LearningResource"
+  },
+  {
+    "id": "schema:LegalForceStatus",
+    "iri": "https://schema.org/LegalForceStatus",
+    "label": "LegalForceStatus"
+  },
+  {
+    "id": "schema:LegalService",
+    "iri": "https://schema.org/LegalService",
+    "label": "LegalService"
+  },
+  {
+    "id": "schema:LegalValueLevel",
+    "iri": "https://schema.org/LegalValueLevel",
+    "label": "LegalValueLevel"
+  },
+  {
+    "id": "schema:Legislation",
+    "iri": "https://schema.org/Legislation",
+    "label": "Legislation"
+  },
+  {
+    "id": "schema:LegislationObject",
+    "iri": "https://schema.org/LegislationObject",
+    "label": "LegislationObject"
+  },
+  {
+    "id": "schema:LegislativeBuilding",
+    "iri": "https://schema.org/LegislativeBuilding",
+    "label": "LegislativeBuilding"
+  },
+  {
+    "id": "schema:Library",
+    "iri": "https://schema.org/Library",
+    "label": "Library"
+  },
+  {
+    "id": "schema:LibrarySystem",
+    "iri": "https://schema.org/LibrarySystem",
+    "label": "LibrarySystem"
+  },
+  {
+    "id": "schema:LifestyleModification",
+    "iri": "https://schema.org/LifestyleModification",
+    "label": "LifestyleModification"
+  },
+  {
+    "id": "schema:LiquorStore",
+    "iri": "https://schema.org/LiquorStore",
+    "label": "LiquorStore"
+  },
+  {
+    "id": "schema:ListItem",
+    "iri": "https://schema.org/ListItem",
+    "label": "ListItem"
+  },
+  {
+    "id": "schema:LiteraryEvent",
+    "iri": "https://schema.org/LiteraryEvent",
+    "label": "LiteraryEvent"
+  },
+  {
+    "id": "schema:LiveBlogPosting",
+    "iri": "https://schema.org/LiveBlogPosting",
+    "label": "LiveBlogPosting"
+  },
+  {
+    "id": "schema:LoanOrCredit",
+    "iri": "https://schema.org/LoanOrCredit",
+    "label": "LoanOrCredit"
+  },
+  {
+    "id": "schema:LocalBusiness",
+    "iri": "https://schema.org/LocalBusiness",
+    "label": "LocalBusiness"
+  },
+  {
+    "id": "schema:LocationFeatureSpecification",
+    "iri": "https://schema.org/LocationFeatureSpecification",
+    "label": "LocationFeatureSpecification"
+  },
+  {
+    "id": "schema:Locksmith",
+    "iri": "https://schema.org/Locksmith",
+    "label": "Locksmith"
+  },
+  {
+    "id": "schema:LodgingBusiness",
+    "iri": "https://schema.org/LodgingBusiness",
+    "label": "LodgingBusiness"
+  },
+  {
+    "id": "schema:Manuscript",
+    "iri": "https://schema.org/Manuscript",
+    "label": "Manuscript"
+  },
+  {
+    "id": "schema:Map",
+    "iri": "https://schema.org/Map",
+    "label": "Map"
+  },
+  {
+    "id": "schema:MapCategoryType",
+    "iri": "https://schema.org/MapCategoryType",
+    "label": "MapCategoryType"
+  },
+  {
+    "id": "schema:Mass",
+    "iri": "https://schema.org/Mass",
+    "label": "Mass"
+  },
+  {
+    "id": "schema:MathSolver",
+    "iri": "https://schema.org/MathSolver",
+    "label": "MathSolver"
+  },
+  {
+    "id": "schema:MaximumDoseSchedule",
+    "iri": "https://schema.org/MaximumDoseSchedule",
+    "label": "MaximumDoseSchedule"
+  },
+  {
+    "id": "schema:MeasurementMethodEnum",
+    "iri": "https://schema.org/MeasurementMethodEnum",
+    "label": "MeasurementMethodEnum"
+  },
+  {
+    "id": "schema:MediaGallery",
+    "iri": "https://schema.org/MediaGallery",
+    "label": "MediaGallery"
+  },
+  {
+    "id": "schema:MediaManipulationRatingEnumeration",
+    "iri": "https://schema.org/MediaManipulationRatingEnumeration",
+    "label": "MediaManipulationRatingEnumeration"
+  },
+  {
+    "id": "schema:MediaObject",
+    "iri": "https://schema.org/MediaObject",
+    "label": "MediaObject"
+  },
+  {
+    "id": "schema:MediaReview",
+    "iri": "https://schema.org/MediaReview",
+    "label": "MediaReview"
+  },
+  {
+    "id": "schema:MediaReviewItem",
+    "iri": "https://schema.org/MediaReviewItem",
+    "label": "MediaReviewItem"
+  },
+  {
+    "id": "schema:MediaSubscription",
+    "iri": "https://schema.org/MediaSubscription",
+    "label": "MediaSubscription"
+  },
+  {
+    "id": "schema:MedicalAudience",
+    "iri": "https://schema.org/MedicalAudience",
+    "label": "MedicalAudience"
+  },
+  {
+    "id": "schema:MedicalAudienceType",
+    "iri": "https://schema.org/MedicalAudienceType",
+    "label": "MedicalAudienceType"
+  },
+  {
+    "id": "schema:MedicalBusiness",
+    "iri": "https://schema.org/MedicalBusiness",
+    "label": "MedicalBusiness"
+  },
+  {
+    "id": "schema:MedicalClinic",
+    "iri": "https://schema.org/MedicalClinic",
+    "label": "MedicalClinic"
+  },
+  {
+    "id": "schema:MedicalCode",
+    "iri": "https://schema.org/MedicalCode",
+    "label": "MedicalCode"
+  },
+  {
+    "id": "schema:MedicalCondition",
+    "iri": "https://schema.org/MedicalCondition",
+    "label": "MedicalCondition"
+  },
+  {
+    "id": "schema:MedicalEntity",
+    "iri": "https://schema.org/MedicalEntity",
+    "label": "MedicalEntity"
+  },
+  {
+    "id": "schema:MedicalEnumeration",
+    "iri": "https://schema.org/MedicalEnumeration",
+    "label": "MedicalEnumeration"
+  },
+  {
+    "id": "schema:MedicalGuideline",
+    "iri": "https://schema.org/MedicalGuideline",
+    "label": "MedicalGuideline"
+  },
+  {
+    "id": "schema:MedicalOrganization",
+    "iri": "https://schema.org/MedicalOrganization",
+    "label": "MedicalOrganization"
+  },
+  {
+    "id": "schema:MedicalProcedure",
+    "iri": "https://schema.org/MedicalProcedure",
+    "label": "MedicalProcedure"
+  },
+  {
+    "id": "schema:MedicalScholarlyArticle",
+    "iri": "https://schema.org/MedicalScholarlyArticle",
+    "label": "MedicalScholarlyArticle"
+  },
+  {
+    "id": "schema:MedicalSpecialty",
+    "iri": "https://schema.org/MedicalSpecialty",
+    "label": "MedicalSpecialty"
+  },
+  {
+    "id": "schema:MedicalStudy",
+    "iri": "https://schema.org/MedicalStudy",
+    "label": "MedicalStudy"
+  },
+  {
+    "id": "schema:MedicalTest",
+    "iri": "https://schema.org/MedicalTest",
+    "label": "MedicalTest"
+  },
+  {
+    "id": "schema:MedicalTherapy",
+    "iri": "https://schema.org/MedicalTherapy",
+    "label": "MedicalTherapy"
+  },
+  {
+    "id": "schema:MedicalWebPage",
+    "iri": "https://schema.org/MedicalWebPage",
+    "label": "MedicalWebPage"
+  },
+  {
+    "id": "schema:MedicineSystem",
+    "iri": "https://schema.org/MedicineSystem",
+    "label": "MedicineSystem"
+  },
+  {
+    "id": "schema:MeetingRoom",
+    "iri": "https://schema.org/MeetingRoom",
+    "label": "MeetingRoom"
+  },
+  {
+    "id": "schema:MemberProgram",
+    "iri": "https://schema.org/MemberProgram",
+    "label": "MemberProgram"
+  },
+  {
+    "id": "schema:MemberProgramTier",
+    "iri": "https://schema.org/MemberProgramTier",
+    "label": "MemberProgramTier"
+  },
+  {
+    "id": "schema:MensClothingStore",
+    "iri": "https://schema.org/MensClothingStore",
+    "label": "MensClothingStore"
+  },
+  {
+    "id": "schema:Menu",
+    "iri": "https://schema.org/Menu",
+    "label": "Menu"
+  },
+  {
+    "id": "schema:MenuItem",
+    "iri": "https://schema.org/MenuItem",
+    "label": "MenuItem"
+  },
+  {
+    "id": "schema:MenuSection",
+    "iri": "https://schema.org/MenuSection",
+    "label": "MenuSection"
+  },
+  {
+    "id": "schema:MerchantReturnPolicy",
+    "iri": "https://schema.org/MerchantReturnPolicy",
+    "label": "MerchantReturnPolicy"
+  },
+  {
+    "id": "schema:Message",
+    "iri": "https://schema.org/Message",
+    "label": "Message"
+  },
+  {
+    "id": "schema:MiddleSchool",
+    "iri": "https://schema.org/MiddleSchool",
+    "label": "MiddleSchool"
+  },
+  {
+    "id": "schema:MobileApplication",
+    "iri": "https://schema.org/MobileApplication",
+    "label": "MobileApplication"
+  },
+  {
+    "id": "schema:MobilePhoneStore",
+    "iri": "https://schema.org/MobilePhoneStore",
+    "label": "MobilePhoneStore"
+  },
+  {
+    "id": "schema:MonetaryAmount",
+    "iri": "https://schema.org/MonetaryAmount",
+    "label": "MonetaryAmount"
+  },
+  {
+    "id": "schema:Mosque",
+    "iri": "https://schema.org/Mosque",
+    "label": "Mosque"
+  },
+  {
+    "id": "schema:Motel",
+    "iri": "https://schema.org/Motel",
+    "label": "Motel"
+  },
+  {
+    "id": "schema:Motorcycle",
+    "iri": "https://schema.org/Motorcycle",
+    "label": "Motorcycle"
+  },
+  {
+    "id": "schema:MotorcycleDealer",
+    "iri": "https://schema.org/MotorcycleDealer",
+    "label": "MotorcycleDealer"
+  },
+  {
+    "id": "schema:MotorcycleRepair",
+    "iri": "https://schema.org/MotorcycleRepair",
+    "label": "MotorcycleRepair"
+  },
+  {
+    "id": "schema:MotorizedBicycle",
+    "iri": "https://schema.org/MotorizedBicycle",
+    "label": "MotorizedBicycle"
+  },
+  {
+    "id": "schema:Mountain",
+    "iri": "https://schema.org/Mountain",
+    "label": "Mountain"
+  },
+  {
+    "id": "schema:Movie",
+    "iri": "https://schema.org/Movie",
+    "label": "Movie"
+  },
+  {
+    "id": "schema:MovieClip",
+    "iri": "https://schema.org/MovieClip",
+    "label": "MovieClip"
+  },
+  {
+    "id": "schema:MovieRentalStore",
+    "iri": "https://schema.org/MovieRentalStore",
+    "label": "MovieRentalStore"
+  },
+  {
+    "id": "schema:MovieSeries",
+    "iri": "https://schema.org/MovieSeries",
+    "label": "MovieSeries"
+  },
+  {
+    "id": "schema:MovieTheater",
+    "iri": "https://schema.org/MovieTheater",
+    "label": "MovieTheater"
+  },
+  {
+    "id": "schema:MovingCompany",
+    "iri": "https://schema.org/MovingCompany",
+    "label": "MovingCompany"
+  },
+  {
+    "id": "schema:Museum",
+    "iri": "https://schema.org/Museum",
+    "label": "Museum"
+  },
+  {
+    "id": "schema:MusicAlbum",
+    "iri": "https://schema.org/MusicAlbum",
+    "label": "MusicAlbum"
+  },
+  {
+    "id": "schema:MusicAlbumProductionType",
+    "iri": "https://schema.org/MusicAlbumProductionType",
+    "label": "MusicAlbumProductionType"
+  },
+  {
+    "id": "schema:MusicAlbumReleaseType",
+    "iri": "https://schema.org/MusicAlbumReleaseType",
+    "label": "MusicAlbumReleaseType"
+  },
+  {
+    "id": "schema:MusicComposition",
+    "iri": "https://schema.org/MusicComposition",
+    "label": "MusicComposition"
+  },
+  {
+    "id": "schema:MusicEvent",
+    "iri": "https://schema.org/MusicEvent",
+    "label": "MusicEvent"
+  },
+  {
+    "id": "schema:MusicGroup",
+    "iri": "https://schema.org/MusicGroup",
+    "label": "MusicGroup"
+  },
+  {
+    "id": "schema:MusicPlaylist",
+    "iri": "https://schema.org/MusicPlaylist",
+    "label": "MusicPlaylist"
+  },
+  {
+    "id": "schema:MusicRecording",
+    "iri": "https://schema.org/MusicRecording",
+    "label": "MusicRecording"
+  },
+  {
+    "id": "schema:MusicRelease",
+    "iri": "https://schema.org/MusicRelease",
+    "label": "MusicRelease"
+  },
+  {
+    "id": "schema:MusicReleaseFormatType",
+    "iri": "https://schema.org/MusicReleaseFormatType",
+    "label": "MusicReleaseFormatType"
+  },
+  {
+    "id": "schema:MusicStore",
+    "iri": "https://schema.org/MusicStore",
+    "label": "MusicStore"
+  },
+  {
+    "id": "schema:MusicVenue",
+    "iri": "https://schema.org/MusicVenue",
+    "label": "MusicVenue"
+  },
+  {
+    "id": "schema:MusicVideoObject",
+    "iri": "https://schema.org/MusicVideoObject",
+    "label": "MusicVideoObject"
+  },
+  {
+    "id": "schema:NGO",
+    "iri": "https://schema.org/NGO",
+    "label": "NGO"
+  },
+  {
+    "id": "schema:NailSalon",
+    "iri": "https://schema.org/NailSalon",
+    "label": "NailSalon"
+  },
+  {
+    "id": "schema:NewsArticle",
+    "iri": "https://schema.org/NewsArticle",
+    "label": "NewsArticle"
+  },
+  {
+    "id": "schema:NewsMediaOrganization",
+    "iri": "https://schema.org/NewsMediaOrganization",
+    "label": "NewsMediaOrganization"
+  },
+  {
+    "id": "schema:Newspaper",
+    "iri": "https://schema.org/Newspaper",
+    "label": "Newspaper"
+  },
+  {
+    "id": "schema:NightClub",
+    "iri": "https://schema.org/NightClub",
+    "label": "NightClub"
+  },
+  {
+    "id": "schema:NonprofitType",
+    "iri": "https://schema.org/NonprofitType",
+    "label": "NonprofitType"
+  },
+  {
+    "id": "schema:Notary",
+    "iri": "https://schema.org/Notary",
+    "label": "Notary"
+  },
+  {
+    "id": "schema:NoteDigitalDocument",
+    "iri": "https://schema.org/NoteDigitalDocument",
+    "label": "NoteDigitalDocument"
+  },
+  {
+    "id": "schema:Number",
+    "iri": "https://schema.org/Number",
+    "label": "Number"
+  },
+  {
+    "id": "schema:NutritionInformation",
+    "iri": "https://schema.org/NutritionInformation",
+    "label": "NutritionInformation"
+  },
+  {
+    "id": "schema:Observation",
+    "iri": "https://schema.org/Observation",
+    "label": "Observation"
+  },
+  {
+    "id": "schema:Occupation",
+    "iri": "https://schema.org/Occupation",
+    "label": "Occupation"
+  },
+  {
+    "id": "schema:OceanBodyOfWater",
+    "iri": "https://schema.org/OceanBodyOfWater",
+    "label": "OceanBodyOfWater"
+  },
+  {
+    "id": "schema:Offer",
+    "iri": "https://schema.org/Offer",
+    "label": "Offer"
+  },
+  {
+    "id": "schema:OfferCatalog",
+    "iri": "https://schema.org/OfferCatalog",
+    "label": "OfferCatalog"
+  },
+  {
+    "id": "schema:OfferItemCondition",
+    "iri": "https://schema.org/OfferItemCondition",
+    "label": "OfferItemCondition"
+  },
+  {
+    "id": "schema:OfficeEquipmentStore",
+    "iri": "https://schema.org/OfficeEquipmentStore",
+    "label": "OfficeEquipmentStore"
+  },
+  {
+    "id": "schema:OnDemandEvent",
+    "iri": "https://schema.org/OnDemandEvent",
+    "label": "OnDemandEvent"
+  },
+  {
+    "id": "schema:OnlineBusiness",
+    "iri": "https://schema.org/OnlineBusiness",
+    "label": "OnlineBusiness"
+  },
+  {
+    "id": "schema:OnlineMarketplace",
+    "iri": "https://schema.org/OnlineMarketplace",
+    "label": "OnlineMarketplace"
+  },
+  {
+    "id": "schema:OnlineStore",
+    "iri": "https://schema.org/OnlineStore",
+    "label": "OnlineStore"
+  },
+  {
+    "id": "schema:OpeningHoursSpecification",
+    "iri": "https://schema.org/OpeningHoursSpecification",
+    "label": "OpeningHoursSpecification"
+  },
+  {
+    "id": "schema:OperatingSystem",
+    "iri": "https://schema.org/OperatingSystem",
+    "label": "OperatingSystem"
+  },
+  {
+    "id": "schema:OpinionNewsArticle",
+    "iri": "https://schema.org/OpinionNewsArticle",
+    "label": "OpinionNewsArticle"
+  },
+  {
+    "id": "schema:Optician",
+    "iri": "https://schema.org/Optician",
+    "label": "Optician"
+  },
+  {
+    "id": "schema:Organization",
+    "iri": "https://schema.org/Organization",
+    "label": "Organization"
+  },
+  {
+    "id": "schema:OutletStore",
+    "iri": "https://schema.org/OutletStore",
+    "label": "OutletStore"
+  },
+  {
+    "id": "schema:Painting",
+    "iri": "https://schema.org/Painting",
+    "label": "Painting"
+  },
+  {
+    "id": "schema:Park",
+    "iri": "https://schema.org/Park",
+    "label": "Park"
+  },
+  {
+    "id": "schema:ParkingFacility",
+    "iri": "https://schema.org/ParkingFacility",
+    "label": "ParkingFacility"
+  },
+  {
+    "id": "schema:Patient",
+    "iri": "https://schema.org/Patient",
+    "label": "Patient"
+  },
+  {
+    "id": "schema:PawnShop",
+    "iri": "https://schema.org/PawnShop",
+    "label": "PawnShop"
+  },
+  {
+    "id": "schema:PaymentMethod",
+    "iri": "https://schema.org/PaymentMethod",
+    "label": "PaymentMethod"
+  },
+  {
+    "id": "schema:PeopleAudience",
+    "iri": "https://schema.org/PeopleAudience",
+    "label": "PeopleAudience"
+  },
+  {
+    "id": "schema:PerformingArtsEvent",
+    "iri": "https://schema.org/PerformingArtsEvent",
+    "label": "PerformingArtsEvent"
+  },
+  {
+    "id": "schema:PerformingArtsTheater",
+    "iri": "https://schema.org/PerformingArtsTheater",
+    "label": "PerformingArtsTheater"
+  },
+  {
+    "id": "schema:PerformingGroup",
+    "iri": "https://schema.org/PerformingGroup",
+    "label": "PerformingGroup"
+  },
+  {
+    "id": "schema:Periodical",
+    "iri": "https://schema.org/Periodical",
+    "label": "Periodical"
+  },
+  {
+    "id": "schema:Person",
+    "iri": "https://schema.org/Person",
+    "label": "Person"
+  },
+  {
+    "id": "schema:PetStore",
+    "iri": "https://schema.org/PetStore",
+    "label": "PetStore"
+  },
+  {
+    "id": "schema:Pharmacy",
+    "iri": "https://schema.org/Pharmacy",
+    "label": "Pharmacy"
+  },
+  {
+    "id": "schema:Photograph",
+    "iri": "https://schema.org/Photograph",
+    "label": "Photograph"
+  },
+  {
+    "id": "schema:PhysicalActivity",
+    "iri": "https://schema.org/PhysicalActivity",
+    "label": "PhysicalActivity"
+  },
+  {
+    "id": "schema:PhysicalActivityCategory",
+    "iri": "https://schema.org/PhysicalActivityCategory",
+    "label": "PhysicalActivityCategory"
+  },
+  {
+    "id": "schema:Physician",
+    "iri": "https://schema.org/Physician",
+    "label": "Physician"
+  },
+  {
+    "id": "schema:PhysiciansOffice",
+    "iri": "https://schema.org/PhysiciansOffice",
+    "label": "PhysiciansOffice"
+  },
+  {
+    "id": "schema:Place",
+    "iri": "https://schema.org/Place",
+    "label": "Place"
+  },
+  {
+    "id": "schema:PlaceOfWorship",
+    "iri": "https://schema.org/PlaceOfWorship",
+    "label": "PlaceOfWorship"
+  },
+  {
+    "id": "schema:Play",
+    "iri": "https://schema.org/Play",
+    "label": "Play"
+  },
+  {
+    "id": "schema:Playground",
+    "iri": "https://schema.org/Playground",
+    "label": "Playground"
+  },
+  {
+    "id": "schema:Plumber",
+    "iri": "https://schema.org/Plumber",
+    "label": "Plumber"
+  },
+  {
+    "id": "schema:PodcastEpisode",
+    "iri": "https://schema.org/PodcastEpisode",
+    "label": "PodcastEpisode"
+  },
+  {
+    "id": "schema:PodcastSeason",
+    "iri": "https://schema.org/PodcastSeason",
+    "label": "PodcastSeason"
+  },
+  {
+    "id": "schema:PodcastSeries",
+    "iri": "https://schema.org/PodcastSeries",
+    "label": "PodcastSeries"
+  },
+  {
+    "id": "schema:PoliceStation",
+    "iri": "https://schema.org/PoliceStation",
+    "label": "PoliceStation"
+  },
+  {
+    "id": "schema:PoliticalParty",
+    "iri": "https://schema.org/PoliticalParty",
+    "label": "PoliticalParty"
+  },
+  {
+    "id": "schema:Pond",
+    "iri": "https://schema.org/Pond",
+    "label": "Pond"
+  },
+  {
+    "id": "schema:PostOffice",
+    "iri": "https://schema.org/PostOffice",
+    "label": "PostOffice"
+  },
+  {
+    "id": "schema:PostalAddress",
+    "iri": "https://schema.org/PostalAddress",
+    "label": "PostalAddress"
+  },
+  {
+    "id": "schema:PostalCodeRangeSpecification",
+    "iri": "https://schema.org/PostalCodeRangeSpecification",
+    "label": "PostalCodeRangeSpecification"
+  },
+  {
+    "id": "schema:Poster",
+    "iri": "https://schema.org/Poster",
+    "label": "Poster"
+  },
+  {
+    "id": "schema:Preschool",
+    "iri": "https://schema.org/Preschool",
+    "label": "Preschool"
+  },
+  {
+    "id": "schema:PresentationDigitalDocument",
+    "iri": "https://schema.org/PresentationDigitalDocument",
+    "label": "PresentationDigitalDocument"
+  },
+  {
+    "id": "schema:PriceSpecification",
+    "iri": "https://schema.org/PriceSpecification",
+    "label": "PriceSpecification"
+  },
+  {
+    "id": "schema:Product",
+    "iri": "https://schema.org/Product",
+    "label": "Product"
+  },
+  {
+    "id": "schema:ProductCollection",
+    "iri": "https://schema.org/ProductCollection",
+    "label": "ProductCollection"
+  },
+  {
+    "id": "schema:ProductGroup",
+    "iri": "https://schema.org/ProductGroup",
+    "label": "ProductGroup"
+  },
+  {
+    "id": "schema:ProductModel",
+    "iri": "https://schema.org/ProductModel",
+    "label": "ProductModel"
+  },
+  {
+    "id": "schema:ProfessionalService",
+    "iri": "https://schema.org/ProfessionalService",
+    "label": "ProfessionalService"
+  },
+  {
+    "id": "schema:ProfilePage",
+    "iri": "https://schema.org/ProfilePage",
+    "label": "ProfilePage"
+  },
+  {
+    "id": "schema:ProgramMembership",
+    "iri": "https://schema.org/ProgramMembership",
+    "label": "ProgramMembership"
+  },
+  {
+    "id": "schema:Project",
+    "iri": "https://schema.org/Project",
+    "label": "Project"
+  },
+  {
+    "id": "schema:Property",
+    "iri": "https://schema.org/Property",
+    "label": "Property"
+  },
+  {
+    "id": "schema:PropertyValue",
+    "iri": "https://schema.org/PropertyValue",
+    "label": "PropertyValue"
+  },
+  {
+    "id": "schema:PublicSwimmingPool",
+    "iri": "https://schema.org/PublicSwimmingPool",
+    "label": "PublicSwimmingPool"
+  },
+  {
+    "id": "schema:PublicToilet",
+    "iri": "https://schema.org/PublicToilet",
+    "label": "PublicToilet"
+  },
+  {
+    "id": "schema:PublicationEvent",
+    "iri": "https://schema.org/PublicationEvent",
+    "label": "PublicationEvent"
+  },
+  {
+    "id": "schema:PublicationIssue",
+    "iri": "https://schema.org/PublicationIssue",
+    "label": "PublicationIssue"
+  },
+  {
+    "id": "schema:PublicationVolume",
+    "iri": "https://schema.org/PublicationVolume",
+    "label": "PublicationVolume"
+  },
+  {
+    "id": "schema:QAPage",
+    "iri": "https://schema.org/QAPage",
+    "label": "QAPage"
+  },
+  {
+    "id": "schema:QualitativeValue",
+    "iri": "https://schema.org/QualitativeValue",
+    "label": "QualitativeValue"
+  },
+  {
+    "id": "schema:QuantitativeValue",
+    "iri": "https://schema.org/QuantitativeValue",
+    "label": "QuantitativeValue"
+  },
+  {
+    "id": "schema:Question",
+    "iri": "https://schema.org/Question",
+    "label": "Question"
+  },
+  {
+    "id": "schema:Quiz",
+    "iri": "https://schema.org/Quiz",
+    "label": "Quiz"
+  },
+  {
+    "id": "schema:Quotation",
+    "iri": "https://schema.org/Quotation",
+    "label": "Quotation"
+  },
+  {
+    "id": "schema:RVPark",
+    "iri": "https://schema.org/RVPark",
+    "label": "RVPark"
+  },
+  {
+    "id": "schema:RadioClip",
+    "iri": "https://schema.org/RadioClip",
+    "label": "RadioClip"
+  },
+  {
+    "id": "schema:RadioEpisode",
+    "iri": "https://schema.org/RadioEpisode",
+    "label": "RadioEpisode"
+  },
+  {
+    "id": "schema:RadioSeason",
+    "iri": "https://schema.org/RadioSeason",
+    "label": "RadioSeason"
+  },
+  {
+    "id": "schema:RadioSeries",
+    "iri": "https://schema.org/RadioSeries",
+    "label": "RadioSeries"
+  },
+  {
+    "id": "schema:RadioStation",
+    "iri": "https://schema.org/RadioStation",
+    "label": "RadioStation"
+  },
+  {
+    "id": "schema:Rating",
+    "iri": "https://schema.org/Rating",
+    "label": "Rating"
+  },
+  {
+    "id": "schema:RealEstateAgent",
+    "iri": "https://schema.org/RealEstateAgent",
+    "label": "RealEstateAgent"
+  },
+  {
+    "id": "schema:RealEstateListing",
+    "iri": "https://schema.org/RealEstateListing",
+    "label": "RealEstateListing"
+  },
+  {
+    "id": "schema:Recipe",
+    "iri": "https://schema.org/Recipe",
+    "label": "Recipe"
+  },
+  {
+    "id": "schema:Recommendation",
+    "iri": "https://schema.org/Recommendation",
+    "label": "Recommendation"
+  },
+  {
+    "id": "schema:RecommendedDoseSchedule",
+    "iri": "https://schema.org/RecommendedDoseSchedule",
+    "label": "RecommendedDoseSchedule"
+  },
+  {
+    "id": "schema:RecyclingCenter",
+    "iri": "https://schema.org/RecyclingCenter",
+    "label": "RecyclingCenter"
+  },
+  {
+    "id": "schema:Report",
+    "iri": "https://schema.org/Report",
+    "label": "Report"
+  },
+  {
+    "id": "schema:ReportageNewsArticle",
+    "iri": "https://schema.org/ReportageNewsArticle",
+    "label": "ReportageNewsArticle"
+  },
+  {
+    "id": "schema:ResearchOrganization",
+    "iri": "https://schema.org/ResearchOrganization",
+    "label": "ResearchOrganization"
+  },
+  {
+    "id": "schema:ResearchProject",
+    "iri": "https://schema.org/ResearchProject",
+    "label": "ResearchProject"
+  },
+  {
+    "id": "schema:Reservoir",
+    "iri": "https://schema.org/Reservoir",
+    "label": "Reservoir"
+  },
+  {
+    "id": "schema:Residence",
+    "iri": "https://schema.org/Residence",
+    "label": "Residence"
+  },
+  {
+    "id": "schema:Resort",
+    "iri": "https://schema.org/Resort",
+    "label": "Resort"
+  },
+  {
+    "id": "schema:Restaurant",
+    "iri": "https://schema.org/Restaurant",
+    "label": "Restaurant"
+  },
+  {
+    "id": "schema:RestrictedDiet",
+    "iri": "https://schema.org/RestrictedDiet",
+    "label": "RestrictedDiet"
+  },
+  {
+    "id": "schema:Review",
+    "iri": "https://schema.org/Review",
+    "label": "Review"
+  },
+  {
+    "id": "schema:ReviewNewsArticle",
+    "iri": "https://schema.org/ReviewNewsArticle",
+    "label": "ReviewNewsArticle"
+  },
+  {
+    "id": "schema:RiverBodyOfWater",
+    "iri": "https://schema.org/RiverBodyOfWater",
+    "label": "RiverBodyOfWater"
+  },
+  {
+    "id": "schema:RoofingContractor",
+    "iri": "https://schema.org/RoofingContractor",
+    "label": "RoofingContractor"
+  },
+  {
+    "id": "schema:Room",
+    "iri": "https://schema.org/Room",
+    "label": "Room"
+  },
+  {
+    "id": "schema:RuntimePlatform",
+    "iri": "https://schema.org/RuntimePlatform",
+    "label": "RuntimePlatform"
+  },
+  {
+    "id": "schema:SaleEvent",
+    "iri": "https://schema.org/SaleEvent",
+    "label": "SaleEvent"
+  },
+  {
+    "id": "schema:SatiricalArticle",
+    "iri": "https://schema.org/SatiricalArticle",
+    "label": "SatiricalArticle"
+  },
+  {
+    "id": "schema:Schedule",
+    "iri": "https://schema.org/Schedule",
+    "label": "Schedule"
+  },
+  {
+    "id": "schema:ScholarlyArticle",
+    "iri": "https://schema.org/ScholarlyArticle",
+    "label": "ScholarlyArticle"
+  },
+  {
+    "id": "schema:School",
+    "iri": "https://schema.org/School",
+    "label": "School"
+  },
+  {
+    "id": "schema:SchoolDistrict",
+    "iri": "https://schema.org/SchoolDistrict",
+    "label": "SchoolDistrict"
+  },
+  {
+    "id": "schema:ScreeningEvent",
+    "iri": "https://schema.org/ScreeningEvent",
+    "label": "ScreeningEvent"
+  },
+  {
+    "id": "schema:Sculpture",
+    "iri": "https://schema.org/Sculpture",
+    "label": "Sculpture"
+  },
+  {
+    "id": "schema:SeaBodyOfWater",
+    "iri": "https://schema.org/SeaBodyOfWater",
+    "label": "SeaBodyOfWater"
+  },
+  {
+    "id": "schema:SearchRescueOrganization",
+    "iri": "https://schema.org/SearchRescueOrganization",
+    "label": "SearchRescueOrganization"
+  },
+  {
+    "id": "schema:SearchResultsPage",
+    "iri": "https://schema.org/SearchResultsPage",
+    "label": "SearchResultsPage"
+  },
+  {
+    "id": "schema:Season",
+    "iri": "https://schema.org/Season",
+    "label": "Season"
+  },
+  {
+    "id": "schema:SelfStorage",
+    "iri": "https://schema.org/SelfStorage",
+    "label": "SelfStorage"
+  },
+  {
+    "id": "schema:SequentialArt",
+    "iri": "https://schema.org/SequentialArt",
+    "label": "SequentialArt"
+  },
+  {
+    "id": "schema:Series",
+    "iri": "https://schema.org/Series",
+    "label": "Series"
+  },
+  {
+    "id": "schema:Service",
+    "iri": "https://schema.org/Service",
+    "label": "Service"
+  },
+  {
+    "id": "schema:SheetMusic",
+    "iri": "https://schema.org/SheetMusic",
+    "label": "SheetMusic"
+  },
+  {
+    "id": "schema:ShippingService",
+    "iri": "https://schema.org/ShippingService",
+    "label": "ShippingService"
+  },
+  {
+    "id": "schema:ShoeStore",
+    "iri": "https://schema.org/ShoeStore",
+    "label": "ShoeStore"
+  },
+  {
+    "id": "schema:ShoppingCenter",
+    "iri": "https://schema.org/ShoppingCenter",
+    "label": "ShoppingCenter"
+  },
+  {
+    "id": "schema:ShortStory",
+    "iri": "https://schema.org/ShortStory",
+    "label": "ShortStory"
+  },
+  {
+    "id": "schema:SingleFamilyResidence",
+    "iri": "https://schema.org/SingleFamilyResidence",
+    "label": "SingleFamilyResidence"
+  },
+  {
+    "id": "schema:SiteNavigationElement",
+    "iri": "https://schema.org/SiteNavigationElement",
+    "label": "SiteNavigationElement"
+  },
+  {
+    "id": "schema:SizeSpecification",
+    "iri": "https://schema.org/SizeSpecification",
+    "label": "SizeSpecification"
+  },
+  {
+    "id": "schema:SkiResort",
+    "iri": "https://schema.org/SkiResort",
+    "label": "SkiResort"
+  },
+  {
+    "id": "schema:SocialEvent",
+    "iri": "https://schema.org/SocialEvent",
+    "label": "SocialEvent"
+  },
+  {
+    "id": "schema:SocialMediaPosting",
+    "iri": "https://schema.org/SocialMediaPosting",
+    "label": "SocialMediaPosting"
+  },
+  {
+    "id": "schema:SoftwareApplication",
+    "iri": "https://schema.org/SoftwareApplication",
+    "label": "SoftwareApplication"
+  },
+  {
+    "id": "schema:SoftwareSourceCode",
+    "iri": "https://schema.org/SoftwareSourceCode",
+    "label": "SoftwareSourceCode"
+  },
+  {
+    "id": "schema:SolveMathAction",
+    "iri": "https://schema.org/SolveMathAction",
+    "label": "SolveMathAction"
+  },
+  {
+    "id": "schema:SomeProducts",
+    "iri": "https://schema.org/SomeProducts",
+    "label": "SomeProducts"
+  },
+  {
+    "id": "schema:SpeakableSpecification",
+    "iri": "https://schema.org/SpeakableSpecification",
+    "label": "SpeakableSpecification"
+  },
+  {
+    "id": "schema:SpecialAnnouncement",
+    "iri": "https://schema.org/SpecialAnnouncement",
+    "label": "SpecialAnnouncement"
+  },
+  {
+    "id": "schema:Specialty",
+    "iri": "https://schema.org/Specialty",
+    "label": "Specialty"
+  },
+  {
+    "id": "schema:SportingGoodsStore",
+    "iri": "https://schema.org/SportingGoodsStore",
+    "label": "SportingGoodsStore"
+  },
+  {
+    "id": "schema:SportsActivityLocation",
+    "iri": "https://schema.org/SportsActivityLocation",
+    "label": "SportsActivityLocation"
+  },
+  {
+    "id": "schema:SportsClub",
+    "iri": "https://schema.org/SportsClub",
+    "label": "SportsClub"
+  },
+  {
+    "id": "schema:SportsEvent",
+    "iri": "https://schema.org/SportsEvent",
+    "label": "SportsEvent"
+  },
+  {
+    "id": "schema:SportsOrganization",
+    "iri": "https://schema.org/SportsOrganization",
+    "label": "SportsOrganization"
+  },
+  {
+    "id": "schema:SportsTeam",
+    "iri": "https://schema.org/SportsTeam",
+    "label": "SportsTeam"
+  },
+  {
+    "id": "schema:SpreadsheetDigitalDocument",
+    "iri": "https://schema.org/SpreadsheetDigitalDocument",
+    "label": "SpreadsheetDigitalDocument"
+  },
+  {
+    "id": "schema:StadiumOrArena",
+    "iri": "https://schema.org/StadiumOrArena",
+    "label": "StadiumOrArena"
+  },
+  {
+    "id": "schema:State",
+    "iri": "https://schema.org/State",
+    "label": "State"
+  },
+  {
+    "id": "schema:Statement",
+    "iri": "https://schema.org/Statement",
+    "label": "Statement"
+  },
+  {
+    "id": "schema:StatisticalVariable",
+    "iri": "https://schema.org/StatisticalVariable",
+    "label": "StatisticalVariable"
+  },
+  {
+    "id": "schema:SteeringPositionValue",
+    "iri": "https://schema.org/SteeringPositionValue",
+    "label": "SteeringPositionValue"
+  },
+  {
+    "id": "schema:Store",
+    "iri": "https://schema.org/Store",
+    "label": "Store"
+  },
+  {
+    "id": "schema:StructuredValue",
+    "iri": "https://schema.org/StructuredValue",
+    "label": "StructuredValue"
+  },
+  {
+    "id": "schema:Substance",
+    "iri": "https://schema.org/Substance",
+    "label": "Substance"
+  },
+  {
+    "id": "schema:SubwayStation",
+    "iri": "https://schema.org/SubwayStation",
+    "label": "SubwayStation"
+  },
+  {
+    "id": "schema:Suite",
+    "iri": "https://schema.org/Suite",
+    "label": "Suite"
+  },
+  {
+    "id": "schema:SuperficialAnatomy",
+    "iri": "https://schema.org/SuperficialAnatomy",
+    "label": "SuperficialAnatomy"
+  },
+  {
+    "id": "schema:Syllabus",
+    "iri": "https://schema.org/Syllabus",
+    "label": "Syllabus"
+  },
+  {
+    "id": "schema:Synagogue",
+    "iri": "https://schema.org/Synagogue",
+    "label": "Synagogue"
+  },
+  {
+    "id": "schema:TVClip",
+    "iri": "https://schema.org/TVClip",
+    "label": "TVClip"
+  },
+  {
+    "id": "schema:TVEpisode",
+    "iri": "https://schema.org/TVEpisode",
+    "label": "TVEpisode"
+  },
+  {
+    "id": "schema:TVSeason",
+    "iri": "https://schema.org/TVSeason",
+    "label": "TVSeason"
+  },
+  {
+    "id": "schema:TVSeries",
+    "iri": "https://schema.org/TVSeries",
+    "label": "TVSeries"
+  },
+  {
+    "id": "schema:Table",
+    "iri": "https://schema.org/Table",
+    "label": "Table"
+  },
+  {
+    "id": "schema:TattooParlor",
+    "iri": "https://schema.org/TattooParlor",
+    "label": "TattooParlor"
+  },
+  {
+    "id": "schema:TaxiStand",
+    "iri": "https://schema.org/TaxiStand",
+    "label": "TaxiStand"
+  },
+  {
+    "id": "schema:TechArticle",
+    "iri": "https://schema.org/TechArticle",
+    "label": "TechArticle"
+  },
+  {
+    "id": "schema:TelevisionStation",
+    "iri": "https://schema.org/TelevisionStation",
+    "label": "TelevisionStation"
+  },
+  {
+    "id": "schema:TennisComplex",
+    "iri": "https://schema.org/TennisComplex",
+    "label": "TennisComplex"
+  },
+  {
+    "id": "schema:Text",
+    "iri": "https://schema.org/Text",
+    "label": "Text"
+  },
+  {
+    "id": "schema:TextDigitalDocument",
+    "iri": "https://schema.org/TextDigitalDocument",
+    "label": "TextDigitalDocument"
+  },
+  {
+    "id": "schema:TextObject",
+    "iri": "https://schema.org/TextObject",
+    "label": "TextObject"
+  },
+  {
+    "id": "schema:TheaterEvent",
+    "iri": "https://schema.org/TheaterEvent",
+    "label": "TheaterEvent"
+  },
+  {
+    "id": "schema:TheaterGroup",
+    "iri": "https://schema.org/TheaterGroup",
+    "label": "TheaterGroup"
+  },
+  {
+    "id": "schema:Thesis",
+    "iri": "https://schema.org/Thesis",
+    "label": "Thesis"
+  },
+  {
+    "id": "schema:Thing",
+    "iri": "https://schema.org/Thing",
+    "label": "Thing"
+  },
+  {
+    "id": "schema:Time",
+    "iri": "https://schema.org/Time",
+    "label": "Time"
+  },
+  {
+    "id": "schema:TireShop",
+    "iri": "https://schema.org/TireShop",
+    "label": "TireShop"
+  },
+  {
+    "id": "schema:TouristAttraction",
+    "iri": "https://schema.org/TouristAttraction",
+    "label": "TouristAttraction"
+  },
+  {
+    "id": "schema:TouristDestination",
+    "iri": "https://schema.org/TouristDestination",
+    "label": "TouristDestination"
+  },
+  {
+    "id": "schema:TouristInformationCenter",
+    "iri": "https://schema.org/TouristInformationCenter",
+    "label": "TouristInformationCenter"
+  },
+  {
+    "id": "schema:ToyStore",
+    "iri": "https://schema.org/ToyStore",
+    "label": "ToyStore"
+  },
+  {
+    "id": "schema:TrainStation",
+    "iri": "https://schema.org/TrainStation",
+    "label": "TrainStation"
+  },
+  {
+    "id": "schema:TravelAgency",
+    "iri": "https://schema.org/TravelAgency",
+    "label": "TravelAgency"
+  },
+  {
+    "id": "schema:TypeAndQuantityNode",
+    "iri": "https://schema.org/TypeAndQuantityNode",
+    "label": "TypeAndQuantityNode"
+  },
+  {
+    "id": "schema:URL",
+    "iri": "https://schema.org/URL",
+    "label": "URL"
+  },
+  {
+    "id": "schema:UserBlocks",
+    "iri": "https://schema.org/UserBlocks",
+    "label": "UserBlocks"
+  },
+  {
+    "id": "schema:UserCheckins",
+    "iri": "https://schema.org/UserCheckins",
+    "label": "UserCheckins"
+  },
+  {
+    "id": "schema:UserComments",
+    "iri": "https://schema.org/UserComments",
+    "label": "UserComments"
+  },
+  {
+    "id": "schema:UserDownloads",
+    "iri": "https://schema.org/UserDownloads",
+    "label": "UserDownloads"
+  },
+  {
+    "id": "schema:UserInteraction",
+    "iri": "https://schema.org/UserInteraction",
+    "label": "UserInteraction"
+  },
+  {
+    "id": "schema:UserLikes",
+    "iri": "https://schema.org/UserLikes",
+    "label": "UserLikes"
+  },
+  {
+    "id": "schema:UserPageVisits",
+    "iri": "https://schema.org/UserPageVisits",
+    "label": "UserPageVisits"
+  },
+  {
+    "id": "schema:UserPlays",
+    "iri": "https://schema.org/UserPlays",
+    "label": "UserPlays"
+  },
+  {
+    "id": "schema:UserPlusOnes",
+    "iri": "https://schema.org/UserPlusOnes",
+    "label": "UserPlusOnes"
+  },
+  {
+    "id": "schema:UserReview",
+    "iri": "https://schema.org/UserReview",
+    "label": "UserReview"
+  },
+  {
+    "id": "schema:UserTweets",
+    "iri": "https://schema.org/UserTweets",
+    "label": "UserTweets"
+  },
+  {
+    "id": "schema:VacationRental",
+    "iri": "https://schema.org/VacationRental",
+    "label": "VacationRental"
+  },
+  {
+    "id": "schema:Vehicle",
+    "iri": "https://schema.org/Vehicle",
+    "label": "Vehicle"
+  },
+  {
+    "id": "schema:VeterinaryCare",
+    "iri": "https://schema.org/VeterinaryCare",
+    "label": "VeterinaryCare"
+  },
+  {
+    "id": "schema:VideoGallery",
+    "iri": "https://schema.org/VideoGallery",
+    "label": "VideoGallery"
+  },
+  {
+    "id": "schema:VideoGame",
+    "iri": "https://schema.org/VideoGame",
+    "label": "VideoGame"
+  },
+  {
+    "id": "schema:VideoGameClip",
+    "iri": "https://schema.org/VideoGameClip",
+    "label": "VideoGameClip"
+  },
+  {
+    "id": "schema:VideoGameSeries",
+    "iri": "https://schema.org/VideoGameSeries",
+    "label": "VideoGameSeries"
+  },
+  {
+    "id": "schema:VideoObject",
+    "iri": "https://schema.org/VideoObject",
+    "label": "VideoObject"
+  },
+  {
+    "id": "schema:VideoObjectSnapshot",
+    "iri": "https://schema.org/VideoObjectSnapshot",
+    "label": "VideoObjectSnapshot"
+  },
+  {
+    "id": "schema:VirtualLocation",
+    "iri": "https://schema.org/VirtualLocation",
+    "label": "VirtualLocation"
+  },
+  {
+    "id": "schema:VisualArtsEvent",
+    "iri": "https://schema.org/VisualArtsEvent",
+    "label": "VisualArtsEvent"
+  },
+  {
+    "id": "schema:VisualArtwork",
+    "iri": "https://schema.org/VisualArtwork",
+    "label": "VisualArtwork"
+  },
+  {
+    "id": "schema:Volcano",
+    "iri": "https://schema.org/Volcano",
+    "label": "Volcano"
+  },
+  {
+    "id": "schema:WPAdBlock",
+    "iri": "https://schema.org/WPAdBlock",
+    "label": "WPAdBlock"
+  },
+  {
+    "id": "schema:WPFooter",
+    "iri": "https://schema.org/WPFooter",
+    "label": "WPFooter"
+  },
+  {
+    "id": "schema:WPHeader",
+    "iri": "https://schema.org/WPHeader",
+    "label": "WPHeader"
+  },
+  {
+    "id": "schema:WPSideBar",
+    "iri": "https://schema.org/WPSideBar",
+    "label": "WPSideBar"
+  },
+  {
+    "id": "schema:Waterfall",
+    "iri": "https://schema.org/Waterfall",
+    "label": "Waterfall"
+  },
+  {
+    "id": "schema:WebApplication",
+    "iri": "https://schema.org/WebApplication",
+    "label": "WebApplication"
+  },
+  {
+    "id": "schema:WebContent",
+    "iri": "https://schema.org/WebContent",
+    "label": "WebContent"
+  },
+  {
+    "id": "schema:WebPage",
+    "iri": "https://schema.org/WebPage",
+    "label": "WebPage"
+  },
+  {
+    "id": "schema:WebPageElement",
+    "iri": "https://schema.org/WebPageElement",
+    "label": "WebPageElement"
+  },
+  {
+    "id": "schema:WebSite",
+    "iri": "https://schema.org/WebSite",
+    "label": "WebSite"
+  },
+  {
+    "id": "schema:WholesaleStore",
+    "iri": "https://schema.org/WholesaleStore",
+    "label": "WholesaleStore"
+  },
+  {
+    "id": "schema:Winery",
+    "iri": "https://schema.org/Winery",
+    "label": "Winery"
+  },
+  {
+    "id": "schema:WorkersUnion",
+    "iri": "https://schema.org/WorkersUnion",
+    "label": "WorkersUnion"
+  },
+  {
+    "id": "schema:XPathType",
+    "iri": "https://schema.org/XPathType",
+    "label": "XPathType"
+  },
+  {
+    "id": "schema:Zoo",
+    "iri": "https://schema.org/Zoo",
+    "label": "Zoo"
+  }
+]

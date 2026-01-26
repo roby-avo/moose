@@ -1,0 +1,1422 @@
+{
+  "TOM": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/TOM.jsonld"
+    ],
+    "module": "TOM"
+  },
+  "actors": {
+    "concept_count": 47,
+    "files": [
+      "2.2/tech/modules/actors.jsonld"
+    ],
+    "module": "actors"
+  },
+  "agreement": {
+    "concept_count": 23,
+    "files": [
+      "2.2/standards/p7012/modules/agreement.jsonld"
+    ],
+    "module": "agreement"
+  },
+  "ai": {
+    "concept_count": 215,
+    "files": [
+      "2.2/ai/ai.jsonld"
+    ],
+    "module": "ai"
+  },
+  "assessment": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/aiact/modules/assessment.jsonld"
+    ],
+    "module": "assessment"
+  },
+  "at": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/at/modules/at.jsonld"
+    ],
+    "module": "at"
+  },
+  "be": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/be/modules/be.jsonld"
+    ],
+    "module": "be"
+  },
+  "bg": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/bg/modules/bg.jsonld"
+    ],
+    "module": "bg"
+  },
+  "capabilities": {
+    "concept_count": 0,
+    "files": [
+      "2.2/ai/modules/capabilities.jsonld"
+    ],
+    "module": "capabilities"
+  },
+  "capability": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/aiact/modules/capability.jsonld"
+    ],
+    "module": "capability"
+  },
+  "comms": {
+    "concept_count": 8,
+    "files": [
+      "2.2/tech/modules/comms.jsonld"
+    ],
+    "module": "comms"
+  },
+  "compliance": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/aiact/modules/compliance.jsonld",
+      "2.2/legal/eu/dga/modules/compliance.jsonld",
+      "2.2/legal/eu/gdpr/modules/compliance.jsonld",
+      "2.2/legal/eu/nis2/modules/compliance.jsonld"
+    ],
+    "module": "compliance"
+  },
+  "consent": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/consent.jsonld"
+    ],
+    "module": "consent"
+  },
+  "consent_controls": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/consent_controls.jsonld"
+    ],
+    "module": "consent_controls"
+  },
+  "consent_status": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/consent_status.jsonld"
+    ],
+    "module": "consent_status"
+  },
+  "consent_types": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/consent_types.jsonld"
+    ],
+    "module": "consent_types"
+  },
+  "context": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/context.jsonld"
+    ],
+    "module": "context"
+  },
+  "contract": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/contract.jsonld"
+    ],
+    "module": "contract"
+  },
+  "contract_clause": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/contract_clause.jsonld"
+    ],
+    "module": "contract_clause"
+  },
+  "contract_control": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/contract_control.jsonld"
+    ],
+    "module": "contract_control"
+  },
+  "contract_status": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/contract_status.jsonld"
+    ],
+    "module": "contract_status"
+  },
+  "contract_types": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/contract_types.jsonld"
+    ],
+    "module": "contract_types"
+  },
+  "core": {
+    "concept_count": 48,
+    "files": [
+      "2.2/ai/modules/core.jsonld",
+      "2.2/pd/modules/core.jsonld",
+      "2.2/tech/modules/core.jsonld"
+    ],
+    "module": "core"
+  },
+  "cy": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/cy/modules/cy.jsonld"
+    ],
+    "module": "cy"
+  },
+  "cz": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/cz/modules/cz.jsonld"
+    ],
+    "module": "cz"
+  },
+  "data": {
+    "concept_count": 5,
+    "files": [
+      "2.2/ai/modules/data.jsonld",
+      "2.2/legal/eu/aiact/modules/data.jsonld",
+      "2.2/legal/eu/ehds/modules/data.jsonld",
+      "2.2/standards/p7012/modules/data.jsonld"
+    ],
+    "module": "data"
+  },
+  "data_breach": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/data_breach.jsonld"
+    ],
+    "module": "data_breach"
+  },
+  "data_transfers": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/data_transfers.jsonld"
+    ],
+    "module": "data_transfers"
+  },
+  "de": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/de/modules/de.jsonld"
+    ],
+    "module": "de"
+  },
+  "development": {
+    "concept_count": 0,
+    "files": [
+      "2.2/ai/modules/development.jsonld"
+    ],
+    "module": "development"
+  },
+  "dex": {
+    "concept_count": 94,
+    "files": [
+      "2.2/examples/dex.jsonld"
+    ],
+    "module": "dex"
+  },
+  "dk": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/dk/modules/dk.jsonld"
+    ],
+    "module": "dk"
+  },
+  "docs": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/eu/aiact/modules/docs.jsonld",
+      "2.2/tech/modules/docs.jsonld"
+    ],
+    "module": "docs"
+  },
+  "dpia": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/dpia.jsonld"
+    ],
+    "module": "dpia"
+  },
+  "dpv": {
+    "concept_count": 1172,
+    "files": [
+      "2.2/dpv/dpv.jsonld"
+    ],
+    "module": "dpv"
+  },
+  "ee": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/ee/modules/ee.jsonld"
+    ],
+    "module": "ee"
+  },
+  "entities": {
+    "concept_count": 14,
+    "files": [
+      "2.2/dpv/modules/entities.jsonld",
+      "2.2/legal/eu/dga/modules/entities.jsonld",
+      "2.2/legal/eu/ehds/modules/entities.jsonld",
+      "2.2/legal/eu/gdpr/modules/entities.jsonld",
+      "2.2/standards/p7012/modules/entities.jsonld"
+    ],
+    "module": "entities"
+  },
+  "entities_authority": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/entities_authority.jsonld"
+    ],
+    "module": "entities_authority"
+  },
+  "entities_datasubject": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/entities_datasubject.jsonld"
+    ],
+    "module": "entities_datasubject"
+  },
+  "entities_legalrole": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/entities_legalrole.jsonld"
+    ],
+    "module": "entities_legalrole"
+  },
+  "entities_organisation": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/entities_organisation.jsonld"
+    ],
+    "module": "entities_organisation"
+  },
+  "es": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/es/modules/es.jsonld"
+    ],
+    "module": "es"
+  },
+  "eu": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/modules/eu.jsonld"
+    ],
+    "module": "eu"
+  },
+  "eu-aiact": {
+    "concept_count": 126,
+    "files": [
+      "2.2/legal/eu/aiact/eu-aiact.jsonld"
+    ],
+    "module": "eu-aiact"
+  },
+  "eu-dga": {
+    "concept_count": 82,
+    "files": [
+      "2.2/legal/eu/dga/eu-dga.jsonld"
+    ],
+    "module": "eu-dga"
+  },
+  "eu-ehds": {
+    "concept_count": 71,
+    "files": [
+      "2.2/legal/eu/ehds/eu-ehds.jsonld"
+    ],
+    "module": "eu-ehds"
+  },
+  "eu-gdpr": {
+    "concept_count": 256,
+    "files": [
+      "2.2/legal/eu/gdpr/eu-gdpr.jsonld"
+    ],
+    "module": "eu-gdpr"
+  },
+  "eu-nis2": {
+    "concept_count": 20,
+    "files": [
+      "2.2/legal/eu/nis2/eu-nis2.jsonld"
+    ],
+    "module": "eu-nis2"
+  },
+  "eu-rights": {
+    "concept_count": 145,
+    "files": [
+      "2.2/legal/eu/rights/eu-rights.jsonld"
+    ],
+    "module": "eu-rights"
+  },
+  "examples": {
+    "concept_count": 0,
+    "files": [
+      "2.2/examples/modules/examples.jsonld"
+    ],
+    "module": "examples"
+  },
+  "extended": {
+    "concept_count": 214,
+    "files": [
+      "2.2/pd/modules/extended.jsonld"
+    ],
+    "module": "extended"
+  },
+  "fi": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/fi/modules/fi.jsonld"
+    ],
+    "module": "fi"
+  },
+  "fr": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/fr/modules/fr.jsonld"
+    ],
+    "module": "fr"
+  },
+  "fundamental": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/rights/modules/fundamental.jsonld"
+    ],
+    "module": "fundamental"
+  },
+  "gb": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/gb/modules/gb.jsonld"
+    ],
+    "module": "gb"
+  },
+  "gr": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/gr/modules/gr.jsonld"
+    ],
+    "module": "gr"
+  },
+  "hk": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/hk/modules/hk.jsonld"
+    ],
+    "module": "hk"
+  },
+  "hr": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/hr/modules/hr.jsonld"
+    ],
+    "module": "hr"
+  },
+  "hu": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/hu/modules/hu.jsonld"
+    ],
+    "module": "hu"
+  },
+  "ie": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/ie/modules/ie.jsonld"
+    ],
+    "module": "ie"
+  },
+  "impacts": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/rights/modules/impacts.jsonld"
+    ],
+    "module": "impacts"
+  },
+  "in": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/in/modules/in.jsonld"
+    ],
+    "module": "in"
+  },
+  "incident": {
+    "concept_count": 30,
+    "files": [
+      "2.2/risk/modules/incident.jsonld"
+    ],
+    "module": "incident"
+  },
+  "incident_status": {
+    "concept_count": 15,
+    "files": [
+      "2.2/risk/modules/incident_status.jsonld"
+    ],
+    "module": "incident_status"
+  },
+  "inverse": {
+    "concept_count": 0,
+    "files": [
+      "2.2/loc/modules/inverse.jsonld"
+    ],
+    "module": "inverse"
+  },
+  "io": {
+    "concept_count": 16,
+    "files": [
+      "2.2/tech/modules/io.jsonld"
+    ],
+    "module": "io"
+  },
+  "is": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/is/modules/is.jsonld"
+    ],
+    "module": "is"
+  },
+  "it": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/it/modules/it.jsonld"
+    ],
+    "module": "it"
+  },
+  "jp": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/jp/modules/jp.jsonld"
+    ],
+    "module": "jp"
+  },
+  "jurisdiction": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/jurisdiction.jsonld"
+    ],
+    "module": "jurisdiction"
+  },
+  "justifications": {
+    "concept_count": 76,
+    "files": [
+      "2.2/justifications/justifications.jsonld"
+    ],
+    "module": "justifications"
+  },
+  "justifications_delay": {
+    "concept_count": 0,
+    "files": [
+      "2.2/justifications/modules/justifications_delay.jsonld"
+    ],
+    "module": "justifications_delay"
+  },
+  "justifications_exercise": {
+    "concept_count": 0,
+    "files": [
+      "2.2/justifications/modules/justifications_exercise.jsonld"
+    ],
+    "module": "justifications_exercise"
+  },
+  "justifications_nonfulfilment": {
+    "concept_count": 0,
+    "files": [
+      "2.2/justifications/modules/justifications_nonfulfilment.jsonld"
+    ],
+    "module": "justifications_nonfulfilment"
+  },
+  "justifications_notrequired": {
+    "concept_count": 0,
+    "files": [
+      "2.2/justifications/modules/justifications_notrequired.jsonld"
+    ],
+    "module": "justifications_notrequired"
+  },
+  "kr": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/kr/modules/kr.jsonld"
+    ],
+    "module": "kr"
+  },
+  "legal": {
+    "concept_count": 185,
+    "files": [
+      "2.2/legal/legal.jsonld"
+    ],
+    "module": "legal"
+  },
+  "legal-at": {
+    "concept_count": 9,
+    "files": [
+      "2.2/legal/at/legal-at.jsonld"
+    ],
+    "module": "legal-at"
+  },
+  "legal-be": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/be/legal-be.jsonld"
+    ],
+    "module": "legal-be"
+  },
+  "legal-bg": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/bg/legal-bg.jsonld"
+    ],
+    "module": "legal-bg"
+  },
+  "legal-cy": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/cy/legal-cy.jsonld"
+    ],
+    "module": "legal-cy"
+  },
+  "legal-cz": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/cz/legal-cz.jsonld"
+    ],
+    "module": "legal-cz"
+  },
+  "legal-de": {
+    "concept_count": 41,
+    "files": [
+      "2.2/legal/de/legal-de.jsonld"
+    ],
+    "module": "legal-de"
+  },
+  "legal-dk": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/dk/legal-dk.jsonld"
+    ],
+    "module": "legal-dk"
+  },
+  "legal-ee": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/ee/legal-ee.jsonld"
+    ],
+    "module": "legal-ee"
+  },
+  "legal-es": {
+    "concept_count": 11,
+    "files": [
+      "2.2/legal/es/legal-es.jsonld"
+    ],
+    "module": "legal-es"
+  },
+  "legal-eu": {
+    "concept_count": 27,
+    "files": [
+      "2.2/legal/eu/legal-eu.jsonld"
+    ],
+    "module": "legal-eu"
+  },
+  "legal-fi": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/fi/legal-fi.jsonld"
+    ],
+    "module": "legal-fi"
+  },
+  "legal-fr": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/fr/legal-fr.jsonld"
+    ],
+    "module": "legal-fr"
+  },
+  "legal-gb": {
+    "concept_count": 10,
+    "files": [
+      "2.2/legal/gb/legal-gb.jsonld"
+    ],
+    "module": "legal-gb"
+  },
+  "legal-gr": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/gr/legal-gr.jsonld"
+    ],
+    "module": "legal-gr"
+  },
+  "legal-hk": {
+    "concept_count": 9,
+    "files": [
+      "2.2/legal/hk/legal-hk.jsonld"
+    ],
+    "module": "legal-hk"
+  },
+  "legal-hr": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/hr/legal-hr.jsonld"
+    ],
+    "module": "legal-hr"
+  },
+  "legal-hu": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/hu/legal-hu.jsonld"
+    ],
+    "module": "legal-hu"
+  },
+  "legal-ie": {
+    "concept_count": 10,
+    "files": [
+      "2.2/legal/ie/legal-ie.jsonld"
+    ],
+    "module": "legal-ie"
+  },
+  "legal-in": {
+    "concept_count": 9,
+    "files": [
+      "2.2/legal/in/legal-in.jsonld"
+    ],
+    "module": "legal-in"
+  },
+  "legal-is": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/is/legal-is.jsonld"
+    ],
+    "module": "legal-is"
+  },
+  "legal-it": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/it/legal-it.jsonld"
+    ],
+    "module": "legal-it"
+  },
+  "legal-jp": {
+    "concept_count": 8,
+    "files": [
+      "2.2/legal/jp/legal-jp.jsonld"
+    ],
+    "module": "legal-jp"
+  },
+  "legal-kr": {
+    "concept_count": 11,
+    "files": [
+      "2.2/legal/kr/legal-kr.jsonld"
+    ],
+    "module": "legal-kr"
+  },
+  "legal-li": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/li/legal-li.jsonld"
+    ],
+    "module": "legal-li"
+  },
+  "legal-lt": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/lt/legal-lt.jsonld"
+    ],
+    "module": "legal-lt"
+  },
+  "legal-lu": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/lu/legal-lu.jsonld"
+    ],
+    "module": "legal-lu"
+  },
+  "legal-lv": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/lv/legal-lv.jsonld"
+    ],
+    "module": "legal-lv"
+  },
+  "legal-mo": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/mo/legal-mo.jsonld"
+    ],
+    "module": "legal-mo"
+  },
+  "legal-mt": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/mt/legal-mt.jsonld"
+    ],
+    "module": "legal-mt"
+  },
+  "legal-my": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/my/legal-my.jsonld"
+    ],
+    "module": "legal-my"
+  },
+  "legal-nl": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/nl/legal-nl.jsonld"
+    ],
+    "module": "legal-nl"
+  },
+  "legal-no": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/no/legal-no.jsonld"
+    ],
+    "module": "legal-no"
+  },
+  "legal-ph": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/ph/legal-ph.jsonld"
+    ],
+    "module": "legal-ph"
+  },
+  "legal-pl": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/pl/legal-pl.jsonld"
+    ],
+    "module": "legal-pl"
+  },
+  "legal-pt": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/pt/legal-pt.jsonld"
+    ],
+    "module": "legal-pt"
+  },
+  "legal-ro": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/ro/legal-ro.jsonld"
+    ],
+    "module": "legal-ro"
+  },
+  "legal-se": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/se/legal-se.jsonld"
+    ],
+    "module": "legal-se"
+  },
+  "legal-sg": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/sg/legal-sg.jsonld"
+    ],
+    "module": "legal-sg"
+  },
+  "legal-si": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/si/legal-si.jsonld"
+    ],
+    "module": "legal-si"
+  },
+  "legal-sk": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/sk/legal-sk.jsonld"
+    ],
+    "module": "legal-sk"
+  },
+  "legal-th": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/th/legal-th.jsonld"
+    ],
+    "module": "legal-th"
+  },
+  "legal-tw": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/tw/legal-tw.jsonld"
+    ],
+    "module": "legal-tw"
+  },
+  "legal-us": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/us/legal-us.jsonld"
+    ],
+    "module": "legal-us"
+  },
+  "legal_basis": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/legal_basis.jsonld",
+      "2.2/legal/eu/dga/modules/legal_basis.jsonld",
+      "2.2/legal/eu/gdpr/modules/legal_basis.jsonld"
+    ],
+    "module": "legal_basis"
+  },
+  "legal_basis_data_transfer": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/legal_basis_data_transfer.jsonld"
+    ],
+    "module": "legal_basis_data_transfer"
+  },
+  "legal_basis_rights_mapping": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/legal_basis_rights_mapping.jsonld"
+    ],
+    "module": "legal_basis_rights_mapping"
+  },
+  "legal_basis_special": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/legal_basis_special.jsonld"
+    ],
+    "module": "legal_basis_special"
+  },
+  "legal_basis_status": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/legal_basis_status.jsonld"
+    ],
+    "module": "legal_basis_status"
+  },
+  "legal_measures": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/legal_measures.jsonld"
+    ],
+    "module": "legal_measures"
+  },
+  "legal_rights": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/dga/modules/legal_rights.jsonld"
+    ],
+    "module": "legal_rights"
+  },
+  "li": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/li/modules/li.jsonld"
+    ],
+    "module": "li"
+  },
+  "lifecycle": {
+    "concept_count": 0,
+    "files": [
+      "2.2/ai/modules/lifecycle.jsonld"
+    ],
+    "module": "lifecycle"
+  },
+  "loc": {
+    "concept_count": 5284,
+    "files": [
+      "2.2/loc/loc.jsonld"
+    ],
+    "module": "loc"
+  },
+  "locations": {
+    "concept_count": 0,
+    "files": [
+      "2.2/loc/modules/locations.jsonld"
+    ],
+    "module": "locations"
+  },
+  "lt": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/lt/modules/lt.jsonld"
+    ],
+    "module": "lt"
+  },
+  "lu": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/lu/modules/lu.jsonld"
+    ],
+    "module": "lu"
+  },
+  "lv": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/lv/modules/lv.jsonld"
+    ],
+    "module": "lv"
+  },
+  "measures": {
+    "concept_count": 0,
+    "files": [
+      "2.2/ai/modules/measures.jsonld"
+    ],
+    "module": "measures"
+  },
+  "memberships": {
+    "concept_count": 0,
+    "files": [
+      "2.2/loc/modules/memberships.jsonld"
+    ],
+    "module": "memberships"
+  },
+  "misc": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/aiact/modules/misc.jsonld"
+    ],
+    "module": "misc"
+  },
+  "misc_concepts": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/misc_concepts.jsonld"
+    ],
+    "module": "misc_concepts"
+  },
+  "mo": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/mo/modules/mo.jsonld"
+    ],
+    "module": "mo"
+  },
+  "mt": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/mt/modules/mt.jsonld"
+    ],
+    "module": "mt"
+  },
+  "my": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/my/modules/my.jsonld"
+    ],
+    "module": "my"
+  },
+  "nl": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/nl/modules/nl.jsonld"
+    ],
+    "module": "nl"
+  },
+  "no": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/no/modules/no.jsonld"
+    ],
+    "module": "no"
+  },
+  "notice": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/notice.jsonld",
+      "2.2/legal/eu/nis2/modules/notice.jsonld"
+    ],
+    "module": "notice"
+  },
+  "organisational_measures": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/organisational_measures.jsonld"
+    ],
+    "module": "organisational_measures"
+  },
+  "p7012": {
+    "concept_count": 0,
+    "files": [
+      "2.2/standards/p7012/p7012.jsonld"
+    ],
+    "module": "p7012"
+  },
+  "pd": {
+    "concept_count": 1,
+    "files": [
+      "2.2/pd/pd.jsonld"
+    ],
+    "module": "pd"
+  },
+  "personal_data": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/personal_data.jsonld"
+    ],
+    "module": "personal_data"
+  },
+  "ph": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/ph/modules/ph.jsonld"
+    ],
+    "module": "ph"
+  },
+  "physical_measures": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/physical_measures.jsonld"
+    ],
+    "module": "physical_measures"
+  },
+  "pl": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/pl/modules/pl.jsonld"
+    ],
+    "module": "pl"
+  },
+  "principles": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/principles.jsonld"
+    ],
+    "module": "principles"
+  },
+  "privacy_term": {
+    "concept_count": 96,
+    "files": [
+      "2.2/standards/p7012/modules/privacy_term.jsonld"
+    ],
+    "module": "privacy_term"
+  },
+  "process": {
+    "concept_count": 15,
+    "files": [
+      "2.2/dpv/modules/process.jsonld",
+      "2.2/legal/eu/ehds/modules/process.jsonld",
+      "2.2/standards/p7012/modules/process.jsonld"
+    ],
+    "module": "process"
+  },
+  "processing": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/processing.jsonld"
+    ],
+    "module": "processing"
+  },
+  "processing_context": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/processing_context.jsonld"
+    ],
+    "module": "processing_context"
+  },
+  "processing_scale": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/processing_scale.jsonld"
+    ],
+    "module": "processing_scale"
+  },
+  "provision": {
+    "concept_count": 19,
+    "files": [
+      "2.2/tech/modules/provision.jsonld"
+    ],
+    "module": "provision"
+  },
+  "pt": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/pt/modules/pt.jsonld"
+    ],
+    "module": "pt"
+  },
+  "purpose": {
+    "concept_count": 4,
+    "files": [
+      "2.2/standards/p7012/modules/purpose.jsonld"
+    ],
+    "module": "purpose"
+  },
+  "purposes": {
+    "concept_count": 349,
+    "files": [
+      "2.2/dpv/modules/purposes.jsonld",
+      "2.2/legal/eu/ehds/modules/purposes.jsonld",
+      "2.2/sector/education/modules/purposes.jsonld",
+      "2.2/sector/finance/modules/purposes.jsonld",
+      "2.2/sector/health/modules/purposes.jsonld",
+      "2.2/sector/infra/modules/purposes.jsonld",
+      "2.2/sector/law/modules/purposes.jsonld",
+      "2.2/sector/publicservices/modules/purposes.jsonld"
+    ],
+    "module": "purposes"
+  },
+  "registers": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/dga/modules/registers.jsonld"
+    ],
+    "module": "registers"
+  },
+  "rights": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/rights.jsonld",
+      "2.2/legal/eu/gdpr/modules/rights.jsonld"
+    ],
+    "module": "rights"
+  },
+  "rights_impacts": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/dga/modules/rights_impacts.jsonld",
+      "2.2/legal/eu/gdpr/modules/rights_impacts.jsonld"
+    ],
+    "module": "rights_impacts"
+  },
+  "rights_justifications": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/gdpr/modules/rights_justifications.jsonld"
+    ],
+    "module": "rights_justifications"
+  },
+  "risk": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/risk.jsonld",
+      "2.2/legal/eu/aiact/modules/risk.jsonld",
+      "2.2/risk/risk.jsonld"
+    ],
+    "module": "risk"
+  },
+  "risk_controls": {
+    "concept_count": 74,
+    "files": [
+      "2.2/risk/modules/risk_controls.jsonld"
+    ],
+    "module": "risk_controls"
+  },
+  "risk_levels": {
+    "concept_count": 31,
+    "files": [
+      "2.2/legal/eu/aiact/modules/risk_levels.jsonld",
+      "2.2/risk/modules/risk_levels.jsonld"
+    ],
+    "module": "risk_levels"
+  },
+  "risk_management": {
+    "concept_count": 36,
+    "files": [
+      "2.2/risk/modules/risk_management.jsonld"
+    ],
+    "module": "risk_management"
+  },
+  "risk_matrix": {
+    "concept_count": 87,
+    "files": [
+      "2.2/risk/modules/risk_matrix.jsonld"
+    ],
+    "module": "risk_matrix"
+  },
+  "risk_taxonomy": {
+    "concept_count": 278,
+    "files": [
+      "2.2/risk/modules/risk_taxonomy.jsonld"
+    ],
+    "module": "risk_taxonomy"
+  },
+  "risks": {
+    "concept_count": 0,
+    "files": [
+      "2.2/ai/modules/risks.jsonld"
+    ],
+    "module": "risks"
+  },
+  "ro": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/ro/modules/ro.jsonld"
+    ],
+    "module": "ro"
+  },
+  "roles": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/aiact/modules/roles.jsonld"
+    ],
+    "module": "roles"
+  },
+  "rules": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/rules.jsonld"
+    ],
+    "module": "rules"
+  },
+  "se": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/se/modules/se.jsonld"
+    ],
+    "module": "se"
+  },
+  "sector": {
+    "concept_count": 6,
+    "files": [
+      "2.2/legal/eu/aiact/modules/sector.jsonld",
+      "2.2/sector/sector.jsonld"
+    ],
+    "module": "sector"
+  },
+  "sector-education": {
+    "concept_count": 0,
+    "files": [
+      "2.2/sector/education/sector-education.jsonld"
+    ],
+    "module": "sector-education"
+  },
+  "sector-finance": {
+    "concept_count": 0,
+    "files": [
+      "2.2/sector/finance/sector-finance.jsonld"
+    ],
+    "module": "sector-finance"
+  },
+  "sector-health": {
+    "concept_count": 0,
+    "files": [
+      "2.2/sector/health/sector-health.jsonld"
+    ],
+    "module": "sector-health"
+  },
+  "sector-infra": {
+    "concept_count": 0,
+    "files": [
+      "2.2/sector/infra/sector-infra.jsonld"
+    ],
+    "module": "sector-infra"
+  },
+  "sector-law": {
+    "concept_count": 0,
+    "files": [
+      "2.2/sector/law/sector-law.jsonld"
+    ],
+    "module": "sector-law"
+  },
+  "sector-publicservices": {
+    "concept_count": 0,
+    "files": [
+      "2.2/sector/publicservices/sector-publicservices.jsonld"
+    ],
+    "module": "sector-publicservices"
+  },
+  "services": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/dga/modules/services.jsonld"
+    ],
+    "module": "services"
+  },
+  "sg": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/sg/modules/sg.jsonld"
+    ],
+    "module": "sg"
+  },
+  "si": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/si/modules/si.jsonld"
+    ],
+    "module": "si"
+  },
+  "sk": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/sk/modules/sk.jsonld"
+    ],
+    "module": "sk"
+  },
+  "status": {
+    "concept_count": 29,
+    "files": [
+      "2.2/dpv/modules/status.jsonld",
+      "2.2/legal/eu/aiact/modules/status.jsonld",
+      "2.2/standards/p7012/modules/status.jsonld",
+      "2.2/tech/modules/status.jsonld"
+    ],
+    "module": "status"
+  },
+  "system": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/aiact/modules/system.jsonld"
+    ],
+    "module": "system"
+  },
+  "systems": {
+    "concept_count": 0,
+    "files": [
+      "2.2/ai/modules/systems.jsonld"
+    ],
+    "module": "systems"
+  },
+  "tech": {
+    "concept_count": 0,
+    "files": [
+      "2.2/tech/tech.jsonld"
+    ],
+    "module": "tech"
+  },
+  "technical_measures": {
+    "concept_count": 0,
+    "files": [
+      "2.2/dpv/modules/technical_measures.jsonld"
+    ],
+    "module": "technical_measures"
+  },
+  "techniques": {
+    "concept_count": 0,
+    "files": [
+      "2.2/ai/modules/techniques.jsonld"
+    ],
+    "module": "techniques"
+  },
+  "th": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/th/modules/th.jsonld"
+    ],
+    "module": "th"
+  },
+  "toms": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/eu/dga/modules/toms.jsonld"
+    ],
+    "module": "toms"
+  },
+  "tools": {
+    "concept_count": 53,
+    "files": [
+      "2.2/tech/modules/tools.jsonld"
+    ],
+    "module": "tools"
+  },
+  "tw": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/tw/modules/tw.jsonld"
+    ],
+    "module": "tw"
+  },
+  "us": {
+    "concept_count": 0,
+    "files": [
+      "2.2/legal/us/modules/us.jsonld"
+    ],
+    "module": "us"
+  }
+}

@@ -1,0 +1,1007 @@
+[
+  {
+    "id": "dpv-ai:capabilities-classes",
+    "iri": null,
+    "label": "dpv-ai:capabilities-classes"
+  },
+  {
+    "id": "dpv-ai:core-classes",
+    "iri": null,
+    "label": "dpv-ai:core-classes"
+  },
+  {
+    "id": "dpv-ai:core-properties",
+    "iri": null,
+    "label": "dpv-ai:core-properties"
+  },
+  {
+    "id": "dpv-ai:data-classes",
+    "iri": null,
+    "label": "dpv-ai:data-classes"
+  },
+  {
+    "id": "dpv-ai:data-properties",
+    "iri": null,
+    "label": "dpv-ai:data-properties"
+  },
+  {
+    "id": "dpv-ai:development-classes",
+    "iri": null,
+    "label": "dpv-ai:development-classes"
+  },
+  {
+    "id": "dpv-ai:lifecycle-classes",
+    "iri": null,
+    "label": "dpv-ai:lifecycle-classes"
+  },
+  {
+    "id": "dpv-ai:measures-classes",
+    "iri": null,
+    "label": "dpv-ai:measures-classes"
+  },
+  {
+    "id": "dpv-ai:risks-classes",
+    "iri": null,
+    "label": "dpv-ai:risks-classes"
+  },
+  {
+    "id": "dpv-ai:systems-classes",
+    "iri": null,
+    "label": "dpv-ai:systems-classes"
+  },
+  {
+    "id": "dpv-ai:techniques-classes",
+    "iri": null,
+    "label": "dpv-ai:techniques-classes"
+  },
+  {
+    "id": "dpv-justifications:justifications-delay-classes",
+    "iri": null,
+    "label": "dpv-justifications:justifications-delay-classes"
+  },
+  {
+    "id": "dpv-justifications:justifications-exercise-classes",
+    "iri": null,
+    "label": "dpv-justifications:justifications-exercise-classes"
+  },
+  {
+    "id": "dpv-justifications:justifications-nonfulfilment-classes",
+    "iri": null,
+    "label": "dpv-justifications:justifications-nonfulfilment-classes"
+  },
+  {
+    "id": "dpv-justifications:justifications-notrequired-classes",
+    "iri": null,
+    "label": "dpv-justifications:justifications-notrequired-classes"
+  },
+  {
+    "id": "dpv-legal/at:at-classes",
+    "iri": null,
+    "label": "dpv-legal/at:at-classes"
+  },
+  {
+    "id": "dpv-legal/be:be-classes",
+    "iri": null,
+    "label": "dpv-legal/be:be-classes"
+  },
+  {
+    "id": "dpv-legal/bg:bg-classes",
+    "iri": null,
+    "label": "dpv-legal/bg:bg-classes"
+  },
+  {
+    "id": "dpv-legal/cy:cy-classes",
+    "iri": null,
+    "label": "dpv-legal/cy:cy-classes"
+  },
+  {
+    "id": "dpv-legal/cz:cz-classes",
+    "iri": null,
+    "label": "dpv-legal/cz:cz-classes"
+  },
+  {
+    "id": "dpv-legal/de:de-classes",
+    "iri": null,
+    "label": "dpv-legal/de:de-classes"
+  },
+  {
+    "id": "dpv-legal/dk:dk-classes",
+    "iri": null,
+    "label": "dpv-legal/dk:dk-classes"
+  },
+  {
+    "id": "dpv-legal/ee:ee-classes",
+    "iri": null,
+    "label": "dpv-legal/ee:ee-classes"
+  },
+  {
+    "id": "dpv-legal/es:es-classes",
+    "iri": null,
+    "label": "dpv-legal/es:es-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:assessment-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:assessment-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:capability-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:capability-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:compliance-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:compliance-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:data-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:data-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:docs-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:docs-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:misc-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:misc-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:risk-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:risk-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:risk-levels-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:risk-levels-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:roles-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:roles-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:sector-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:sector-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:status-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:status-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:status-properties",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:status-properties"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:system-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/aiact:system-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:compliance-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:compliance-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:entities-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:entities-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:entities-properties",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:entities-properties"
+  },
+  {
+    "id": "dpv-legal/eu/dga:legal-basis-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:legal-basis-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:legal-rights-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:legal-rights-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:registers-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:registers-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:rights-impacts-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:rights-impacts-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:services-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:services-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:toms-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/dga:toms-classes"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:data-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/ehds:data-classes"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:entities-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/ehds:entities-classes"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:process-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/ehds:process-classes"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:purposes-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/ehds:purposes-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:compliance-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:compliance-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:data-breach-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:data-breach-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:data-transfers-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:data-transfers-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:dpia-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:dpia-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:dpia-properties",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:dpia-properties"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:entities-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:entities-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:entities-properties",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:entities-properties"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:legal-basis-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:legal-basis-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:legal-basis-data-transfer-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:legal-basis-data-transfer-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:legal-basis-special-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:legal-basis-special-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:misc-concepts-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:misc-concepts-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:principles-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:principles-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:rights-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:rights-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:rights-impacts-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:rights-impacts-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:rights-justifications-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/gdpr:rights-justifications-classes"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:compliance-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/nis2:compliance-classes"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:notice-classes",
+    "iri": null,
+    "label": "dpv-legal/eu/nis2:notice-classes"
+  },
+  {
+    "id": "dpv-legal/eu:eu-classes",
+    "iri": null,
+    "label": "dpv-legal/eu:eu-classes"
+  },
+  {
+    "id": "dpv-legal/fi:fi-classes",
+    "iri": null,
+    "label": "dpv-legal/fi:fi-classes"
+  },
+  {
+    "id": "dpv-legal/fr:fr-classes",
+    "iri": null,
+    "label": "dpv-legal/fr:fr-classes"
+  },
+  {
+    "id": "dpv-legal/gb:gb-classes",
+    "iri": null,
+    "label": "dpv-legal/gb:gb-classes"
+  },
+  {
+    "id": "dpv-legal/gr:gr-classes",
+    "iri": null,
+    "label": "dpv-legal/gr:gr-classes"
+  },
+  {
+    "id": "dpv-legal/hk:hk-classes",
+    "iri": null,
+    "label": "dpv-legal/hk:hk-classes"
+  },
+  {
+    "id": "dpv-legal/hr:hr-classes",
+    "iri": null,
+    "label": "dpv-legal/hr:hr-classes"
+  },
+  {
+    "id": "dpv-legal/hu:hu-classes",
+    "iri": null,
+    "label": "dpv-legal/hu:hu-classes"
+  },
+  {
+    "id": "dpv-legal/ie:ie-classes",
+    "iri": null,
+    "label": "dpv-legal/ie:ie-classes"
+  },
+  {
+    "id": "dpv-legal/in:in-classes",
+    "iri": null,
+    "label": "dpv-legal/in:in-classes"
+  },
+  {
+    "id": "dpv-legal/is:is-classes",
+    "iri": null,
+    "label": "dpv-legal/is:is-classes"
+  },
+  {
+    "id": "dpv-legal/it:it-classes",
+    "iri": null,
+    "label": "dpv-legal/it:it-classes"
+  },
+  {
+    "id": "dpv-legal/jp:jp-classes",
+    "iri": null,
+    "label": "dpv-legal/jp:jp-classes"
+  },
+  {
+    "id": "dpv-legal/kr:kr-classes",
+    "iri": null,
+    "label": "dpv-legal/kr:kr-classes"
+  },
+  {
+    "id": "dpv-legal/li:li-classes",
+    "iri": null,
+    "label": "dpv-legal/li:li-classes"
+  },
+  {
+    "id": "dpv-legal/lt:lt-classes",
+    "iri": null,
+    "label": "dpv-legal/lt:lt-classes"
+  },
+  {
+    "id": "dpv-legal/lu:lu-classes",
+    "iri": null,
+    "label": "dpv-legal/lu:lu-classes"
+  },
+  {
+    "id": "dpv-legal/lv:lv-classes",
+    "iri": null,
+    "label": "dpv-legal/lv:lv-classes"
+  },
+  {
+    "id": "dpv-legal/mo:mo-classes",
+    "iri": null,
+    "label": "dpv-legal/mo:mo-classes"
+  },
+  {
+    "id": "dpv-legal/mt:mt-classes",
+    "iri": null,
+    "label": "dpv-legal/mt:mt-classes"
+  },
+  {
+    "id": "dpv-legal/my:my-classes",
+    "iri": null,
+    "label": "dpv-legal/my:my-classes"
+  },
+  {
+    "id": "dpv-legal/nl:nl-classes",
+    "iri": null,
+    "label": "dpv-legal/nl:nl-classes"
+  },
+  {
+    "id": "dpv-legal/no:no-classes",
+    "iri": null,
+    "label": "dpv-legal/no:no-classes"
+  },
+  {
+    "id": "dpv-legal/ph:ph-classes",
+    "iri": null,
+    "label": "dpv-legal/ph:ph-classes"
+  },
+  {
+    "id": "dpv-legal/pl:pl-classes",
+    "iri": null,
+    "label": "dpv-legal/pl:pl-classes"
+  },
+  {
+    "id": "dpv-legal/pt:pt-classes",
+    "iri": null,
+    "label": "dpv-legal/pt:pt-classes"
+  },
+  {
+    "id": "dpv-legal/ro:ro-classes",
+    "iri": null,
+    "label": "dpv-legal/ro:ro-classes"
+  },
+  {
+    "id": "dpv-legal/se:se-classes",
+    "iri": null,
+    "label": "dpv-legal/se:se-classes"
+  },
+  {
+    "id": "dpv-legal/sg:sg-classes",
+    "iri": null,
+    "label": "dpv-legal/sg:sg-classes"
+  },
+  {
+    "id": "dpv-legal/si:si-classes",
+    "iri": null,
+    "label": "dpv-legal/si:si-classes"
+  },
+  {
+    "id": "dpv-legal/sk:sk-classes",
+    "iri": null,
+    "label": "dpv-legal/sk:sk-classes"
+  },
+  {
+    "id": "dpv-legal/th:th-classes",
+    "iri": null,
+    "label": "dpv-legal/th:th-classes"
+  },
+  {
+    "id": "dpv-legal/tw:tw-classes",
+    "iri": null,
+    "label": "dpv-legal/tw:tw-classes"
+  },
+  {
+    "id": "dpv-legal/us:us-classes",
+    "iri": null,
+    "label": "dpv-legal/us:us-classes"
+  },
+  {
+    "id": "dpv-loc:inverse-classes",
+    "iri": null,
+    "label": "dpv-loc:inverse-classes"
+  },
+  {
+    "id": "dpv-loc:locations-classes",
+    "iri": null,
+    "label": "dpv-loc:locations-classes"
+  },
+  {
+    "id": "dpv-loc:locations-properties",
+    "iri": null,
+    "label": "dpv-loc:locations-properties"
+  },
+  {
+    "id": "dpv-loc:memberships-classes",
+    "iri": null,
+    "label": "dpv-loc:memberships-classes"
+  },
+  {
+    "id": "dpv-pd:core-classes",
+    "iri": null,
+    "label": "dpv-pd:core-classes"
+  },
+  {
+    "id": "dpv-pd:extended-classes",
+    "iri": null,
+    "label": "dpv-pd:extended-classes"
+  },
+  {
+    "id": "dpv-pd:specialcategory-classes",
+    "iri": null,
+    "label": "dpv-pd:specialcategory-classes"
+  },
+  {
+    "id": "dpv-rights/eu:fundamental-classes",
+    "iri": null,
+    "label": "dpv-rights/eu:fundamental-classes"
+  },
+  {
+    "id": "dpv-rights/eu:impacts-classes",
+    "iri": null,
+    "label": "dpv-rights/eu:impacts-classes"
+  },
+  {
+    "id": "dpv-risk:incident-classes",
+    "iri": null,
+    "label": "dpv-risk:incident-classes"
+  },
+  {
+    "id": "dpv-risk:incident-properties",
+    "iri": null,
+    "label": "dpv-risk:incident-properties"
+  },
+  {
+    "id": "dpv-risk:incident-status-classes",
+    "iri": null,
+    "label": "dpv-risk:incident-status-classes"
+  },
+  {
+    "id": "dpv-risk:risk-controls-classes",
+    "iri": null,
+    "label": "dpv-risk:risk-controls-classes"
+  },
+  {
+    "id": "dpv-risk:risk-controls-properties",
+    "iri": null,
+    "label": "dpv-risk:risk-controls-properties"
+  },
+  {
+    "id": "dpv-risk:risk-levels-classes",
+    "iri": null,
+    "label": "dpv-risk:risk-levels-classes"
+  },
+  {
+    "id": "dpv-risk:risk-management-classes",
+    "iri": null,
+    "label": "dpv-risk:risk-management-classes"
+  },
+  {
+    "id": "dpv-risk:risk-management-properties",
+    "iri": null,
+    "label": "dpv-risk:risk-management-properties"
+  },
+  {
+    "id": "dpv-risk:risk-matrix-classes",
+    "iri": null,
+    "label": "dpv-risk:risk-matrix-classes"
+  },
+  {
+    "id": "dpv-risk:risk-taxonomy-classes",
+    "iri": null,
+    "label": "dpv-risk:risk-taxonomy-classes"
+  },
+  {
+    "id": "dpv-sector/education:purposes-classes",
+    "iri": null,
+    "label": "dpv-sector/education:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/finance:purposes-classes",
+    "iri": null,
+    "label": "dpv-sector/finance:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/health:purposes-classes",
+    "iri": null,
+    "label": "dpv-sector/health:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/infra:purposes-classes",
+    "iri": null,
+    "label": "dpv-sector/infra:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/law:purposes-classes",
+    "iri": null,
+    "label": "dpv-sector/law:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/publicservices:purposes-classes",
+    "iri": null,
+    "label": "dpv-sector/publicservices:purposes-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:agreement-classes",
+    "iri": null,
+    "label": "dpv-standards/p7012:agreement-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:data-classes",
+    "iri": null,
+    "label": "dpv-standards/p7012:data-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:entities-classes",
+    "iri": null,
+    "label": "dpv-standards/p7012:entities-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:entities-properties",
+    "iri": null,
+    "label": "dpv-standards/p7012:entities-properties"
+  },
+  {
+    "id": "dpv-standards/p7012:privacy-term-classes",
+    "iri": null,
+    "label": "dpv-standards/p7012:privacy-term-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:privacy-term-properties",
+    "iri": null,
+    "label": "dpv-standards/p7012:privacy-term-properties"
+  },
+  {
+    "id": "dpv-standards/p7012:process-classes",
+    "iri": null,
+    "label": "dpv-standards/p7012:process-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:process-properties",
+    "iri": null,
+    "label": "dpv-standards/p7012:process-properties"
+  },
+  {
+    "id": "dpv-standards/p7012:purpose-classes",
+    "iri": null,
+    "label": "dpv-standards/p7012:purpose-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:status-classes",
+    "iri": null,
+    "label": "dpv-standards/p7012:status-classes"
+  },
+  {
+    "id": "dpv-tech:actors-classes",
+    "iri": null,
+    "label": "dpv-tech:actors-classes"
+  },
+  {
+    "id": "dpv-tech:actors-properties",
+    "iri": null,
+    "label": "dpv-tech:actors-properties"
+  },
+  {
+    "id": "dpv-tech:comms-classes",
+    "iri": null,
+    "label": "dpv-tech:comms-classes"
+  },
+  {
+    "id": "dpv-tech:core-classes",
+    "iri": null,
+    "label": "dpv-tech:core-classes"
+  },
+  {
+    "id": "dpv-tech:core-properties",
+    "iri": null,
+    "label": "dpv-tech:core-properties"
+  },
+  {
+    "id": "dpv-tech:docs-classes",
+    "iri": null,
+    "label": "dpv-tech:docs-classes"
+  },
+  {
+    "id": "dpv-tech:io-classes",
+    "iri": null,
+    "label": "dpv-tech:io-classes"
+  },
+  {
+    "id": "dpv-tech:provision-classes",
+    "iri": null,
+    "label": "dpv-tech:provision-classes"
+  },
+  {
+    "id": "dpv-tech:status-classes",
+    "iri": null,
+    "label": "dpv-tech:status-classes"
+  },
+  {
+    "id": "dpv-tech:status-properties",
+    "iri": null,
+    "label": "dpv-tech:status-properties"
+  },
+  {
+    "id": "dpv-tech:tools-classes",
+    "iri": null,
+    "label": "dpv-tech:tools-classes"
+  },
+  {
+    "id": "dpv-tech:tools-properties",
+    "iri": null,
+    "label": "dpv-tech:tools-properties"
+  },
+  {
+    "id": "dpv:TOM-classes",
+    "iri": null,
+    "label": "dpv:TOM-classes"
+  },
+  {
+    "id": "dpv:TOM-properties",
+    "iri": null,
+    "label": "dpv:TOM-properties"
+  },
+  {
+    "id": "dpv:consent-controls-classes",
+    "iri": null,
+    "label": "dpv:consent-controls-classes"
+  },
+  {
+    "id": "dpv:consent-properties",
+    "iri": null,
+    "label": "dpv:consent-properties"
+  },
+  {
+    "id": "dpv:consent-status-classes",
+    "iri": null,
+    "label": "dpv:consent-status-classes"
+  },
+  {
+    "id": "dpv:consent-types-classes",
+    "iri": null,
+    "label": "dpv:consent-types-classes"
+  },
+  {
+    "id": "dpv:context-classes",
+    "iri": null,
+    "label": "dpv:context-classes"
+  },
+  {
+    "id": "dpv:context-properties",
+    "iri": null,
+    "label": "dpv:context-properties"
+  },
+  {
+    "id": "dpv:contract-clause-classes",
+    "iri": null,
+    "label": "dpv:contract-clause-classes"
+  },
+  {
+    "id": "dpv:contract-control-classes",
+    "iri": null,
+    "label": "dpv:contract-control-classes"
+  },
+  {
+    "id": "dpv:contract-properties",
+    "iri": null,
+    "label": "dpv:contract-properties"
+  },
+  {
+    "id": "dpv:contract-status-classes",
+    "iri": null,
+    "label": "dpv:contract-status-classes"
+  },
+  {
+    "id": "dpv:contract-types-classes",
+    "iri": null,
+    "label": "dpv:contract-types-classes"
+  },
+  {
+    "id": "dpv:entities-authority-classes",
+    "iri": null,
+    "label": "dpv:entities-authority-classes"
+  },
+  {
+    "id": "dpv:entities-authority-properties",
+    "iri": null,
+    "label": "dpv:entities-authority-properties"
+  },
+  {
+    "id": "dpv:entities-classes",
+    "iri": null,
+    "label": "dpv:entities-classes"
+  },
+  {
+    "id": "dpv:entities-datasubject-classes",
+    "iri": null,
+    "label": "dpv:entities-datasubject-classes"
+  },
+  {
+    "id": "dpv:entities-datasubject-properties",
+    "iri": null,
+    "label": "dpv:entities-datasubject-properties"
+  },
+  {
+    "id": "dpv:entities-legalrole-classes",
+    "iri": null,
+    "label": "dpv:entities-legalrole-classes"
+  },
+  {
+    "id": "dpv:entities-legalrole-properties",
+    "iri": null,
+    "label": "dpv:entities-legalrole-properties"
+  },
+  {
+    "id": "dpv:entities-organisation-classes",
+    "iri": null,
+    "label": "dpv:entities-organisation-classes"
+  },
+  {
+    "id": "dpv:entities-properties",
+    "iri": null,
+    "label": "dpv:entities-properties"
+  },
+  {
+    "id": "dpv:jurisdiction-classes",
+    "iri": null,
+    "label": "dpv:jurisdiction-classes"
+  },
+  {
+    "id": "dpv:jurisdiction-properties",
+    "iri": null,
+    "label": "dpv:jurisdiction-properties"
+  },
+  {
+    "id": "dpv:legal-basis-classes",
+    "iri": null,
+    "label": "dpv:legal-basis-classes"
+  },
+  {
+    "id": "dpv:legal-basis-properties",
+    "iri": null,
+    "label": "dpv:legal-basis-properties"
+  },
+  {
+    "id": "dpv:legal-basis-status-classes",
+    "iri": null,
+    "label": "dpv:legal-basis-status-classes"
+  },
+  {
+    "id": "dpv:legal-measures-classes",
+    "iri": null,
+    "label": "dpv:legal-measures-classes"
+  },
+  {
+    "id": "dpv:notice-classes",
+    "iri": null,
+    "label": "dpv:notice-classes"
+  },
+  {
+    "id": "dpv:notice-properties",
+    "iri": null,
+    "label": "dpv:notice-properties"
+  },
+  {
+    "id": "dpv:organisational-measures-classes",
+    "iri": null,
+    "label": "dpv:organisational-measures-classes"
+  },
+  {
+    "id": "dpv:personal-data-classes",
+    "iri": null,
+    "label": "dpv:personal-data-classes"
+  },
+  {
+    "id": "dpv:personal-data-properties",
+    "iri": null,
+    "label": "dpv:personal-data-properties"
+  },
+  {
+    "id": "dpv:physical-measures-classes",
+    "iri": null,
+    "label": "dpv:physical-measures-classes"
+  },
+  {
+    "id": "dpv:process-classes",
+    "iri": null,
+    "label": "dpv:process-classes"
+  },
+  {
+    "id": "dpv:process-properties",
+    "iri": null,
+    "label": "dpv:process-properties"
+  },
+  {
+    "id": "dpv:processing-classes",
+    "iri": null,
+    "label": "dpv:processing-classes"
+  },
+  {
+    "id": "dpv:processing-context-classes",
+    "iri": null,
+    "label": "dpv:processing-context-classes"
+  },
+  {
+    "id": "dpv:processing-context-properties",
+    "iri": null,
+    "label": "dpv:processing-context-properties"
+  },
+  {
+    "id": "dpv:processing-properties",
+    "iri": null,
+    "label": "dpv:processing-properties"
+  },
+  {
+    "id": "dpv:processing-scale-classes",
+    "iri": null,
+    "label": "dpv:processing-scale-classes"
+  },
+  {
+    "id": "dpv:processing-scale-properties",
+    "iri": null,
+    "label": "dpv:processing-scale-properties"
+  },
+  {
+    "id": "dpv:purposes-classes",
+    "iri": null,
+    "label": "dpv:purposes-classes"
+  },
+  {
+    "id": "dpv:purposes-properties",
+    "iri": null,
+    "label": "dpv:purposes-properties"
+  },
+  {
+    "id": "dpv:rights-classes",
+    "iri": null,
+    "label": "dpv:rights-classes"
+  },
+  {
+    "id": "dpv:rights-properties",
+    "iri": null,
+    "label": "dpv:rights-properties"
+  },
+  {
+    "id": "dpv:risk-classes",
+    "iri": null,
+    "label": "dpv:risk-classes"
+  },
+  {
+    "id": "dpv:risk-properties",
+    "iri": null,
+    "label": "dpv:risk-properties"
+  },
+  {
+    "id": "dpv:rules-classes",
+    "iri": null,
+    "label": "dpv:rules-classes"
+  },
+  {
+    "id": "dpv:rules-properties",
+    "iri": null,
+    "label": "dpv:rules-properties"
+  },
+  {
+    "id": "dpv:status-classes",
+    "iri": null,
+    "label": "dpv:status-classes"
+  },
+  {
+    "id": "dpv:status-properties",
+    "iri": null,
+    "label": "dpv:status-properties"
+  },
+  {
+    "id": "dpv:technical-measures-classes",
+    "iri": null,
+    "label": "dpv:technical-measures-classes"
+  }
+]

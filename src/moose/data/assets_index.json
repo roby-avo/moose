@@ -1,0 +1,33 @@
+{
+  "assets": {
+    "legal": {
+      "gdprtext": {
+        "manifest": "legal/gdprtext/manifest.json"
+      }
+    },
+    "ontologies": {
+      "dpv": {
+        "manifest": "dpv/manifest.json"
+      },
+      "schemaorg": {
+        "manifest": "schemaorg/manifest.json"
+      }
+    },
+    "policy_packs": [
+      {
+        "label": "GDPR Basic",
+        "name": "gdpr_basic",
+        "path": "policies/gdpr_basic.json",
+        "version": "0.1"
+      }
+    ]
+  },
+  "data_root": "src/moose/data",
+  "generated_at": "2026-01-21T09:12:11.433818+00:00",
+  "registries": {
+    "pipelines": {
+      "privacy_profiles": "pipelines/privacy_profiles.json"
+    },
+    "vocabularies": "vocabularies.json"
+  }
+}

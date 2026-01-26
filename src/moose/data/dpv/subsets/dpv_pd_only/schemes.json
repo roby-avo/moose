@@ -1,0 +1,17 @@
+[
+  {
+    "id": "dpv-pd:core-classes",
+    "iri": null,
+    "label": "dpv-pd:core-classes"
+  },
+  {
+    "id": "dpv-pd:extended-classes",
+    "iri": null,
+    "label": "dpv-pd:extended-classes"
+  },
+  {
+    "id": "dpv-pd:specialcategory-classes",
+    "iri": null,
+    "label": "dpv-pd:specialcategory-classes"
+  }
+]
