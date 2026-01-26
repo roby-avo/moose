@@ -1,0 +1,1 @@
+This folder was moved to src/moose/data/legal/gdprtext

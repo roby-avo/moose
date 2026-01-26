@@ -1,0 +1,25 @@
+{
+  "foaf": {
+    "concept_count": 0,
+    "files": [
+      "docs/webvowl/data/foaf.json"
+    ],
+    "module": "foaf"
+  },
+  "gdpr": {
+    "concept_count": 1100,
+    "files": [
+      "gdpr.json",
+      "gdpr.jsonld"
+    ],
+    "module": "gdpr"
+  },
+  "ontology": {
+    "concept_count": 257,
+    "files": [
+      "docs/ontology.json",
+      "docs/webvowl/data/ontology.json"
+    ],
+    "module": "ontology"
+  }
+}

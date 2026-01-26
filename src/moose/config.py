@@ -18,12 +18,21 @@ class Settings(BaseSettings):
     MOOSE_OLLAMA_TOKEN: str | None = None
     MOOSE_OPENROUTER_API_KEY: str | None = None
     MOOSE_OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
+
+    # DeepInfra (OpenAI-compatible)
+    MOOSE_DEEPINFRA_API_KEY: str | None = None
+    MOOSE_DEEPINFRA_BASE_URL: str = "https://api.deepinfra.com/v1/openai"
+
+    # DeepSeek (OpenAI-compatible)
+    MOOSE_DEEPSEEK_API_KEY: str | None = None
+    MOOSE_DEEPSEEK_BASE_URL: str = "https://api.deepseek.com"
+
     MOOSE_MONGO_URL: str | None = None
     MOOSE_MONGO_DB: str = "moose"
     MOOSE_MONGO_TIMEOUT_SECS: float = 2.0
     MOOSE_MAX_TASKS_PER_PROMPT: int = 10
     MOOSE_MAX_CHARS_PER_PROMPT: int = 12000
-    MOOSE_TIMEOUT_SECS: float = 60.0
+    MOOSE_TIMEOUT_SECS: float = 3600.0
 
 
 @lru_cache

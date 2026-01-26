@@ -1,0 +1,202 @@
+{
+  "name": "gdpr_basic",
+  "label": "GDPR Basic",
+  "version": "0.1",
+  "confidence": {
+    "ignore_below": 0.05,
+    "default_min": 0.40,
+    "by_category": {
+      "PERSONAL_DATA": 0.40,
+      "DIRECT_IDENTIFIER": 0.50,
+      "NETWORK_IDENTIFIER": 0.40,
+      "RECIPIENT": 0.35,
+      "QUASI_IDENTIFIER": 0.45
+    }
+  },
+  "actions": [
+    {
+      "action_id": "minimize_collection",
+      "label": "Minimize collection",
+      "description": "Collect only the minimum necessary data for the stated purpose."
+    },
+    {
+      "action_id": "minimize_sharing",
+      "label": "Minimize sharing",
+      "description": "Share only required fields with recipients/processors."
+    },
+    {
+      "action_id": "mask_logs",
+      "label": "Mask in logs/UI",
+      "description": "Redact personal data in logs, monitoring, and UI outputs."
+    },
+    {
+      "action_id": "tokenize_at_rest",
+      "label": "Tokenize at rest",
+      "description": "Replace identifiers with tokens; store mapping securely."
+    },
+    {
+      "action_id": "encrypt_at_rest",
+      "label": "Encrypt at rest",
+      "description": "Encrypt personal/sensitive data at rest."
+    },
+    {
+      "action_id": "retention_limit",
+      "label": "Limit retention",
+      "description": "Set and enforce short retention for raw identifiers."
+    },
+    {
+      "action_id": "ip_truncate",
+      "label": "Truncate IP address",
+      "description": "Truncate IPs (e.g., /24 or /64) where full IP not needed."
+    },
+    {
+      "action_id": "ensure_dpa",
+      "label": "Ensure DPA with processor",
+      "description": "Ensure a Data Processing Agreement with the recipient/processor."
+    },
+    {
+      "action_id": "access_control",
+      "label": "Restrict access",
+      "description": "Least privilege access control + auditing for personal data."
+    },
+    {
+      "action_id": "generalize",
+      "label": "Generalize/bucketize",
+      "description": "Reduce granularity (e.g., age bands, coarse location)."
+    }
+  ],
+  "signals": {
+    "SHARING_VERB": [
+      "share",
+      "shared",
+      "sharing",
+      "disclose",
+      "disclosed",
+      "transfer",
+      "transferred",
+      "send",
+      "sent",
+      "provide",
+      "provided",
+      "sell",
+      "sold"
+    ],
+    "RECIPIENT_TERM": [
+      "third party",
+      "processor",
+      "payment processor",
+      "vendor",
+      "service provider",
+      "partner"
+    ]
+  },
+  "legal_refs": {
+    "source": "gdprtext",
+    "by_rule_id": {
+      "direct_identifier_present": [
+        "gdprtext:Accountability",
+        "gdprtext:IntegrityAndConfidentiality",
+        "gdprtext:SecurityOfPersonalData",
+        "gdprtext:DataMinimisation"
+      ],
+      "network_identifier_present": [
+        "gdprtext:PersonalData",
+        "gdprtext:IntegrityAndConfidentiality",
+        "gdprtext:StorageLimitation",
+        "gdprtext:DataMinimisation"
+      ],
+      "possible_third_party_sharing": [
+        "gdprtext:AppointmentOfProcessors",
+        "gdprtext:AppointingSubProcessors",
+        "gdprtext:Controller",
+        "gdprtext:Processor",
+        "gdprtext:PersonalData"
+      ],
+      "possible_reidentification_quasi_identifiers": [
+        "gdprtext:AnonymousData",
+        "gdprtext:DataMinimisation",
+        "gdprtext:Accuracy"
+      ]
+    }
+  },
+  "type_prefix_categories": {
+    "dpv-pd:": ["PERSONAL_DATA"]
+  },
+  "type_categories": {
+    "dpv-pd:EmailAddress": ["DIRECT_IDENTIFIER", "CONTACT"],
+    "dpv-pd:IPAddress": ["NETWORK_IDENTIFIER", "TRACKING"],
+    "dpv-pd:PhoneNumber": ["DIRECT_IDENTIFIER", "CONTACT"],
+    "dpv-pd:Name": ["DIRECT_IDENTIFIER"],
+    "dpv-pd:PhysicalAddress": ["DIRECT_IDENTIFIER", "LOCATION"],
+    "dpv-pd:Location": ["LOCATION"],
+    "dpv-pd:BirthDate": ["QUASI_IDENTIFIER"],
+    "dpv-pd:Age": ["QUASI_IDENTIFIER"],
+    "dpv-pd:Gender": ["QUASI_IDENTIFIER"],
+    "dpv-pd:PostalCode": ["QUASI_IDENTIFIER", "LOCATION"],
+
+    "dpv:Recipient": ["RECIPIENT"],
+    "dpv:ThirdParty": ["RECIPIENT"],
+    "dpv:DataProcessor": ["RECIPIENT"],
+
+    "ext:email": ["PERSONAL_DATA", "DIRECT_IDENTIFIER", "CONTACT"],
+    "ext:ipv4": ["PERSONAL_DATA", "NETWORK_IDENTIFIER", "TRACKING"],
+    "ext:ipv6": ["PERSONAL_DATA", "NETWORK_IDENTIFIER", "TRACKING"],
+    "ext:phone": ["PERSONAL_DATA", "DIRECT_IDENTIFIER", "CONTACT"],
+    "ext:postalCode": ["QUASI_IDENTIFIER", "LOCATION"],
+    "ext:countryCode": ["LOCATION"],
+    "xsd:date": ["QUASI_IDENTIFIER"],
+    "xsd:dateTime": ["QUASI_IDENTIFIER"],
+    "NE:PERSON": ["PERSONAL_DATA", "DIRECT_IDENTIFIER"]
+  },
+  "rules": [
+    {
+      "rule_id": "direct_identifier_present",
+      "scope": "any",
+      "issue": "Direct identifier detected",
+      "severity": "high",
+      "default_actions": [
+        "mask_logs",
+        "tokenize_at_rest",
+        "minimize_collection",
+        "access_control"
+      ],
+      "when": { "any_of": ["DIRECT_IDENTIFIER"] }
+    },
+    {
+      "rule_id": "network_identifier_present",
+      "scope": "any",
+      "issue": "Network identifier detected (tracking risk)",
+      "severity": "medium",
+      "default_actions": ["ip_truncate", "retention_limit", "mask_logs"],
+      "when": { "any_of": ["NETWORK_IDENTIFIER"] }
+    },
+    {
+      "rule_id": "possible_third_party_sharing",
+      "scope": "text_task",
+      "issue": "Potential sharing with a recipient/processor",
+      "severity": "medium",
+      "default_actions": ["ensure_dpa", "minimize_sharing", "access_control"],
+      "needs_llm": true,
+      "when": {
+        "all_of": ["PERSONAL_DATA"],
+        "all_signals": ["SHARING_VERB"],
+        "any_of_either": ["cat:RECIPIENT", "sig:RECIPIENT_TERM"]
+      }
+    },
+    {
+      "rule_id": "possible_reidentification_quasi_identifiers",
+      "scope": "table_task",
+      "issue": "Re-identification risk via quasi-identifiers",
+      "severity": "medium",
+      "default_actions": ["generalize", "minimize_collection", "access_control"],
+      "when": { "min_count": { "category": "QUASI_IDENTIFIER", "count": 2 } }
+    }
+  ],
+  "llm_assessor": {
+    "intro": "You are a privacy and data protection assistant. Use the input evidence and context to confirm, reject, or mark findings as uncertain. Choose recommended_actions ONLY from the allowed action catalog.",
+    "max_findings": 20,
+    "max_actions_per_finding": 6,
+    "max_rationale_chars": 300
+  },
+  "max_evidence_per_finding": 5
+}

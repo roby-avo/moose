@@ -1,0 +1,1760 @@
+{
+  "schema:3DModel": [
+    "schema:MediaObject"
+  ],
+  "schema:APIReference": [
+    "schema:TechArticle"
+  ],
+  "schema:AboutPage": [
+    "schema:WebPage"
+  ],
+  "schema:Accommodation": [
+    "schema:Place"
+  ],
+  "schema:AccountingService": [
+    "schema:FinancialService"
+  ],
+  "schema:AdministrativeArea": [
+    "schema:Place"
+  ],
+  "schema:AdultEntertainment": [
+    "schema:EntertainmentBusiness"
+  ],
+  "schema:AdultOrientedEnumeration": [],
+  "schema:AdvertiserContentArticle": [
+    "schema:Article"
+  ],
+  "schema:AggregateRating": [
+    "schema:Rating"
+  ],
+  "schema:Airline": [
+    "schema:Organization"
+  ],
+  "schema:Airport": [
+    "schema:CivicStructure"
+  ],
+  "schema:AlignmentObject": [
+    "schema:Intangible"
+  ],
+  "schema:AmpStory": [
+    "schema:CreativeWork",
+    "schema:MediaObject"
+  ],
+  "schema:AmusementPark": [
+    "schema:EntertainmentBusiness"
+  ],
+  "schema:AnalysisNewsArticle": [
+    "schema:NewsArticle"
+  ],
+  "schema:AnatomicalStructure": [
+    "schema:MedicalEntity"
+  ],
+  "schema:AnatomicalSystem": [
+    "schema:MedicalEntity"
+  ],
+  "schema:AnimalShelter": [
+    "schema:LocalBusiness"
+  ],
+  "schema:Answer": [
+    "schema:Comment"
+  ],
+  "schema:Apartment": [
+    "schema:Accommodation"
+  ],
+  "schema:ApartmentComplex": [
+    "schema:Residence"
+  ],
+  "schema:Aquarium": [
+    "schema:CivicStructure"
+  ],
+  "schema:ArchiveComponent": [
+    "schema:CreativeWork"
+  ],
+  "schema:ArchiveOrganization": [
+    "schema:LocalBusiness"
+  ],
+  "schema:ArtGallery": [
+    "schema:EntertainmentBusiness"
+  ],
+  "schema:Article": [
+    "schema:CreativeWork"
+  ],
+  "schema:AskPublicNewsArticle": [
+    "schema:NewsArticle"
+  ],
+  "schema:Atlas": [
+    "schema:CreativeWork"
+  ],
+  "schema:Attorney": [
+    "schema:LegalService"
+  ],
+  "schema:Audience": [
+    "schema:Intangible"
+  ],
+  "schema:AudioObject": [
+    "schema:MediaObject"
+  ],
+  "schema:AudioObjectSnapshot": [
+    "schema:AudioObject"
+  ],
+  "schema:Audiobook": [
+    "schema:AudioObject",
+    "schema:Book"
+  ],
+  "schema:AutoBodyShop": [
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:AutoDealer": [
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:AutoPartsStore": [
+    "schema:Store",
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:AutoRental": [
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:AutoRepair": [
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:AutoWash": [
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:AutomatedTeller": [
+    "schema:FinancialService"
+  ],
+  "schema:AutomotiveBusiness": [
+    "schema:LocalBusiness"
+  ],
+  "schema:BackgroundNewsArticle": [
+    "schema:NewsArticle"
+  ],
+  "schema:Bakery": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:BankOrCreditUnion": [
+    "schema:FinancialService"
+  ],
+  "schema:BarOrPub": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:Barcode": [
+    "schema:ImageObject"
+  ],
+  "schema:Beach": [
+    "schema:CivicStructure"
+  ],
+  "schema:BeautySalon": [
+    "schema:HealthAndBeautyBusiness"
+  ],
+  "schema:BedAndBreakfast": [
+    "schema:LodgingBusiness"
+  ],
+  "schema:BedDetails": [
+    "schema:Intangible"
+  ],
+  "schema:BedType": [
+    "schema:QualitativeValue"
+  ],
+  "schema:BikeStore": [
+    "schema:Store"
+  ],
+  "schema:Blog": [
+    "schema:CreativeWork"
+  ],
+  "schema:BlogPosting": [
+    "schema:SocialMediaPosting"
+  ],
+  "schema:BoardingPolicyType": [],
+  "schema:BoatTerminal": [
+    "schema:CivicStructure"
+  ],
+  "schema:BodyOfWater": [
+    "schema:Landform"
+  ],
+  "schema:Book": [
+    "schema:CreativeWork"
+  ],
+  "schema:BookFormatType": [],
+  "schema:BookSeries": [
+    "schema:CreativeWorkSeries"
+  ],
+  "schema:BookStore": [
+    "schema:Store"
+  ],
+  "schema:Boolean": [],
+  "schema:BowlingAlley": [
+    "schema:SportsActivityLocation"
+  ],
+  "schema:Brand": [
+    "schema:Intangible"
+  ],
+  "schema:BreadcrumbList": [
+    "schema:ItemList"
+  ],
+  "schema:Brewery": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:Bridge": [
+    "schema:CivicStructure"
+  ],
+  "schema:BroadcastEvent": [
+    "schema:PublicationEvent"
+  ],
+  "schema:BroadcastService": [
+    "schema:Service"
+  ],
+  "schema:BuddhistTemple": [
+    "schema:PlaceOfWorship"
+  ],
+  "schema:BusOrCoach": [
+    "schema:Vehicle"
+  ],
+  "schema:BusStation": [
+    "schema:CivicStructure"
+  ],
+  "schema:BusStop": [
+    "schema:CivicStructure"
+  ],
+  "schema:BusinessEvent": [
+    "schema:Event"
+  ],
+  "schema:CDCPMDRecord": [
+    "schema:StructuredValue"
+  ],
+  "schema:CafeOrCoffeeShop": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:Campground": [
+    "schema:CivicStructure",
+    "schema:LodgingBusiness"
+  ],
+  "schema:CampingPitch": [
+    "schema:Accommodation"
+  ],
+  "schema:Canal": [
+    "schema:BodyOfWater"
+  ],
+  "schema:Car": [
+    "schema:Vehicle"
+  ],
+  "schema:CarUsageType": [],
+  "schema:Casino": [
+    "schema:EntertainmentBusiness"
+  ],
+  "schema:CategoryCode": [
+    "schema:DefinedTerm"
+  ],
+  "schema:CategoryCodeSet": [
+    "schema:DefinedTermSet"
+  ],
+  "schema:CatholicChurch": [
+    "schema:Church"
+  ],
+  "schema:Cemetery": [
+    "schema:CivicStructure"
+  ],
+  "schema:Certification": [
+    "schema:CreativeWork"
+  ],
+  "schema:CertificationStatusEnumeration": [],
+  "schema:Chapter": [
+    "schema:CreativeWork"
+  ],
+  "schema:CheckoutPage": [
+    "schema:WebPage"
+  ],
+  "schema:ChildCare": [
+    "schema:LocalBusiness"
+  ],
+  "schema:ChildrensEvent": [
+    "schema:Event"
+  ],
+  "schema:Church": [
+    "schema:PlaceOfWorship"
+  ],
+  "schema:City": [
+    "schema:AdministrativeArea"
+  ],
+  "schema:CityHall": [
+    "schema:GovernmentBuilding"
+  ],
+  "schema:CivicStructure": [
+    "schema:Place"
+  ],
+  "schema:Claim": [
+    "schema:CreativeWork"
+  ],
+  "schema:ClaimReview": [
+    "schema:Review"
+  ],
+  "schema:Clip": [
+    "schema:CreativeWork"
+  ],
+  "schema:ClothingStore": [
+    "schema:Store"
+  ],
+  "schema:Code": [
+    "schema:CreativeWork"
+  ],
+  "schema:Collection": [
+    "schema:CreativeWork"
+  ],
+  "schema:CollectionPage": [
+    "schema:WebPage"
+  ],
+  "schema:CollegeOrUniversity": [
+    "schema:EducationalOrganization"
+  ],
+  "schema:ComedyClub": [
+    "schema:EntertainmentBusiness"
+  ],
+  "schema:ComedyEvent": [
+    "schema:Event"
+  ],
+  "schema:ComicCoverArt": [
+    "schema:ComicStory",
+    "schema:CoverArt"
+  ],
+  "schema:ComicIssue": [
+    "schema:PublicationIssue"
+  ],
+  "schema:ComicSeries": [
+    "schema:Periodical"
+  ],
+  "schema:ComicStory": [
+    "schema:CreativeWork"
+  ],
+  "schema:Comment": [
+    "schema:CreativeWork"
+  ],
+  "schema:CompleteDataFeed": [
+    "schema:DataFeed"
+  ],
+  "schema:ComputerLanguage": [
+    "schema:Intangible"
+  ],
+  "schema:ComputerStore": [
+    "schema:Store"
+  ],
+  "schema:ConferenceEvent": [
+    "schema:Event"
+  ],
+  "schema:Consortium": [
+    "schema:Organization"
+  ],
+  "schema:ContactPage": [
+    "schema:WebPage"
+  ],
+  "schema:ContactPoint": [
+    "schema:StructuredValue"
+  ],
+  "schema:Continent": [
+    "schema:Landform"
+  ],
+  "schema:ConvenienceStore": [
+    "schema:Store"
+  ],
+  "schema:Conversation": [
+    "schema:CreativeWork"
+  ],
+  "schema:Cooperative": [
+    "schema:Organization"
+  ],
+  "schema:Corporation": [
+    "schema:Organization"
+  ],
+  "schema:CorrectionComment": [
+    "schema:Comment"
+  ],
+  "schema:Country": [
+    "schema:AdministrativeArea"
+  ],
+  "schema:Course": [
+    "schema:LearningResource",
+    "schema:CreativeWork"
+  ],
+  "schema:CourseInstance": [
+    "schema:Event"
+  ],
+  "schema:Courthouse": [
+    "schema:GovernmentBuilding"
+  ],
+  "schema:CoverArt": [
+    "schema:VisualArtwork"
+  ],
+  "schema:CovidTestingFacility": [
+    "schema:MedicalClinic"
+  ],
+  "schema:CreativeWork": [
+    "schema:Thing"
+  ],
+  "schema:CreativeWorkSeason": [
+    "schema:CreativeWork"
+  ],
+  "schema:CreativeWorkSeries": [
+    "schema:Series",
+    "schema:CreativeWork"
+  ],
+  "schema:Crematorium": [
+    "schema:CivicStructure"
+  ],
+  "schema:CriticReview": [
+    "schema:Review"
+  ],
+  "schema:CssSelectorType": [
+    "schema:Text"
+  ],
+  "schema:DanceEvent": [
+    "schema:Event"
+  ],
+  "schema:DanceGroup": [
+    "schema:PerformingGroup"
+  ],
+  "schema:DataCatalog": [
+    "schema:CreativeWork"
+  ],
+  "schema:DataDownload": [
+    "schema:MediaObject"
+  ],
+  "schema:DataFeed": [
+    "schema:Dataset"
+  ],
+  "schema:DataFeedItem": [
+    "schema:Intangible"
+  ],
+  "schema:Dataset": [
+    "schema:CreativeWork"
+  ],
+  "schema:Date": [],
+  "schema:DateTime": [],
+  "schema:DaySpa": [
+    "schema:HealthAndBeautyBusiness"
+  ],
+  "schema:DefenceEstablishment": [
+    "schema:GovernmentBuilding"
+  ],
+  "schema:DefinedRegion": [
+    "schema:Place",
+    "schema:StructuredValue"
+  ],
+  "schema:DefinedTerm": [
+    "schema:Intangible"
+  ],
+  "schema:DefinedTermSet": [
+    "schema:CreativeWork"
+  ],
+  "schema:DeliveryEvent": [
+    "schema:Event"
+  ],
+  "schema:DeliveryMethod": [],
+  "schema:Demand": [
+    "schema:Intangible"
+  ],
+  "schema:Dentist": [
+    "schema:LocalBusiness",
+    "schema:MedicalOrganization",
+    "schema:MedicalBusiness"
+  ],
+  "schema:DepartmentStore": [
+    "schema:Store"
+  ],
+  "schema:DiagnosticLab": [
+    "schema:MedicalOrganization"
+  ],
+  "schema:Diet": [
+    "schema:CreativeWork",
+    "schema:LifestyleModification"
+  ],
+  "schema:DietarySupplement": [
+    "schema:Substance",
+    "schema:Product"
+  ],
+  "schema:DigitalDocument": [
+    "schema:CreativeWork"
+  ],
+  "schema:DigitalDocumentPermission": [
+    "schema:Intangible"
+  ],
+  "schema:DiscussionForumPosting": [
+    "schema:SocialMediaPosting"
+  ],
+  "schema:Distance": [],
+  "schema:Distillery": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:DoseSchedule": [],
+  "schema:Drawing": [
+    "schema:CreativeWork"
+  ],
+  "schema:DriveWheelConfigurationValue": [
+    "schema:QualitativeValue"
+  ],
+  "schema:Drug": [
+    "schema:Substance",
+    "schema:Product"
+  ],
+  "schema:DrugClass": [
+    "schema:MedicalEntity"
+  ],
+  "schema:DrugLegalStatus": [],
+  "schema:DrugPregnancyCategory": [
+    "schema:MedicalEnumeration"
+  ],
+  "schema:DrugPrescriptionStatus": [
+    "schema:MedicalEnumeration"
+  ],
+  "schema:DrugStrength": [],
+  "schema:DryCleaningOrLaundry": [
+    "schema:LocalBusiness"
+  ],
+  "schema:Duration": [],
+  "schema:EducationEvent": [
+    "schema:Event"
+  ],
+  "schema:EducationalOccupationalCredential": [
+    "schema:CreativeWork"
+  ],
+  "schema:EducationalOrganization": [
+    "schema:Organization",
+    "schema:CivicStructure"
+  ],
+  "schema:Electrician": [
+    "schema:HomeAndConstructionBusiness"
+  ],
+  "schema:ElectronicsStore": [
+    "schema:Store"
+  ],
+  "schema:ElementarySchool": [
+    "schema:EducationalOrganization"
+  ],
+  "schema:EmailMessage": [
+    "schema:Message"
+  ],
+  "schema:Embassy": [
+    "schema:GovernmentBuilding"
+  ],
+  "schema:EmergencyService": [
+    "schema:LocalBusiness"
+  ],
+  "schema:EmployerReview": [
+    "schema:Review"
+  ],
+  "schema:EmploymentAgency": [
+    "schema:LocalBusiness"
+  ],
+  "schema:Energy": [],
+  "schema:EnergyConsumptionDetails": [
+    "schema:Intangible"
+  ],
+  "schema:EngineSpecification": [
+    "schema:StructuredValue"
+  ],
+  "schema:EntertainmentBusiness": [
+    "schema:LocalBusiness"
+  ],
+  "schema:Episode": [
+    "schema:CreativeWork"
+  ],
+  "schema:Event": [
+    "schema:Thing"
+  ],
+  "schema:EventAttendanceModeEnumeration": [],
+  "schema:EventSeries": [
+    "schema:Event",
+    "schema:Series"
+  ],
+  "schema:EventStatusType": [],
+  "schema:EventVenue": [
+    "schema:CivicStructure"
+  ],
+  "schema:ExerciseGym": [
+    "schema:SportsActivityLocation"
+  ],
+  "schema:ExercisePlan": [
+    "schema:PhysicalActivity",
+    "schema:CreativeWork"
+  ],
+  "schema:ExhibitionEvent": [
+    "schema:Event"
+  ],
+  "schema:FAQPage": [
+    "schema:WebPage"
+  ],
+  "schema:FastFoodRestaurant": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:Festival": [
+    "schema:Event"
+  ],
+  "schema:FinancialService": [
+    "schema:LocalBusiness"
+  ],
+  "schema:FireStation": [
+    "schema:CivicStructure",
+    "schema:EmergencyService"
+  ],
+  "schema:FloorPlan": [
+    "schema:Intangible"
+  ],
+  "schema:Florist": [
+    "schema:Store"
+  ],
+  "schema:FoodEstablishment": [
+    "schema:LocalBusiness"
+  ],
+  "schema:FoodEvent": [
+    "schema:Event"
+  ],
+  "schema:FundingAgency": [
+    "schema:Project"
+  ],
+  "schema:FundingScheme": [
+    "schema:Organization"
+  ],
+  "schema:FurnitureStore": [
+    "schema:Store"
+  ],
+  "schema:Game": [
+    "schema:CreativeWork"
+  ],
+  "schema:GamePlayMode": [],
+  "schema:GameServer": [
+    "schema:Intangible"
+  ],
+  "schema:GardenStore": [
+    "schema:Store"
+  ],
+  "schema:GasStation": [
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:GatedResidenceCommunity": [
+    "schema:Residence"
+  ],
+  "schema:GenderType": [],
+  "schema:GeneralContractor": [
+    "schema:HomeAndConstructionBusiness"
+  ],
+  "schema:GeoCoordinates": [
+    "schema:StructuredValue"
+  ],
+  "schema:GeoShape": [
+    "schema:StructuredValue"
+  ],
+  "schema:GeospatialGeometry": [
+    "schema:Intangible"
+  ],
+  "schema:GolfCourse": [
+    "schema:SportsActivityLocation"
+  ],
+  "schema:GovernmentBuilding": [
+    "schema:CivicStructure"
+  ],
+  "schema:GovernmentOffice": [
+    "schema:LocalBusiness"
+  ],
+  "schema:GovernmentOrganization": [
+    "schema:Organization"
+  ],
+  "schema:GovernmentService": [
+    "schema:Service"
+  ],
+  "schema:Grant": [
+    "schema:Intangible"
+  ],
+  "schema:GroceryStore": [
+    "schema:Store"
+  ],
+  "schema:Guide": [
+    "schema:CreativeWork"
+  ],
+  "schema:HVACBusiness": [
+    "schema:HomeAndConstructionBusiness"
+  ],
+  "schema:Hackathon": [
+    "schema:Event"
+  ],
+  "schema:HairSalon": [
+    "schema:HealthAndBeautyBusiness"
+  ],
+  "schema:HardwareStore": [
+    "schema:Store"
+  ],
+  "schema:HealthAndBeautyBusiness": [
+    "schema:LocalBusiness"
+  ],
+  "schema:HealthAspectEnumeration": [],
+  "schema:HealthClub": [
+    "schema:HealthAndBeautyBusiness",
+    "schema:SportsActivityLocation"
+  ],
+  "schema:HealthInsurancePlan": [
+    "schema:Intangible"
+  ],
+  "schema:HealthTopicContent": [
+    "schema:WebContent"
+  ],
+  "schema:HighSchool": [
+    "schema:EducationalOrganization"
+  ],
+  "schema:HinduTemple": [
+    "schema:PlaceOfWorship"
+  ],
+  "schema:HobbyShop": [
+    "schema:Store"
+  ],
+  "schema:HomeAndConstructionBusiness": [
+    "schema:LocalBusiness"
+  ],
+  "schema:HomeGoodsStore": [
+    "schema:Store"
+  ],
+  "schema:Hospital": [
+    "schema:CivicStructure",
+    "schema:EmergencyService",
+    "schema:MedicalOrganization"
+  ],
+  "schema:Hostel": [
+    "schema:LodgingBusiness"
+  ],
+  "schema:Hotel": [
+    "schema:LodgingBusiness"
+  ],
+  "schema:HotelRoom": [
+    "schema:Room"
+  ],
+  "schema:House": [
+    "schema:Accommodation"
+  ],
+  "schema:HousePainter": [
+    "schema:HomeAndConstructionBusiness"
+  ],
+  "schema:HowTo": [
+    "schema:CreativeWork"
+  ],
+  "schema:HowToDirection": [
+    "schema:CreativeWork",
+    "schema:ListItem"
+  ],
+  "schema:HowToSection": [
+    "schema:CreativeWork",
+    "schema:ItemList",
+    "schema:ListItem"
+  ],
+  "schema:HowToStep": [
+    "schema:CreativeWork",
+    "schema:ItemList",
+    "schema:ListItem"
+  ],
+  "schema:HowToSupply": [],
+  "schema:HowToTip": [
+    "schema:CreativeWork",
+    "schema:ListItem"
+  ],
+  "schema:HowToTool": [],
+  "schema:HyperToc": [
+    "schema:CreativeWork"
+  ],
+  "schema:HyperTocEntry": [
+    "schema:CreativeWork"
+  ],
+  "schema:IPTCDigitalSourceEnumeration": [],
+  "schema:IceCreamShop": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:ImageGallery": [
+    "schema:MediaGallery"
+  ],
+  "schema:ImageObject": [
+    "schema:MediaObject"
+  ],
+  "schema:ImageObjectSnapshot": [
+    "schema:ImageObject"
+  ],
+  "schema:IndividualPhysician": [
+    "schema:Physician"
+  ],
+  "schema:IndividualProduct": [
+    "schema:Product"
+  ],
+  "schema:InsuranceAgency": [
+    "schema:FinancialService"
+  ],
+  "schema:Intangible": [
+    "schema:Thing"
+  ],
+  "schema:Integer": [
+    "schema:Number"
+  ],
+  "schema:InteractionCounter": [
+    "schema:StructuredValue"
+  ],
+  "schema:InternetCafe": [
+    "schema:LocalBusiness"
+  ],
+  "schema:ItemList": [
+    "schema:Intangible"
+  ],
+  "schema:ItemListOrderType": [],
+  "schema:ItemPage": [
+    "schema:WebPage"
+  ],
+  "schema:JewelryStore": [
+    "schema:Store"
+  ],
+  "schema:LakeBodyOfWater": [
+    "schema:BodyOfWater"
+  ],
+  "schema:Landform": [
+    "schema:Place"
+  ],
+  "schema:LandmarksOrHistoricalBuildings": [
+    "schema:Place"
+  ],
+  "schema:Language": [
+    "schema:Intangible"
+  ],
+  "schema:LearningResource": [
+    "schema:CreativeWork"
+  ],
+  "schema:LegalForceStatus": [],
+  "schema:LegalService": [
+    "schema:LocalBusiness"
+  ],
+  "schema:LegalValueLevel": [],
+  "schema:Legislation": [
+    "schema:CreativeWork"
+  ],
+  "schema:LegislationObject": [
+    "schema:MediaObject",
+    "schema:Legislation"
+  ],
+  "schema:LegislativeBuilding": [
+    "schema:GovernmentBuilding"
+  ],
+  "schema:Library": [
+    "schema:LocalBusiness"
+  ],
+  "schema:LibrarySystem": [
+    "schema:Organization"
+  ],
+  "schema:LifestyleModification": [
+    "schema:MedicalEntity"
+  ],
+  "schema:LiquorStore": [
+    "schema:Store"
+  ],
+  "schema:ListItem": [
+    "schema:Intangible"
+  ],
+  "schema:LiteraryEvent": [
+    "schema:Event"
+  ],
+  "schema:LiveBlogPosting": [
+    "schema:BlogPosting"
+  ],
+  "schema:LoanOrCredit": [],
+  "schema:LocalBusiness": [
+    "schema:Place",
+    "schema:Organization"
+  ],
+  "schema:LocationFeatureSpecification": [
+    "schema:PropertyValue"
+  ],
+  "schema:Locksmith": [
+    "schema:HomeAndConstructionBusiness"
+  ],
+  "schema:LodgingBusiness": [
+    "schema:LocalBusiness"
+  ],
+  "schema:Manuscript": [
+    "schema:CreativeWork"
+  ],
+  "schema:Map": [
+    "schema:CreativeWork"
+  ],
+  "schema:MapCategoryType": [],
+  "schema:Mass": [],
+  "schema:MathSolver": [
+    "schema:CreativeWork"
+  ],
+  "schema:MaximumDoseSchedule": [
+    "schema:DoseSchedule"
+  ],
+  "schema:MeasurementMethodEnum": [],
+  "schema:MediaGallery": [
+    "schema:CollectionPage"
+  ],
+  "schema:MediaManipulationRatingEnumeration": [],
+  "schema:MediaObject": [
+    "schema:CreativeWork"
+  ],
+  "schema:MediaReview": [
+    "schema:Review"
+  ],
+  "schema:MediaReviewItem": [
+    "schema:CreativeWork"
+  ],
+  "schema:MediaSubscription": [
+    "schema:Intangible"
+  ],
+  "schema:MedicalAudience": [
+    "schema:Audience",
+    "schema:PeopleAudience"
+  ],
+  "schema:MedicalAudienceType": [
+    "schema:MedicalEnumeration"
+  ],
+  "schema:MedicalBusiness": [
+    "schema:LocalBusiness"
+  ],
+  "schema:MedicalClinic": [
+    "schema:MedicalOrganization",
+    "schema:MedicalBusiness"
+  ],
+  "schema:MedicalCode": [
+    "schema:CategoryCode"
+  ],
+  "schema:MedicalCondition": [
+    "schema:MedicalEntity"
+  ],
+  "schema:MedicalEntity": [
+    "schema:Thing"
+  ],
+  "schema:MedicalEnumeration": [],
+  "schema:MedicalGuideline": [
+    "schema:MedicalEntity"
+  ],
+  "schema:MedicalOrganization": [
+    "schema:Organization"
+  ],
+  "schema:MedicalProcedure": [
+    "schema:MedicalEntity"
+  ],
+  "schema:MedicalScholarlyArticle": [
+    "schema:ScholarlyArticle"
+  ],
+  "schema:MedicalSpecialty": [
+    "schema:Specialty",
+    "schema:MedicalEnumeration"
+  ],
+  "schema:MedicalStudy": [
+    "schema:MedicalEntity"
+  ],
+  "schema:MedicalTest": [
+    "schema:MedicalEntity"
+  ],
+  "schema:MedicalTherapy": [],
+  "schema:MedicalWebPage": [
+    "schema:WebPage"
+  ],
+  "schema:MedicineSystem": [
+    "schema:MedicalEnumeration"
+  ],
+  "schema:MeetingRoom": [
+    "schema:Room"
+  ],
+  "schema:MemberProgram": [
+    "schema:Intangible"
+  ],
+  "schema:MemberProgramTier": [
+    "schema:Intangible"
+  ],
+  "schema:MensClothingStore": [
+    "schema:Store"
+  ],
+  "schema:Menu": [
+    "schema:CreativeWork"
+  ],
+  "schema:MenuItem": [
+    "schema:Intangible"
+  ],
+  "schema:MenuSection": [
+    "schema:CreativeWork"
+  ],
+  "schema:MerchantReturnPolicy": [
+    "schema:Intangible"
+  ],
+  "schema:Message": [
+    "schema:CreativeWork"
+  ],
+  "schema:MiddleSchool": [
+    "schema:EducationalOrganization"
+  ],
+  "schema:MobileApplication": [
+    "schema:SoftwareApplication"
+  ],
+  "schema:MobilePhoneStore": [
+    "schema:Store"
+  ],
+  "schema:MonetaryAmount": [
+    "schema:StructuredValue"
+  ],
+  "schema:Mosque": [
+    "schema:PlaceOfWorship"
+  ],
+  "schema:Motel": [
+    "schema:LodgingBusiness"
+  ],
+  "schema:Motorcycle": [
+    "schema:Vehicle"
+  ],
+  "schema:MotorcycleDealer": [
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:MotorcycleRepair": [
+    "schema:AutomotiveBusiness"
+  ],
+  "schema:MotorizedBicycle": [
+    "schema:Vehicle"
+  ],
+  "schema:Mountain": [
+    "schema:Landform"
+  ],
+  "schema:Movie": [
+    "schema:CreativeWork"
+  ],
+  "schema:MovieClip": [
+    "schema:Clip"
+  ],
+  "schema:MovieRentalStore": [
+    "schema:Store"
+  ],
+  "schema:MovieSeries": [
+    "schema:CreativeWorkSeries"
+  ],
+  "schema:MovieTheater": [
+    "schema:CivicStructure",
+    "schema:EntertainmentBusiness"
+  ],
+  "schema:MovingCompany": [
+    "schema:HomeAndConstructionBusiness"
+  ],
+  "schema:Museum": [
+    "schema:CivicStructure"
+  ],
+  "schema:MusicAlbum": [
+    "schema:MusicPlaylist"
+  ],
+  "schema:MusicAlbumProductionType": [],
+  "schema:MusicAlbumReleaseType": [],
+  "schema:MusicComposition": [
+    "schema:CreativeWork"
+  ],
+  "schema:MusicEvent": [
+    "schema:Event"
+  ],
+  "schema:MusicGroup": [
+    "schema:PerformingGroup"
+  ],
+  "schema:MusicPlaylist": [
+    "schema:CreativeWork"
+  ],
+  "schema:MusicRecording": [
+    "schema:CreativeWork"
+  ],
+  "schema:MusicRelease": [
+    "schema:MusicPlaylist"
+  ],
+  "schema:MusicReleaseFormatType": [],
+  "schema:MusicStore": [
+    "schema:Store"
+  ],
+  "schema:MusicVenue": [
+    "schema:CivicStructure"
+  ],
+  "schema:MusicVideoObject": [
+    "schema:MediaObject"
+  ],
+  "schema:NGO": [
+    "schema:Organization"
+  ],
+  "schema:NailSalon": [
+    "schema:HealthAndBeautyBusiness"
+  ],
+  "schema:NewsArticle": [
+    "schema:Article"
+  ],
+  "schema:NewsMediaOrganization": [
+    "schema:Organization"
+  ],
+  "schema:Newspaper": [
+    "schema:Periodical"
+  ],
+  "schema:NightClub": [
+    "schema:EntertainmentBusiness"
+  ],
+  "schema:NonprofitType": [],
+  "schema:Notary": [
+    "schema:LegalService"
+  ],
+  "schema:NoteDigitalDocument": [
+    "schema:DigitalDocument"
+  ],
+  "schema:Number": [],
+  "schema:NutritionInformation": [
+    "schema:StructuredValue"
+  ],
+  "schema:Observation": [
+    "schema:Intangible",
+    "schema:QuantitativeValue"
+  ],
+  "schema:Occupation": [
+    "schema:Intangible"
+  ],
+  "schema:OceanBodyOfWater": [
+    "schema:BodyOfWater"
+  ],
+  "schema:Offer": [
+    "schema:Intangible"
+  ],
+  "schema:OfferCatalog": [
+    "schema:ItemList"
+  ],
+  "schema:OfferItemCondition": [],
+  "schema:OfficeEquipmentStore": [
+    "schema:Store"
+  ],
+  "schema:OnDemandEvent": [
+    "schema:PublicationEvent"
+  ],
+  "schema:OnlineBusiness": [
+    "schema:Organization"
+  ],
+  "schema:OnlineMarketplace": [
+    "schema:OnlineStore"
+  ],
+  "schema:OnlineStore": [
+    "schema:OnlineBusiness"
+  ],
+  "schema:OpeningHoursSpecification": [
+    "schema:StructuredValue"
+  ],
+  "schema:OperatingSystem": [
+    "schema:SoftwareApplication"
+  ],
+  "schema:OpinionNewsArticle": [
+    "schema:NewsArticle"
+  ],
+  "schema:Optician": [
+    "schema:MedicalBusiness"
+  ],
+  "schema:Organization": [
+    "schema:Thing"
+  ],
+  "schema:OutletStore": [
+    "schema:Store"
+  ],
+  "schema:Painting": [
+    "schema:CreativeWork"
+  ],
+  "schema:Park": [
+    "schema:CivicStructure"
+  ],
+  "schema:ParkingFacility": [
+    "schema:CivicStructure"
+  ],
+  "schema:Patient": [
+    "schema:MedicalAudience",
+    "schema:Person"
+  ],
+  "schema:PawnShop": [
+    "schema:Store"
+  ],
+  "schema:PaymentMethod": [
+    "schema:Intangible"
+  ],
+  "schema:PeopleAudience": [
+    "schema:Audience"
+  ],
+  "schema:PerformingArtsEvent": [
+    "schema:Event"
+  ],
+  "schema:PerformingArtsTheater": [
+    "schema:CivicStructure"
+  ],
+  "schema:PerformingGroup": [
+    "schema:Organization"
+  ],
+  "schema:Periodical": [
+    "schema:CreativeWorkSeries"
+  ],
+  "schema:Person": [
+    "schema:Thing"
+  ],
+  "schema:PetStore": [
+    "schema:Store"
+  ],
+  "schema:Pharmacy": [
+    "schema:MedicalOrganization",
+    "schema:MedicalBusiness"
+  ],
+  "schema:Photograph": [
+    "schema:CreativeWork"
+  ],
+  "schema:PhysicalActivity": [
+    "schema:LifestyleModification"
+  ],
+  "schema:PhysicalActivityCategory": [],
+  "schema:Physician": [
+    "schema:MedicalOrganization",
+    "schema:MedicalBusiness"
+  ],
+  "schema:PhysiciansOffice": [
+    "schema:Physician"
+  ],
+  "schema:Place": [
+    "schema:Thing"
+  ],
+  "schema:PlaceOfWorship": [
+    "schema:CivicStructure"
+  ],
+  "schema:Play": [
+    "schema:CreativeWork"
+  ],
+  "schema:Playground": [
+    "schema:CivicStructure"
+  ],
+  "schema:Plumber": [
+    "schema:HomeAndConstructionBusiness"
+  ],
+  "schema:PodcastEpisode": [
+    "schema:Episode"
+  ],
+  "schema:PodcastSeason": [
+    "schema:CreativeWorkSeason"
+  ],
+  "schema:PodcastSeries": [
+    "schema:CreativeWorkSeries"
+  ],
+  "schema:PoliceStation": [
+    "schema:CivicStructure",
+    "schema:EmergencyService"
+  ],
+  "schema:PoliticalParty": [
+    "schema:Organization"
+  ],
+  "schema:Pond": [
+    "schema:BodyOfWater"
+  ],
+  "schema:PostOffice": [
+    "schema:GovernmentOffice"
+  ],
+  "schema:PostalAddress": [
+    "schema:ContactPoint"
+  ],
+  "schema:PostalCodeRangeSpecification": [
+    "schema:StructuredValue"
+  ],
+  "schema:Poster": [
+    "schema:CreativeWork"
+  ],
+  "schema:Preschool": [
+    "schema:EducationalOrganization"
+  ],
+  "schema:PresentationDigitalDocument": [
+    "schema:DigitalDocument"
+  ],
+  "schema:PriceSpecification": [
+    "schema:StructuredValue"
+  ],
+  "schema:Product": [
+    "schema:Thing"
+  ],
+  "schema:ProductCollection": [
+    "schema:Product",
+    "schema:Collection"
+  ],
+  "schema:ProductGroup": [
+    "schema:Product"
+  ],
+  "schema:ProductModel": [
+    "schema:Product"
+  ],
+  "schema:ProfessionalService": [
+    "schema:LocalBusiness"
+  ],
+  "schema:ProfilePage": [
+    "schema:WebPage"
+  ],
+  "schema:ProgramMembership": [
+    "schema:Intangible"
+  ],
+  "schema:Project": [
+    "schema:Organization"
+  ],
+  "schema:Property": [
+    "schema:Intangible"
+  ],
+  "schema:PropertyValue": [
+    "schema:StructuredValue"
+  ],
+  "schema:PublicSwimmingPool": [
+    "schema:SportsActivityLocation"
+  ],
+  "schema:PublicToilet": [
+    "schema:CivicStructure"
+  ],
+  "schema:PublicationEvent": [
+    "schema:Event"
+  ],
+  "schema:PublicationIssue": [
+    "schema:CreativeWork"
+  ],
+  "schema:PublicationVolume": [
+    "schema:CreativeWork"
+  ],
+  "schema:QAPage": [
+    "schema:WebPage"
+  ],
+  "schema:QualitativeValue": [],
+  "schema:QuantitativeValue": [
+    "schema:StructuredValue"
+  ],
+  "schema:Question": [
+    "schema:Comment"
+  ],
+  "schema:Quiz": [
+    "schema:LearningResource"
+  ],
+  "schema:Quotation": [
+    "schema:CreativeWork"
+  ],
+  "schema:RVPark": [
+    "schema:CivicStructure"
+  ],
+  "schema:RadioClip": [
+    "schema:Clip"
+  ],
+  "schema:RadioEpisode": [
+    "schema:Episode"
+  ],
+  "schema:RadioSeason": [
+    "schema:CreativeWorkSeason"
+  ],
+  "schema:RadioSeries": [
+    "schema:CreativeWorkSeries"
+  ],
+  "schema:RadioStation": [
+    "schema:LocalBusiness"
+  ],
+  "schema:Rating": [
+    "schema:Intangible"
+  ],
+  "schema:RealEstateAgent": [
+    "schema:LocalBusiness"
+  ],
+  "schema:RealEstateListing": [
+    "schema:WebPage"
+  ],
+  "schema:Recipe": [
+    "schema:HowTo"
+  ],
+  "schema:Recommendation": [
+    "schema:Review"
+  ],
+  "schema:RecommendedDoseSchedule": [
+    "schema:DoseSchedule"
+  ],
+  "schema:RecyclingCenter": [
+    "schema:LocalBusiness"
+  ],
+  "schema:Report": [
+    "schema:Article"
+  ],
+  "schema:ReportageNewsArticle": [
+    "schema:NewsArticle"
+  ],
+  "schema:ResearchOrganization": [
+    "schema:Organization"
+  ],
+  "schema:ResearchProject": [
+    "schema:Project"
+  ],
+  "schema:Reservoir": [
+    "schema:BodyOfWater"
+  ],
+  "schema:Residence": [
+    "schema:Place"
+  ],
+  "schema:Resort": [
+    "schema:LodgingBusiness"
+  ],
+  "schema:Restaurant": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:RestrictedDiet": [],
+  "schema:Review": [
+    "schema:CreativeWork"
+  ],
+  "schema:ReviewNewsArticle": [
+    "schema:NewsArticle",
+    "schema:CriticReview"
+  ],
+  "schema:RiverBodyOfWater": [
+    "schema:BodyOfWater"
+  ],
+  "schema:RoofingContractor": [
+    "schema:HomeAndConstructionBusiness"
+  ],
+  "schema:Room": [
+    "schema:Accommodation"
+  ],
+  "schema:RuntimePlatform": [
+    "schema:SoftwareApplication"
+  ],
+  "schema:SaleEvent": [
+    "schema:Event"
+  ],
+  "schema:SatiricalArticle": [
+    "schema:Article"
+  ],
+  "schema:Schedule": [
+    "schema:Intangible"
+  ],
+  "schema:ScholarlyArticle": [
+    "schema:Article"
+  ],
+  "schema:School": [
+    "schema:EducationalOrganization"
+  ],
+  "schema:SchoolDistrict": [
+    "schema:AdministrativeArea"
+  ],
+  "schema:ScreeningEvent": [
+    "schema:Event"
+  ],
+  "schema:Sculpture": [
+    "schema:CreativeWork"
+  ],
+  "schema:SeaBodyOfWater": [
+    "schema:BodyOfWater"
+  ],
+  "schema:SearchRescueOrganization": [
+    "schema:Organization"
+  ],
+  "schema:SearchResultsPage": [
+    "schema:WebPage"
+  ],
+  "schema:Season": [
+    "schema:CreativeWork"
+  ],
+  "schema:SelfStorage": [
+    "schema:LocalBusiness"
+  ],
+  "schema:SequentialArt": [
+    "schema:VisualArtwork",
+    "schema:Book"
+  ],
+  "schema:Series": [
+    "schema:Intangible"
+  ],
+  "schema:Service": [
+    "schema:Intangible"
+  ],
+  "schema:SheetMusic": [
+    "schema:CreativeWork"
+  ],
+  "schema:ShippingService": [
+    "schema:StructuredValue"
+  ],
+  "schema:ShoeStore": [
+    "schema:Store"
+  ],
+  "schema:ShoppingCenter": [
+    "schema:LocalBusiness"
+  ],
+  "schema:ShortStory": [
+    "schema:CreativeWork"
+  ],
+  "schema:SingleFamilyResidence": [
+    "schema:House"
+  ],
+  "schema:SiteNavigationElement": [
+    "schema:WebPageElement"
+  ],
+  "schema:SizeSpecification": [
+    "schema:QualitativeValue"
+  ],
+  "schema:SkiResort": [
+    "schema:SportsActivityLocation",
+    "schema:Resort"
+  ],
+  "schema:SocialEvent": [
+    "schema:Event"
+  ],
+  "schema:SocialMediaPosting": [
+    "schema:Article"
+  ],
+  "schema:SoftwareApplication": [
+    "schema:CreativeWork"
+  ],
+  "schema:SoftwareSourceCode": [
+    "schema:CreativeWork"
+  ],
+  "schema:SolveMathAction": [],
+  "schema:SomeProducts": [
+    "schema:Product"
+  ],
+  "schema:SpeakableSpecification": [
+    "schema:Intangible"
+  ],
+  "schema:SpecialAnnouncement": [
+    "schema:CreativeWork"
+  ],
+  "schema:Specialty": [],
+  "schema:SportingGoodsStore": [
+    "schema:Store"
+  ],
+  "schema:SportsActivityLocation": [
+    "schema:LocalBusiness"
+  ],
+  "schema:SportsClub": [
+    "schema:SportsActivityLocation"
+  ],
+  "schema:SportsEvent": [
+    "schema:Event"
+  ],
+  "schema:SportsOrganization": [
+    "schema:Organization"
+  ],
+  "schema:SportsTeam": [
+    "schema:SportsOrganization"
+  ],
+  "schema:SpreadsheetDigitalDocument": [
+    "schema:DigitalDocument"
+  ],
+  "schema:StadiumOrArena": [
+    "schema:CivicStructure",
+    "schema:SportsActivityLocation"
+  ],
+  "schema:State": [
+    "schema:AdministrativeArea"
+  ],
+  "schema:Statement": [
+    "schema:CreativeWork"
+  ],
+  "schema:StatisticalVariable": [],
+  "schema:SteeringPositionValue": [
+    "schema:QualitativeValue"
+  ],
+  "schema:Store": [
+    "schema:LocalBusiness"
+  ],
+  "schema:StructuredValue": [
+    "schema:Intangible"
+  ],
+  "schema:Substance": [
+    "schema:MedicalEntity"
+  ],
+  "schema:SubwayStation": [
+    "schema:CivicStructure"
+  ],
+  "schema:Suite": [
+    "schema:Accommodation"
+  ],
+  "schema:SuperficialAnatomy": [
+    "schema:MedicalEntity"
+  ],
+  "schema:Syllabus": [
+    "schema:LearningResource"
+  ],
+  "schema:Synagogue": [
+    "schema:PlaceOfWorship"
+  ],
+  "schema:TVClip": [
+    "schema:Clip"
+  ],
+  "schema:TVEpisode": [
+    "schema:Episode"
+  ],
+  "schema:TVSeason": [
+    "schema:CreativeWorkSeason",
+    "schema:CreativeWork"
+  ],
+  "schema:TVSeries": [
+    "schema:CreativeWork",
+    "schema:CreativeWorkSeries"
+  ],
+  "schema:Table": [
+    "schema:WebPageElement"
+  ],
+  "schema:TattooParlor": [
+    "schema:HealthAndBeautyBusiness"
+  ],
+  "schema:TaxiStand": [
+    "schema:CivicStructure"
+  ],
+  "schema:TechArticle": [
+    "schema:Article"
+  ],
+  "schema:TelevisionStation": [
+    "schema:LocalBusiness"
+  ],
+  "schema:TennisComplex": [
+    "schema:SportsActivityLocation"
+  ],
+  "schema:Text": [],
+  "schema:TextDigitalDocument": [
+    "schema:DigitalDocument"
+  ],
+  "schema:TextObject": [
+    "schema:MediaObject"
+  ],
+  "schema:TheaterEvent": [
+    "schema:Event"
+  ],
+  "schema:TheaterGroup": [
+    "schema:PerformingGroup"
+  ],
+  "schema:Thesis": [
+    "schema:CreativeWork"
+  ],
+  "schema:Thing": [],
+  "schema:Time": [],
+  "schema:TireShop": [
+    "schema:Store"
+  ],
+  "schema:TouristAttraction": [
+    "schema:Place"
+  ],
+  "schema:TouristDestination": [
+    "schema:Place"
+  ],
+  "schema:TouristInformationCenter": [
+    "schema:LocalBusiness"
+  ],
+  "schema:ToyStore": [
+    "schema:Store"
+  ],
+  "schema:TrainStation": [
+    "schema:CivicStructure"
+  ],
+  "schema:TravelAgency": [
+    "schema:LocalBusiness"
+  ],
+  "schema:TypeAndQuantityNode": [
+    "schema:StructuredValue"
+  ],
+  "schema:URL": [
+    "schema:Text"
+  ],
+  "schema:UserBlocks": [
+    "schema:UserInteraction"
+  ],
+  "schema:UserCheckins": [
+    "schema:UserInteraction"
+  ],
+  "schema:UserComments": [
+    "schema:UserInteraction"
+  ],
+  "schema:UserDownloads": [
+    "schema:UserInteraction"
+  ],
+  "schema:UserInteraction": [
+    "schema:Event"
+  ],
+  "schema:UserLikes": [
+    "schema:UserInteraction"
+  ],
+  "schema:UserPageVisits": [
+    "schema:UserInteraction"
+  ],
+  "schema:UserPlays": [
+    "schema:UserInteraction"
+  ],
+  "schema:UserPlusOnes": [
+    "schema:UserInteraction"
+  ],
+  "schema:UserReview": [
+    "schema:Review"
+  ],
+  "schema:UserTweets": [
+    "schema:UserInteraction"
+  ],
+  "schema:VacationRental": [
+    "schema:LodgingBusiness"
+  ],
+  "schema:Vehicle": [
+    "schema:Product"
+  ],
+  "schema:VeterinaryCare": [
+    "schema:MedicalOrganization"
+  ],
+  "schema:VideoGallery": [
+    "schema:MediaGallery"
+  ],
+  "schema:VideoGame": [
+    "schema:SoftwareApplication",
+    "schema:Game"
+  ],
+  "schema:VideoGameClip": [
+    "schema:Clip"
+  ],
+  "schema:VideoGameSeries": [
+    "schema:CreativeWorkSeries"
+  ],
+  "schema:VideoObject": [
+    "schema:MediaObject"
+  ],
+  "schema:VideoObjectSnapshot": [
+    "schema:VideoObject"
+  ],
+  "schema:VirtualLocation": [
+    "schema:Intangible"
+  ],
+  "schema:VisualArtsEvent": [
+    "schema:Event"
+  ],
+  "schema:VisualArtwork": [
+    "schema:CreativeWork"
+  ],
+  "schema:Volcano": [
+    "schema:Landform"
+  ],
+  "schema:WPAdBlock": [
+    "schema:WebPageElement"
+  ],
+  "schema:WPFooter": [
+    "schema:WebPageElement"
+  ],
+  "schema:WPHeader": [
+    "schema:WebPageElement"
+  ],
+  "schema:WPSideBar": [
+    "schema:WebPageElement"
+  ],
+  "schema:Waterfall": [
+    "schema:BodyOfWater"
+  ],
+  "schema:WebApplication": [
+    "schema:SoftwareApplication"
+  ],
+  "schema:WebContent": [
+    "schema:CreativeWork"
+  ],
+  "schema:WebPage": [
+    "schema:CreativeWork"
+  ],
+  "schema:WebPageElement": [
+    "schema:CreativeWork"
+  ],
+  "schema:WebSite": [
+    "schema:CreativeWork"
+  ],
+  "schema:WholesaleStore": [
+    "schema:Store"
+  ],
+  "schema:Winery": [
+    "schema:FoodEstablishment"
+  ],
+  "schema:WorkersUnion": [
+    "schema:Organization"
+  ],
+  "schema:XPathType": [
+    "schema:Text"
+  ],
+  "schema:Zoo": [
+    "schema:CivicStructure"
+  ]
+}

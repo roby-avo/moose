@@ -10,8 +10,10 @@ from pymongo import ASCENDING
 from pymongo.errors import DuplicateKeyError
 
 from moose.config import Settings
+from moose.cpa import run_table_cpa
 from moose.llm import LLMClient, create_client
-from moose.ner import run_table_annotate, run_text_ner
+from moose.ner import run_table_annotate, run_tabular_ner, run_text_ner
+from moose.privacy import run_privacy_analyze
 
 
 @dataclass
@@ -41,6 +43,7 @@ class JobStore:
     async def update_job(self, job_id: str, **fields: Any) -> None:
         raise NotImplementedError
 
+
 class InMemoryJobStore(JobStore):
     def __init__(self) -> None:
         self._jobs: dict[str, JobRecord] = {}
@@ -62,6 +65,7 @@ class InMemoryJobStore(JobStore):
             for key, value in fields.items():
                 setattr(job, key, value)
             self._jobs[job_id] = job
+
 
 class MongoJobStore(JobStore):
     def __init__(self, db) -> None:
@@ -102,6 +106,7 @@ class MongoJobStore(JobStore):
         if not fields:
             return
         await self._jobs.update_one({"_id": job_id}, {"$set": fields})
+
 
 class QueueBackend:
     async def enqueue(self, job_id: str) -> None:
@@ -166,19 +171,33 @@ class MongoQueue(QueueBackend):
 def _settings_with_overrides(settings: Settings, overrides: dict) -> Settings:
     update: dict[str, Any] = {}
     provider = overrides.get("provider", settings.MOOSE_LLM_PROVIDER).lower()
+
     if overrides.get("provider"):
         update["MOOSE_LLM_PROVIDER"] = overrides["provider"]
     if overrides.get("model"):
         update["MOOSE_MODEL"] = overrides["model"]
+
+    # Credentials
     if overrides.get("ollama_token"):
         update["MOOSE_OLLAMA_TOKEN"] = overrides["ollama_token"]
     if overrides.get("openrouter_api_key"):
         update["MOOSE_OPENROUTER_API_KEY"] = overrides["openrouter_api_key"]
+    if overrides.get("deepinfra_api_key"):
+        update["MOOSE_DEEPINFRA_API_KEY"] = overrides["deepinfra_api_key"]
+    if overrides.get("deepseek_api_key"):
+        update["MOOSE_DEEPSEEK_API_KEY"] = overrides["deepseek_api_key"]
+
+    # Endpoint override
     if overrides.get("endpoint"):
         if provider == "openrouter":
             update["MOOSE_OPENROUTER_BASE_URL"] = overrides["endpoint"]
         elif provider == "ollama":
             update["MOOSE_OLLAMA_HOST"] = overrides["endpoint"]
+        elif provider == "deepinfra":
+            update["MOOSE_DEEPINFRA_BASE_URL"] = overrides["endpoint"]
+        elif provider == "deepseek":
+            update["MOOSE_DEEPSEEK_BASE_URL"] = overrides["endpoint"]
+
     if not update:
         return settings
     return settings.model_copy(update=update)
@@ -217,27 +236,35 @@ class WorkerPool:
             job = await self._store.get_job(job_id)
             if not job:
                 continue
+
             await self._store.update_job(job_id, status="processing", updated_at=utc_now())
+
             llm_client = self._llm_client
             owns_client = False
+
             try:
                 overrides = job.payload.get("llm") or {}
                 if overrides:
                     job_settings = _settings_with_overrides(self._settings, overrides)
                     llm_client = create_client(job_settings)
                     owns_client = True
+
                 if llm_client is None:
                     raise RuntimeError(
-                        "LLM client not configured. Provide llm overrides with openrouter_api_key."
+                        "LLM client not configured. Provide per-request llm overrides with credentials "
+                        "(X-LLM-API-Key) or configure default provider credentials in env."
                     )
+
                 if job.endpoint_type == "ner":
                     result = await run_text_ner(
                         job.payload["tasks"],
                         job.payload["schema"],
                         llm_client,
                         include_scores=job.payload.get("include_scores", False),
+                        strict_offsets=job.payload.get("strict_offsets", False),
                         settings=self._settings,
                     )
+
                 elif job.endpoint_type == "tabular":
                     result = await run_table_annotate(
                         job.payload["tasks"],
@@ -246,14 +273,50 @@ class WorkerPool:
                         include_scores=job.payload.get("include_scores", False),
                         settings=self._settings,
                     )
+
+                elif job.endpoint_type == "tabular_ner":
+                    result = await run_tabular_ner(
+                        job.payload["tasks"],
+                        job.payload["schema"],
+                        llm_client,
+                        include_scores=job.payload.get("include_scores", False),
+                        strict_offsets=job.payload.get("strict_offsets", False),
+                        settings=self._settings,
+                    )
+
+                elif job.endpoint_type == "privacy_analyze":
+                    result = await run_privacy_analyze(
+                        tasks=job.payload["tasks"],
+                        policy_pack=job.payload.get("policy_pack"),
+                        profile=job.payload.get("profile"),
+                        analysis_mode=job.payload.get("analysis_mode"),
+                        text_schema=job.payload.get("text_schema"),
+                        table_schema=job.payload.get("table_schema"),
+                        scan_schema=job.payload.get("scan_schema"),
+                        include_extraction=job.payload.get("include_extraction"),
+                        llm_client=llm_client,
+                        settings=self._settings,
+                    )
+
+                elif job.endpoint_type == "cpa":
+                    result = await run_table_cpa(
+                        job.payload["tasks"],
+                        job.payload["schema"],
+                        llm_client,
+                        include_scores=job.payload.get("include_scores", False),
+                        settings=self._settings,
+                    )
+
                 else:
                     raise ValueError(f"Unknown endpoint_type: {job.endpoint_type}")
+
                 await self._store.update_job(
                     job_id,
                     status="completed",
                     updated_at=utc_now(),
                     result=result,
                 )
+
             except Exception as exc:  # noqa: BLE001
                 await self._store.update_job(
                     job_id,
@@ -261,8 +324,9 @@ class WorkerPool:
                     updated_at=utc_now(),
                     error=str(exc),
                 )
+
             finally:
-                if owns_client:
+                if owns_client and llm_client is not None:
                     await llm_client.close()
 
 
@@ -286,4 +350,5 @@ async def build_backends(settings: Settings) -> tuple[JobStore, QueueBackend, di
             return store, queue, {"mongo_client": client, **info}
         except Exception:  # noqa: BLE001
             client.close()
+
     return InMemoryJobStore(), InMemoryQueue(settings.MOOSE_QUEUE_MAXSIZE), info

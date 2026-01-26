@@ -1,0 +1,15 @@
+{
+  "counts": {
+    "articles": 0,
+    "concepts": 1357,
+    "recitals": 3
+  },
+  "generated_at": "2026-01-21T09:12:11.428267+00:00",
+  "label": "GDPRtEXT (GDPR articles/recitals as linked data)",
+  "name": "gdprtext",
+  "source": {
+    "format": "jsonld/json",
+    "repo": "https://github.com/coolharsh55/GDPRtEXT"
+  },
+  "version": "unknown"
+}

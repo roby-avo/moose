@@ -52,6 +52,7 @@ VOCAB_REGISTRY_PATH = DATA_DIR / "vocabularies.json"
 
 DEFAULT_TEXT_INTRO = "You are a high-precision NER engine."
 DEFAULT_TABLE_INTRO = "You are a semantic typing engine for tabular data."
+DEFAULT_CPA_INTRO = "You are a column relationship prediction engine."
 
 
 @dataclass(frozen=True)
@@ -62,6 +63,7 @@ class SchemaConfig:
     require_all_scores: bool
     text_intro: str
     table_intro: str
+    cpa_intro: str
     type_ids: tuple[str, ...] | None = None
     data_path: Path | None = None
     coarse_mapping: dict[str, str] | None = None
@@ -70,6 +72,7 @@ class SchemaConfig:
     prefilter_types: bool = False
     supports_text: bool = True
     supports_table: bool = True
+    supports_cpa: bool = False
 
     def load_type_ids(self) -> list[str]:
         if self.type_ids is not None:
@@ -190,7 +193,9 @@ def _schema_registry() -> dict[str, SchemaConfig]:
             require_all_scores=True,
             text_intro=DEFAULT_TEXT_INTRO,
             table_intro=DEFAULT_TABLE_INTRO,
+            cpa_intro=DEFAULT_CPA_INTRO,
             type_ids=tuple(COARSE_TYPES),
+            supports_cpa=False,
         ),
         "fine": SchemaConfig(
             name="fine",
@@ -199,8 +204,10 @@ def _schema_registry() -> dict[str, SchemaConfig]:
             require_all_scores=True,
             text_intro=DEFAULT_TEXT_INTRO,
             table_intro=DEFAULT_TABLE_INTRO,
+            cpa_intro=DEFAULT_CPA_INTRO,
             type_ids=tuple(FINE_TYPES),
             coarse_mapping=FINE_TO_COARSE,
+            supports_cpa=False,
         ),
     }
 
@@ -226,6 +233,7 @@ def _schema_registry() -> dict[str, SchemaConfig]:
             require_all_scores=_parse_score_mode(entry),
             text_intro=_normalize_intro(entry.get("text_intro"), DEFAULT_TEXT_INTRO),
             table_intro=_normalize_intro(entry.get("table_intro"), DEFAULT_TABLE_INTRO),
+            cpa_intro=_normalize_intro(entry.get("cpa_intro"), DEFAULT_CPA_INTRO),
             data_path=data_path,
             type_aliases=_parse_alias_mapping(entry.get("type_aliases"), "type_aliases"),
             type_alias_prefixes=_parse_alias_mapping(
@@ -235,6 +243,7 @@ def _schema_registry() -> dict[str, SchemaConfig]:
             prefilter_types=_parse_bool_field(entry, "prefilter_types", False),
             supports_text=_parse_bool_field(entry, "supports_text", True),
             supports_table=_parse_bool_field(entry, "supports_table", True),
+            supports_cpa=_parse_bool_field(entry, "supports_cpa", False),
         )
     return registry
 
