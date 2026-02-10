@@ -72,6 +72,13 @@ def _validate_scores(scores: dict[str, float], allowed_types: set[str], require_
         raise ValueError("At least one score must be > 0")
 
 
+def _drop_unknown_score_keys(scores: dict[str, float], allowed_types: set[str]) -> list[str]:
+    unknown = [key for key in scores if key not in allowed_types]
+    for key in unknown:
+        scores.pop(key, None)
+    return unknown
+
+
 def _normalize_scores(
     scores: dict[str, float],
     allowed_types: set[str],
@@ -259,7 +266,33 @@ def validate_ner_response_with_warnings(
             if normalized is not entity.scores:
                 entity.scores.clear()
                 entity.scores.update(normalized)
-            _validate_scores(entity.scores, allowed_types, require_all=require_all_scores)
+
+            if not require_all_scores:
+                unknown_score_keys = _drop_unknown_score_keys(entity.scores, allowed_types)
+                if unknown_score_keys:
+                    warnings.append(
+                        {
+                            "task_id": item.task_id,
+                            "code": "unknown_score_keys_dropped",
+                            "original": original,
+                            "dropped_keys": sorted(unknown_score_keys),
+                        }
+                    )
+
+            try:
+                _validate_scores(entity.scores, allowed_types, require_all=require_all_scores)
+            except ValueError as exc:
+                if require_all_scores:
+                    raise
+                warnings.append(
+                    {
+                        "task_id": item.task_id,
+                        "code": "entity_dropped_invalid_scores",
+                        "original": original,
+                        "reason": str(exc),
+                    }
+                )
+                continue
 
             kept.append(entity)
 

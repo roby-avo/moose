@@ -43,6 +43,16 @@ async def test_run_text_ner_prompt_keeps_raw_text_unchanged():
 
 
 @pytest.mark.asyncio
+async def test_run_text_ner_accepts_single_object_output_shape():
+    tasks = [{"task_id": "t1", "text": "Alice"}]
+    llm = _FakeLLM('{"entities":[]}')
+    settings = SimpleNamespace(MOOSE_MAX_RETRIES=0)
+    out = await run_text_ner(tasks, "coarse", llm, settings=settings)
+    assert out["results"][0]["task_id"] == "t1"
+    assert out["results"][0]["entities"] == []
+
+
+@pytest.mark.asyncio
 async def test_run_tabular_ner_prompt_keeps_raw_cell_text_unchanged():
     table_task_id = "t1"
     cell_task_id = make_cell_task_id(table_task_id, 0, "name")

@@ -268,6 +268,12 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 bearer_scheme = HTTPBearer(auto_error=False)
+llm_api_key_header = APIKeyHeader(
+    name="X-LLM-API-Key",
+    auto_error=False,
+    scheme_name="X-LLM-API-Key",
+    description="Provider API key used by LLM backends (OpenRouter, DeepInfra, DeepSeek, optional for Ollama).",
+)
 
 
 async def require_api_key(
@@ -347,6 +353,11 @@ async def shutdown() -> None:
         mongo_client.close()
 
 
+def _new_job_id() -> str:
+    # Compact UUID form for easier copy/paste while keeping enough entropy.
+    return uuid.uuid4().hex
+
+
 async def _enqueue_job(endpoint_type: str, payload: dict):
     settings: Settings = app.state.settings
     queue_backend = app.state.queue_backend
@@ -356,7 +367,7 @@ async def _enqueue_job(endpoint_type: str, payload: dict):
     if queue_size >= settings.MOOSE_QUEUE_MAXSIZE:
         raise HTTPException(status_code=429, detail="Queue is full, try again later")
 
-    job_id = str(uuid.uuid4())
+    job_id = _new_job_id()
     now = utc_now()
     job = JobRecord(
         job_id=job_id,
@@ -411,7 +422,7 @@ def _build_llm_payload(
 @app.post("/ner", dependencies=[Depends(require_api_key)], tags=["NER"], response_model=JobQueuedResponse)
 async def submit_ner(
     request: NERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -430,7 +441,7 @@ async def submit_ner(
 async def submit_schema_ner(
     schema: str,
     request: SchemaNERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -448,7 +459,7 @@ async def submit_schema_ner(
 @app.post("/dpv/ner", dependencies=[Depends(require_api_key)], tags=["DPV"], response_model=JobQueuedResponse, deprecated=True)
 async def submit_dpv_ner(
     request: DpvNERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -469,7 +480,7 @@ async def submit_dpv_ner(
 @app.post("/tabular/annotate", dependencies=[Depends(require_api_key)], tags=["Tabular"], response_model=JobQueuedResponse)
 async def submit_tabular(
     request: TabularRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -489,7 +500,7 @@ async def submit_tabular(
 async def submit_schema_tabular(
     schema: str,
     request: SchemaTabularRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -508,7 +519,7 @@ async def submit_schema_tabular(
 @app.post("/dpv/tabular/annotate", dependencies=[Depends(require_api_key)], tags=["DPV"], response_model=JobQueuedResponse, deprecated=True)
 async def submit_dpv_tabular(
     request: DpvTabularRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -530,7 +541,7 @@ async def submit_dpv_tabular(
 @app.post("/tabular/ner", dependencies=[Depends(require_api_key)], tags=["Tabular NER"], response_model=JobQueuedResponse)
 async def submit_tabular_ner(
     request: TabularNERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -553,7 +564,7 @@ async def submit_tabular_ner(
 async def submit_schema_tabular_ner(
     schema: str,
     request: SchemaTabularNERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -578,7 +589,7 @@ async def submit_schema_tabular_ner(
 @app.post("/tabular/cpa", dependencies=[Depends(require_api_key)], tags=["CPA"], response_model=JobQueuedResponse)
 async def submit_tabular_cpa(
     request: CPARequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -604,7 +615,7 @@ async def submit_tabular_cpa(
 async def submit_schema_tabular_cpa(
     schema: str,
     request: SchemaCPARequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -632,7 +643,7 @@ async def submit_schema_tabular_cpa(
 @app.post("/privacy/analyze", dependencies=[Depends(require_api_key)], tags=["Privacy"], response_model=JobQueuedResponse)
 async def submit_privacy_analyze(
     request: PrivacyAnalyzeRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     """
@@ -741,7 +752,7 @@ def _parse_price(value: Any) -> float | None:
 @app.get("/models", dependencies=[Depends(require_api_key)], tags=["Metadata"])
 async def list_models(
     provider: Literal["ollama", "openrouter", "deepinfra", "deepseek", "all"] = "openrouter",
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     """

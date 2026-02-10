@@ -87,3 +87,27 @@ def test_dpv_pd_text_prompt_follows_contract_sections() -> None:
     assert "OUTPUT" in prompt
     assert "personal data categories (DPV-PD)" in prompt
     assert "AI-related concepts/activities (DPV-AI)" in prompt
+
+
+def test_text_prompt_single_input_uses_single_object_contract() -> None:
+    schema = get_schema_config("dpv_pd")
+    prompt = build_text_ner_prompt(
+        schema,
+        [{"task_id": "t1", "text": "We process email addresses."}],
+        schema.load_type_ids(),
+    )
+    assert "Input text JSON:" in prompt
+    assert "Input texts JSON:" not in prompt
+    assert "Top-level output MUST be a JSON object for this single input text." in prompt
+    assert "Top-level output MUST be a JSON array" not in prompt
+
+
+def test_text_prompt_multi_input_uses_array_contract() -> None:
+    schema = get_schema_config("coarse")
+    prompt = build_text_ner_prompt(
+        schema,
+        [{"task_id": "t1", "text": "Alice"}, {"task_id": "t2", "text": "Bob"}],
+        schema.load_type_ids(),
+    )
+    assert "Input texts JSON:" in prompt
+    assert "Top-level output MUST be a JSON array with length exactly equal to the number of input texts." in prompt

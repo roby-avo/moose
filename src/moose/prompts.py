@@ -97,37 +97,69 @@ TYPE_SELECT_INTRO = "You are a type inventory selector for semantic typing."
 
 
 def build_text_ner_prompt(schema: SchemaConfig, tasks: list[dict], type_ids: list[str]) -> str:
-    payload = [t["text"] for t in tasks]
+    is_single = len(tasks) == 1
+    payload = tasks[0]["text"] if is_single else [t["text"] for t in tasks]
     intro = _format_intro(schema.text_intro).strip()
     allowed_json = json.dumps(type_ids, ensure_ascii=True)
 
     task_block = (
-        "For each input text, identify spans that explicitly denote concepts mappable to the allowed type_ids."
+        "Identify spans that explicitly denote concepts mappable to the allowed type_ids."
+        if is_single
+        else "For each input text, identify spans that explicitly denote concepts mappable to the allowed type_ids."
     )
     has_pd = any(type_id.startswith("dpv-pd:") for type_id in type_ids)
     has_ai = any(type_id.startswith("dpv-ai:") for type_id in type_ids)
     if has_pd and has_ai:
-        task_block = "\n".join(
-            [
-                "For each input text, identify spans that explicitly denote:",
-                "1) personal data categories (DPV-PD), and/or",
-                "2) AI-related concepts/activities (DPV-AI),",
-                "using ONLY the provided allowed type_ids.",
-            ]
+        task_block = (
+            "\n".join(
+                [
+                    "Identify spans that explicitly denote:",
+                    "1) personal data categories (DPV-PD), and/or",
+                    "2) AI-related concepts/activities (DPV-AI),",
+                    "using ONLY the provided allowed type_ids.",
+                ]
+            )
+            if is_single
+            else "\n".join(
+                [
+                    "For each input text, identify spans that explicitly denote:",
+                    "1) personal data categories (DPV-PD), and/or",
+                    "2) AI-related concepts/activities (DPV-AI),",
+                    "using ONLY the provided allowed type_ids.",
+                ]
+            )
         )
     elif has_pd:
-        task_block = "\n".join(
-            [
-                "For each input text, identify spans that explicitly denote personal data categories (DPV-PD),",
-                "using ONLY the provided allowed type_ids.",
-            ]
+        task_block = (
+            "\n".join(
+                [
+                    "Identify spans that explicitly denote personal data categories (DPV-PD),",
+                    "using ONLY the provided allowed type_ids.",
+                ]
+            )
+            if is_single
+            else "\n".join(
+                [
+                    "For each input text, identify spans that explicitly denote personal data categories (DPV-PD),",
+                    "using ONLY the provided allowed type_ids.",
+                ]
+            )
         )
     elif has_ai:
-        task_block = "\n".join(
-            [
-                "For each input text, identify spans that explicitly denote AI-related concepts/activities (DPV-AI),",
-                "using ONLY the provided allowed type_ids.",
-            ]
+        task_block = (
+            "\n".join(
+                [
+                    "Identify spans that explicitly denote AI-related concepts/activities (DPV-AI),",
+                    "using ONLY the provided allowed type_ids.",
+                ]
+            )
+            if is_single
+            else "\n".join(
+                [
+                    "For each input text, identify spans that explicitly denote AI-related concepts/activities (DPV-AI),",
+                    "using ONLY the provided allowed type_ids.",
+                ]
+            )
         )
 
     if schema.require_all_scores:
@@ -141,31 +173,59 @@ def build_text_ner_prompt(schema: SchemaConfig, tasks: list[dict], type_ids: lis
         )
         scoring_positive_rule = '- Each entity MUST have at least one score strictly > 0.'
 
-    return "\n".join(
+    lines = [
+        intro,
+        "",
+        "TASK",
+        task_block,
+        "",
+        "OUTPUT (API CONTRACT)",
+        "Return ONLY valid JSON. No markdown. No extra text.",
+    ]
+
+    if is_single:
+        lines.extend(
+            [
+                "Top-level output MUST be a JSON object for this single input text.",
+                "",
+                "RESPONSE SHAPE",
+                "{",
+                '  "entities": [',
+                "    {",
+                '      "start": <int>,',
+                '      "end": <int>,',
+                '      "text": "<exact substring from the input text>",',
+                '      "scores": {"<allowed_type_id>": <float in [0,1]>, ...}',
+                "    },",
+                "    ...",
+                "  ]",
+                "}",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "Top-level output MUST be a JSON array with length exactly equal to the number of input texts.",
+                "Output item at index i corresponds to input text at index i (order-preserving, 1:1 mapping).",
+                "",
+                "RESPONSE SHAPE (per input text)",
+                "Each output item MUST be:",
+                "{",
+                '  "entities": [',
+                "    {",
+                '      "start": <int>,',
+                '      "end": <int>,',
+                '      "text": "<exact substring from the input text>",',
+                '      "scores": {"<allowed_type_id>": <float in [0,1]>, ...}',
+                "    },",
+                "    ...",
+                "  ]",
+                "}",
+            ]
+        )
+
+    lines.extend(
         [
-            intro,
-            "",
-            "TASK",
-            task_block,
-            "",
-            "OUTPUT (API CONTRACT)",
-            "Return ONLY valid JSON. No markdown. No extra text.",
-            "Top-level output MUST be a JSON array with length exactly equal to the number of input texts.",
-            "Output item at index i corresponds to input text at index i (order-preserving, 1:1 mapping).",
-            "",
-            "RESPONSE SHAPE (per input text)",
-            "Each output item MUST be:",
-            "{",
-            '  "entities": [',
-            "    {",
-            '      "start": <int>,',
-            '      "end": <int>,',
-            '      "text": "<exact substring from the input text>",',
-            '      "scores": {"<allowed_type_id>": <float in [0,1]>, ...}',
-            "    },",
-            "    ...",
-            "  ]",
-            "}",
             "",
             "ALLOWED LABEL SPACE",
             '"scores" keys MUST be ONLY from this allowed set (no other keys permitted):',
@@ -192,13 +252,19 @@ def build_text_ner_prompt(schema: SchemaConfig, tasks: list[dict], type_ids: lis
             "- Do NOT infer unstated concepts.",
             "",
             "INPUT",
-            "Input texts JSON:",
+            "Input text JSON:" if is_single else "Input texts JSON:",
             json.dumps(payload, ensure_ascii=True),
             "",
             "OUTPUT",
-            "Return ONLY the JSON array described above.",
+            (
+                "Return ONLY the JSON object described above."
+                if is_single
+                else "Return ONLY the JSON array described above."
+            ),
         ]
     )
+
+    return "\n".join(lines)
 
 
 def build_tabular_cell_ner_prompt(schema: SchemaConfig, tasks: list[dict], type_ids: list[str]) -> str:

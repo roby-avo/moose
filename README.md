@@ -76,6 +76,7 @@ You can also keep using `POST /ner` and `POST /tabular/annotate` with `schema` i
 
 Provide `llm.provider` and `llm.model` per request. Provider credentials are passed via the `X-LLM-API-Key` header.
 Set `X-LLM-Endpoint` to override `MOOSE_OPENROUTER_BASE_URL` or `MOOSE_OLLAMA_HOST` for that request.
+In Swagger UI (`/docs`), set `X-LLM-API-Key` once via the **Authorize** dialog; keep `X-LLM-Endpoint` as an optional per-request override parameter.
 
 ```json
 {

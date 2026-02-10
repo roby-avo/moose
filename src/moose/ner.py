@@ -58,6 +58,14 @@ def _looks_like_structured_literal(value: str) -> bool:
 
 def _coerce_text_ner_output_with_task_ids(raw_text: str, tasks: list[dict[str, Any]]) -> str:
     data = extract_json(raw_text)
+    if isinstance(data, dict):
+        if len(tasks) != 1:
+            raise ValueError("NER response object shape is only valid for single-task requests.")
+        entities = data.get("entities")
+        if not isinstance(entities, list):
+            raise ValueError("NER response object must include an entities array.")
+        coerced = [{"task_id": tasks[0]["task_id"], "entities": entities}]
+        return json.dumps(coerced, ensure_ascii=True)
     if not isinstance(data, list):
         raise ValueError("NER response must be a JSON array.")
     if all(isinstance(item, dict) and isinstance(item.get("task_id"), str) for item in data):
