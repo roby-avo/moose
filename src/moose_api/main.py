@@ -10,7 +10,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException, Security
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.security import APIKeyHeader, HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from moose.config import Settings, get_settings
 from moose.llm import create_client
@@ -28,16 +28,18 @@ class LLMOverrides(BaseModel):
 # -----------------------
 # Text NER request models
 # -----------------------
-class NERTaskIn(BaseModel):
-    task_id: str
-    text: str
-
-
 class BaseNERRequest(BaseModel):
-    tasks: list[NERTaskIn] = Field(min_length=1)
-    include_scores: bool = False
-    strict_offsets: bool = False
+    model_config = ConfigDict(extra="forbid")
+
+    text: str = Field(min_length=1)
     llm: LLMOverrides
+
+    @field_validator("text")
+    @classmethod
+    def validate_text(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("text must be non-empty.")
+        return value
 
 
 class NERRequest(BaseNERRequest):
@@ -59,15 +61,11 @@ class NERRequest(BaseNERRequest):
 # -----------------------------
 # Tabular typing request models
 # -----------------------------
-class TabularTaskIn(BaseModel):
-    task_id: str
-    table_id: str
-    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
-
-
 class BaseTabularRequest(BaseModel):
-    tasks: list[TabularTaskIn] = Field(min_length=1)
-    include_scores: bool = False
+    model_config = ConfigDict(extra="forbid")
+
+    table_id: str | None = None
+    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
     llm: LLMOverrides
 
 
@@ -90,24 +88,15 @@ class TabularRequest(BaseTabularRequest):
 # -----------------------------
 # Tabular cell NER models
 # -----------------------------
-class TabularNerTaskIn(BaseModel):
-    task_id: str
-    table_id: str
-    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
+class BaseTabularNERRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
 
-    target_columns: list[str] = Field(
-        min_length=1,
-        description="Columns to run cell-level NER on.",
-    )
+    table_id: str | None = None
+    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
+    target_columns: list[str] = Field(min_length=1)
 
     strings_only: bool = True
     skip_structured_literals: bool = True
-
-
-class BaseTabularNERRequest(BaseModel):
-    tasks: list[TabularNerTaskIn] = Field(min_length=1)
-    include_scores: bool = False
-    strict_offsets: bool = False
     llm: LLMOverrides
 
 
@@ -130,11 +119,11 @@ class TabularNERRequest(BaseTabularNERRequest):
 # -----------------------------
 # CPA (column relationship) request models
 # -----------------------------
-class CPATaskIn(BaseModel):
-    task_id: str
-    table_id: str
-    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
+class BaseCPARequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
 
+    table_id: str | None = None
+    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
     subject_column: str = Field(min_length=1, description="Subject column name (required).")
 
     # OPTIONAL: if known, helps filter schema.org predicates using domainIncludes + class hierarchy.
@@ -155,10 +144,14 @@ class CPATaskIn(BaseModel):
     debug: bool = False
     debug_preview_limit: int = Field(default=20, ge=0, le=200)
 
-class BaseCPARequest(BaseModel):
-    tasks: list[CPATaskIn] = Field(min_length=1)
-    include_scores: bool = False
     llm: LLMOverrides
+
+    @field_validator("subject_column")
+    @classmethod
+    def validate_subject_column(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("subject_column must be non-empty.")
+        return value
 
 
 class CPARequest(BaseCPARequest):
@@ -275,6 +268,12 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 bearer_scheme = HTTPBearer(auto_error=False)
+llm_api_key_header = APIKeyHeader(
+    name="X-LLM-API-Key",
+    auto_error=False,
+    scheme_name="X-LLM-API-Key",
+    description="Provider API key used by LLM backends (OpenRouter, DeepInfra, DeepSeek, optional for Ollama).",
+)
 
 
 async def require_api_key(
@@ -354,6 +353,11 @@ async def shutdown() -> None:
         mongo_client.close()
 
 
+def _new_job_id() -> str:
+    # Compact UUID form for easier copy/paste while keeping enough entropy.
+    return uuid.uuid4().hex
+
+
 async def _enqueue_job(endpoint_type: str, payload: dict):
     settings: Settings = app.state.settings
     queue_backend = app.state.queue_backend
@@ -363,7 +367,7 @@ async def _enqueue_job(endpoint_type: str, payload: dict):
     if queue_size >= settings.MOOSE_QUEUE_MAXSIZE:
         raise HTTPException(status_code=429, detail="Queue is full, try again later")
 
-    job_id = str(uuid.uuid4())
+    job_id = _new_job_id()
     now = utc_now()
     job = JobRecord(
         job_id=job_id,
@@ -418,7 +422,7 @@ def _build_llm_payload(
 @app.post("/ner", dependencies=[Depends(require_api_key)], tags=["NER"], response_model=JobQueuedResponse)
 async def submit_ner(
     request: NERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -426,9 +430,7 @@ async def submit_ner(
 
     payload = {
         "schema": request.schema,
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
+        "text": request.text,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("ner", payload)
@@ -439,7 +441,7 @@ async def submit_ner(
 async def submit_schema_ner(
     schema: str,
     request: SchemaNERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -447,9 +449,7 @@ async def submit_schema_ner(
 
     payload = {
         "schema": schema,
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
+        "text": request.text,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("ner", payload)
@@ -459,7 +459,7 @@ async def submit_schema_ner(
 @app.post("/dpv/ner", dependencies=[Depends(require_api_key)], tags=["DPV"], response_model=JobQueuedResponse, deprecated=True)
 async def submit_dpv_ner(
     request: DpvNERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -467,9 +467,7 @@ async def submit_dpv_ner(
 
     payload = {
         "schema": "dpv",
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
+        "text": request.text,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("ner", payload)
@@ -482,7 +480,7 @@ async def submit_dpv_ner(
 @app.post("/tabular/annotate", dependencies=[Depends(require_api_key)], tags=["Tabular"], response_model=JobQueuedResponse)
 async def submit_tabular(
     request: TabularRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -490,8 +488,8 @@ async def submit_tabular(
 
     payload = {
         "schema": request.schema,
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular", payload)
@@ -502,7 +500,7 @@ async def submit_tabular(
 async def submit_schema_tabular(
     schema: str,
     request: SchemaTabularRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -510,8 +508,8 @@ async def submit_schema_tabular(
 
     payload = {
         "schema": schema,
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular", payload)
@@ -521,7 +519,7 @@ async def submit_schema_tabular(
 @app.post("/dpv/tabular/annotate", dependencies=[Depends(require_api_key)], tags=["DPV"], response_model=JobQueuedResponse, deprecated=True)
 async def submit_dpv_tabular(
     request: DpvTabularRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -529,8 +527,8 @@ async def submit_dpv_tabular(
 
     payload = {
         "schema": "dpv",
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular", payload)
@@ -543,7 +541,7 @@ async def submit_dpv_tabular(
 @app.post("/tabular/ner", dependencies=[Depends(require_api_key)], tags=["Tabular NER"], response_model=JobQueuedResponse)
 async def submit_tabular_ner(
     request: TabularNERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -551,9 +549,11 @@ async def submit_tabular_ner(
 
     payload = {
         "schema": request.schema,
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
+        "target_columns": request.target_columns,
+        "strings_only": request.strings_only,
+        "skip_structured_literals": request.skip_structured_literals,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular_ner", payload)
@@ -564,7 +564,7 @@ async def submit_tabular_ner(
 async def submit_schema_tabular_ner(
     schema: str,
     request: SchemaTabularNERRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -572,9 +572,11 @@ async def submit_schema_tabular_ner(
 
     payload = {
         "schema": schema,
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
+        "target_columns": request.target_columns,
+        "strings_only": request.strings_only,
+        "skip_structured_literals": request.skip_structured_literals,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular_ner", payload)
@@ -587,7 +589,7 @@ async def submit_schema_tabular_ner(
 @app.post("/tabular/cpa", dependencies=[Depends(require_api_key)], tags=["CPA"], response_model=JobQueuedResponse)
 async def submit_tabular_cpa(
     request: CPARequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -595,11 +597,16 @@ async def submit_tabular_cpa(
 
     payload = {
         "schema": request.schema,
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
+        "subject_column": request.subject_column,
+        "subject_class": request.subject_class,
+        "target_columns": request.target_columns,
+        "use_sti_signature_cache": request.use_sti_signature_cache,
+        "debug": request.debug,
+        "debug_preview_limit": request.debug_preview_limit,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
-    # Note: subject_class and use_sti_signature_cache are now part of task.model_dump()
     job_id = await _enqueue_job("cpa", payload)
     return JobQueuedResponse(job_id=job_id, status="queued")
 
@@ -608,7 +615,7 @@ async def submit_tabular_cpa(
 async def submit_schema_tabular_cpa(
     schema: str,
     request: SchemaCPARequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
@@ -616,11 +623,16 @@ async def submit_schema_tabular_cpa(
 
     payload = {
         "schema": schema,
-        "tasks": [task.model_dump() for task in request.tasks],
-        "include_scores": request.include_scores,
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
+        "subject_column": request.subject_column,
+        "subject_class": request.subject_class,
+        "target_columns": request.target_columns,
+        "use_sti_signature_cache": request.use_sti_signature_cache,
+        "debug": request.debug,
+        "debug_preview_limit": request.debug_preview_limit,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
-    # Note: subject_class and use_sti_signature_cache are now part of task.model_dump()
     job_id = await _enqueue_job("cpa", payload)
     return JobQueuedResponse(job_id=job_id, status="queued")
 
@@ -631,7 +643,7 @@ async def submit_schema_tabular_cpa(
 @app.post("/privacy/analyze", dependencies=[Depends(require_api_key)], tags=["Privacy"], response_model=JobQueuedResponse)
 async def submit_privacy_analyze(
     request: PrivacyAnalyzeRequest,
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     """
@@ -740,7 +752,7 @@ def _parse_price(value: Any) -> float | None:
 @app.get("/models", dependencies=[Depends(require_api_key)], tags=["Metadata"])
 async def list_models(
     provider: Literal["ollama", "openrouter", "deepinfra", "deepseek", "all"] = "openrouter",
-    llm_api_key: str | None = Header(default=None, alias="X-LLM-API-Key"),
+    llm_api_key: str | None = Security(llm_api_key_header),
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     """

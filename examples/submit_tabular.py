@@ -31,15 +31,10 @@ def main():
 
     payload = {
         "schema": "coarse",
-        "tasks": [
-            {
-                "task_id": "table-1",
-                "table_id": "employees",
-                "sampled_rows": [
-                    {"name": "Alice Smith", "email": "alice@example.com", "age": "29"},
-                    {"name": "Bob Jones", "email": "bob@example.com", "age": "41"},
-                ],
-            }
+        "table_id": "employees",
+        "sampled_rows": [
+            {"name": "Alice Smith", "email": "alice@example.com", "age": "29"},
+            {"name": "Bob Jones", "email": "bob@example.com", "age": "41"},
         ],
         "llm": {"provider": provider, "model": model},
     }

@@ -96,8 +96,6 @@ if operation == "Column typing":
     recommended = "sti" if "sti" in table_schema_names else ("dpv_pd" if "dpv_pd" in table_schema_names else ("dpv" if "dpv" in table_schema_names else table_schema_names[0]))
     schema = st.selectbox("Schema", table_schema_names, index=table_schema_names.index(recommended))
 
-    include_scores = st.checkbox("include_scores", value=False)
-
     if st.button("Run column typing", type="primary"):
         if err:
             st.error(err)
@@ -107,8 +105,8 @@ if operation == "Column typing":
             st.stop()
 
         payload = {
-            "tasks": [{"task_id": "table-1", "table_id": table_id, "sampled_rows": sampled_rows}],
-            "include_scores": include_scores,
+            "table_id": table_id,
+            "sampled_rows": sampled_rows,
             "llm": {"provider": cfg["provider"], "model": cfg["model"]},
         }
 
@@ -141,15 +139,11 @@ elif operation == "Cell NER":
     else:
         target_cols = st.multiselect("target_columns", options=columns, default=columns[:2])
 
-    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+    col1, col2 = st.columns([1, 1])
     with col1:
         strings_only = st.checkbox("strings_only", value=True)
     with col2:
         skip_structured_literals = st.checkbox("skip_structured_literals", value=True)
-    with col3:
-        include_scores = st.checkbox("include_scores", value=False)
-    with col4:
-        strict_offsets = st.checkbox("strict_offsets", value=False)
 
     if st.button("Run cell NER", type="primary"):
         if err:
@@ -163,18 +157,11 @@ elif operation == "Cell NER":
             st.stop()
 
         payload = {
-            "tasks": [
-                {
-                    "task_id": "table-1",
-                    "table_id": table_id,
-                    "sampled_rows": sampled_rows,
-                    "target_columns": target_cols,
-                    "strings_only": strings_only,
-                    "skip_structured_literals": skip_structured_literals,
-                }
-            ],
-            "include_scores": include_scores,
-            "strict_offsets": strict_offsets,
+            "table_id": table_id,
+            "sampled_rows": sampled_rows,
+            "target_columns": target_cols,
+            "strings_only": strings_only,
+            "skip_structured_literals": skip_structured_literals,
             "llm": {"provider": cfg["provider"], "model": cfg["model"]},
         }
 
@@ -213,8 +200,6 @@ else:
         subject_column = st.text_input("subject_column", value="")
         target_columns = []
 
-    include_scores = st.checkbox("include_scores", value=False)
-
     # New: CPA flags
     debug_flag = st.checkbox("debug", value=cfg.get("show_debug", False))
     use_sti_signature_cache = st.checkbox("use_sti_signature_cache", value=True)
@@ -235,25 +220,19 @@ else:
             st.error("subject_column is required.")
             st.stop()
 
-        task: dict[str, Any] = {
-            "task_id": "cpa-1",
+        payload: dict[str, Any] = {
             "table_id": table_id,
             "sampled_rows": sampled_rows,
             "subject_column": subject_column,
             "debug": debug_flag,
             "use_sti_signature_cache": use_sti_signature_cache,
+            "llm": {"provider": cfg["provider"], "model": cfg["model"]},
         }
 
         if subject_class:
-            task["subject_class"] = subject_class
+            payload["subject_class"] = subject_class
         if target_columns:
-            task["target_columns"] = target_columns
-
-        payload = {
-            "tasks": [task],
-            "include_scores": include_scores,
-            "llm": {"provider": cfg["provider"], "model": cfg["model"]},
-        }
+            payload["target_columns"] = target_columns
 
         submit_and_render_job(
             cfg=cfg,

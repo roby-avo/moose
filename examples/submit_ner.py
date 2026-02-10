@@ -31,10 +31,7 @@ def main():
 
     payload = {
         "schema": "coarse",
-        "tasks": [
-            {"task_id": "t1", "text": "Roberto Avogadro founded Moose in 2024."},
-            {"task_id": "t2", "text": "OpenAI held a conference in San Francisco."},
-        ],
+        "text": "Roberto Avogadro founded Moose in 2024.",
         "llm": {"provider": provider, "model": model},
     }
     

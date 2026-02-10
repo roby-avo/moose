@@ -1,0 +1,12 @@
+{
+  "type_ids": [
+    "PERSON",
+    "ORGANIZATION",
+    "LOCATION",
+    "EVENT",
+    "WORK",
+    "PRODUCT",
+    "CONCEPT",
+    "MISC"
+  ]
+}

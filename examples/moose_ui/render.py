@@ -38,6 +38,14 @@ def render_job(job: dict[str, Any], *, show_raw: bool, show_legal_refs: bool, sh
 def _detect_kind(result: dict[str, Any]) -> str:
     if not isinstance(result, dict):
         return "unknown"
+    if "entities" in result:
+        return "text_ner"
+    if "columns" in result:
+        return "tabular_annotate"
+    if "relationships" in result:
+        return "cpa"
+    if "rows" in result:
+        return "tabular_ner"
     if "action_catalog" in result and "results" in result:
         rs = result.get("results")
         if isinstance(rs, list) and rs and isinstance(rs[0], dict) and "findings" in rs[0]:
@@ -75,9 +83,12 @@ def _render_result(result: dict[str, Any], *, show_raw: bool, show_legal_refs: b
 
 def render_cpa_result(result: dict[str, Any], *, show_debug: bool, show_raw: bool) -> None:
     st.subheader("CPA relationships")
-    for item in result.get("results", []):
+    items = result.get("results", [])
+    if not isinstance(items, list):
+        items = [result]
+
+    for item in items:
         st.markdown(
-            f"**task_id:** `{item.get('task_id')}`  \n"
             f"**table_id:** `{item.get('table_id')}`  \n"
             f"**subject_column:** `{item.get('subject_column')}`"
         )

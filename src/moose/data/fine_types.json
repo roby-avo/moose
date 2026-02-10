@@ -1,0 +1,33 @@
+{
+  "type_ids": [
+    "PERSON",
+    "FICTIONAL_CHARACTER",
+    "COMPANY",
+    "NONPROFIT_ORG",
+    "GOVERNMENT_ORG",
+    "EDUCATIONAL_ORG",
+    "SPORTS_TEAM",
+    "COUNTRY",
+    "CITY",
+    "REGION",
+    "LANDMARK",
+    "CELESTIAL_BODY",
+    "CONFLICT",
+    "SPORT_EVENT",
+    "EVENT_GENERIC",
+    "FILM",
+    "BOOK",
+    "MUSIC_WORK",
+    "SOFTWARE",
+    "INTERNET_MEME",
+    "DEVICE",
+    "MEDICATION",
+    "FOOD_BEVERAGE",
+    "PRODUCT_GENERIC",
+    "LANGUAGE",
+    "LAW",
+    "SCIENTIFIC_THEORY",
+    "BIOLOGICAL_TAXON",
+    "ANATOMY"
+  ]
+}

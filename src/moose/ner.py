@@ -11,13 +11,12 @@ from moose.prompts import (
     build_table_prompt,
     build_text_ner_prompt,
     build_tabular_cell_ner_prompt,
-    build_type_selection_prompt,
 )
 from moose.schema import get_schema_config
 from moose.validate import (
+    extract_json,
     validate_ner_response_with_warnings,
     validate_table_response,
-    validate_type_selection_response,
 )
 
 
@@ -47,7 +46,6 @@ _STRUCTURED_RE = re.compile(
     re.VERBOSE,
 )
 
-
 def _looks_like_structured_literal(value: str) -> bool:
     v = value.strip()
     if not v:
@@ -58,41 +56,124 @@ def _looks_like_structured_literal(value: str) -> bool:
     return bool(_STRUCTURED_RE.match(v))
 
 
-def _estimate_task_size(task: dict) -> int:
-    return len(json.dumps(task, ensure_ascii=True))
+def _coerce_text_ner_output_with_task_ids(raw_text: str, tasks: list[dict[str, Any]]) -> str:
+    data = extract_json(raw_text)
+    if isinstance(data, dict):
+        if len(tasks) != 1:
+            raise ValueError("NER response object shape is only valid for single-task requests.")
+        entities = data.get("entities")
+        if not isinstance(entities, list):
+            raise ValueError("NER response object must include an entities array.")
+        coerced = [{"task_id": tasks[0]["task_id"], "entities": entities}]
+        return json.dumps(coerced, ensure_ascii=True)
+    if not isinstance(data, list):
+        raise ValueError("NER response must be a JSON array.")
+    if all(isinstance(item, dict) and isinstance(item.get("task_id"), str) for item in data):
+        return json.dumps(data, ensure_ascii=True)
+    if len(data) != len(tasks):
+        raise ValueError("NER response length mismatch.")
+
+    coerced: list[dict[str, Any]] = []
+    for index, item in enumerate(data):
+        if not isinstance(item, dict):
+            raise ValueError("Each NER response item must be an object.")
+        entities = item.get("entities")
+        if not isinstance(entities, list):
+            raise ValueError("Each NER response item must include an entities array.")
+        coerced.append({"task_id": tasks[index]["task_id"], "entities": entities})
+
+    return json.dumps(coerced, ensure_ascii=True)
 
 
-def _batch_tasks(tasks: list[dict], max_tasks: int, max_chars: int) -> list[list[dict]]:
-    batches: list[list[dict]] = []
-    current: list[dict] = []
-    current_chars = 0
+def _coerce_table_output_with_task_ids(raw_text: str, tasks: list[dict[str, Any]]) -> str:
+    data = extract_json(raw_text)
+    if not isinstance(data, list):
+        raise ValueError("Table response must be a JSON array.")
+    if all(isinstance(item, dict) and isinstance(item.get("task_id"), str) for item in data):
+        return json.dumps(data, ensure_ascii=True)
+    if len(data) != len(tasks):
+        raise ValueError("Table response length mismatch.")
+
+    coerced: list[dict[str, Any]] = []
+    for index, item in enumerate(data):
+        if not isinstance(item, dict):
+            raise ValueError("Each table response item must be an object.")
+        columns = item.get("columns")
+        if not isinstance(columns, list):
+            raise ValueError("Each table response item must include a columns array.")
+        table_id = item.get("table_id")
+        expected_table_id = tasks[index]["table_id"]
+        if not isinstance(table_id, str):
+            table_id = expected_table_id
+        coerced.append(
+            {
+                "task_id": tasks[index]["task_id"],
+                "table_id": table_id,
+                "columns": columns,
+            }
+        )
+
+    return json.dumps(coerced, ensure_ascii=True)
+
+
+def _coerce_cell_ner_output_with_task_ids(raw_text: str, tasks: list[dict[str, Any]]) -> str:
+    data = extract_json(raw_text)
+    if not isinstance(data, list):
+        raise ValueError("Tabular cell NER response must be a JSON array.")
+    if all(isinstance(item, dict) and isinstance(item.get("task_id"), str) for item in data):
+        return json.dumps(data, ensure_ascii=True)
+    if len(data) != len(tasks):
+        raise ValueError("Tabular cell NER response length mismatch.")
+
+    expected_by_coord: dict[tuple[str | None, int, str], str] = {}
+    expected_ids: set[str] = set()
     for task in tasks:
-        task_size = _estimate_task_size(task)
-        if current and (len(current) + 1 > max_tasks or current_chars + task_size > max_chars):
-            batches.append(current)
-            current = []
-            current_chars = 0
-        current.append(task)
-        current_chars += task_size
-    if current:
-        batches.append(current)
-    return batches
+        row_index = task.get("row_index")
+        column = task.get("column")
+        task_id = task.get("task_id")
+        if not isinstance(row_index, int) or not isinstance(column, str) or not isinstance(task_id, str):
+            raise ValueError("Invalid internal cell task metadata.")
+        table_id = task.get("table_id")
+        key = (table_id if isinstance(table_id, str) else None, row_index, column)
+        expected_by_coord[key] = task_id
+        expected_ids.add(task_id)
 
+    coerced: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
 
-def _batch_type_ids_for_prompt(schema_config, tasks: list[dict], type_ids: list[str], mode: str, max_chars: int) -> list[list[str]]:
-    batches: list[list[str]] = []
-    current: list[str] = []
-    for type_id in type_ids:
-        candidate = current + [type_id]
-        prompt = build_type_selection_prompt(schema_config, tasks, candidate, mode)
-        if current and len(prompt) > max_chars:
-            batches.append(current)
-            current = [type_id]
+    for index, item in enumerate(data):
+        if not isinstance(item, dict):
+            raise ValueError("Each tabular cell NER response item must be an object.")
+        entities = item.get("entities")
+        if not isinstance(entities, list):
+            raise ValueError("Each tabular cell NER response item must include an entities array.")
+
+        task_id = item.get("task_id")
+        if isinstance(task_id, str):
+            resolved_task_id = task_id
         else:
-            current = candidate
-    if current:
-        batches.append(current)
-    return batches
+            row_index = item.get("row_index")
+            column = item.get("column")
+            table_id = item.get("table_id")
+            table_key = table_id if isinstance(table_id, str) else None
+            if isinstance(row_index, int) and isinstance(column, str):
+                resolved_task_id = expected_by_coord.get((table_key, row_index, column))
+                if resolved_task_id is None:
+                    resolved_task_id = expected_by_coord.get((None, row_index, column))
+            else:
+                resolved_task_id = tasks[index]["task_id"]
+            if not isinstance(resolved_task_id, str):
+                raise ValueError("Unknown cell identifier in tabular cell NER response.")
+
+        if resolved_task_id in seen_ids:
+            raise ValueError("Duplicate cell output in tabular cell NER response.")
+        seen_ids.add(resolved_task_id)
+        coerced.append({"task_id": resolved_task_id, "entities": entities})
+
+    if seen_ids != expected_ids:
+        raise ValueError("Tabular cell NER response items mismatch.")
+
+    return json.dumps(coerced, ensure_ascii=True)
 
 
 async def _run_with_retries(llm_client, prompt: str, validator, max_retries: int) -> Any:
@@ -113,43 +194,10 @@ async def _run_with_retries(llm_client, prompt: str, validator, max_retries: int
     raise ValueError(f"LLM output invalid after {max_retries} retries: {last_error}")
 
 
-async def _select_type_ids(schema_config, tasks: list[dict], type_ids: list[str], llm_client, settings: Settings, mode: str) -> list[str]:
-    if not schema_config.prefilter_types:
-        return type_ids
-
-    selected: set[str] = set()
-    type_batches = _batch_type_ids_for_prompt(
-        schema_config,
-        tasks,
-        type_ids,
-        mode,
-        settings.MOOSE_MAX_CHARS_PER_PROMPT,
-    )
-    for type_batch in type_batches:
-        prompt = build_type_selection_prompt(schema_config, tasks, type_batch, mode)
-
-        def validator(raw_text: str):
-            return validate_type_selection_response(
-                raw_text,
-                set(type_batch),
-                type_aliases=schema_config.type_aliases,
-                type_alias_prefixes=schema_config.type_alias_prefixes,
-            )
-
-        extracted = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
-        selected.update(extracted)
-
-    if not selected:
-        return type_ids
-    return [type_id for type_id in type_ids if type_id in selected]
-
-
 async def run_text_ner(
     tasks: list[dict],
     schema: str,
     llm_client,
-    include_scores: bool = False,
-    strict_offsets: bool = False,
     settings: Settings | None = None,
 ) -> dict:
     settings = settings or get_settings()
@@ -164,50 +212,42 @@ async def run_text_ner(
     results_by_id: dict[str, dict] = {}
     all_warnings: list[dict[str, Any]] = []
 
-    batches = _batch_tasks(
-        tasks,
-        max_tasks=settings.MOOSE_MAX_TASKS_PER_PROMPT,
-        max_chars=settings.MOOSE_MAX_CHARS_PER_PROMPT,
-    )
+    selected_type_ids = type_ids
+    type_set = set(selected_type_ids)
+    prompt = build_text_ner_prompt(schema_config, tasks, selected_type_ids)
 
-    for batch in batches:
-        selected_type_ids = await _select_type_ids(schema_config, batch, type_ids, llm_client, settings, mode="text")
-        type_set = set(selected_type_ids)
-        prompt = build_text_ner_prompt(schema_config, batch, selected_type_ids)
+    def validator(raw_text: str):
+        normalized_raw = _coerce_text_ner_output_with_task_ids(raw_text, tasks)
+        return validate_ner_response_with_warnings(
+            [{"task_id": t["task_id"], "text": t["text"]} for t in tasks],
+            normalized_raw,
+            type_set,
+            require_all_scores=require_all_scores,
+            type_aliases=schema_config.type_aliases,
+            type_alias_prefixes=schema_config.type_alias_prefixes,
+            strict_offsets=False,
+        )
 
-        def validator(raw_text: str):
-            return validate_ner_response_with_warnings(
-                [{"task_id": t["task_id"], "text": t["text"]} for t in batch],
-                raw_text,
-                type_set,
-                require_all_scores=require_all_scores,
-                type_aliases=schema_config.type_aliases,
-                type_alias_prefixes=schema_config.type_alias_prefixes,
-                strict_offsets=strict_offsets,
-            )
+    parsed, warnings = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
+    all_warnings.extend(warnings)
 
-        parsed, warnings = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
-        all_warnings.extend(warnings)
-
-        for item in parsed:
-            text = task_lookup[item.task_id]["text"]
-            entities = []
-            for entity in item.entities:
-                scores = {type_id: float(entity.scores.get(type_id, 0)) for type_id in selected_type_ids}
-                type_id, confidence, distribution = choose_argmax(scores)
-                output = {
-                    "start": entity.start,
-                    "end": entity.end,
-                    "text": text[entity.start : entity.end],
-                    "type_id": type_id,
-                    "confidence": confidence,
-                }
-                if schema_config.coarse_mapping:
-                    output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
-                if include_scores:
-                    output["distribution"] = distribution
-                entities.append(output)
-            results_by_id[item.task_id] = {"task_id": item.task_id, "entities": entities}
+    for item in parsed:
+        original_text = task_lookup[item.task_id]["text"]
+        entities = []
+        for entity in item.entities:
+            scores = {type_id: float(entity.scores.get(type_id, 0)) for type_id in selected_type_ids}
+            type_id, confidence, _distribution = choose_argmax(scores)
+            output = {
+                "start": entity.start,
+                "end": entity.end,
+                "text": original_text[entity.start : entity.end],
+                "type_id": type_id,
+                "confidence": confidence,
+            }
+            if schema_config.coarse_mapping:
+                output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
+            entities.append(output)
+        results_by_id[item.task_id] = {"task_id": item.task_id, "entities": entities}
 
     ordered = [results_by_id[task["task_id"]] for task in tasks]
     response: dict[str, Any] = {"results": ordered}
@@ -220,7 +260,6 @@ async def run_table_annotate(
     tasks: list[dict],
     schema: str,
     llm_client,
-    include_scores: bool = False,
     settings: Settings | None = None,
 ) -> dict:
     settings = settings or get_settings()
@@ -234,42 +273,34 @@ async def run_table_annotate(
     task_lookup = {task["task_id"]: task for task in tasks}
     results_by_id: dict[str, dict] = {}
 
-    batches = _batch_tasks(
-        tasks,
-        max_tasks=settings.MOOSE_MAX_TASKS_PER_PROMPT,
-        max_chars=settings.MOOSE_MAX_CHARS_PER_PROMPT,
-    )
+    selected_type_ids = type_ids
+    type_set = set(selected_type_ids)
+    prompt = build_table_prompt(schema_config, tasks, selected_type_ids)
 
-    for batch in batches:
-        selected_type_ids = await _select_type_ids(schema_config, batch, type_ids, llm_client, settings, mode="table")
-        type_set = set(selected_type_ids)
-        prompt = build_table_prompt(schema_config, batch, selected_type_ids)
+    def validator(raw_text: str):
+        normalized_raw = _coerce_table_output_with_task_ids(raw_text, tasks)
+        return validate_table_response(
+            tasks,
+            normalized_raw,
+            type_set,
+            require_all_scores=require_all_scores,
+            type_aliases=schema_config.type_aliases,
+            type_alias_prefixes=schema_config.type_alias_prefixes,
+        )
 
-        def validator(raw_text: str):
-            return validate_table_response(
-                batch,
-                raw_text,
-                type_set,
-                require_all_scores=require_all_scores,
-                type_aliases=schema_config.type_aliases,
-                type_alias_prefixes=schema_config.type_alias_prefixes,
-            )
+    parsed = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
 
-        parsed = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
-
-        for item in parsed:
-            task = task_lookup[item.task_id]
-            columns = []
-            for column in item.columns:
-                scores = {type_id: float(column.scores.get(type_id, 0)) for type_id in selected_type_ids}
-                type_id, confidence, distribution = choose_argmax(scores)
-                output = {"column": column.column, "type_id": type_id, "confidence": confidence}
-                if schema_config.coarse_mapping:
-                    output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
-                if include_scores:
-                    output["distribution"] = distribution
-                columns.append(output)
-            results_by_id[item.task_id] = {"task_id": item.task_id, "table_id": task["table_id"], "columns": columns}
+    for item in parsed:
+        task = task_lookup[item.task_id]
+        columns = []
+        for column in item.columns:
+            scores = {type_id: float(column.scores.get(type_id, 0)) for type_id in selected_type_ids}
+            type_id, confidence, _distribution = choose_argmax(scores)
+            output = {"column": column.column, "type_id": type_id, "confidence": confidence}
+            if schema_config.coarse_mapping:
+                output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
+            columns.append(output)
+        results_by_id[item.task_id] = {"task_id": item.task_id, "table_id": task["table_id"], "columns": columns}
 
     ordered = [results_by_id[task["task_id"]] for task in tasks]
     return {"results": ordered}
@@ -279,8 +310,6 @@ async def run_tabular_ner(
     tasks: list[dict],
     schema: str,
     llm_client,
-    include_scores: bool = False,
-    strict_offsets: bool = False,
     settings: Settings | None = None,
 ) -> dict:
     settings = settings or get_settings()
@@ -336,10 +365,7 @@ async def run_tabular_ner(
                     else:
                         text = value if isinstance(value, str) else str(value)
 
-                if isinstance(text, str):
-                    text = text.strip()
-
-                if isinstance(text, str) and skip_structured and _looks_like_structured_literal(text):
+                if isinstance(text, str) and skip_structured and _looks_like_structured_literal(text.strip()):
                     text_for_task = ""
                 else:
                     text_for_task = text if isinstance(text, str) else ""
@@ -380,56 +406,48 @@ async def run_tabular_ner(
     results_by_cell_id: dict[str, list[dict[str, Any]]] = {}
     all_warnings: list[dict[str, Any]] = []
 
-    batches = _batch_tasks(
-        cell_tasks,
-        max_tasks=settings.MOOSE_MAX_TASKS_PER_PROMPT,
-        max_chars=settings.MOOSE_MAX_CHARS_PER_PROMPT,
-    )
+    selected_type_ids = type_ids
+    type_set = set(selected_type_ids)
 
-    for batch in batches:
-        selected_type_ids = await _select_type_ids(schema_config, batch, type_ids, llm_client, settings, mode="text")
-        type_set = set(selected_type_ids)
+    prompt = build_tabular_cell_ner_prompt(schema_config, cell_tasks, selected_type_ids)
 
-        prompt = build_tabular_cell_ner_prompt(schema_config, batch, selected_type_ids)
+    batch_text_by_id = {t["task_id"]: t["text"] for t in cell_tasks}
 
-        batch_text_by_id = {t["task_id"]: t["text"] for t in batch}
+    def validator(raw_text: str):
+        base_tasks = [{"task_id": t["task_id"], "text": t["text"]} for t in cell_tasks]
+        normalized_raw = _coerce_cell_ner_output_with_task_ids(raw_text, cell_tasks)
+        return validate_ner_response_with_warnings(
+            base_tasks,
+            normalized_raw,
+            type_set,
+            require_all_scores=require_all_scores,
+            type_aliases=schema_config.type_aliases,
+            type_alias_prefixes=schema_config.type_alias_prefixes,
+            strict_offsets=False,
+        )
 
-        def validator(raw_text: str):
-            base_tasks = [{"task_id": t["task_id"], "text": t["text"]} for t in batch]
-            return validate_ner_response_with_warnings(
-                base_tasks,
-                raw_text,
-                type_set,
-                require_all_scores=require_all_scores,
-                type_aliases=schema_config.type_aliases,
-                type_alias_prefixes=schema_config.type_alias_prefixes,
-                strict_offsets=strict_offsets,
-            )
+    parsed, warnings = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
+    all_warnings.extend(warnings)
 
-        parsed, warnings = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
-        all_warnings.extend(warnings)
+    for item in parsed:
+        text_for_cell = batch_text_by_id.get(item.task_id, "")
+        entities_out: list[dict[str, Any]] = []
 
-        for item in parsed:
-            text_for_cell = batch_text_by_id.get(item.task_id, "")
-            entities_out: list[dict[str, Any]] = []
+        for entity in item.entities:
+            scores = {type_id: float(entity.scores.get(type_id, 0)) for type_id in selected_type_ids}
+            type_id, confidence, _distribution = choose_argmax(scores)
+            output = {
+                "start": entity.start,
+                "end": entity.end,
+                "text": text_for_cell[entity.start : entity.end],
+                "type_id": type_id,
+                "confidence": confidence,
+            }
+            if schema_config.coarse_mapping:
+                output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
+            entities_out.append(output)
 
-            for entity in item.entities:
-                scores = {type_id: float(entity.scores.get(type_id, 0)) for type_id in selected_type_ids}
-                type_id, confidence, distribution = choose_argmax(scores)
-                output = {
-                    "start": entity.start,
-                    "end": entity.end,
-                    "text": text_for_cell[entity.start : entity.end],
-                    "type_id": type_id,
-                    "confidence": confidence,
-                }
-                if schema_config.coarse_mapping:
-                    output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
-                if include_scores:
-                    output["distribution"] = distribution
-                entities_out.append(output)
-
-            results_by_cell_id[item.task_id] = entities_out
+        results_by_cell_id[item.task_id] = entities_out
 
     # Fill scaffold with extracted entities
     for table_task_out in results_scaffold:

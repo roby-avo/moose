@@ -33,6 +33,72 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+_SINGLE_TASK_ID = "__single__"
+_SINGLE_TABLE_ID = "__single_table__"
+
+
+def _strip_warning_ids(warnings: Any, keys: set[str]) -> list[Any]:
+    if not isinstance(warnings, list):
+        return []
+    out: list[Any] = []
+    for warning in warnings:
+        if isinstance(warning, dict):
+            out.append({k: v for k, v in warning.items() if k not in keys})
+        else:
+            out.append(warning)
+    return out
+
+
+def _unwrap_single_ner_result(result: dict[str, Any]) -> dict[str, Any]:
+    item = (result.get("results") or [{}])[0]
+    out: dict[str, Any] = {"entities": item.get("entities", [])}
+    warnings = _strip_warning_ids(result.get("warnings"), {"task_id"})
+    if warnings:
+        out["warnings"] = warnings
+    return out
+
+
+def _unwrap_single_tabular_result(result: dict[str, Any]) -> dict[str, Any]:
+    item = (result.get("results") or [{}])[0]
+    out: dict[str, Any] = {"columns": item.get("columns", [])}
+    table_id = item.get("table_id")
+    if isinstance(table_id, str) and table_id and table_id != _SINGLE_TABLE_ID:
+        out["table_id"] = table_id
+    warnings = _strip_warning_ids(result.get("warnings"), {"task_id"})
+    if warnings:
+        out["warnings"] = warnings
+    return out
+
+
+def _unwrap_single_tabular_ner_result(result: dict[str, Any]) -> dict[str, Any]:
+    item = (result.get("results") or [{}])[0]
+    out: dict[str, Any] = {"rows": item.get("rows", [])}
+    table_id = item.get("table_id")
+    if isinstance(table_id, str) and table_id and table_id != _SINGLE_TABLE_ID:
+        out["table_id"] = table_id
+    warnings = _strip_warning_ids(result.get("warnings"), {"task_id", "table_task_id"})
+    if warnings:
+        out["warnings"] = warnings
+    return out
+
+
+def _unwrap_single_cpa_result(result: dict[str, Any]) -> dict[str, Any]:
+    item = (result.get("results") or [{}])[0]
+    out: dict[str, Any] = {
+        "subject_column": item.get("subject_column"),
+        "relationships": item.get("relationships", []),
+    }
+    table_id = item.get("table_id")
+    if isinstance(table_id, str) and table_id and table_id != _SINGLE_TABLE_ID:
+        out["table_id"] = table_id
+    if isinstance(item.get("debug"), dict):
+        out["debug"] = item["debug"]
+    warnings = _strip_warning_ids(result.get("warnings"), {"task_id"})
+    if warnings:
+        out["warnings"] = warnings
+    return out
+
+
 class JobStore:
     async def get_job(self, job_id: str) -> JobRecord | None:
         raise NotImplementedError
@@ -256,33 +322,45 @@ class WorkerPool:
                     )
 
                 if job.endpoint_type == "ner":
-                    result = await run_text_ner(
-                        job.payload["tasks"],
+                    single_task = {"task_id": _SINGLE_TASK_ID, "text": job.payload["text"]}
+                    raw = await run_text_ner(
+                        [single_task],
                         job.payload["schema"],
                         llm_client,
-                        include_scores=job.payload.get("include_scores", False),
-                        strict_offsets=job.payload.get("strict_offsets", False),
                         settings=self._settings,
                     )
+                    result = _unwrap_single_ner_result(raw)
 
                 elif job.endpoint_type == "tabular":
-                    result = await run_table_annotate(
-                        job.payload["tasks"],
+                    single_task = {
+                        "task_id": _SINGLE_TASK_ID,
+                        "table_id": job.payload.get("table_id") or _SINGLE_TABLE_ID,
+                        "sampled_rows": job.payload["sampled_rows"],
+                    }
+                    raw = await run_table_annotate(
+                        [single_task],
                         job.payload["schema"],
                         llm_client,
-                        include_scores=job.payload.get("include_scores", False),
                         settings=self._settings,
                     )
+                    result = _unwrap_single_tabular_result(raw)
 
                 elif job.endpoint_type == "tabular_ner":
-                    result = await run_tabular_ner(
-                        job.payload["tasks"],
+                    single_task = {
+                        "task_id": _SINGLE_TASK_ID,
+                        "table_id": job.payload.get("table_id") or _SINGLE_TABLE_ID,
+                        "sampled_rows": job.payload["sampled_rows"],
+                        "target_columns": job.payload["target_columns"],
+                        "strings_only": job.payload.get("strings_only", True),
+                        "skip_structured_literals": job.payload.get("skip_structured_literals", True),
+                    }
+                    raw = await run_tabular_ner(
+                        [single_task],
                         job.payload["schema"],
                         llm_client,
-                        include_scores=job.payload.get("include_scores", False),
-                        strict_offsets=job.payload.get("strict_offsets", False),
                         settings=self._settings,
                     )
+                    result = _unwrap_single_tabular_ner_result(raw)
 
                 elif job.endpoint_type == "privacy_analyze":
                     result = await run_privacy_analyze(
@@ -299,13 +377,24 @@ class WorkerPool:
                     )
 
                 elif job.endpoint_type == "cpa":
-                    result = await run_table_cpa(
-                        job.payload["tasks"],
+                    single_task = {
+                        "task_id": _SINGLE_TASK_ID,
+                        "table_id": job.payload.get("table_id") or _SINGLE_TABLE_ID,
+                        "sampled_rows": job.payload["sampled_rows"],
+                        "subject_column": job.payload["subject_column"],
+                        "subject_class": job.payload.get("subject_class"),
+                        "target_columns": job.payload.get("target_columns"),
+                        "use_sti_signature_cache": job.payload.get("use_sti_signature_cache", True),
+                        "debug": job.payload.get("debug", False),
+                        "debug_preview_limit": job.payload.get("debug_preview_limit", 20),
+                    }
+                    raw = await run_table_cpa(
+                        [single_task],
                         job.payload["schema"],
                         llm_client,
-                        include_scores=job.payload.get("include_scores", False),
                         settings=self._settings,
                     )
+                    result = _unwrap_single_cpa_result(raw)
 
                 else:
                     raise ValueError(f"Unknown endpoint_type: {job.endpoint_type}")

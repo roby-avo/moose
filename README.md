@@ -76,11 +76,12 @@ You can also keep using `POST /ner` and `POST /tabular/annotate` with `schema` i
 
 Provide `llm.provider` and `llm.model` per request. Provider credentials are passed via the `X-LLM-API-Key` header.
 Set `X-LLM-Endpoint` to override `MOOSE_OPENROUTER_BASE_URL` or `MOOSE_OLLAMA_HOST` for that request.
+In Swagger UI (`/docs`), set `X-LLM-API-Key` once via the **Authorize** dialog; keep `X-LLM-Endpoint` as an optional per-request override parameter.
 
 ```json
 {
   "schema": "coarse",
-  "tasks": [{"task_id": "t1", "text": "Roberto founded Moose."}],
+  "text": "Roberto founded Moose.",
   "llm": {
     "provider": "openrouter",
     "model": "anthropic/claude-3.5-sonnet"
@@ -98,9 +99,7 @@ curl -s http://localhost:8000/ner \
   -H 'Content-Type: application/json' \
   -d '{
     "schema":"coarse",
-    "tasks":[
-      {"task_id":"t1","text":"Roberto Avogadro founded Moose in 2024."}
-    ],
+    "text":"Roberto Avogadro founded Moose in 2024.",
     "llm":{
       "provider":"openrouter",
       "model":"anthropic/claude-3.5-sonnet"
@@ -118,15 +117,10 @@ curl -s http://localhost:8000/tabular/annotate \
   -H 'Content-Type: application/json' \
   -d '{
     "schema":"coarse",
-    "tasks":[
-      {
-        "task_id":"table-1",
-        "table_id":"employees",
-        "sampled_rows":[
-          {"name":"Alice Smith","email":"alice@example.com","age":"29"},
-          {"name":"Bob Jones","email":"bob@example.com","age":"41"}
-        ]
-      }
+    "table_id":"employees",
+    "sampled_rows":[
+      {"name":"Alice Smith","email":"alice@example.com","age":"29"},
+      {"name":"Bob Jones","email":"bob@example.com","age":"41"}
     ],
     "llm":{
       "provider":"openrouter",
@@ -142,6 +136,12 @@ curl -s http://localhost:8000/jobs/<job_id> \
   -H 'X-API-Key: your_api_key'
 ```
 
+For single-resource endpoints, `result` is also single-resource:
+- `/ner` -> `{"entities": [...], "warnings": [...]?}`
+- `/tabular/annotate` -> `{"table_id": "...", "columns": [...], "warnings": [...]?}`
+- `/tabular/ner` -> `{"table_id": "...", "rows": [...], "warnings": [...]?}`
+- `/tabular/cpa` -> `{"table_id": "...", "subject_column": "...", "relationships": [...]}`
+
 ### List models
 
 ```bash
@@ -156,8 +156,8 @@ You can query a single provider via `?provider=ollama` or `?provider=openrouter`
 
 ## Schemas
 
-- `coarse`: PERSON, ORGANIZATION, LOCATION, EVENT, WORK_OF_ART, PRODUCT, DATE_TIME, NUMBER, MONEY, PERCENT, LAW_OR_REGULATION, OTHER.
-- `fine`: minimal fine-grained types with parent mapping; responses also include `coarse_type_id`.
+- `coarse`: high-level NER types: PERSON, ORGANIZATION, LOCATION, EVENT, WORK, PRODUCT, CONCEPT, MISC.
+- `fine`: detailed NER types (e.g., PERSON, COMPANY, CITY, LAW, DEVICE, etc.) with parent mapping; responses also include `coarse_type_id`.
 - `sti`: column type classification inventory for STI (NE:* plus high-level LIT:* and a compact `xsd:*` set, with `ext:*` syntactic patterns like email/IP/phone/UUID; see `src/moose/data/sti_types.json`). Tabular-only; text NER endpoints reject it. For literal subtypes, responses include `coarse_type_id` with the matching LIT:STRING/NUMBER/DATETIME.
 - `dpv`: full DPV vocabulary IDs (loaded from `src/moose/data/dpv_full.json` via the registry).
 
@@ -179,13 +179,12 @@ Example registry entry:
 }
 ```
 
-For large vocabularies, set `"prefilter_types": true` to enable a two-step prompt: Moose
-first asks the model to extract relevant type_ids from the full vocabulary, then runs the
-annotation using only that subset.
+For large vocabularies, `"prefilter_types": true` enables two-step type selection where implemented
+(currently used in CPA flows). NER/text and table typing use a single prompt per request.
 
 ## Confidence
 
-For each entity/column, the model returns unnormalized non-negative scores for a fixed hypothesis set that includes `NER:OTHER`. Moose normalizes these scores to a posterior distribution and returns the selected type with its posterior confidence in `[0,1]`. Set `include_scores: true` in the request to include the full normalized distribution per entity/column.
+For each entity/column, the model returns unnormalized non-negative scores for the configured label set (including fallback labels where present), and Moose returns the selected type with confidence in `[0,1]`.
 
 ## Queue behavior
 

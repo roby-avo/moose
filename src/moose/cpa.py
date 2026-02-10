@@ -9,7 +9,7 @@ from moose.ner import run_table_annotate
 from moose.prob import choose_argmax
 from moose.prompts import build_cpa_prompt, build_type_selection_prompt
 from moose.schema import DATA_DIR, get_schema_config
-from moose.validate import validate_cpa_response, validate_type_selection_response
+from moose.validate import extract_json, validate_cpa_response, validate_type_selection_response
 
 
 # --------------------------
@@ -57,6 +57,45 @@ def _normalize_schema_curie(value: str) -> str:
     if v.startswith("http://schema.org/"):
         return "schema:" + v[len("http://schema.org/") :]
     return v
+
+
+def _coerce_cpa_output_with_task_ids(raw_text: str, tasks: list[dict[str, Any]]) -> str:
+    data = extract_json(raw_text)
+    if isinstance(data, dict):
+        data = [data]
+    if not isinstance(data, list):
+        raise ValueError("CPA response must be a JSON array or object.")
+    if all(isinstance(item, dict) and isinstance(item.get("task_id"), str) for item in data):
+        return json.dumps(data, ensure_ascii=True)
+    if len(data) != len(tasks):
+        raise ValueError("CPA response length mismatch.")
+
+    coerced: list[dict[str, Any]] = []
+    for index, item in enumerate(data):
+        if not isinstance(item, dict):
+            raise ValueError("Each CPA response item must be an object.")
+        relationships = item.get("relationships")
+        if not isinstance(relationships, list):
+            raise ValueError("Each CPA response item must include a relationships array.")
+
+        expected = tasks[index]
+        table_id = item.get("table_id")
+        if not isinstance(table_id, str):
+            table_id = expected["table_id"]
+        subject_column = item.get("subject_column")
+        if not isinstance(subject_column, str):
+            subject_column = expected["subject_column"]
+
+        coerced.append(
+            {
+                "task_id": expected["task_id"],
+                "table_id": table_id,
+                "subject_column": subject_column,
+                "relationships": relationships,
+            }
+        )
+
+    return json.dumps(coerced, ensure_ascii=True)
 
 
 def _batch_type_ids_for_prompt(schema_config, tasks: list[dict[str, Any]], type_ids: list[str], mode: str, max_chars: int) -> list[list[str]]:
@@ -194,7 +233,7 @@ async def _infer_subject_class_via_cta(
     Returns None if unknown or moose:OTHER.
     """
     task = {"task_id": "cta-subject-1", "table_id": "cta-subject", "sampled_rows": sampled_rows}
-    out = await run_table_annotate([task], cta_schema, llm_client, include_scores=False, settings=settings)
+    out = await run_table_annotate([task], cta_schema, llm_client, settings=settings)
     results = out.get("results", [])
     if not results:
         return None
@@ -220,7 +259,7 @@ async def _infer_subject_class_via_cta(
 async def _get_sti_types_for_table(sampled_rows: list[dict[str, Any]], llm_client, settings: Settings) -> dict[str, str]:
     sti_task = {"task_id": "sti-cache-1", "table_id": "sti-cache", "sampled_rows": sampled_rows}
     try:
-        out = await run_table_annotate([sti_task], "sti", llm_client, include_scores=False, settings=settings)
+        out = await run_table_annotate([sti_task], "sti", llm_client, settings=settings)
         results = out.get("results", [])
         if not results:
             return {}
@@ -242,7 +281,6 @@ async def _get_sti_types_for_table(sampled_rows: list[dict[str, Any]], llm_clien
 async def _select_relation_ids_per_target(
     schema_config,
     *,
-    task_id: str,
     table_id: str,
     subject_column: str,
     target_column: str,
@@ -255,7 +293,6 @@ async def _select_relation_ids_per_target(
     LLM selection per target column using build_type_selection_prompt(mode="cpa").
     """
     selection_task = {
-        "task_id": f"{task_id}::select::{target_column}",
         "table_id": table_id,
         "subject_column": subject_column,
         "target_column": target_column,
@@ -339,7 +376,6 @@ async def run_table_cpa(
     tasks: list[dict[str, Any]],
     schema: str,
     llm_client,
-    include_scores: bool = False,
     settings: Settings | None = None,
     max_rows_in_prompt: int = 5,
 ) -> dict[str, Any]:
@@ -467,7 +503,6 @@ async def run_table_cpa(
                 else:
                     selected_relation_ids = await _select_relation_ids_per_target(
                         schema_config,
-                        task_id=task_id,
                         table_id=table_id,
                         subject_column=subject_column,
                         target_column=target_col,
@@ -493,6 +528,16 @@ async def run_table_cpa(
                 allowed_set = set(selected_relation_ids)
 
                 def validator(raw_text: str):
+                    normalized_raw = _coerce_cpa_output_with_task_ids(
+                        raw_text,
+                        [
+                            {
+                                "task_id": task_id,
+                                "table_id": table_id,
+                                "subject_column": subject_column,
+                            }
+                        ],
+                    )
                     return validate_cpa_response(
                         [
                             {
@@ -502,7 +547,7 @@ async def run_table_cpa(
                                 "target_columns": [target_col],
                             }
                         ],
-                        raw_text,
+                        normalized_raw,
                         allowed_set,
                         require_all_scores=require_all_scores,
                         type_aliases=schema_config.type_aliases,
@@ -514,11 +559,9 @@ async def run_table_cpa(
                 rel = item.relationships[0]
 
                 scores = {rid: float(rel.scores.get(rid, 0.0)) for rid in selected_relation_ids}
-                relation_id, confidence, distribution = choose_argmax(scores)
+                relation_id, confidence, _distribution = choose_argmax(scores)
 
                 out: dict[str, Any] = {"target_column": target_col, "relation_id": relation_id, "confidence": confidence}
-                if include_scores:
-                    out["distribution"] = distribution
                 relationships_out[target_col] = out
 
                 if debug:
@@ -572,6 +615,10 @@ async def run_table_cpa(
             prompt = build_cpa_prompt(schema_config, chunk_task, relation_ids, max_rows=max_rows_in_prompt)
 
             def validator(raw_text: str):
+                normalized_raw = _coerce_cpa_output_with_task_ids(
+                    raw_text,
+                    [{"task_id": task_id, "table_id": table_id, "subject_column": subject_column}],
+                )
                 return validate_cpa_response(
                     [
                         {
@@ -581,7 +628,7 @@ async def run_table_cpa(
                             "target_columns": chunk_targets,
                         }
                     ],
-                    raw_text,
+                    normalized_raw,
                     allowed_set,
                     require_all_scores=require_all_scores,
                     type_aliases=schema_config.type_aliases,
@@ -593,10 +640,8 @@ async def run_table_cpa(
 
             for rel in item.relationships:
                 scores = {rid: float(rel.scores.get(rid, 0.0)) for rid in relation_ids}
-                relation_id, confidence, distribution = choose_argmax(scores)
+                relation_id, confidence, _distribution = choose_argmax(scores)
                 out: dict[str, Any] = {"target_column": rel.target_column, "relation_id": relation_id, "confidence": confidence}
-                if include_scores:
-                    out["distribution"] = distribution
                 relationships_out[rel.target_column] = out
 
         ordered_relationships = [relationships_out[c] for c in target_columns if c in relationships_out]
