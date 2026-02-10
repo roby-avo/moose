@@ -1,0 +1,4389 @@
+[
+  {
+    "alt_labels": [],
+    "definition": "Information about linguistic and speech accents",
+    "id": "dpv-pd:Accent",
+    "iri": "https://w3id.org/dpv/pd#Accent",
+    "label": "Accent",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about financial account identifier",
+    "id": "dpv-pd:AccountIdentifier",
+    "iri": "https://w3id.org/dpv/pd#AccountIdentifier",
+    "label": "Account Identifier",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about acquaintances in a social network",
+    "id": "dpv-pd:Acquaintance",
+    "iri": "https://w3id.org/dpv/pd#Acquaintance",
+    "label": "Acquaintance",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about age",
+    "id": "dpv-pd:Age",
+    "iri": "https://w3id.org/dpv/pd#Age",
+    "label": "Age",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the exact age (i.e. to some degree within a year, month, or day)",
+    "id": "dpv-pd:AgeExact",
+    "iri": "https://w3id.org/dpv/pd#AgeExact",
+    "label": "Age Exact",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about age range i.e. inexact age to some degree (i.e. some years)",
+    "id": "dpv-pd:AgeRange",
+    "iri": "https://w3id.org/dpv/pd#AgeRange",
+    "label": "Age Range",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about apartment(s) owned and its history",
+    "id": "dpv-pd:ApartmentOwned",
+    "iri": "https://w3id.org/dpv/pd#ApartmentOwned",
+    "label": "Apartment Owned",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about associations in a social network with other individuals, groups, or entities e.g. friend of a friend",
+    "id": "dpv-pd:Association",
+    "iri": "https://w3id.org/dpv/pd#Association",
+    "label": "Association",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about attitude",
+    "id": "dpv-pd:Attitude",
+    "iri": "https://w3id.org/dpv/pd#Attitude",
+    "label": "Attitude",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about authentication and information used for authenticating",
+    "id": "dpv-pd:Authenticating",
+    "iri": "https://w3id.org/dpv/pd#Authenticating",
+    "label": "Authenticating",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about prior authentication and its outcomes such as login attempts or location",
+    "id": "dpv-pd:AuthenticationHistory",
+    "iri": "https://w3id.org/dpv/pd#AuthenticationHistory",
+    "label": "Authentication History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about bank accounts",
+    "id": "dpv-pd:BankAccount",
+    "iri": "https://w3id.org/dpv/pd#BankAccount",
+    "label": "Bank Account",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about behaviour or activity",
+    "id": "dpv-pd:Behavioural",
+    "iri": "https://w3id.org/dpv/pd#Behavioural",
+    "label": "Behavioural",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about biometrics and biometric characteristics.",
+    "id": "dpv-pd:Biometric",
+    "iri": "https://w3id.org/dpv/pd#Biometric",
+    "label": "Biometric",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about country of birth",
+    "id": "dpv-pd:BirthCountry",
+    "iri": "https://w3id.org/dpv/pd#BirthCountry",
+    "label": "Birth Country",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about birth date",
+    "id": "dpv-pd:BirthDate",
+    "iri": "https://w3id.org/dpv/pd#BirthDate",
+    "label": "Birth Date",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about birth place",
+    "id": "dpv-pd:BirthPlace",
+    "iri": "https://w3id.org/dpv/pd#BirthPlace",
+    "label": "Birth Place",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about blood type",
+    "id": "dpv-pd:BloodType",
+    "iri": "https://w3id.org/dpv/pd#BloodType",
+    "label": "Blood Type",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the web browser which is used as a 'fingerprint'",
+    "id": "dpv-pd:BrowserFingerprint",
+    "iri": "https://w3id.org/dpv/pd#BrowserFingerprint",
+    "label": "Browser Fingerprint",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about and including web browsing history",
+    "id": "dpv-pd:BrowserHistory",
+    "iri": "https://w3id.org/dpv/pd#BrowserHistory",
+    "label": "Browser History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about browsing behaviour",
+    "id": "dpv-pd:BrowsingBehaviour",
+    "iri": "https://w3id.org/dpv/pd#BrowsingBehaviour",
+    "label": "Browsing Behaviour",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about web browsing referrer or referral, which can be based on location, targeted referrals, direct, organic search, social media or actions, campaigns.",
+    "id": "dpv-pd:BrowsingReferral",
+    "iri": "https://w3id.org/dpv/pd#BrowsingReferral",
+    "label": "Browsing Referral",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the calls that an individual has made",
+    "id": "dpv-pd:CallLog",
+    "iri": "https://w3id.org/dpv/pd#CallLog",
+    "label": "Call Log",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about cars ownership and ownership history",
+    "id": "dpv-pd:CarOwned",
+    "iri": "https://w3id.org/dpv/pd#CarOwned",
+    "label": "Car Owned",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about character in the public sphere",
+    "id": "dpv-pd:Character",
+    "iri": "https://w3id.org/dpv/pd#Character",
+    "label": "Character",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about citizenship",
+    "id": "dpv-pd:Citizenship",
+    "iri": "https://w3id.org/dpv/pd#Citizenship",
+    "label": "Citizenship",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about city as a location",
+    "id": "dpv-pd:City",
+    "iri": "https://w3id.org/dpv/pd#City",
+    "label": "City",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information communicated from or to an individual",
+    "id": "dpv-pd:Communication",
+    "iri": "https://w3id.org/dpv/pd#Communication",
+    "label": "Communication",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about communication metadata in the public sphere",
+    "id": "dpv-pd:CommunicationsMetadata",
+    "iri": "https://w3id.org/dpv/pd#CommunicationsMetadata",
+    "label": "Communications Metadata",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about and including connections in a social network",
+    "id": "dpv-pd:Connection",
+    "iri": "https://w3id.org/dpv/pd#Connection",
+    "label": "Connection",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about contacts or used for contacting e.g. email address or phone number",
+    "id": "dpv-pd:Contact",
+    "iri": "https://w3id.org/dpv/pd#Contact",
+    "label": "Contact",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about country e.g. residence, travel",
+    "id": "dpv-pd:Country",
+    "iri": "https://w3id.org/dpv/pd#Country",
+    "label": "Country",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about reputation with regards to money",
+    "id": "dpv-pd:Credit",
+    "iri": "https://w3id.org/dpv/pd#Credit",
+    "label": "Credit",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about credit capacity",
+    "id": "dpv-pd:CreditCapacity",
+    "iri": "https://w3id.org/dpv/pd#CreditCapacity",
+    "label": "Credit Capacity",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about credit card number",
+    "id": "dpv-pd:CreditCardNumber",
+    "iri": "https://w3id.org/dpv/pd#CreditCardNumber",
+    "label": "Credit Card Number",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about credit record",
+    "id": "dpv-pd:CreditRecord",
+    "iri": "https://w3id.org/dpv/pd#CreditRecord",
+    "label": "Credit Record",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about credit score",
+    "id": "dpv-pd:CreditScore",
+    "iri": "https://w3id.org/dpv/pd#CreditScore",
+    "label": "Credit Score",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about credit standing",
+    "id": "dpv-pd:CreditStanding",
+    "iri": "https://w3id.org/dpv/pd#CreditStanding",
+    "label": "Credit Standing",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about credit worthiness",
+    "id": "dpv-pd:CreditWorthiness",
+    "iri": "https://w3id.org/dpv/pd#CreditWorthiness",
+    "label": "Credit Worthiness",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about criminal activity e.g. criminal convictions or jail time",
+    "id": "dpv-pd:Criminal",
+    "iri": "https://w3id.org/dpv/pd#Criminal",
+    "label": "Criminal",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about criminal charges",
+    "id": "dpv-pd:CriminalCharge",
+    "iri": "https://w3id.org/dpv/pd#CriminalCharge",
+    "label": "Criminal Charge",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about criminal convictions",
+    "id": "dpv-pd:CriminalConviction",
+    "iri": "https://w3id.org/dpv/pd#CriminalConviction",
+    "label": "Criminal Conviction",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about criminal offences",
+    "id": "dpv-pd:CriminalOffence",
+    "iri": "https://w3id.org/dpv/pd#CriminalOffence",
+    "label": "Criminal Offence",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about criminal pardons",
+    "id": "dpv-pd:CriminalPardon",
+    "iri": "https://w3id.org/dpv/pd#CriminalPardon",
+    "label": "Criminal Pardon",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about current employment",
+    "id": "dpv-pd:CurrentEmployment",
+    "iri": "https://w3id.org/dpv/pd#CurrentEmployment",
+    "label": "Current Employment",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about DNA",
+    "id": "dpv-pd:DNACode",
+    "iri": "https://w3id.org/dpv/pd#DNACode",
+    "label": "DNA Code",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about demeanour",
+    "id": "dpv-pd:Demeanour",
+    "iri": "https://w3id.org/dpv/pd#Demeanour",
+    "label": "Demeanour",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about demography and demographic characteristics",
+    "id": "dpv-pd:Demographic",
+    "iri": "https://w3id.org/dpv/pd#Demographic",
+    "label": "Demographic",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about applications or application-like software on a device",
+    "id": "dpv-pd:DeviceApplications",
+    "iri": "https://w3id.org/dpv/pd#DeviceApplications",
+    "label": "Device Applications",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about devices",
+    "id": "dpv-pd:DeviceBased",
+    "iri": "https://w3id.org/dpv/pd#DeviceBased",
+    "label": "Device Based",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the operating system (OS) or system software that manages hardware or software resources.",
+    "id": "dpv-pd:DeviceOperatingSystem",
+    "iri": "https://w3id.org/dpv/pd#DeviceOperatingSystem",
+    "label": "Device Operating System",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about software on or related to a device",
+    "id": "dpv-pd:DeviceSoftware",
+    "iri": "https://w3id.org/dpv/pd#DeviceSoftware",
+    "label": "Device Software",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about linguistic dialects",
+    "id": "dpv-pd:Dialect",
+    "iri": "https://w3id.org/dpv/pd#Dialect",
+    "label": "Dialect",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about a 'digital fingerprint' created for identification",
+    "id": "dpv-pd:DigitalFingerprint",
+    "iri": "https://w3id.org/dpv/pd#DigitalFingerprint",
+    "label": "Digital Fingerprint",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about disabilities",
+    "id": "dpv-pd:Disability",
+    "iri": "https://w3id.org/dpv/pd#Disability",
+    "label": "Disability",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about disciplinary actions and its history",
+    "id": "dpv-pd:DisciplinaryAction",
+    "iri": "https://w3id.org/dpv/pd#DisciplinaryAction",
+    "label": "Disciplinary Action",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about dislikes or preferences regarding repulsions",
+    "id": "dpv-pd:Dislike",
+    "iri": "https://w3id.org/dpv/pd#Dislike",
+    "label": "Dislike",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about divorce(s)",
+    "id": "dpv-pd:Divorce",
+    "iri": "https://w3id.org/dpv/pd#Divorce",
+    "label": "Divorce",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about domicile status e.g. which region or country a person is domiciled in",
+    "id": "dpv-pd:Domicile",
+    "iri": "https://w3id.org/dpv/pd#Domicile",
+    "label": "Domicile",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about drug test results",
+    "id": "dpv-pd:DrugTestResult",
+    "iri": "https://w3id.org/dpv/pd#DrugTestResult",
+    "label": "Drug Test Result",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about education",
+    "id": "dpv-pd:Education",
+    "iri": "https://w3id.org/dpv/pd#Education",
+    "label": "Education",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about education experience e.g. attending a university",
+    "id": "dpv-pd:EducationExperience",
+    "iri": "https://w3id.org/dpv/pd#EducationExperience",
+    "label": "Education Experience",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about educational qualifications",
+    "id": "dpv-pd:EducationQualification",
+    "iri": "https://w3id.org/dpv/pd#EducationQualification",
+    "label": "Education Qualification",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about email address",
+    "id": "dpv-pd:EmailAddress",
+    "iri": "https://w3id.org/dpv/pd#EmailAddress",
+    "label": "Email Address",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about email address used in personal capacity",
+    "id": "dpv-pd:EmailAddressPersonal",
+    "iri": "https://w3id.org/dpv/pd#EmailAddressPersonal",
+    "label": "Email Address Personal",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about email address used for work or in professional capacity",
+    "id": "dpv-pd:EmailAddressWork",
+    "iri": "https://w3id.org/dpv/pd#EmailAddressWork",
+    "label": "Email Address Work",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the contents of emails sent or received",
+    "id": "dpv-pd:EmailContent",
+    "iri": "https://w3id.org/dpv/pd#EmailContent",
+    "label": "Email Content",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about emotion",
+    "id": "dpv-pd:Emotion",
+    "iri": "https://w3id.org/dpv/pd#Emotion",
+    "label": "Emotion",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about employment history",
+    "id": "dpv-pd:EmploymentHistory",
+    "iri": "https://w3id.org/dpv/pd#EmploymentHistory",
+    "label": "Employment History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about ethnic origin",
+    "id": "dpv-pd:EthnicOrigin",
+    "iri": "https://w3id.org/dpv/pd#EthnicOrigin",
+    "label": "Ethnic Origin",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about ethnic origins and lineage",
+    "id": "dpv-pd:Ethnicity",
+    "iri": "https://w3id.org/dpv/pd#Ethnicity",
+    "label": "Ethnicity",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about external characteristics that can be observed",
+    "id": "dpv-pd:External",
+    "iri": "https://w3id.org/dpv/pd#External",
+    "label": "External",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:core-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about facial expression",
+    "id": "dpv-pd:FacialExpression",
+    "iri": "https://w3id.org/dpv/pd#FacialExpression",
+    "label": "Facial Expression",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about facial print or pattern",
+    "id": "dpv-pd:FacialPrint",
+    "iri": "https://w3id.org/dpv/pd#FacialPrint",
+    "label": "Facial Print",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about family and relationships",
+    "id": "dpv-pd:Family",
+    "iri": "https://w3id.org/dpv/pd#Family",
+    "label": "Family",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about family health history",
+    "id": "dpv-pd:FamilyHealthHistory",
+    "iri": "https://w3id.org/dpv/pd#FamilyHealthHistory",
+    "label": "Family Health History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about family and familial structure",
+    "id": "dpv-pd:FamilyStructure",
+    "iri": "https://w3id.org/dpv/pd#FamilyStructure",
+    "label": "Family Structure",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about favourites",
+    "id": "dpv-pd:Favourite",
+    "iri": "https://w3id.org/dpv/pd#Favourite",
+    "label": "Favourite",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about favourite colour",
+    "id": "dpv-pd:FavouriteColour",
+    "iri": "https://w3id.org/dpv/pd#FavouriteColour",
+    "label": "Favourite Colour",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about favourite food",
+    "id": "dpv-pd:FavouriteFood",
+    "iri": "https://w3id.org/dpv/pd#FavouriteFood",
+    "label": "Favourite Food",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about favourite music",
+    "id": "dpv-pd:FavouriteMusic",
+    "iri": "https://w3id.org/dpv/pd#FavouriteMusic",
+    "label": "Favourite Music",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about an individual's sexual fetishes",
+    "id": "dpv-pd:Fetish",
+    "iri": "https://w3id.org/dpv/pd#Fetish",
+    "label": "Fetish",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about finance including monetary characteristics and transactions",
+    "id": "dpv-pd:Financial",
+    "iri": "https://w3id.org/dpv/pd#Financial",
+    "label": "Financial",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:core-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about financial accounts",
+    "id": "dpv-pd:FinancialAccount",
+    "iri": "https://w3id.org/dpv/pd#FinancialAccount",
+    "label": "Financial Account",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about financial account number",
+    "id": "dpv-pd:FinancialAccountNumber",
+    "iri": "https://w3id.org/dpv/pd#FinancialAccountNumber",
+    "label": "Financial Account Number",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about financial status or standing",
+    "id": "dpv-pd:FinancialStatus",
+    "iri": "https://w3id.org/dpv/pd#FinancialStatus",
+    "label": "Financial Status",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about fingerprint used for biometric purposes",
+    "id": "dpv-pd:Fingerprint",
+    "iri": "https://w3id.org/dpv/pd#Fingerprint",
+    "label": "Fingerprint",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about friends in a social network, including aspects of friendships such as years together or nature of friendship",
+    "id": "dpv-pd:Friend",
+    "iri": "https://w3id.org/dpv/pd#Friend",
+    "label": "Friend",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about location expressed using Global Position System coordinates (GPS)",
+    "id": "dpv-pd:GPSCoordinate",
+    "iri": "https://w3id.org/dpv/pd#GPSCoordinate",
+    "label": "GPS Coordinate",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about gender",
+    "id": "dpv-pd:Gender",
+    "iri": "https://w3id.org/dpv/pd#Gender",
+    "label": "Gender",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about reputation in the public sphere",
+    "id": "dpv-pd:GeneralReputation",
+    "iri": "https://w3id.org/dpv/pd#GeneralReputation",
+    "label": "General Reputation",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about inherited or acquired genetic characteristics",
+    "id": "dpv-pd:Genetic",
+    "iri": "https://w3id.org/dpv/pd#Genetic",
+    "label": "Genetic",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about location or based on geography (e.g. home address)",
+    "id": "dpv-pd:Geographic",
+    "iri": "https://w3id.org/dpv/pd#Geographic",
+    "label": "Geographic",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about groups and memberships included or associated with a social network",
+    "id": "dpv-pd:GroupMembership",
+    "iri": "https://w3id.org/dpv/pd#GroupMembership",
+    "label": "Group Membership",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Group profile or category profile is information and representation of characteristics associated with a group or category of individuals",
+    "id": "dpv-pd:GroupProfile",
+    "iri": "https://w3id.org/dpv/pd#GroupProfile",
+    "label": "Group Profile",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about hair colour",
+    "id": "dpv-pd:HairColour",
+    "iri": "https://w3id.org/dpv/pd#HairColour",
+    "label": "Hair Colour",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about health",
+    "id": "dpv-pd:Health",
+    "iri": "https://w3id.org/dpv/pd#Health",
+    "label": "Health",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about health history",
+    "id": "dpv-pd:HealthHistory",
+    "iri": "https://w3id.org/dpv/pd#HealthHistory",
+    "label": "Health History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about health record",
+    "id": "dpv-pd:HealthRecord",
+    "iri": "https://w3id.org/dpv/pd#HealthRecord",
+    "label": "Health Record",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about physical height",
+    "id": "dpv-pd:Height",
+    "iri": "https://w3id.org/dpv/pd#Height",
+    "label": "Height",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about historical data related to or relevant regarding history or past events",
+    "id": "dpv-pd:Historical",
+    "iri": "https://w3id.org/dpv/pd#Historical",
+    "label": "Historical",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:core-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about house or apartment number as a location",
+    "id": "dpv-pd:HouseNumber",
+    "iri": "https://w3id.org/dpv/pd#HouseNumber",
+    "label": "House Number",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about house(s) owned and ownership history",
+    "id": "dpv-pd:HouseOwned",
+    "iri": "https://w3id.org/dpv/pd#HouseOwned",
+    "label": "House Owned",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about personal or household activities",
+    "id": "dpv-pd:Household",
+    "iri": "https://w3id.org/dpv/pd#Household",
+    "label": "Household",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:core-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the Internet Protocol (IP) address of a device",
+    "id": "dpv-pd:IPAddress",
+    "iri": "https://w3id.org/dpv/pd#IPAddress",
+    "label": "IP Address",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about an identifier or name used for identification",
+    "id": "dpv-pd:Identifier",
+    "iri": "https://w3id.org/dpv/pd#Identifier",
+    "label": "Identifier",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information that uniquely or semi-uniquely identifies an individual or a group",
+    "id": "dpv-pd:Identifying",
+    "iri": "https://w3id.org/dpv/pd#Identifying",
+    "label": "Identifying",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about financial income e.g. for individual or household or family",
+    "id": "dpv-pd:Income",
+    "iri": "https://w3id.org/dpv/pd#Income",
+    "label": "Income",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about income bracket",
+    "id": "dpv-pd:IncomeBracket",
+    "iri": "https://w3id.org/dpv/pd#IncomeBracket",
+    "label": "Income Bracket",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about information health history",
+    "id": "dpv-pd:IndividualHealthHistory",
+    "iri": "https://w3id.org/dpv/pd#IndividualHealthHistory",
+    "label": "Individual Health History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Individual profile or user profile is information and representation of characteristics associated with a specific individual",
+    "id": "dpv-pd:IndividualProfile",
+    "iri": "https://w3id.org/dpv/pd#IndividualProfile",
+    "label": "Individual Profile",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about Insurance",
+    "id": "dpv-pd:Insurance",
+    "iri": "https://w3id.org/dpv/pd#Insurance",
+    "label": "Insurance",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about intentions",
+    "id": "dpv-pd:Intention",
+    "iri": "https://w3id.org/dpv/pd#Intention",
+    "label": "Intention",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about interactions in the public sphere",
+    "id": "dpv-pd:Interaction",
+    "iri": "https://w3id.org/dpv/pd#Interaction",
+    "label": "Interaction",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about interests",
+    "id": "dpv-pd:Interest",
+    "iri": "https://w3id.org/dpv/pd#Interest",
+    "label": "Interest",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about internal characteristics that cannot be seen or observed",
+    "id": "dpv-pd:Internal",
+    "iri": "https://w3id.org/dpv/pd#Internal",
+    "label": "Internal",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:core-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about professional jobs",
+    "id": "dpv-pd:Job",
+    "iri": "https://w3id.org/dpv/pd#Job",
+    "label": "Job",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about knowledge and beliefs",
+    "id": "dpv-pd:KnowledgeBelief",
+    "iri": "https://w3id.org/dpv/pd#KnowledgeBelief",
+    "label": "Knowledge and Beliefs",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about language and lingual history",
+    "id": "dpv-pd:Language",
+    "iri": "https://w3id.org/dpv/pd#Language",
+    "label": "Language",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about personal history regarding events or activities - including  their occurrences that might be directly related or have had an influence (e.g. World War, 9/11)",
+    "id": "dpv-pd:LifeHistory",
+    "iri": "https://w3id.org/dpv/pd#LifeHistory",
+    "label": "Life History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about likes or preferences regarding attractions",
+    "id": "dpv-pd:Like",
+    "iri": "https://w3id.org/dpv/pd#Like",
+    "label": "Like",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the links that an individual has clicked",
+    "id": "dpv-pd:LinkClicked",
+    "iri": "https://w3id.org/dpv/pd#LinkClicked",
+    "label": "Link Clicked",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about loans, whether applied, provided or rejected, and its history",
+    "id": "dpv-pd:LoanRecord",
+    "iri": "https://w3id.org/dpv/pd#LoanRecord",
+    "label": "Loan Record",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about locality e.g. city, village, town, portion of a city as a location",
+    "id": "dpv-pd:Locality",
+    "iri": "https://w3id.org/dpv/pd#Locality",
+    "label": "Locality",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about location",
+    "id": "dpv-pd:Location",
+    "iri": "https://w3id.org/dpv/pd#Location",
+    "label": "Location",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the Media Access Control (MAC) address of a device",
+    "id": "dpv-pd:MACAddress",
+    "iri": "https://w3id.org/dpv/pd#MACAddress",
+    "label": "MAC Address",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about marital status and history",
+    "id": "dpv-pd:MaritalStatus",
+    "iri": "https://w3id.org/dpv/pd#MaritalStatus",
+    "label": "Marital Status",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about marriage(s)",
+    "id": "dpv-pd:Marriage",
+    "iri": "https://w3id.org/dpv/pd#Marriage",
+    "label": "Marriage",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about health, medical conditions or health care",
+    "id": "dpv-pd:MedicalHealth",
+    "iri": "https://w3id.org/dpv/pd#MedicalHealth",
+    "label": "Medical Health",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about mental health",
+    "id": "dpv-pd:MentalHealth",
+    "iri": "https://w3id.org/dpv/pd#MentalHealth",
+    "label": "Mental Health",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about mood",
+    "id": "dpv-pd:Mood",
+    "iri": "https://w3id.org/dpv/pd#Mood",
+    "label": "Mood",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about names associated or used as given name or nickname",
+    "id": "dpv-pd:Name",
+    "iri": "https://w3id.org/dpv/pd#Name",
+    "label": "Name",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about nationality",
+    "id": "dpv-pd:Nationality",
+    "iri": "https://w3id.org/dpv/pd#Nationality",
+    "label": "Nationality",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about an official identifier or identification document",
+    "id": "dpv-pd:OfficialID",
+    "iri": "https://w3id.org/dpv/pd#OfficialID",
+    "label": "Official ID",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about offspring(s)",
+    "id": "dpv-pd:Offspring",
+    "iri": "https://w3id.org/dpv/pd#Offspring",
+    "label": "Offspring",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about opinions",
+    "id": "dpv-pd:Opinion",
+    "iri": "https://w3id.org/dpv/pd#Opinion",
+    "label": "Opinion",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about ownership and history, including renting, borrowing, possessions",
+    "id": "dpv-pd:Ownership",
+    "iri": "https://w3id.org/dpv/pd#Ownership",
+    "label": "Ownership",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about personal identification number (PIN), which is usually used in the process of authenticating the individual as an user accessing a system",
+    "id": "dpv-pd:PINCode",
+    "iri": "https://w3id.org/dpv/pd#PINCode",
+    "label": "PIN Code",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about parent(s)",
+    "id": "dpv-pd:Parent",
+    "iri": "https://w3id.org/dpv/pd#Parent",
+    "label": "Parent",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about passport",
+    "id": "dpv-pd:Passport",
+    "iri": "https://w3id.org/dpv/pd#Passport",
+    "label": "Passport",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about password used in the process of authenticating the individual as an user accessing a system.",
+    "id": "dpv-pd:Password",
+    "iri": "https://w3id.org/dpv/pd#Password",
+    "label": "Password",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about past employment",
+    "id": "dpv-pd:PastEmployment",
+    "iri": "https://w3id.org/dpv/pd#PastEmployment",
+    "label": "Past Employment",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about payment card such as credit and debit cards",
+    "id": "dpv-pd:PaymentCard",
+    "iri": "https://w3id.org/dpv/pd#PaymentCard",
+    "label": "Payment Card",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about payment card expiry such as a date",
+    "id": "dpv-pd:PaymentCardExpiry",
+    "iri": "https://w3id.org/dpv/pd#PaymentCardExpiry",
+    "label": "Payment Card Expiry",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about payment card number",
+    "id": "dpv-pd:PaymentCardNumber",
+    "iri": "https://w3id.org/dpv/pd#PaymentCardNumber",
+    "label": "Payment Card Number",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about performance at work or within work environments",
+    "id": "dpv-pd:PerformanceAtWork",
+    "iri": "https://w3id.org/dpv/pd#PerformanceAtWork",
+    "label": "Performance at Work",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about and including personal documents e.g. diaries or journals",
+    "id": "dpv-pd:PersonalDocuments",
+    "iri": "https://w3id.org/dpv/pd#PersonalDocuments",
+    "label": "Personal Documents",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about personal possessions",
+    "id": "dpv-pd:PersonalPossession",
+    "iri": "https://w3id.org/dpv/pd#PersonalPossession",
+    "label": "Personal Possession",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about personality (e.g., categorization in terms of the Big Five personality traits)",
+    "id": "dpv-pd:Personality",
+    "iri": "https://w3id.org/dpv/pd#Personality",
+    "label": "Personality",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about philosophical beliefs",
+    "id": "dpv-pd:PhilosophicalBelief",
+    "iri": "https://w3id.org/dpv/pd#PhilosophicalBelief",
+    "label": "Philosophical Belief",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about physical address",
+    "id": "dpv-pd:PhysicalAddress",
+    "iri": "https://w3id.org/dpv/pd#PhysicalAddress",
+    "label": "Physical Address",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about physical characteristics",
+    "id": "dpv-pd:PhysicalCharacteristic",
+    "iri": "https://w3id.org/dpv/pd#PhysicalCharacteristic",
+    "label": "Physical Characteristic",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about physical health",
+    "id": "dpv-pd:PhysicalHealth",
+    "iri": "https://w3id.org/dpv/pd#PhysicalHealth",
+    "label": "Physical Health",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about defining traits or features regarding the body",
+    "id": "dpv-pd:PhysicalTrait",
+    "iri": "https://w3id.org/dpv/pd#PhysicalTrait",
+    "label": "Physical Trait",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about visual representation or image e.g. profile photo",
+    "id": "dpv-pd:Picture",
+    "iri": "https://w3id.org/dpv/pd#Picture",
+    "label": "Picture",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about piercings",
+    "id": "dpv-pd:Piercing",
+    "iri": "https://w3id.org/dpv/pd#Piercing",
+    "label": "Piercing",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about political affiliation and history",
+    "id": "dpv-pd:PoliticalAffiliation",
+    "iri": "https://w3id.org/dpv/pd#PoliticalAffiliation",
+    "label": "Political Affiliation",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about opinions regarding politics and political topics",
+    "id": "dpv-pd:PoliticalOpinion",
+    "iri": "https://w3id.org/dpv/pd#PoliticalOpinion",
+    "label": "Political Opinion",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about postal code as a location",
+    "id": "dpv-pd:PostalCode",
+    "iri": "https://w3id.org/dpv/pd#PostalCode",
+    "label": "Postal Code",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about preferences or interests",
+    "id": "dpv-pd:Preference",
+    "iri": "https://w3id.org/dpv/pd#Preference",
+    "label": "Preference",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about medical and pharmaceutical prescriptions",
+    "id": "dpv-pd:Prescription",
+    "iri": "https://w3id.org/dpv/pd#Prescription",
+    "label": "Prescription",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about privacy preferences",
+    "id": "dpv-pd:PrivacyPreference",
+    "iri": "https://w3id.org/dpv/pd#PrivacyPreference",
+    "label": "Privacy Preference",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about proclivities in a sexual context",
+    "id": "dpv-pd:Proclivity",
+    "iri": "https://w3id.org/dpv/pd#Proclivity",
+    "label": "Proclivity",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about educational or professional career",
+    "id": "dpv-pd:Professional",
+    "iri": "https://w3id.org/dpv/pd#Professional",
+    "label": "Professional",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about professional certifications",
+    "id": "dpv-pd:ProfessionalCertification",
+    "iri": "https://w3id.org/dpv/pd#ProfessionalCertification",
+    "label": "Professional Certification",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about professional evaluations",
+    "id": "dpv-pd:ProfessionalEvaluation",
+    "iri": "https://w3id.org/dpv/pd#ProfessionalEvaluation",
+    "label": "Professional Evaluation",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about professional interviews",
+    "id": "dpv-pd:ProfessionalInterview",
+    "iri": "https://w3id.org/dpv/pd#ProfessionalInterview",
+    "label": "Professional Interview",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Profile or user profile is information and representation of characteristics associated with person(s) or group(s)",
+    "id": "dpv-pd:Profile",
+    "iri": "https://w3id.org/dpv/pd#Profile",
+    "label": "Profile",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:core-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about public life",
+    "id": "dpv-pd:PublicLife",
+    "iri": "https://w3id.org/dpv/pd#PublicLife",
+    "label": "Public Life",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about social media that is publicly available",
+    "id": "dpv-pd:PubliclyAvailableSocialMedia",
+    "iri": "https://w3id.org/dpv/pd#PubliclyAvailableSocialMedia",
+    "label": "Publicly Available Social Media",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about purchases such as items bought e.g. grocery or clothing",
+    "id": "dpv-pd:Purchase",
+    "iri": "https://w3id.org/dpv/pd#Purchase",
+    "label": "Purchase",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about analysis of purchases made and money spent expressed as a habit e.g. monthly shopping trends",
+    "id": "dpv-pd:PurchasesAndSpendingHabit",
+    "iri": "https://w3id.org/dpv/pd#PurchasesAndSpendingHabit",
+    "label": "Purchases and Spending Habit",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about race or racial history",
+    "id": "dpv-pd:Race",
+    "iri": "https://w3id.org/dpv/pd#Race",
+    "label": "Race",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about references in the professional context",
+    "id": "dpv-pd:Reference",
+    "iri": "https://w3id.org/dpv/pd#Reference",
+    "label": "Reference",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about region as a location",
+    "id": "dpv-pd:Region",
+    "iri": "https://w3id.org/dpv/pd#Region",
+    "label": "Region",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about relationships and relationship history",
+    "id": "dpv-pd:Relationship",
+    "iri": "https://w3id.org/dpv/pd#Relationship",
+    "label": "Relationship",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about reliability (e.g. of a person)",
+    "id": "dpv-pd:Reliability",
+    "iri": "https://w3id.org/dpv/pd#Reliability",
+    "label": "Reliability",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about religion, religious inclinations, and religious history.",
+    "id": "dpv-pd:Religion",
+    "iri": "https://w3id.org/dpv/pd#Religion",
+    "label": "Religion",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about religion and religious beliefs",
+    "id": "dpv-pd:ReligiousBelief",
+    "iri": "https://w3id.org/dpv/pd#ReligiousBelief",
+    "label": "Religious Belief",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about residency e.g. which region or country a person is resident in",
+    "id": "dpv-pd:Residency",
+    "iri": "https://w3id.org/dpv/pd#Residency",
+    "label": "Residency",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about retina and the retinal patterns",
+    "id": "dpv-pd:Retina",
+    "iri": "https://w3id.org/dpv/pd#Retina",
+    "label": "Retina",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about location expressed as room number or similar numbering systems",
+    "id": "dpv-pd:RoomNumber",
+    "iri": "https://w3id.org/dpv/pd#RoomNumber",
+    "label": "Room Number",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about salary",
+    "id": "dpv-pd:Salary",
+    "iri": "https://w3id.org/dpv/pd#Salary",
+    "label": "Salary",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about sales e.g. selling of goods or services",
+    "id": "dpv-pd:Sale",
+    "iri": "https://w3id.org/dpv/pd#Sale",
+    "label": "Sale",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about school such as name of school, conduct, or grades obtained",
+    "id": "dpv-pd:School",
+    "iri": "https://w3id.org/dpv/pd#School",
+    "label": "School",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about secret text used in the process of authenticating the individual as an user accessing a system, e.g., when recovering a lost password",
+    "id": "dpv-pd:SecretText",
+    "iri": "https://w3id.org/dpv/pd#SecretText",
+    "label": "Secret Text",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about the consumption of a service, e.g. time and duration of consumption",
+    "id": "dpv-pd:ServiceConsumptionBehaviour",
+    "iri": "https://w3id.org/dpv/pd#ServiceConsumptionBehaviour",
+    "label": "Service Consumption Behaviour",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about sexuality and sexual history",
+    "id": "dpv-pd:Sexual",
+    "iri": "https://w3id.org/dpv/pd#Sexual",
+    "label": "Sexual",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about sexual history",
+    "id": "dpv-pd:SexualHistory",
+    "iri": "https://w3id.org/dpv/pd#SexualHistory",
+    "label": "Sexual History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about sexual preferences",
+    "id": "dpv-pd:SexualPreference",
+    "iri": "https://w3id.org/dpv/pd#SexualPreference",
+    "label": "Sexual Preference",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about sibling(s)",
+    "id": "dpv-pd:Sibling",
+    "iri": "https://w3id.org/dpv/pd#Sibling",
+    "label": "Sibling",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about skin tone",
+    "id": "dpv-pd:SkinTone",
+    "iri": "https://w3id.org/dpv/pd#SkinTone",
+    "label": "Skin Tone",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about social aspects such as family, public life, or professional networks",
+    "id": "dpv-pd:Social",
+    "iri": "https://w3id.org/dpv/pd#Social",
+    "label": "Social",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:core-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about social media",
+    "id": "dpv-pd:SocialMedia",
+    "iri": "https://w3id.org/dpv/pd#SocialMedia",
+    "label": "Social Media",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about social media communication, including the communication itself and metadata",
+    "id": "dpv-pd:SocialMediaCommunication",
+    "iri": "https://w3id.org/dpv/pd#SocialMediaCommunication",
+    "label": "Social Media Communication",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about friends or connections expressed as a social network",
+    "id": "dpv-pd:SocialNetwork",
+    "iri": "https://w3id.org/dpv/pd#SocialNetwork",
+    "label": "Social Network",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about social status",
+    "id": "dpv-pd:SocialStatus",
+    "iri": "https://w3id.org/dpv/pd#SocialStatus",
+    "label": "Social Status",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about street as a location",
+    "id": "dpv-pd:Street",
+    "iri": "https://w3id.org/dpv/pd#Street",
+    "label": "Street",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about TV viewing behaviour, such as timestamps of channel change, duration of viewership, content consumed",
+    "id": "dpv-pd:TVViewingBehaviour",
+    "iri": "https://w3id.org/dpv/pd#TVViewingBehaviour",
+    "label": "TV Viewing Behaviour",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about tattoos",
+    "id": "dpv-pd:Tattoo",
+    "iri": "https://w3id.org/dpv/pd#Tattoo",
+    "label": "Tattoo",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about financial tax e.g. tax records or tax due",
+    "id": "dpv-pd:Tax",
+    "iri": "https://w3id.org/dpv/pd#Tax",
+    "label": "Tax",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about telephone number",
+    "id": "dpv-pd:TelephoneNumber",
+    "iri": "https://w3id.org/dpv/pd#TelephoneNumber",
+    "label": "Telephone Number",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about thoughts",
+    "id": "dpv-pd:Thought",
+    "iri": "https://w3id.org/dpv/pd#Thought",
+    "label": "Thought",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information used to track an individual or group e.g. location or email",
+    "id": "dpv-pd:Tracking",
+    "iri": "https://w3id.org/dpv/pd#Tracking",
+    "label": "Tracking",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:core-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about trade union memberships and related topics",
+    "id": "dpv-pd:TradeUnionMembership",
+    "iri": "https://w3id.org/dpv/pd#TradeUnionMembership",
+    "label": "Trade Union Membership",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes",
+      "dpv-pd:specialcategory-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData",
+      "https://w3id.org/dpv#SpecialCategoryPersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about financial transactions e.g. bank transfers",
+    "id": "dpv-pd:Transaction",
+    "iri": "https://w3id.org/dpv/pd#Transaction",
+    "label": "Transaction",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about a purchasing, spending or income",
+    "id": "dpv-pd:Transactional",
+    "iri": "https://w3id.org/dpv/pd#Transactional",
+    "label": "Transactional",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about travel history",
+    "id": "dpv-pd:TravelHistory",
+    "iri": "https://w3id.org/dpv/pd#TravelHistory",
+    "label": "Travel History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about unique identifiers",
+    "id": "dpv-pd:UID",
+    "iri": "https://w3id.org/dpv/pd#UID",
+    "label": "UID",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about software acting on behalf of users e.g. web browser",
+    "id": "dpv-pd:UserAgent",
+    "iri": "https://w3id.org/dpv/pd#UserAgent",
+    "label": "User agent",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about usernames",
+    "id": "dpv-pd:Username",
+    "iri": "https://w3id.org/dpv/pd#Username",
+    "label": "Username",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about vehicle license number",
+    "id": "dpv-pd:VehicalLicenseNumber",
+    "iri": "https://w3id.org/dpv/pd#VehicalLicenseNumber",
+    "label": "Vehicle License Number",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about vehicle license registration",
+    "id": "dpv-pd:VehicalLicenseRegistration",
+    "iri": "https://w3id.org/dpv/pd#VehicalLicenseRegistration",
+    "label": "Vehicle License Registration",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about vehicles",
+    "id": "dpv-pd:Vehicle",
+    "iri": "https://w3id.org/dpv/pd#Vehicle",
+    "label": "Vehicle",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about vehicle license",
+    "id": "dpv-pd:VehicleLicense",
+    "iri": "https://w3id.org/dpv/pd#VehicleLicense",
+    "label": "Vehicle License",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about usage of vehicles, e.g. driving statistics",
+    "id": "dpv-pd:VehicleUsage",
+    "iri": "https://w3id.org/dpv/pd#VehicleUsage",
+    "label": "Vehicle Usage",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about vocal recorded communication (e.g. telephony, VoIP)",
+    "id": "dpv-pd:VoiceCommunicationRecording",
+    "iri": "https://w3id.org/dpv/pd#VoiceCommunicationRecording",
+    "label": "Voice Communication Recording",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about voice mail messages",
+    "id": "dpv-pd:VoiceMail",
+    "iri": "https://w3id.org/dpv/pd#VoiceMail",
+    "label": "Voice Mail",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about physical weight",
+    "id": "dpv-pd:Weight",
+    "iri": "https://w3id.org/dpv/pd#Weight",
+    "label": "Weight",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about work environments",
+    "id": "dpv-pd:WorkEnvironment",
+    "iri": "https://w3id.org/dpv/pd#WorkEnvironment",
+    "label": "Work Environment",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Information about work history in a professional context",
+    "id": "dpv-pd:WorkHistory",
+    "iri": "https://w3id.org/dpv/pd#WorkHistory",
+    "label": "Work History",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [
+      "dpv-pd:extended-classes"
+    ],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2000/01/rdf-schema#Class",
+      "https://w3id.org/dpv#PersonalData"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": null,
+    "id": "dpv-pd:core-classes",
+    "iri": "https://w3id.org/dpv/pd#core-classes",
+    "label": "dpv-pd:core-classes",
+    "modules": [
+      "core",
+      "pd"
+    ],
+    "schemes": [],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#ConceptScheme"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": null,
+    "id": "dpv-pd:extended-classes",
+    "iri": "https://w3id.org/dpv/pd#extended-classes",
+    "label": "dpv-pd:extended-classes",
+    "modules": [
+      "extended",
+      "pd"
+    ],
+    "schemes": [],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#ConceptScheme"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": null,
+    "id": "dpv-pd:serialisation-html",
+    "iri": "https://w3id.org/dpv/pd#serialisation-html",
+    "label": "dpv-pd:serialisation-html",
+    "modules": [
+      "core",
+      "extended",
+      "pd"
+    ],
+    "schemes": [],
+    "types": [
+      "http://www.w3.org/ns/dx/prof/ResourceDescriptor"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": null,
+    "id": "dpv-pd:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/pd#serialisation-jsonld",
+    "label": "dpv-pd:serialisation-jsonld",
+    "modules": [
+      "core",
+      "extended",
+      "pd"
+    ],
+    "schemes": [],
+    "types": [
+      "http://www.w3.org/ns/dx/prof/ResourceDescriptor"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": null,
+    "id": "dpv-pd:serialisation-n3",
+    "iri": "https://w3id.org/dpv/pd#serialisation-n3",
+    "label": "dpv-pd:serialisation-n3",
+    "modules": [
+      "core",
+      "extended",
+      "pd"
+    ],
+    "schemes": [],
+    "types": [
+      "http://www.w3.org/ns/dx/prof/ResourceDescriptor"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": null,
+    "id": "dpv-pd:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/pd#serialisation-rdf",
+    "label": "dpv-pd:serialisation-rdf",
+    "modules": [
+      "core",
+      "extended",
+      "pd"
+    ],
+    "schemes": [],
+    "types": [
+      "http://www.w3.org/ns/dx/prof/ResourceDescriptor"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": null,
+    "id": "dpv-pd:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/pd#serialisation-ttl",
+    "label": "dpv-pd:serialisation-ttl",
+    "modules": [
+      "core",
+      "extended",
+      "pd"
+    ],
+    "schemes": [],
+    "types": [
+      "http://www.w3.org/ns/dx/prof/ResourceDescriptor"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": null,
+    "id": "dpv-pd:specialcategory-classes",
+    "iri": "https://w3id.org/dpv/pd#specialcategory-classes",
+    "label": "dpv-pd:specialcategory-classes",
+    "modules": [
+      "pd"
+    ],
+    "schemes": [],
+    "types": [
+      "http://www.w3.org/2004/02/skos/core#ConceptScheme"
+    ]
+  }
+]

@@ -4,7 +4,8 @@ from moose.config import Settings
 from moose.llm.base import LLMClient
 from moose.llm.ollama import OllamaClient
 from moose.llm.openrouter import OpenRouterClient
-
+from moose.llm.deepinfra import DeepInfraClient
+from moose.llm.deepseek import DeepSeekClient
 
 def create_client(settings: Settings) -> LLMClient:
     provider = settings.MOOSE_LLM_PROVIDER.lower()
@@ -19,6 +20,21 @@ def create_client(settings: Settings) -> LLMClient:
         return OpenRouterClient(
             api_key=settings.MOOSE_OPENROUTER_API_KEY,
             base_url=settings.MOOSE_OPENROUTER_BASE_URL,
+            model=settings.MOOSE_MODEL,
+            timeout=settings.MOOSE_TIMEOUT_SECS,
+        )
+    if provider == "deepinfra":
+        return DeepInfraClient(
+            api_key=settings.MOOSE_DEEPINFRA_API_KEY,
+            base_url=settings.MOOSE_DEEPINFRA_BASE_URL,
+            model=settings.MOOSE_MODEL,
+            timeout=settings.MOOSE_TIMEOUT_SECS,
+        )
+
+    if provider == "deepseek":
+        return DeepSeekClient(
+            api_key=settings.MOOSE_DEEPSEEK_API_KEY,
+            base_url=settings.MOOSE_DEEPSEEK_BASE_URL,
             model=settings.MOOSE_MODEL,
             timeout=settings.MOOSE_TIMEOUT_SECS,
         )

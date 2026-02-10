@@ -1,0 +1,49 @@
+{
+  "default_profile": "balanced",
+  "profiles": {
+    "balanced": {
+      "defaults": {
+        "analysis_mode": "hybrid",
+        "include_extraction": true,
+        "policy_pack": "gdpr_basic",
+        "scan_schema": "dpv_pd",
+        "table_schema": "sti",
+        "text_schema": "dpv_pd"
+      },
+      "description": "Balanced accuracy/cost. Uses dpv_pd + assessor; escalates selectively.",
+      "escalation": [
+        {
+          "when": "uncertain_findings",
+          "text_schema": "dpv",
+          "max_extra_passes": 1,
+          "max_escalated_tasks": 5,
+          "note": "Escalate only tasks that remain uncertain after rules+assessor."
+        }
+      ]
+    },
+    "deep": {
+      "defaults": {
+        "analysis_mode": "hybrid",
+        "include_extraction": true,
+        "policy_pack": "gdpr_basic",
+        "scan_schema": "dpv",
+        "table_schema": "sti",
+        "text_schema": "dpv"
+      },
+      "description": "Deep semantic privacy analysis (slow). Uses full DPV by default.",
+      "escalation": []
+    },
+    "fast": {
+      "defaults": {
+        "analysis_mode": "rules",
+        "include_extraction": true,
+        "policy_pack": "gdpr_basic",
+        "scan_schema": "dpv_pd",
+        "table_schema": "sti",
+        "text_schema": "dpv_pd"
+      },
+      "description": "Fast, low-cost privacy scan. Uses small vocabularies and rules only.",
+      "escalation": []
+    }
+  }
+}

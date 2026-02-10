@@ -1,58 +1,109 @@
 [
   {
-    "name": "dpv",
-    "label": "DPV",
-    "description": "Data Privacy Vocabulary (W3C).",
-    "type_source": "dpv_full.json",
+    "cpa_intro": "You are a column relationship prediction engine. Your task is to predict the semantic relationship between a SUBJECT column and each TARGET column in a table. Choose ONLY from the provided relationship labels. If none apply, choose CPA:NONE. If a relationship exists but is not in the label set, choose CPA:OTHER.",
+    "description": "Column property annotation (CPA) / column relationship prediction from a subject column to target columns.",
+    "label": "CPA Relationships",
+    "name": "cpa",
     "score_mode": "sparse",
-    "text_intro": "You are a DPV annotation engine.",
-    "table_intro": "You are a DPV classification engine for tabular data.",
-    "prefilter_types": true,
-    "type_alias_prefixes": {
-      "dpv-pd:": "dpv:"
-    }
+    "supports_cpa": true,
+    "supports_table": false,
+    "supports_text": false,
+    "type_source": "colprops_types.json"
   },
   {
-    "name": "sti",
-    "label": "STI Column Types",
-    "description": "Coarse Semantic Table Interpretation column typing.",
-    "type_source": "sti_types.json",
+    "description": "Data Privacy Vocabulary (W3C) – full concept set (deep/slow).",
+    "label": "DPV (Full)",
+    "name": "dpv",
+    "prefilter_types": true,
     "score_mode": "sparse",
-    "text_intro": "You are a semantic typing engine for tabular data.",
-    "table_intro": "You are a column type classifier for semantic table interpretation. Assign one type per column using the column header and value distribution. First decide NE vs LIT: use NE:* for columns whose values are names of real-world entities that could be linked in a KG (people, organizations, locations, works/titles, products, brands). Use NE:OTHER for entity names that are not PERSON/ORGANIZATION/LOCATION (e.g., movie titles). Use LIT:* only for non-entity attributes like numbers, dates, durations, codes, or descriptive text that is not an entity name. For literals, prefer the most specific xsd:* datatype; use ext:* for common syntactic patterns (email, ipv4/ipv6, phone, uuid, url, postal/country/currency codes); if unsure, use the high-level LIT:STRING, LIT:NUMBER, or LIT:DATETIME. Do not perform entity linking.",
+    "table_intro": "You are a DPV classification engine for tabular data.",
+    "text_intro": "You are a DPV annotation engine.",
+    "type_alias_prefixes": {},
+    "type_source": "dpv/concepts.json"
+  },
+  {
+    "description": "DPV personal data subset for fast privacy detection.",
+    "label": "DPV Personal Data (Fast)",
+    "name": "dpv_pd",
+    "prefilter_types": true,
+    "score_mode": "sparse",
+    "table_intro": "You are a DPV personal data classification engine for tabular data.",
+    "text_intro": "You are a DPV personal data annotation engine.",
+    "type_alias_prefixes": {},
+    "type_source": "dpv/subsets/dpv_pd_only/concepts.json"
+  },
+  {
+    "cpa_intro": "You are a column relationship prediction engine. Predict the schema.org property relating the SUBJECT column to each TARGET column. Choose ONLY from the provided labels. If no relationship exists, choose moose:NONE. If a relationship exists but is not represented, choose moose:OTHER.",
+    "description": "schema.org predicate CPA using curated_v1 property subset (+ moose:NONE/OTHER).",
+    "label": "schema.org CPA (curated_v1)",
+    "name": "schemaorg_cpa_v1",
+    "prefilter_types": true,
+    "score_mode": "sparse",
+    "supports_cpa": true,
+    "supports_table": false,
     "supports_text": false,
     "type_alias_prefixes": {
-      "XSD:": "xsd:",
-      "EXT:": "ext:"
+      "http://schema.org/": "schema:",
+      "https://schema.org/": "schema:"
     },
+    "type_source": "schemaorg/subsets/curated_v1/cpa_labels.json"
+  },
+  {
+    "description": "schema.org class typing (CTA) using curated_v1 class subset.",
+    "label": "schema.org CTA (curated_v1)",
+    "name": "schemaorg_cta_v1",
+    "prefilter_types": true,
+    "score_mode": "sparse",
+    "supports_table": true,
+    "supports_text": false,
+    "table_intro": "You are a schema.org class typing engine for tables. Assign one schema.org class per column based on header and sample values. If no class applies, choose moose:OTHER.",
+    "type_alias_prefixes": {
+      "http://schema.org/": "schema:",
+      "https://schema.org/": "schema:"
+    },
+    "type_source": "schemaorg/subsets/curated_v1/cta_labels.json"
+  },
+  {
     "coarse_mapping": {
-      "NE:PERSON": "NE:PERSON",
-      "NE:ORGANIZATION": "NE:ORGANIZATION",
-      "NE:LOCATION": "NE:LOCATION",
-      "NE:OTHER": "NE:OTHER",
-      "LIT:STRING": "LIT:STRING",
-      "LIT:NUMBER": "LIT:NUMBER",
       "LIT:DATETIME": "LIT:DATETIME",
-      "xsd:string": "LIT:STRING",
-      "xsd:boolean": "LIT:STRING",
-      "xsd:integer": "LIT:NUMBER",
-      "xsd:decimal": "LIT:NUMBER",
-      "xsd:date": "LIT:DATETIME",
-      "xsd:dateTime": "LIT:DATETIME",
-      "xsd:anyURI": "LIT:STRING",
+      "LIT:NUMBER": "LIT:NUMBER",
+      "LIT:STRING": "LIT:STRING",
+      "NE:LOCATION": "NE:LOCATION",
+      "NE:ORGANIZATION": "NE:ORGANIZATION",
+      "NE:OTHER": "NE:OTHER",
+      "NE:PERSON": "NE:PERSON",
+      "ext:countryCode": "LIT:STRING",
+      "ext:currencyCode": "LIT:STRING",
+      "ext:duration": "LIT:DATETIME",
       "ext:email": "LIT:STRING",
       "ext:ipv4": "LIT:STRING",
       "ext:ipv6": "LIT:STRING",
-      "ext:phone": "LIT:STRING",
-      "ext:uuid": "LIT:STRING",
-      "ext:url": "LIT:STRING",
-      "ext:postalCode": "LIT:STRING",
-      "ext:countryCode": "LIT:STRING",
-      "ext:currencyCode": "LIT:STRING",
       "ext:lat": "LIT:NUMBER",
       "ext:lon": "LIT:NUMBER",
       "ext:percentage": "LIT:NUMBER",
-      "ext:duration": "LIT:DATETIME"
-    }
+      "ext:phone": "LIT:STRING",
+      "ext:postalCode": "LIT:STRING",
+      "ext:url": "LIT:STRING",
+      "ext:uuid": "LIT:STRING",
+      "xsd:anyURI": "LIT:STRING",
+      "xsd:boolean": "LIT:STRING",
+      "xsd:date": "LIT:DATETIME",
+      "xsd:dateTime": "LIT:DATETIME",
+      "xsd:decimal": "LIT:NUMBER",
+      "xsd:integer": "LIT:NUMBER",
+      "xsd:string": "LIT:STRING"
+    },
+    "description": "Coarse Semantic Table Interpretation column typing.",
+    "label": "STI Column Types",
+    "name": "sti",
+    "score_mode": "sparse",
+    "supports_text": false,
+    "table_intro": "You are a column type classifier for semantic table interpretation. Assign one type per column using the column header and value distribution. First decide NE vs LIT: use NE:* for columns whose values are names of real-world entities that could be linked in a KG (people, organizations, locations, works/titles, products, brands). Use NE:OTHER for entity names that are not PERSON/ORGANIZATION/LOCATION (e.g., movie titles). Use LIT:* only for non-entity attributes like numbers, dates, durations, codes, or descriptive text that is not an entity name. For literals, prefer the most specific xsd:* datatype; use ext:* for common syntactic patterns (email, ipv4/ipv6, phone, uuid, url, postal/country/currency codes); if unsure, use the high-level LIT:STRING, LIT:NUMBER, or LIT:DATETIME. Do not perform entity linking.",
+    "text_intro": "You are a semantic typing engine for tabular data.",
+    "type_alias_prefixes": {
+      "EXT:": "ext:",
+      "XSD:": "xsd:"
+    },
+    "type_source": "sti_types.json"
   }
 ]

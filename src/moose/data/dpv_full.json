@@ -925,6 +925,36 @@
     "label": "Video Generation"
   },
   {
+    "id": "dpv-ai:capabilities-classes",
+    "iri": "https://w3id.org/dpv/ai#capabilities-classes",
+    "label": "dpv-ai:capabilities-classes"
+  },
+  {
+    "id": "dpv-ai:core-classes",
+    "iri": "https://w3id.org/dpv/ai#core-classes",
+    "label": "dpv-ai:core-classes"
+  },
+  {
+    "id": "dpv-ai:core-properties",
+    "iri": "https://w3id.org/dpv/ai#core-properties",
+    "label": "dpv-ai:core-properties"
+  },
+  {
+    "id": "dpv-ai:data-classes",
+    "iri": "https://w3id.org/dpv/ai#data-classes",
+    "label": "dpv-ai:data-classes"
+  },
+  {
+    "id": "dpv-ai:data-properties",
+    "iri": "https://w3id.org/dpv/ai#data-properties",
+    "label": "dpv-ai:data-properties"
+  },
+  {
+    "id": "dpv-ai:development-classes",
+    "iri": "https://w3id.org/dpv/ai#development-classes",
+    "label": "dpv-ai:development-classes"
+  },
+  {
     "id": "dpv-ai:hasAI",
     "iri": "https://w3id.org/dpv/ai#hasAI",
     "label": "has AI"
@@ -975,9 +1005,524 @@
     "label": "has validation data"
   },
   {
+    "id": "dpv-ai:lifecycle-classes",
+    "iri": "https://w3id.org/dpv/ai#lifecycle-classes",
+    "label": "dpv-ai:lifecycle-classes"
+  },
+  {
+    "id": "dpv-ai:measures-classes",
+    "iri": "https://w3id.org/dpv/ai#measures-classes",
+    "label": "dpv-ai:measures-classes"
+  },
+  {
+    "id": "dpv-ai:risks-classes",
+    "iri": "https://w3id.org/dpv/ai#risks-classes",
+    "label": "dpv-ai:risks-classes"
+  },
+  {
+    "id": "dpv-ai:serialisation-html",
+    "iri": "https://w3id.org/dpv/ai#serialisation-html",
+    "label": "dpv-ai:serialisation-html"
+  },
+  {
+    "id": "dpv-ai:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/ai#serialisation-jsonld",
+    "label": "dpv-ai:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-ai:serialisation-n3",
+    "iri": "https://w3id.org/dpv/ai#serialisation-n3",
+    "label": "dpv-ai:serialisation-n3"
+  },
+  {
+    "id": "dpv-ai:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/ai#serialisation-rdf",
+    "label": "dpv-ai:serialisation-rdf"
+  },
+  {
+    "id": "dpv-ai:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/ai#serialisation-ttl",
+    "label": "dpv-ai:serialisation-ttl"
+  },
+  {
+    "id": "dpv-ai:systems-classes",
+    "iri": "https://w3id.org/dpv/ai#systems-classes",
+    "label": "dpv-ai:systems-classes"
+  },
+  {
+    "id": "dpv-ai:techniques-classes",
+    "iri": "https://w3id.org/dpv/ai#techniques-classes",
+    "label": "dpv-ai:techniques-classes"
+  },
+  {
+    "id": "dpv-examples:E0001",
+    "iri": "https://w3id.org/dpv/examples#E0001",
+    "label": "dpv-examples:E0001"
+  },
+  {
+    "id": "dpv-examples:E0002",
+    "iri": "https://w3id.org/dpv/examples#E0002",
+    "label": "dpv-examples:E0002"
+  },
+  {
+    "id": "dpv-examples:E0003",
+    "iri": "https://w3id.org/dpv/examples#E0003",
+    "label": "dpv-examples:E0003"
+  },
+  {
+    "id": "dpv-examples:E0004",
+    "iri": "https://w3id.org/dpv/examples#E0004",
+    "label": "dpv-examples:E0004"
+  },
+  {
+    "id": "dpv-examples:E0005",
+    "iri": "https://w3id.org/dpv/examples#E0005",
+    "label": "dpv-examples:E0005"
+  },
+  {
+    "id": "dpv-examples:E0006",
+    "iri": "https://w3id.org/dpv/examples#E0006",
+    "label": "dpv-examples:E0006"
+  },
+  {
+    "id": "dpv-examples:E0007",
+    "iri": "https://w3id.org/dpv/examples#E0007",
+    "label": "dpv-examples:E0007"
+  },
+  {
+    "id": "dpv-examples:E0008",
+    "iri": "https://w3id.org/dpv/examples#E0008",
+    "label": "dpv-examples:E0008"
+  },
+  {
+    "id": "dpv-examples:E0009",
+    "iri": "https://w3id.org/dpv/examples#E0009",
+    "label": "dpv-examples:E0009"
+  },
+  {
+    "id": "dpv-examples:E0010",
+    "iri": "https://w3id.org/dpv/examples#E0010",
+    "label": "dpv-examples:E0010"
+  },
+  {
+    "id": "dpv-examples:E0011",
+    "iri": "https://w3id.org/dpv/examples#E0011",
+    "label": "dpv-examples:E0011"
+  },
+  {
+    "id": "dpv-examples:E0012",
+    "iri": "https://w3id.org/dpv/examples#E0012",
+    "label": "dpv-examples:E0012"
+  },
+  {
+    "id": "dpv-examples:E0013",
+    "iri": "https://w3id.org/dpv/examples#E0013",
+    "label": "dpv-examples:E0013"
+  },
+  {
+    "id": "dpv-examples:E0014",
+    "iri": "https://w3id.org/dpv/examples#E0014",
+    "label": "dpv-examples:E0014"
+  },
+  {
+    "id": "dpv-examples:E0015",
+    "iri": "https://w3id.org/dpv/examples#E0015",
+    "label": "dpv-examples:E0015"
+  },
+  {
+    "id": "dpv-examples:E0016",
+    "iri": "https://w3id.org/dpv/examples#E0016",
+    "label": "dpv-examples:E0016"
+  },
+  {
+    "id": "dpv-examples:E0017",
+    "iri": "https://w3id.org/dpv/examples#E0017",
+    "label": "dpv-examples:E0017"
+  },
+  {
+    "id": "dpv-examples:E0018",
+    "iri": "https://w3id.org/dpv/examples#E0018",
+    "label": "dpv-examples:E0018"
+  },
+  {
+    "id": "dpv-examples:E0019",
+    "iri": "https://w3id.org/dpv/examples#E0019",
+    "label": "dpv-examples:E0019"
+  },
+  {
+    "id": "dpv-examples:E0020",
+    "iri": "https://w3id.org/dpv/examples#E0020",
+    "label": "dpv-examples:E0020"
+  },
+  {
+    "id": "dpv-examples:E0021",
+    "iri": "https://w3id.org/dpv/examples#E0021",
+    "label": "dpv-examples:E0021"
+  },
+  {
+    "id": "dpv-examples:E0022",
+    "iri": "https://w3id.org/dpv/examples#E0022",
+    "label": "dpv-examples:E0022"
+  },
+  {
+    "id": "dpv-examples:E0023",
+    "iri": "https://w3id.org/dpv/examples#E0023",
+    "label": "dpv-examples:E0023"
+  },
+  {
+    "id": "dpv-examples:E0024",
+    "iri": "https://w3id.org/dpv/examples#E0024",
+    "label": "dpv-examples:E0024"
+  },
+  {
+    "id": "dpv-examples:E0025",
+    "iri": "https://w3id.org/dpv/examples#E0025",
+    "label": "dpv-examples:E0025"
+  },
+  {
+    "id": "dpv-examples:E0026",
+    "iri": "https://w3id.org/dpv/examples#E0026",
+    "label": "dpv-examples:E0026"
+  },
+  {
+    "id": "dpv-examples:E0027",
+    "iri": "https://w3id.org/dpv/examples#E0027",
+    "label": "dpv-examples:E0027"
+  },
+  {
+    "id": "dpv-examples:E0028",
+    "iri": "https://w3id.org/dpv/examples#E0028",
+    "label": "dpv-examples:E0028"
+  },
+  {
+    "id": "dpv-examples:E0029",
+    "iri": "https://w3id.org/dpv/examples#E0029",
+    "label": "dpv-examples:E0029"
+  },
+  {
+    "id": "dpv-examples:E0030",
+    "iri": "https://w3id.org/dpv/examples#E0030",
+    "label": "dpv-examples:E0030"
+  },
+  {
+    "id": "dpv-examples:E0031",
+    "iri": "https://w3id.org/dpv/examples#E0031",
+    "label": "dpv-examples:E0031"
+  },
+  {
+    "id": "dpv-examples:E0032",
+    "iri": "https://w3id.org/dpv/examples#E0032",
+    "label": "dpv-examples:E0032"
+  },
+  {
+    "id": "dpv-examples:E0033",
+    "iri": "https://w3id.org/dpv/examples#E0033",
+    "label": "dpv-examples:E0033"
+  },
+  {
+    "id": "dpv-examples:E0034",
+    "iri": "https://w3id.org/dpv/examples#E0034",
+    "label": "dpv-examples:E0034"
+  },
+  {
+    "id": "dpv-examples:E0035",
+    "iri": "https://w3id.org/dpv/examples#E0035",
+    "label": "dpv-examples:E0035"
+  },
+  {
+    "id": "dpv-examples:E0036",
+    "iri": "https://w3id.org/dpv/examples#E0036",
+    "label": "dpv-examples:E0036"
+  },
+  {
+    "id": "dpv-examples:E0037",
+    "iri": "https://w3id.org/dpv/examples#E0037",
+    "label": "dpv-examples:E0037"
+  },
+  {
+    "id": "dpv-examples:E0038",
+    "iri": "https://w3id.org/dpv/examples#E0038",
+    "label": "dpv-examples:E0038"
+  },
+  {
+    "id": "dpv-examples:E0039",
+    "iri": "https://w3id.org/dpv/examples#E0039",
+    "label": "dpv-examples:E0039"
+  },
+  {
+    "id": "dpv-examples:E0040",
+    "iri": "https://w3id.org/dpv/examples#E0040",
+    "label": "dpv-examples:E0040"
+  },
+  {
+    "id": "dpv-examples:E0041",
+    "iri": "https://w3id.org/dpv/examples#E0041",
+    "label": "dpv-examples:E0041"
+  },
+  {
+    "id": "dpv-examples:E0042",
+    "iri": "https://w3id.org/dpv/examples#E0042",
+    "label": "dpv-examples:E0042"
+  },
+  {
+    "id": "dpv-examples:E0043",
+    "iri": "https://w3id.org/dpv/examples#E0043",
+    "label": "dpv-examples:E0043"
+  },
+  {
+    "id": "dpv-examples:E0044",
+    "iri": "https://w3id.org/dpv/examples#E0044",
+    "label": "dpv-examples:E0044"
+  },
+  {
+    "id": "dpv-examples:E0045",
+    "iri": "https://w3id.org/dpv/examples#E0045",
+    "label": "dpv-examples:E0045"
+  },
+  {
+    "id": "dpv-examples:E0046",
+    "iri": "https://w3id.org/dpv/examples#E0046",
+    "label": "dpv-examples:E0046"
+  },
+  {
+    "id": "dpv-examples:E0047",
+    "iri": "https://w3id.org/dpv/examples#E0047",
+    "label": "dpv-examples:E0047"
+  },
+  {
+    "id": "dpv-examples:E0048",
+    "iri": "https://w3id.org/dpv/examples#E0048",
+    "label": "dpv-examples:E0048"
+  },
+  {
+    "id": "dpv-examples:E0049",
+    "iri": "https://w3id.org/dpv/examples#E0049",
+    "label": "dpv-examples:E0049"
+  },
+  {
+    "id": "dpv-examples:E0050",
+    "iri": "https://w3id.org/dpv/examples#E0050",
+    "label": "dpv-examples:E0050"
+  },
+  {
+    "id": "dpv-examples:E0051",
+    "iri": "https://w3id.org/dpv/examples#E0051",
+    "label": "dpv-examples:E0051"
+  },
+  {
+    "id": "dpv-examples:E0052",
+    "iri": "https://w3id.org/dpv/examples#E0052",
+    "label": "dpv-examples:E0052"
+  },
+  {
+    "id": "dpv-examples:E0053",
+    "iri": "https://w3id.org/dpv/examples#E0053",
+    "label": "dpv-examples:E0053"
+  },
+  {
+    "id": "dpv-examples:E0054",
+    "iri": "https://w3id.org/dpv/examples#E0054",
+    "label": "dpv-examples:E0054"
+  },
+  {
+    "id": "dpv-examples:E0055",
+    "iri": "https://w3id.org/dpv/examples#E0055",
+    "label": "dpv-examples:E0055"
+  },
+  {
+    "id": "dpv-examples:E0056",
+    "iri": "https://w3id.org/dpv/examples#E0056",
+    "label": "dpv-examples:E0056"
+  },
+  {
+    "id": "dpv-examples:E0057",
+    "iri": "https://w3id.org/dpv/examples#E0057",
+    "label": "dpv-examples:E0057"
+  },
+  {
+    "id": "dpv-examples:E0058",
+    "iri": "https://w3id.org/dpv/examples#E0058",
+    "label": "dpv-examples:E0058"
+  },
+  {
+    "id": "dpv-examples:E0059",
+    "iri": "https://w3id.org/dpv/examples#E0059",
+    "label": "dpv-examples:E0059"
+  },
+  {
+    "id": "dpv-examples:E0060",
+    "iri": "https://w3id.org/dpv/examples#E0060",
+    "label": "dpv-examples:E0060"
+  },
+  {
+    "id": "dpv-examples:E0061",
+    "iri": "https://w3id.org/dpv/examples#E0061",
+    "label": "dpv-examples:E0061"
+  },
+  {
+    "id": "dpv-examples:E0062",
+    "iri": "https://w3id.org/dpv/examples#E0062",
+    "label": "dpv-examples:E0062"
+  },
+  {
+    "id": "dpv-examples:E0063",
+    "iri": "https://w3id.org/dpv/examples#E0063",
+    "label": "dpv-examples:E0063"
+  },
+  {
+    "id": "dpv-examples:E0064",
+    "iri": "https://w3id.org/dpv/examples#E0064",
+    "label": "dpv-examples:E0064"
+  },
+  {
+    "id": "dpv-examples:E0065",
+    "iri": "https://w3id.org/dpv/examples#E0065",
+    "label": "dpv-examples:E0065"
+  },
+  {
+    "id": "dpv-examples:E0066",
+    "iri": "https://w3id.org/dpv/examples#E0066",
+    "label": "dpv-examples:E0066"
+  },
+  {
+    "id": "dpv-examples:E0067",
+    "iri": "https://w3id.org/dpv/examples#E0067",
+    "label": "dpv-examples:E0067"
+  },
+  {
+    "id": "dpv-examples:E0068",
+    "iri": "https://w3id.org/dpv/examples#E0068",
+    "label": "dpv-examples:E0068"
+  },
+  {
+    "id": "dpv-examples:E0069",
+    "iri": "https://w3id.org/dpv/examples#E0069",
+    "label": "dpv-examples:E0069"
+  },
+  {
+    "id": "dpv-examples:E0070",
+    "iri": "https://w3id.org/dpv/examples#E0070",
+    "label": "dpv-examples:E0070"
+  },
+  {
+    "id": "dpv-examples:E0071",
+    "iri": "https://w3id.org/dpv/examples#E0071",
+    "label": "dpv-examples:E0071"
+  },
+  {
+    "id": "dpv-examples:E0072",
+    "iri": "https://w3id.org/dpv/examples#E0072",
+    "label": "dpv-examples:E0072"
+  },
+  {
+    "id": "dpv-examples:E0073",
+    "iri": "https://w3id.org/dpv/examples#E0073",
+    "label": "dpv-examples:E0073"
+  },
+  {
+    "id": "dpv-examples:E0074",
+    "iri": "https://w3id.org/dpv/examples#E0074",
+    "label": "dpv-examples:E0074"
+  },
+  {
+    "id": "dpv-examples:E0075",
+    "iri": "https://w3id.org/dpv/examples#E0075",
+    "label": "dpv-examples:E0075"
+  },
+  {
+    "id": "dpv-examples:E0076",
+    "iri": "https://w3id.org/dpv/examples#E0076",
+    "label": "dpv-examples:E0076"
+  },
+  {
+    "id": "dpv-examples:E0077",
+    "iri": "https://w3id.org/dpv/examples#E0077",
+    "label": "dpv-examples:E0077"
+  },
+  {
+    "id": "dpv-examples:E0078",
+    "iri": "https://w3id.org/dpv/examples#E0078",
+    "label": "dpv-examples:E0078"
+  },
+  {
+    "id": "dpv-examples:E0079",
+    "iri": "https://w3id.org/dpv/examples#E0079",
+    "label": "dpv-examples:E0079"
+  },
+  {
+    "id": "dpv-examples:E0080",
+    "iri": "https://w3id.org/dpv/examples#E0080",
+    "label": "dpv-examples:E0080"
+  },
+  {
+    "id": "dpv-examples:E0081",
+    "iri": "https://w3id.org/dpv/examples#E0081",
+    "label": "dpv-examples:E0081"
+  },
+  {
+    "id": "dpv-examples:E0082",
+    "iri": "https://w3id.org/dpv/examples#E0082",
+    "label": "dpv-examples:E0082"
+  },
+  {
+    "id": "dpv-examples:E0083",
+    "iri": "https://w3id.org/dpv/examples#E0083",
+    "label": "dpv-examples:E0083"
+  },
+  {
+    "id": "dpv-examples:E0084",
+    "iri": "https://w3id.org/dpv/examples#E0084",
+    "label": "dpv-examples:E0084"
+  },
+  {
+    "id": "dpv-examples:E0085",
+    "iri": "https://w3id.org/dpv/examples#E0085",
+    "label": "dpv-examples:E0085"
+  },
+  {
+    "id": "dpv-examples:E0086",
+    "iri": "https://w3id.org/dpv/examples#E0086",
+    "label": "dpv-examples:E0086"
+  },
+  {
+    "id": "dpv-examples:E0087",
+    "iri": "https://w3id.org/dpv/examples#E0087",
+    "label": "dpv-examples:E0087"
+  },
+  {
+    "id": "dpv-examples:E0088",
+    "iri": "https://w3id.org/dpv/examples#E0088",
+    "label": "dpv-examples:E0088"
+  },
+  {
     "id": "dpv-examples:Example",
     "iri": "https://w3id.org/dpv/examples#Example",
     "label": "Example"
+  },
+  {
+    "id": "dpv-examples:serialisation-html",
+    "iri": "https://w3id.org/dpv/examples#serialisation-html",
+    "label": "dpv-examples:serialisation-html"
+  },
+  {
+    "id": "dpv-examples:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/examples#serialisation-jsonld",
+    "label": "dpv-examples:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-examples:serialisation-n3",
+    "iri": "https://w3id.org/dpv/examples#serialisation-n3",
+    "label": "dpv-examples:serialisation-n3"
+  },
+  {
+    "id": "dpv-examples:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/examples#serialisation-rdf",
+    "label": "dpv-examples:serialisation-rdf"
+  },
+  {
+    "id": "dpv-examples:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/examples#serialisation-ttl",
+    "label": "dpv-examples:serialisation-ttl"
   },
   {
     "id": "dpv-justifications:CivilLawEnforcementImpaired",
@@ -1310,9 +1855,84 @@
     "label": "Unlawful Activity Objection"
   },
   {
+    "id": "dpv-justifications:justifications-delay-classes",
+    "iri": "https://w3id.org/dpv/justifications#justifications-delay-classes",
+    "label": "dpv-justifications:justifications-delay-classes"
+  },
+  {
+    "id": "dpv-justifications:justifications-exercise-classes",
+    "iri": "https://w3id.org/dpv/justifications#justifications-exercise-classes",
+    "label": "dpv-justifications:justifications-exercise-classes"
+  },
+  {
+    "id": "dpv-justifications:justifications-nonfulfilment-classes",
+    "iri": "https://w3id.org/dpv/justifications#justifications-nonfulfilment-classes",
+    "label": "dpv-justifications:justifications-nonfulfilment-classes"
+  },
+  {
+    "id": "dpv-justifications:justifications-notrequired-classes",
+    "iri": "https://w3id.org/dpv/justifications#justifications-notrequired-classes",
+    "label": "dpv-justifications:justifications-notrequired-classes"
+  },
+  {
+    "id": "dpv-justifications:serialisation-html",
+    "iri": "https://w3id.org/dpv/justifications#serialisation-html",
+    "label": "dpv-justifications:serialisation-html"
+  },
+  {
+    "id": "dpv-justifications:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/justifications#serialisation-jsonld",
+    "label": "dpv-justifications:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-justifications:serialisation-n3",
+    "iri": "https://w3id.org/dpv/justifications#serialisation-n3",
+    "label": "dpv-justifications:serialisation-n3"
+  },
+  {
+    "id": "dpv-justifications:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/justifications#serialisation-rdf",
+    "label": "dpv-justifications:serialisation-rdf"
+  },
+  {
+    "id": "dpv-justifications:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/justifications#serialisation-ttl",
+    "label": "dpv-justifications:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/at:DPA-AT",
     "iri": "https://w3id.org/dpv/legal/at#DPA-AT",
     "label": "Data Protection Authority (DSB)"
+  },
+  {
+    "id": "dpv-legal/at:at-classes",
+    "iri": "https://w3id.org/dpv/legal/at#at-classes",
+    "label": "dpv-legal/at:at-classes"
+  },
+  {
+    "id": "dpv-legal/at:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/at#serialisation-html",
+    "label": "dpv-legal/at:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/at:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/at#serialisation-jsonld",
+    "label": "dpv-legal/at:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/at:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/at#serialisation-n3",
+    "label": "dpv-legal/at:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/at:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/at#serialisation-rdf",
+    "label": "dpv-legal/at:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/at:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/at#serialisation-ttl",
+    "label": "dpv-legal/at:serialisation-ttl"
   },
   {
     "id": "dpv-legal/be:DPA-BE",
@@ -1320,9 +1940,69 @@
     "label": "Data Protection Authority (APD/GBA)"
   },
   {
+    "id": "dpv-legal/be:be-classes",
+    "iri": "https://w3id.org/dpv/legal/be#be-classes",
+    "label": "dpv-legal/be:be-classes"
+  },
+  {
+    "id": "dpv-legal/be:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/be#serialisation-html",
+    "label": "dpv-legal/be:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/be:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/be#serialisation-jsonld",
+    "label": "dpv-legal/be:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/be:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/be#serialisation-n3",
+    "label": "dpv-legal/be:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/be:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/be#serialisation-rdf",
+    "label": "dpv-legal/be:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/be:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/be#serialisation-ttl",
+    "label": "dpv-legal/be:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/bg:DPA-BG",
     "iri": "https://w3id.org/dpv/legal/bg#DPA-BG",
     "label": "Data Protection Authority (CPDP)"
+  },
+  {
+    "id": "dpv-legal/bg:bg-classes",
+    "iri": "https://w3id.org/dpv/legal/bg#bg-classes",
+    "label": "dpv-legal/bg:bg-classes"
+  },
+  {
+    "id": "dpv-legal/bg:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/bg#serialisation-html",
+    "label": "dpv-legal/bg:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/bg:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/bg#serialisation-jsonld",
+    "label": "dpv-legal/bg:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/bg:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/bg#serialisation-n3",
+    "label": "dpv-legal/bg:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/bg:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/bg#serialisation-rdf",
+    "label": "dpv-legal/bg:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/bg:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/bg#serialisation-ttl",
+    "label": "dpv-legal/bg:serialisation-ttl"
   },
   {
     "id": "dpv-legal/cy:DPA-CY",
@@ -1330,9 +2010,69 @@
     "label": "Commissioner for Personal Data Protection (CPDP)"
   },
   {
+    "id": "dpv-legal/cy:cy-classes",
+    "iri": "https://w3id.org/dpv/legal/cy#cy-classes",
+    "label": "dpv-legal/cy:cy-classes"
+  },
+  {
+    "id": "dpv-legal/cy:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/cy#serialisation-html",
+    "label": "dpv-legal/cy:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/cy:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/cy#serialisation-jsonld",
+    "label": "dpv-legal/cy:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/cy:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/cy#serialisation-n3",
+    "label": "dpv-legal/cy:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/cy:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/cy#serialisation-rdf",
+    "label": "dpv-legal/cy:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/cy:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/cy#serialisation-ttl",
+    "label": "dpv-legal/cy:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/cz:DPA-CZ",
     "iri": "https://w3id.org/dpv/legal/cz#DPA-CZ",
     "label": "Office for Personal Data Protection (UOOU)"
+  },
+  {
+    "id": "dpv-legal/cz:cz-classes",
+    "iri": "https://w3id.org/dpv/legal/cz#cz-classes",
+    "label": "dpv-legal/cz:cz-classes"
+  },
+  {
+    "id": "dpv-legal/cz:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/cz#serialisation-html",
+    "label": "dpv-legal/cz:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/cz:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/cz#serialisation-jsonld",
+    "label": "dpv-legal/cz:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/cz:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/cz#serialisation-n3",
+    "label": "dpv-legal/cz:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/cz:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/cz#serialisation-rdf",
+    "label": "dpv-legal/cz:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/cz:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/cz#serialisation-ttl",
+    "label": "dpv-legal/cz:serialisation-ttl"
   },
   {
     "id": "dpv-legal/de:DPA-DE",
@@ -1420,6 +2160,11 @@
     "label": "Thuringia state commissioner for data protection and freedom of information"
   },
   {
+    "id": "dpv-legal/de:de-classes",
+    "iri": "https://w3id.org/dpv/legal/de#de-classes",
+    "label": "dpv-legal/de:de-classes"
+  },
+  {
     "id": "dpv-legal/de:law-BDSG",
     "iri": "https://w3id.org/dpv/legal/de#law-BDSG",
     "label": "Federal Data Protection Act (BDSG)"
@@ -1505,14 +2250,99 @@
     "label": "Thuringian Data Protection Act (Th\u00fcrDSG)"
   },
   {
+    "id": "dpv-legal/de:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/de#serialisation-html",
+    "label": "dpv-legal/de:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/de:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/de#serialisation-jsonld",
+    "label": "dpv-legal/de:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/de:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/de#serialisation-n3",
+    "label": "dpv-legal/de:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/de:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/de#serialisation-rdf",
+    "label": "dpv-legal/de:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/de:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/de#serialisation-ttl",
+    "label": "dpv-legal/de:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/dk:DPA-DK",
     "iri": "https://w3id.org/dpv/legal/dk#DPA-DK",
     "label": "Data Protection Authority"
   },
   {
+    "id": "dpv-legal/dk:dk-classes",
+    "iri": "https://w3id.org/dpv/legal/dk#dk-classes",
+    "label": "dpv-legal/dk:dk-classes"
+  },
+  {
+    "id": "dpv-legal/dk:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/dk#serialisation-html",
+    "label": "dpv-legal/dk:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/dk:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/dk#serialisation-jsonld",
+    "label": "dpv-legal/dk:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/dk:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/dk#serialisation-n3",
+    "label": "dpv-legal/dk:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/dk:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/dk#serialisation-rdf",
+    "label": "dpv-legal/dk:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/dk:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/dk#serialisation-ttl",
+    "label": "dpv-legal/dk:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/ee:DPA-EE",
     "iri": "https://w3id.org/dpv/legal/ee#DPA-EE",
     "label": "Data Protection Inspectorate (AKI)"
+  },
+  {
+    "id": "dpv-legal/ee:ee-classes",
+    "iri": "https://w3id.org/dpv/legal/ee#ee-classes",
+    "label": "dpv-legal/ee:ee-classes"
+  },
+  {
+    "id": "dpv-legal/ee:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/ee#serialisation-html",
+    "label": "dpv-legal/ee:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/ee:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/ee#serialisation-jsonld",
+    "label": "dpv-legal/ee:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/ee:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/ee#serialisation-n3",
+    "label": "dpv-legal/ee:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/ee:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/ee#serialisation-rdf",
+    "label": "dpv-legal/ee:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/ee:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/ee#serialisation-ttl",
+    "label": "dpv-legal/ee:serialisation-ttl"
   },
   {
     "id": "dpv-legal/es:DPA-ES",
@@ -1533,6 +2363,36 @@
     "id": "dpv-legal/es:DPA-ES-PV",
     "iri": "https://w3id.org/dpv/legal/es#DPA-ES-PV",
     "label": "Basque Data Protection Office (AVPD/DBED)"
+  },
+  {
+    "id": "dpv-legal/es:es-classes",
+    "iri": "https://w3id.org/dpv/legal/es#es-classes",
+    "label": "dpv-legal/es:es-classes"
+  },
+  {
+    "id": "dpv-legal/es:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/es#serialisation-html",
+    "label": "dpv-legal/es:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/es:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/es#serialisation-jsonld",
+    "label": "dpv-legal/es:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/es:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/es#serialisation-n3",
+    "label": "dpv-legal/es:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/es:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/es#serialisation-rdf",
+    "label": "dpv-legal/es:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/es:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/es#serialisation-ttl",
+    "label": "dpv-legal/es:serialisation-ttl"
   },
   {
     "id": "dpv-legal/eu/aiact:AIActComplianceUnknown",
@@ -2060,6 +2920,31 @@
     "label": "Withdrawn from Service"
   },
   {
+    "id": "dpv-legal/eu/aiact:assessment-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#assessment-classes",
+    "label": "dpv-legal/eu/aiact:assessment-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:capability-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#capability-classes",
+    "label": "dpv-legal/eu/aiact:capability-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:compliance-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#compliance-classes",
+    "label": "dpv-legal/eu/aiact:compliance-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:data-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#data-classes",
+    "label": "dpv-legal/eu/aiact:data-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:docs-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#docs-classes",
+    "label": "dpv-legal/eu/aiact:docs-classes"
+  },
+  {
     "id": "dpv-legal/eu/aiact:hasChangeCategory",
     "iri": "https://w3id.org/dpv/legal/eu/aiact#hasChangeCategory",
     "label": "has change category"
@@ -2068,6 +2953,71 @@
     "id": "dpv-legal/eu/aiact:hasChangeDescription",
     "iri": "https://w3id.org/dpv/legal/eu/aiact#hasChangeDescription",
     "label": "has change description"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:misc-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#misc-classes",
+    "label": "dpv-legal/eu/aiact:misc-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:risk-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#risk-classes",
+    "label": "dpv-legal/eu/aiact:risk-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:risk-levels-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#risk-levels-classes",
+    "label": "dpv-legal/eu/aiact:risk-levels-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:roles-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#roles-classes",
+    "label": "dpv-legal/eu/aiact:roles-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:sector-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#sector-classes",
+    "label": "dpv-legal/eu/aiact:sector-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#serialisation-html",
+    "label": "dpv-legal/eu/aiact:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#serialisation-jsonld",
+    "label": "dpv-legal/eu/aiact:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#serialisation-n3",
+    "label": "dpv-legal/eu/aiact:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#serialisation-rdf",
+    "label": "dpv-legal/eu/aiact:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#serialisation-ttl",
+    "label": "dpv-legal/eu/aiact:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:status-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#status-classes",
+    "label": "dpv-legal/eu/aiact:status-classes"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:status-properties",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#status-properties",
+    "label": "dpv-legal/eu/aiact:status-properties"
+  },
+  {
+    "id": "dpv-legal/eu/aiact:system-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact#system-classes",
+    "label": "dpv-legal/eu/aiact:system-classes"
   },
   {
     "id": "dpv-legal/eu/dga:A12-e-Exchange-Approval",
@@ -2380,6 +3330,21 @@
     "label": "Third Country Data Request Notice"
   },
   {
+    "id": "dpv-legal/eu/dga:compliance-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#compliance-classes",
+    "label": "dpv-legal/eu/dga:compliance-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:entities-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#entities-classes",
+    "label": "dpv-legal/eu/dga:entities-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:entities-properties",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#entities-properties",
+    "label": "dpv-legal/eu/dga:entities-properties"
+  },
+  {
     "id": "dpv-legal/eu/dga:hasDAO",
     "iri": "https://w3id.org/dpv/legal/eu/dga#hasDAO",
     "label": "has data altruism organisation"
@@ -2403,6 +3368,61 @@
     "id": "dpv-legal/eu/dga:hasDataUser",
     "iri": "https://w3id.org/dpv/legal/eu/dga#hasDataUser",
     "label": "has data user"
+  },
+  {
+    "id": "dpv-legal/eu/dga:legal-basis-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#legal-basis-classes",
+    "label": "dpv-legal/eu/dga:legal-basis-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:legal-rights-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#legal-rights-classes",
+    "label": "dpv-legal/eu/dga:legal-rights-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:registers-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#registers-classes",
+    "label": "dpv-legal/eu/dga:registers-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:rights-impacts-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#rights-impacts-classes",
+    "label": "dpv-legal/eu/dga:rights-impacts-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#serialisation-html",
+    "label": "dpv-legal/eu/dga:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/eu/dga:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#serialisation-jsonld",
+    "label": "dpv-legal/eu/dga:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/eu/dga:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#serialisation-n3",
+    "label": "dpv-legal/eu/dga:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/eu/dga:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#serialisation-rdf",
+    "label": "dpv-legal/eu/dga:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/eu/dga:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#serialisation-ttl",
+    "label": "dpv-legal/eu/dga:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/eu/dga:services-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#services-classes",
+    "label": "dpv-legal/eu/dga:services-classes"
+  },
+  {
+    "id": "dpv-legal/eu/dga:toms-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/dga#toms-classes",
+    "label": "dpv-legal/eu/dga:toms-classes"
   },
   {
     "id": "dpv-legal/eu/ehds:BehaviouralData",
@@ -2708,6 +3728,51 @@
     "id": "dpv-legal/eu/ehds:WellnessData",
     "iri": "https://w3id.org/dpv/legal/eu/ehds#WellnessData",
     "label": "Wellness Data"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:data-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#data-classes",
+    "label": "dpv-legal/eu/ehds:data-classes"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:entities-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#entities-classes",
+    "label": "dpv-legal/eu/ehds:entities-classes"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:process-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#process-classes",
+    "label": "dpv-legal/eu/ehds:process-classes"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:purposes-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#purposes-classes",
+    "label": "dpv-legal/eu/ehds:purposes-classes"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#serialisation-html",
+    "label": "dpv-legal/eu/ehds:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#serialisation-jsonld",
+    "label": "dpv-legal/eu/ehds:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#serialisation-n3",
+    "label": "dpv-legal/eu/ehds:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#serialisation-rdf",
+    "label": "dpv-legal/eu/ehds:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/eu/ehds:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds#serialisation-ttl",
+    "label": "dpv-legal/eu/ehds:serialisation-ttl"
   },
   {
     "id": "dpv-legal/eu/gdpr:A13",
@@ -3795,6 +4860,41 @@
     "label": "Transparency Principle"
   },
   {
+    "id": "dpv-legal/eu/gdpr:compliance-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#compliance-classes",
+    "label": "dpv-legal/eu/gdpr:compliance-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:data-breach-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#data-breach-classes",
+    "label": "dpv-legal/eu/gdpr:data-breach-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:data-transfers-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#data-transfers-classes",
+    "label": "dpv-legal/eu/gdpr:data-transfers-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:dpia-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#dpia-classes",
+    "label": "dpv-legal/eu/gdpr:dpia-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:dpia-properties",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#dpia-properties",
+    "label": "dpv-legal/eu/gdpr:dpia-properties"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:entities-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#entities-classes",
+    "label": "dpv-legal/eu/gdpr:entities-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:entities-properties",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#entities-properties",
+    "label": "dpv-legal/eu/gdpr:entities-properties"
+  },
+  {
     "id": "dpv-legal/eu/gdpr:hasConcernedSA",
     "iri": "https://w3id.org/dpv/legal/eu/gdpr#hasConcernedSA",
     "label": "has concerned supervisory authority"
@@ -3823,6 +4923,71 @@
     "id": "dpv-legal/eu/gdpr:isMainEstablishmentFor",
     "iri": "https://w3id.org/dpv/legal/eu/gdpr#isMainEstablishmentFor",
     "label": "is main establishment for"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:legal-basis-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#legal-basis-classes",
+    "label": "dpv-legal/eu/gdpr:legal-basis-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:legal-basis-data-transfer-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#legal-basis-data-transfer-classes",
+    "label": "dpv-legal/eu/gdpr:legal-basis-data-transfer-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:legal-basis-special-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#legal-basis-special-classes",
+    "label": "dpv-legal/eu/gdpr:legal-basis-special-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:misc-concepts-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#misc-concepts-classes",
+    "label": "dpv-legal/eu/gdpr:misc-concepts-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:principles-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#principles-classes",
+    "label": "dpv-legal/eu/gdpr:principles-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:rights-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#rights-classes",
+    "label": "dpv-legal/eu/gdpr:rights-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:rights-impacts-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#rights-impacts-classes",
+    "label": "dpv-legal/eu/gdpr:rights-impacts-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:rights-justifications-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#rights-justifications-classes",
+    "label": "dpv-legal/eu/gdpr:rights-justifications-classes"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#serialisation-html",
+    "label": "dpv-legal/eu/gdpr:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#serialisation-jsonld",
+    "label": "dpv-legal/eu/gdpr:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#serialisation-n3",
+    "label": "dpv-legal/eu/gdpr:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#serialisation-rdf",
+    "label": "dpv-legal/eu/gdpr:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/eu/gdpr:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr#serialisation-ttl",
+    "label": "dpv-legal/eu/gdpr:serialisation-ttl"
   },
   {
     "id": "dpv-legal/eu/nis2:EarlyWarningReport",
@@ -3883,6 +5048,41 @@
     "id": "dpv-legal/eu/nis2:SignificantIncidentNotice",
     "iri": "https://w3id.org/dpv/legal/eu/nis2#SignificantIncidentNotice",
     "label": "Significant Incident Notice"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:compliance-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/nis2#compliance-classes",
+    "label": "dpv-legal/eu/nis2:compliance-classes"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:notice-classes",
+    "iri": "https://w3id.org/dpv/legal/eu/nis2#notice-classes",
+    "label": "dpv-legal/eu/nis2:notice-classes"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/eu/nis2#serialisation-html",
+    "label": "dpv-legal/eu/nis2:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/eu/nis2#serialisation-jsonld",
+    "label": "dpv-legal/eu/nis2:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/eu/nis2#serialisation-n3",
+    "label": "dpv-legal/eu/nis2:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/eu/nis2#serialisation-rdf",
+    "label": "dpv-legal/eu/nis2:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/eu/nis2:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/eu/nis2#serialisation-ttl",
+    "label": "dpv-legal/eu/nis2:serialisation-ttl"
   },
   {
     "id": "dpv-legal/eu:Adequacy-EU-AD",
@@ -3960,6 +5160,11 @@
     "label": "European Data Protection Supervisor"
   },
   {
+    "id": "dpv-legal/eu:eu-classes",
+    "iri": "https://w3id.org/dpv/legal/eu#eu-classes",
+    "label": "dpv-legal/eu:eu-classes"
+  },
+  {
     "id": "dpv-legal/eu:law-AIAct",
     "iri": "https://w3id.org/dpv/legal/eu#law-AIAct",
     "label": "AI Act"
@@ -3987,7 +5192,32 @@
   {
     "id": "dpv-legal/eu:law-GDPR",
     "iri": "https://w3id.org/dpv/legal/eu#law-GDPR",
-    "label": "General Data Protection Regulation (GDPR)"
+    "label": "dpv-legal/eu:law-GDPR"
+  },
+  {
+    "id": "dpv-legal/eu:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/eu#serialisation-html",
+    "label": "dpv-legal/eu:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/eu:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/eu#serialisation-jsonld",
+    "label": "dpv-legal/eu:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/eu:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/eu#serialisation-n3",
+    "label": "dpv-legal/eu:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/eu:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/eu#serialisation-rdf",
+    "label": "dpv-legal/eu:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/eu:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/eu#serialisation-ttl",
+    "label": "dpv-legal/eu:serialisation-ttl"
   },
   {
     "id": "dpv-legal/fi:DPA-FI",
@@ -3995,14 +5225,79 @@
     "label": "Office of the Data Protection Ombudsman"
   },
   {
+    "id": "dpv-legal/fi:fi-classes",
+    "iri": "https://w3id.org/dpv/legal/fi#fi-classes",
+    "label": "dpv-legal/fi:fi-classes"
+  },
+  {
+    "id": "dpv-legal/fi:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/fi#serialisation-html",
+    "label": "dpv-legal/fi:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/fi:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/fi#serialisation-jsonld",
+    "label": "dpv-legal/fi:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/fi:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/fi#serialisation-n3",
+    "label": "dpv-legal/fi:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/fi:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/fi#serialisation-rdf",
+    "label": "dpv-legal/fi:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/fi:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/fi#serialisation-ttl",
+    "label": "dpv-legal/fi:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/fr:DPA-FR",
     "iri": "https://w3id.org/dpv/legal/fr#DPA-FR",
     "label": "National Commission on Informatics and Liberty (CNIL)"
   },
   {
+    "id": "dpv-legal/fr:fr-classes",
+    "iri": "https://w3id.org/dpv/legal/fr#fr-classes",
+    "label": "dpv-legal/fr:fr-classes"
+  },
+  {
+    "id": "dpv-legal/fr:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/fr#serialisation-html",
+    "label": "dpv-legal/fr:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/fr:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/fr#serialisation-jsonld",
+    "label": "dpv-legal/fr:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/fr:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/fr#serialisation-n3",
+    "label": "dpv-legal/fr:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/fr:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/fr#serialisation-rdf",
+    "label": "dpv-legal/fr:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/fr:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/fr#serialisation-ttl",
+    "label": "dpv-legal/fr:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/gb:DPA-GB",
     "iri": "https://w3id.org/dpv/legal/gb#DPA-GB",
     "label": "Information Commissioner's Office (ICO)"
+  },
+  {
+    "id": "dpv-legal/gb:gb-classes",
+    "iri": "https://w3id.org/dpv/legal/gb#gb-classes",
+    "label": "dpv-legal/gb:gb-classes"
   },
   {
     "id": "dpv-legal/gb:law-DPA",
@@ -4015,9 +5310,64 @@
     "label": "General Data Protection Regulation (GDPR)"
   },
   {
+    "id": "dpv-legal/gb:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/gb#serialisation-html",
+    "label": "dpv-legal/gb:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/gb:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/gb#serialisation-jsonld",
+    "label": "dpv-legal/gb:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/gb:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/gb#serialisation-n3",
+    "label": "dpv-legal/gb:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/gb:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/gb#serialisation-rdf",
+    "label": "dpv-legal/gb:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/gb:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/gb#serialisation-ttl",
+    "label": "dpv-legal/gb:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/gr:DPA-GR",
     "iri": "https://w3id.org/dpv/legal/gr#DPA-GR",
     "label": "Hellenic Data Protection Authority (HDPA)"
+  },
+  {
+    "id": "dpv-legal/gr:gr-classes",
+    "iri": "https://w3id.org/dpv/legal/gr#gr-classes",
+    "label": "dpv-legal/gr:gr-classes"
+  },
+  {
+    "id": "dpv-legal/gr:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/gr#serialisation-html",
+    "label": "dpv-legal/gr:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/gr:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/gr#serialisation-jsonld",
+    "label": "dpv-legal/gr:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/gr:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/gr#serialisation-n3",
+    "label": "dpv-legal/gr:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/gr:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/gr#serialisation-rdf",
+    "label": "dpv-legal/gr:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/gr:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/gr#serialisation-ttl",
+    "label": "dpv-legal/gr:serialisation-ttl"
   },
   {
     "id": "dpv-legal/hk:DPA-HK",
@@ -4025,9 +5375,39 @@
     "label": "Office of the Privacy Commissioner for Personal Data (PCPD)"
   },
   {
+    "id": "dpv-legal/hk:hk-classes",
+    "iri": "https://w3id.org/dpv/legal/hk#hk-classes",
+    "label": "dpv-legal/hk:hk-classes"
+  },
+  {
     "id": "dpv-legal/hk:law-PDPO",
     "iri": "https://w3id.org/dpv/legal/hk#law-PDPO",
     "label": "Personal Data (Privacy) Ordinance (PDPO)"
+  },
+  {
+    "id": "dpv-legal/hk:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/hk#serialisation-html",
+    "label": "dpv-legal/hk:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/hk:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/hk#serialisation-jsonld",
+    "label": "dpv-legal/hk:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/hk:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/hk#serialisation-n3",
+    "label": "dpv-legal/hk:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/hk:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/hk#serialisation-rdf",
+    "label": "dpv-legal/hk:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/hk:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/hk#serialisation-ttl",
+    "label": "dpv-legal/hk:serialisation-ttl"
   },
   {
     "id": "dpv-legal/hr:DPA-HR",
@@ -4035,14 +5415,79 @@
     "label": "Personal Data Protection Agency (AZOP)"
   },
   {
+    "id": "dpv-legal/hr:hr-classes",
+    "iri": "https://w3id.org/dpv/legal/hr#hr-classes",
+    "label": "dpv-legal/hr:hr-classes"
+  },
+  {
+    "id": "dpv-legal/hr:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/hr#serialisation-html",
+    "label": "dpv-legal/hr:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/hr:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/hr#serialisation-jsonld",
+    "label": "dpv-legal/hr:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/hr:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/hr#serialisation-n3",
+    "label": "dpv-legal/hr:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/hr:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/hr#serialisation-rdf",
+    "label": "dpv-legal/hr:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/hr:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/hr#serialisation-ttl",
+    "label": "dpv-legal/hr:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/hu:DPA-HU",
     "iri": "https://w3id.org/dpv/legal/hu#DPA-HU",
     "label": "National Authority for Data Protection and Freedom of Information (NAIH)"
   },
   {
+    "id": "dpv-legal/hu:hu-classes",
+    "iri": "https://w3id.org/dpv/legal/hu#hu-classes",
+    "label": "dpv-legal/hu:hu-classes"
+  },
+  {
+    "id": "dpv-legal/hu:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/hu#serialisation-html",
+    "label": "dpv-legal/hu:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/hu:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/hu#serialisation-jsonld",
+    "label": "dpv-legal/hu:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/hu:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/hu#serialisation-n3",
+    "label": "dpv-legal/hu:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/hu:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/hu#serialisation-rdf",
+    "label": "dpv-legal/hu:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/hu:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/hu#serialisation-ttl",
+    "label": "dpv-legal/hu:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/ie:DPA-IE",
     "iri": "https://w3id.org/dpv/legal/ie#DPA-IE",
     "label": "Data Protection Commission (DPC)"
+  },
+  {
+    "id": "dpv-legal/ie:ie-classes",
+    "iri": "https://w3id.org/dpv/legal/ie#ie-classes",
+    "label": "dpv-legal/ie:ie-classes"
   },
   {
     "id": "dpv-legal/ie:law-DPA",
@@ -4055,9 +5500,39 @@
     "label": "Health Information Bill 2024 (HIB)"
   },
   {
+    "id": "dpv-legal/ie:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/ie#serialisation-html",
+    "label": "dpv-legal/ie:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/ie:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/ie#serialisation-jsonld",
+    "label": "dpv-legal/ie:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/ie:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/ie#serialisation-n3",
+    "label": "dpv-legal/ie:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/ie:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/ie#serialisation-rdf",
+    "label": "dpv-legal/ie:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/ie:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/ie#serialisation-ttl",
+    "label": "dpv-legal/ie:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/in:DPA-IN",
     "iri": "https://w3id.org/dpv/legal/in#DPA-IN",
     "label": "Data Protection Board of India"
+  },
+  {
+    "id": "dpv-legal/in:in-classes",
+    "iri": "https://w3id.org/dpv/legal/in#in-classes",
+    "label": "dpv-legal/in:in-classes"
   },
   {
     "id": "dpv-legal/in:law-DPDP",
@@ -4065,9 +5540,64 @@
     "label": "Digital Personal Data Protection Act 2023 (DPDP)"
   },
   {
+    "id": "dpv-legal/in:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/in#serialisation-html",
+    "label": "dpv-legal/in:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/in:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/in#serialisation-jsonld",
+    "label": "dpv-legal/in:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/in:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/in#serialisation-n3",
+    "label": "dpv-legal/in:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/in:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/in#serialisation-rdf",
+    "label": "dpv-legal/in:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/in:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/in#serialisation-ttl",
+    "label": "dpv-legal/in:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/is:DPA-IS",
     "iri": "https://w3id.org/dpv/legal/is#DPA-IS",
     "label": "Data Protection Authority"
+  },
+  {
+    "id": "dpv-legal/is:is-classes",
+    "iri": "https://w3id.org/dpv/legal/is#is-classes",
+    "label": "dpv-legal/is:is-classes"
+  },
+  {
+    "id": "dpv-legal/is:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/is#serialisation-html",
+    "label": "dpv-legal/is:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/is:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/is#serialisation-jsonld",
+    "label": "dpv-legal/is:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/is:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/is#serialisation-n3",
+    "label": "dpv-legal/is:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/is:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/is#serialisation-rdf",
+    "label": "dpv-legal/is:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/is:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/is#serialisation-ttl",
+    "label": "dpv-legal/is:serialisation-ttl"
   },
   {
     "id": "dpv-legal/it:DPA-IT",
@@ -4075,14 +5605,79 @@
     "label": "Data Protection Authority"
   },
   {
+    "id": "dpv-legal/it:it-classes",
+    "iri": "https://w3id.org/dpv/legal/it#it-classes",
+    "label": "dpv-legal/it:it-classes"
+  },
+  {
+    "id": "dpv-legal/it:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/it#serialisation-html",
+    "label": "dpv-legal/it:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/it:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/it#serialisation-jsonld",
+    "label": "dpv-legal/it:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/it:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/it#serialisation-n3",
+    "label": "dpv-legal/it:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/it:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/it#serialisation-rdf",
+    "label": "dpv-legal/it:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/it:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/it#serialisation-ttl",
+    "label": "dpv-legal/it:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/jp:jp-classes",
+    "iri": "https://w3id.org/dpv/legal/jp#jp-classes",
+    "label": "dpv-legal/jp:jp-classes"
+  },
+  {
     "id": "dpv-legal/jp:law-APPI",
     "iri": "https://w3id.org/dpv/legal/jp#law-APPI",
     "label": "Act on the Protection of Personal Information (Act No. 57 of 2003) (APPI)"
   },
   {
+    "id": "dpv-legal/jp:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/jp#serialisation-html",
+    "label": "dpv-legal/jp:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/jp:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/jp#serialisation-jsonld",
+    "label": "dpv-legal/jp:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/jp:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/jp#serialisation-n3",
+    "label": "dpv-legal/jp:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/jp:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/jp#serialisation-rdf",
+    "label": "dpv-legal/jp:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/jp:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/jp#serialisation-ttl",
+    "label": "dpv-legal/jp:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/kr:DPA-KR",
     "iri": "https://w3id.org/dpv/legal/kr#DPA-KR",
     "label": "Personal Information Protection Commission (PIPC)"
+  },
+  {
+    "id": "dpv-legal/kr:kr-classes",
+    "iri": "https://w3id.org/dpv/legal/kr#kr-classes",
+    "label": "dpv-legal/kr:kr-classes"
   },
   {
     "id": "dpv-legal/kr:law-CIA",
@@ -4100,9 +5695,64 @@
     "label": "Personal Information Protection Act (PIPA)"
   },
   {
+    "id": "dpv-legal/kr:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/kr#serialisation-html",
+    "label": "dpv-legal/kr:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/kr:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/kr#serialisation-jsonld",
+    "label": "dpv-legal/kr:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/kr:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/kr#serialisation-n3",
+    "label": "dpv-legal/kr:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/kr:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/kr#serialisation-rdf",
+    "label": "dpv-legal/kr:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/kr:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/kr#serialisation-ttl",
+    "label": "dpv-legal/kr:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/li:DPA-LI",
     "iri": "https://w3id.org/dpv/legal/li#DPA-LI",
     "label": "State Data Protection Inspectorate"
+  },
+  {
+    "id": "dpv-legal/li:li-classes",
+    "iri": "https://w3id.org/dpv/legal/li#li-classes",
+    "label": "dpv-legal/li:li-classes"
+  },
+  {
+    "id": "dpv-legal/li:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/li#serialisation-html",
+    "label": "dpv-legal/li:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/li:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/li#serialisation-jsonld",
+    "label": "dpv-legal/li:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/li:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/li#serialisation-n3",
+    "label": "dpv-legal/li:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/li:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/li#serialisation-rdf",
+    "label": "dpv-legal/li:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/li:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/li#serialisation-ttl",
+    "label": "dpv-legal/li:serialisation-ttl"
   },
   {
     "id": "dpv-legal/lt:DPA-LT",
@@ -4110,14 +5760,104 @@
     "label": "Data Protection Office (VDAI)"
   },
   {
+    "id": "dpv-legal/lt:lt-classes",
+    "iri": "https://w3id.org/dpv/legal/lt#lt-classes",
+    "label": "dpv-legal/lt:lt-classes"
+  },
+  {
+    "id": "dpv-legal/lt:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/lt#serialisation-html",
+    "label": "dpv-legal/lt:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/lt:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/lt#serialisation-jsonld",
+    "label": "dpv-legal/lt:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/lt:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/lt#serialisation-n3",
+    "label": "dpv-legal/lt:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/lt:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/lt#serialisation-rdf",
+    "label": "dpv-legal/lt:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/lt:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/lt#serialisation-ttl",
+    "label": "dpv-legal/lt:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/lu:DPA-LU",
     "iri": "https://w3id.org/dpv/legal/lu#DPA-LU",
     "label": "National Commission for Data Protection (CNPD)"
   },
   {
+    "id": "dpv-legal/lu:lu-classes",
+    "iri": "https://w3id.org/dpv/legal/lu#lu-classes",
+    "label": "dpv-legal/lu:lu-classes"
+  },
+  {
+    "id": "dpv-legal/lu:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/lu#serialisation-html",
+    "label": "dpv-legal/lu:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/lu:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/lu#serialisation-jsonld",
+    "label": "dpv-legal/lu:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/lu:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/lu#serialisation-n3",
+    "label": "dpv-legal/lu:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/lu:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/lu#serialisation-rdf",
+    "label": "dpv-legal/lu:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/lu:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/lu#serialisation-ttl",
+    "label": "dpv-legal/lu:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/lv:DPA-LV",
     "iri": "https://w3id.org/dpv/legal/lv#DPA-LV",
     "label": "Data State Inspectorate (DVI)"
+  },
+  {
+    "id": "dpv-legal/lv:lv-classes",
+    "iri": "https://w3id.org/dpv/legal/lv#lv-classes",
+    "label": "dpv-legal/lv:lv-classes"
+  },
+  {
+    "id": "dpv-legal/lv:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/lv#serialisation-html",
+    "label": "dpv-legal/lv:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/lv:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/lv#serialisation-jsonld",
+    "label": "dpv-legal/lv:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/lv:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/lv#serialisation-n3",
+    "label": "dpv-legal/lv:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/lv:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/lv#serialisation-rdf",
+    "label": "dpv-legal/lv:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/lv:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/lv#serialisation-ttl",
+    "label": "dpv-legal/lv:serialisation-ttl"
   },
   {
     "id": "dpv-legal/mo:DPA-MO",
@@ -4130,9 +5870,69 @@
     "label": "Personal Data Protection Act (Act 8/2005)"
   },
   {
+    "id": "dpv-legal/mo:mo-classes",
+    "iri": "https://w3id.org/dpv/legal/mo#mo-classes",
+    "label": "dpv-legal/mo:mo-classes"
+  },
+  {
+    "id": "dpv-legal/mo:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/mo#serialisation-html",
+    "label": "dpv-legal/mo:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/mo:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/mo#serialisation-jsonld",
+    "label": "dpv-legal/mo:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/mo:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/mo#serialisation-n3",
+    "label": "dpv-legal/mo:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/mo:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/mo#serialisation-rdf",
+    "label": "dpv-legal/mo:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/mo:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/mo#serialisation-ttl",
+    "label": "dpv-legal/mo:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/mt:DPA-MT",
     "iri": "https://w3id.org/dpv/legal/mt#DPA-MT",
     "label": "Office of the Information and Data Protection Commissioner (IDPC)"
+  },
+  {
+    "id": "dpv-legal/mt:mt-classes",
+    "iri": "https://w3id.org/dpv/legal/mt#mt-classes",
+    "label": "dpv-legal/mt:mt-classes"
+  },
+  {
+    "id": "dpv-legal/mt:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/mt#serialisation-html",
+    "label": "dpv-legal/mt:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/mt:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/mt#serialisation-jsonld",
+    "label": "dpv-legal/mt:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/mt:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/mt#serialisation-n3",
+    "label": "dpv-legal/mt:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/mt:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/mt#serialisation-rdf",
+    "label": "dpv-legal/mt:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/mt:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/mt#serialisation-ttl",
+    "label": "dpv-legal/mt:serialisation-ttl"
   },
   {
     "id": "dpv-legal/my:DPA-MY",
@@ -4145,14 +5945,104 @@
     "label": "Personal Data Protection Act 2010 (Act 709) (PDPA)"
   },
   {
+    "id": "dpv-legal/my:my-classes",
+    "iri": "https://w3id.org/dpv/legal/my#my-classes",
+    "label": "dpv-legal/my:my-classes"
+  },
+  {
+    "id": "dpv-legal/my:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/my#serialisation-html",
+    "label": "dpv-legal/my:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/my:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/my#serialisation-jsonld",
+    "label": "dpv-legal/my:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/my:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/my#serialisation-n3",
+    "label": "dpv-legal/my:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/my:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/my#serialisation-rdf",
+    "label": "dpv-legal/my:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/my:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/my#serialisation-ttl",
+    "label": "dpv-legal/my:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/nl:DPA-NL",
     "iri": "https://w3id.org/dpv/legal/nl#DPA-NL",
     "label": "Data Protection Authority (AP)"
   },
   {
+    "id": "dpv-legal/nl:nl-classes",
+    "iri": "https://w3id.org/dpv/legal/nl#nl-classes",
+    "label": "dpv-legal/nl:nl-classes"
+  },
+  {
+    "id": "dpv-legal/nl:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/nl#serialisation-html",
+    "label": "dpv-legal/nl:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/nl:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/nl#serialisation-jsonld",
+    "label": "dpv-legal/nl:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/nl:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/nl#serialisation-n3",
+    "label": "dpv-legal/nl:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/nl:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/nl#serialisation-rdf",
+    "label": "dpv-legal/nl:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/nl:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/nl#serialisation-ttl",
+    "label": "dpv-legal/nl:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/no:DPA-NO",
     "iri": "https://w3id.org/dpv/legal/no#DPA-NO",
     "label": "Data Protection Authority"
+  },
+  {
+    "id": "dpv-legal/no:no-classes",
+    "iri": "https://w3id.org/dpv/legal/no#no-classes",
+    "label": "dpv-legal/no:no-classes"
+  },
+  {
+    "id": "dpv-legal/no:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/no#serialisation-html",
+    "label": "dpv-legal/no:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/no:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/no#serialisation-jsonld",
+    "label": "dpv-legal/no:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/no:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/no#serialisation-n3",
+    "label": "dpv-legal/no:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/no:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/no#serialisation-rdf",
+    "label": "dpv-legal/no:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/no:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/no#serialisation-ttl",
+    "label": "dpv-legal/no:serialisation-ttl"
   },
   {
     "id": "dpv-legal/ph:DPA-PH",
@@ -4165,9 +6055,69 @@
     "label": "Data Privacy Act of 2012 (Republic Act No. 10173) (DPA)"
   },
   {
+    "id": "dpv-legal/ph:ph-classes",
+    "iri": "https://w3id.org/dpv/legal/ph#ph-classes",
+    "label": "dpv-legal/ph:ph-classes"
+  },
+  {
+    "id": "dpv-legal/ph:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/ph#serialisation-html",
+    "label": "dpv-legal/ph:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/ph:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/ph#serialisation-jsonld",
+    "label": "dpv-legal/ph:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/ph:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/ph#serialisation-n3",
+    "label": "dpv-legal/ph:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/ph:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/ph#serialisation-rdf",
+    "label": "dpv-legal/ph:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/ph:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/ph#serialisation-ttl",
+    "label": "dpv-legal/ph:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/pl:DPA-PL",
     "iri": "https://w3id.org/dpv/legal/pl#DPA-PL",
     "label": "President of the Personal Data Protection Office (UODO)"
+  },
+  {
+    "id": "dpv-legal/pl:pl-classes",
+    "iri": "https://w3id.org/dpv/legal/pl#pl-classes",
+    "label": "dpv-legal/pl:pl-classes"
+  },
+  {
+    "id": "dpv-legal/pl:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/pl#serialisation-html",
+    "label": "dpv-legal/pl:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/pl:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/pl#serialisation-jsonld",
+    "label": "dpv-legal/pl:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/pl:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/pl#serialisation-n3",
+    "label": "dpv-legal/pl:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/pl:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/pl#serialisation-rdf",
+    "label": "dpv-legal/pl:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/pl:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/pl#serialisation-ttl",
+    "label": "dpv-legal/pl:serialisation-ttl"
   },
   {
     "id": "dpv-legal/pt:DPA-PT",
@@ -4175,14 +6125,104 @@
     "label": "Data Protection Authority (CNPD)"
   },
   {
+    "id": "dpv-legal/pt:pt-classes",
+    "iri": "https://w3id.org/dpv/legal/pt#pt-classes",
+    "label": "dpv-legal/pt:pt-classes"
+  },
+  {
+    "id": "dpv-legal/pt:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/pt#serialisation-html",
+    "label": "dpv-legal/pt:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/pt:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/pt#serialisation-jsonld",
+    "label": "dpv-legal/pt:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/pt:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/pt#serialisation-n3",
+    "label": "dpv-legal/pt:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/pt:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/pt#serialisation-rdf",
+    "label": "dpv-legal/pt:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/pt:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/pt#serialisation-ttl",
+    "label": "dpv-legal/pt:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/ro:DPA-RO",
     "iri": "https://w3id.org/dpv/legal/ro#DPA-RO",
     "label": "National Supervisory Authority for Personal Data Processing (ANSPDCP)"
   },
   {
+    "id": "dpv-legal/ro:ro-classes",
+    "iri": "https://w3id.org/dpv/legal/ro#ro-classes",
+    "label": "dpv-legal/ro:ro-classes"
+  },
+  {
+    "id": "dpv-legal/ro:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/ro#serialisation-html",
+    "label": "dpv-legal/ro:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/ro:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/ro#serialisation-jsonld",
+    "label": "dpv-legal/ro:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/ro:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/ro#serialisation-n3",
+    "label": "dpv-legal/ro:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/ro:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/ro#serialisation-rdf",
+    "label": "dpv-legal/ro:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/ro:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/ro#serialisation-ttl",
+    "label": "dpv-legal/ro:serialisation-ttl"
+  },
+  {
     "id": "dpv-legal/se:DPA-SE",
     "iri": "https://w3id.org/dpv/legal/se#DPA-SE",
     "label": "Data Protection Authority (IMY)"
+  },
+  {
+    "id": "dpv-legal/se:se-classes",
+    "iri": "https://w3id.org/dpv/legal/se#se-classes",
+    "label": "dpv-legal/se:se-classes"
+  },
+  {
+    "id": "dpv-legal/se:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/se#serialisation-html",
+    "label": "dpv-legal/se:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/se:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/se#serialisation-jsonld",
+    "label": "dpv-legal/se:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/se:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/se#serialisation-n3",
+    "label": "dpv-legal/se:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/se:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/se#serialisation-rdf",
+    "label": "dpv-legal/se:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/se:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/se#serialisation-ttl",
+    "label": "dpv-legal/se:serialisation-ttl"
   },
   {
     "id": "dpv-legal/sg:DPA-SG",
@@ -4195,14 +6235,104 @@
     "label": "Personal Data Protection Act 2012 (PDPA)"
   },
   {
+    "id": "dpv-legal/sg:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/sg#serialisation-html",
+    "label": "dpv-legal/sg:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/sg:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/sg#serialisation-jsonld",
+    "label": "dpv-legal/sg:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/sg:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/sg#serialisation-n3",
+    "label": "dpv-legal/sg:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/sg:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/sg#serialisation-rdf",
+    "label": "dpv-legal/sg:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/sg:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/sg#serialisation-ttl",
+    "label": "dpv-legal/sg:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/sg:sg-classes",
+    "iri": "https://w3id.org/dpv/legal/sg#sg-classes",
+    "label": "dpv-legal/sg:sg-classes"
+  },
+  {
     "id": "dpv-legal/si:DPA-SI",
     "iri": "https://w3id.org/dpv/legal/si#DPA-SI",
     "label": "Information Commissioner (IP)"
   },
   {
+    "id": "dpv-legal/si:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/si#serialisation-html",
+    "label": "dpv-legal/si:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/si:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/si#serialisation-jsonld",
+    "label": "dpv-legal/si:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/si:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/si#serialisation-n3",
+    "label": "dpv-legal/si:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/si:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/si#serialisation-rdf",
+    "label": "dpv-legal/si:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/si:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/si#serialisation-ttl",
+    "label": "dpv-legal/si:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/si:si-classes",
+    "iri": "https://w3id.org/dpv/legal/si#si-classes",
+    "label": "dpv-legal/si:si-classes"
+  },
+  {
     "id": "dpv-legal/sk:DPA-SK",
     "iri": "https://w3id.org/dpv/legal/sk#DPA-SK",
     "label": "Office for Personal Data Protection (UOOU)"
+  },
+  {
+    "id": "dpv-legal/sk:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/sk#serialisation-html",
+    "label": "dpv-legal/sk:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/sk:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/sk#serialisation-jsonld",
+    "label": "dpv-legal/sk:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/sk:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/sk#serialisation-n3",
+    "label": "dpv-legal/sk:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/sk:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/sk#serialisation-rdf",
+    "label": "dpv-legal/sk:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/sk:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/sk#serialisation-ttl",
+    "label": "dpv-legal/sk:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/sk:sk-classes",
+    "iri": "https://w3id.org/dpv/legal/sk#sk-classes",
+    "label": "dpv-legal/sk:sk-classes"
   },
   {
     "id": "dpv-legal/th:DPA-TH",
@@ -4220,6 +6350,36 @@
     "label": "Telecommunications Data Protection Notification (TDPN)"
   },
   {
+    "id": "dpv-legal/th:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/th#serialisation-html",
+    "label": "dpv-legal/th:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/th:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/th#serialisation-jsonld",
+    "label": "dpv-legal/th:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/th:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/th#serialisation-n3",
+    "label": "dpv-legal/th:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/th:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/th#serialisation-rdf",
+    "label": "dpv-legal/th:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/th:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/th#serialisation-ttl",
+    "label": "dpv-legal/th:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/th:th-classes",
+    "iri": "https://w3id.org/dpv/legal/th#th-classes",
+    "label": "dpv-legal/th:th-classes"
+  },
+  {
     "id": "dpv-legal/tw:DPA-TW",
     "iri": "https://w3id.org/dpv/legal/tw#DPA-TW",
     "label": "Personal Data Protection Commission (PDPC)"
@@ -4228,6 +6388,36 @@
     "id": "dpv-legal/tw:law-PDPA",
     "iri": "https://w3id.org/dpv/legal/tw#law-PDPA",
     "label": "Personal Data Protection Act (PDPA)"
+  },
+  {
+    "id": "dpv-legal/tw:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/tw#serialisation-html",
+    "label": "dpv-legal/tw:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/tw:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/tw#serialisation-jsonld",
+    "label": "dpv-legal/tw:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/tw:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/tw#serialisation-n3",
+    "label": "dpv-legal/tw:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/tw:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/tw#serialisation-rdf",
+    "label": "dpv-legal/tw:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/tw:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/tw#serialisation-ttl",
+    "label": "dpv-legal/tw:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/tw:tw-classes",
+    "iri": "https://w3id.org/dpv/legal/tw#tw-classes",
+    "label": "dpv-legal/tw:tw-classes"
   },
   {
     "id": "dpv-legal/us:DPA-US-CA",
@@ -4293,6 +6483,61 @@
     "id": "dpv-legal/us:law-VA-VCDPA",
     "iri": "https://w3id.org/dpv/legal/us#law-VA-VCDPA",
     "label": "Virginia Consumer Data Protection Act (VCDPA)"
+  },
+  {
+    "id": "dpv-legal/us:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal/us#serialisation-html",
+    "label": "dpv-legal/us:serialisation-html"
+  },
+  {
+    "id": "dpv-legal/us:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal/us#serialisation-jsonld",
+    "label": "dpv-legal/us:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal/us:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal/us#serialisation-n3",
+    "label": "dpv-legal/us:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal/us:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal/us#serialisation-rdf",
+    "label": "dpv-legal/us:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal/us:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal/us#serialisation-ttl",
+    "label": "dpv-legal/us:serialisation-ttl"
+  },
+  {
+    "id": "dpv-legal/us:us-classes",
+    "iri": "https://w3id.org/dpv/legal/us#us-classes",
+    "label": "dpv-legal/us:us-classes"
+  },
+  {
+    "id": "dpv-legal:serialisation-html",
+    "iri": "https://w3id.org/dpv/legal#serialisation-html",
+    "label": "dpv-legal:serialisation-html"
+  },
+  {
+    "id": "dpv-legal:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/legal#serialisation-jsonld",
+    "label": "dpv-legal:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-legal:serialisation-n3",
+    "iri": "https://w3id.org/dpv/legal#serialisation-n3",
+    "label": "dpv-legal:serialisation-n3"
+  },
+  {
+    "id": "dpv-legal:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/legal#serialisation-rdf",
+    "label": "dpv-legal:serialisation-rdf"
+  },
+  {
+    "id": "dpv-legal:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/legal#serialisation-ttl",
+    "label": "dpv-legal:serialisation-ttl"
   },
   {
     "id": "dpv-loc:AD",
@@ -29370,6 +31615,11 @@
     "label": "Mashonaland West"
   },
   {
+    "id": "dpv-loc:inverse-classes",
+    "iri": "https://w3id.org/dpv/loc#inverse-classes",
+    "label": "dpv-loc:inverse-classes"
+  },
+  {
     "id": "dpv-loc:iso_alpha2",
     "iri": "https://w3id.org/dpv/loc#iso_alpha2",
     "label": "ISO-alpha2"
@@ -29383,6 +31633,21 @@
     "id": "dpv-loc:iso_numeric",
     "iri": "https://w3id.org/dpv/loc#iso_numeric",
     "label": "ISO-numeric"
+  },
+  {
+    "id": "dpv-loc:locations-classes",
+    "iri": "https://w3id.org/dpv/loc#locations-classes",
+    "label": "dpv-loc:locations-classes"
+  },
+  {
+    "id": "dpv-loc:locations-properties",
+    "iri": "https://w3id.org/dpv/loc#locations-properties",
+    "label": "dpv-loc:locations-properties"
+  },
+  {
+    "id": "dpv-loc:memberships-classes",
+    "iri": "https://w3id.org/dpv/loc#memberships-classes",
+    "label": "dpv-loc:memberships-classes"
   },
   {
     "id": "dpv-loc:non-AD",
@@ -30660,6 +32925,31 @@
     "label": "non-ZW"
   },
   {
+    "id": "dpv-loc:serialisation-html",
+    "iri": "https://w3id.org/dpv/loc#serialisation-html",
+    "label": "dpv-loc:serialisation-html"
+  },
+  {
+    "id": "dpv-loc:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/loc#serialisation-jsonld",
+    "label": "dpv-loc:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-loc:serialisation-n3",
+    "iri": "https://w3id.org/dpv/loc#serialisation-n3",
+    "label": "dpv-loc:serialisation-n3"
+  },
+  {
+    "id": "dpv-loc:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/loc#serialisation-rdf",
+    "label": "dpv-loc:serialisation-rdf"
+  },
+  {
+    "id": "dpv-loc:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/loc#serialisation-ttl",
+    "label": "dpv-loc:serialisation-ttl"
+  },
+  {
     "id": "dpv-loc:un_m49",
     "iri": "https://w3id.org/dpv/loc#un_m49",
     "label": "UN-M49"
@@ -31770,6 +34060,46 @@
     "label": "Work History"
   },
   {
+    "id": "dpv-pd:core-classes",
+    "iri": "https://w3id.org/dpv/pd#core-classes",
+    "label": "dpv-pd:core-classes"
+  },
+  {
+    "id": "dpv-pd:extended-classes",
+    "iri": "https://w3id.org/dpv/pd#extended-classes",
+    "label": "dpv-pd:extended-classes"
+  },
+  {
+    "id": "dpv-pd:serialisation-html",
+    "iri": "https://w3id.org/dpv/pd#serialisation-html",
+    "label": "dpv-pd:serialisation-html"
+  },
+  {
+    "id": "dpv-pd:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/pd#serialisation-jsonld",
+    "label": "dpv-pd:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-pd:serialisation-n3",
+    "iri": "https://w3id.org/dpv/pd#serialisation-n3",
+    "label": "dpv-pd:serialisation-n3"
+  },
+  {
+    "id": "dpv-pd:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/pd#serialisation-rdf",
+    "label": "dpv-pd:serialisation-rdf"
+  },
+  {
+    "id": "dpv-pd:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/pd#serialisation-ttl",
+    "label": "dpv-pd:serialisation-ttl"
+  },
+  {
+    "id": "dpv-pd:specialcategory-classes",
+    "iri": "https://w3id.org/dpv/pd#specialcategory-classes",
+    "label": "dpv-pd:specialcategory-classes"
+  },
+  {
     "id": "dpv-rights/eu:A1-HumanDignity",
     "iri": "https://w3id.org/dpv/rights/eu#A1-HumanDignity",
     "label": "A1 Human Dignity"
@@ -32453,6 +34783,41 @@
     "id": "dpv-rights/eu:T7-InterpretationAndApplicationImpact",
     "iri": "https://w3id.org/dpv/rights/eu#T7-InterpretationAndApplicationImpact",
     "label": "Impact on T7 Interpretation And Application"
+  },
+  {
+    "id": "dpv-rights/eu:fundamental-classes",
+    "iri": "https://w3id.org/dpv/rights/eu#fundamental-classes",
+    "label": "dpv-rights/eu:fundamental-classes"
+  },
+  {
+    "id": "dpv-rights/eu:impacts-classes",
+    "iri": "https://w3id.org/dpv/rights/eu#impacts-classes",
+    "label": "dpv-rights/eu:impacts-classes"
+  },
+  {
+    "id": "dpv-rights/eu:serialisation-html",
+    "iri": "https://w3id.org/dpv/rights/eu#serialisation-html",
+    "label": "dpv-rights/eu:serialisation-html"
+  },
+  {
+    "id": "dpv-rights/eu:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/rights/eu#serialisation-jsonld",
+    "label": "dpv-rights/eu:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-rights/eu:serialisation-n3",
+    "iri": "https://w3id.org/dpv/rights/eu#serialisation-n3",
+    "label": "dpv-rights/eu:serialisation-n3"
+  },
+  {
+    "id": "dpv-rights/eu:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/rights/eu#serialisation-rdf",
+    "label": "dpv-rights/eu:serialisation-rdf"
+  },
+  {
+    "id": "dpv-rights/eu:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/rights/eu#serialisation-ttl",
+    "label": "dpv-rights/eu:serialisation-ttl"
   },
   {
     "id": "dpv-risk:3LikelihoodLevels",
@@ -35035,6 +37400,21 @@
     "label": "identifies"
   },
   {
+    "id": "dpv-risk:incident-classes",
+    "iri": "https://w3id.org/dpv/risk#incident-classes",
+    "label": "dpv-risk:incident-classes"
+  },
+  {
+    "id": "dpv-risk:incident-properties",
+    "iri": "https://w3id.org/dpv/risk#incident-properties",
+    "label": "dpv-risk:incident-properties"
+  },
+  {
+    "id": "dpv-risk:incident-status-classes",
+    "iri": "https://w3id.org/dpv/risk#incident-status-classes",
+    "label": "dpv-risk:incident-status-classes"
+  },
+  {
     "id": "dpv-risk:interrupts",
     "iri": "https://w3id.org/dpv/risk#interrupts",
     "label": "interrupts"
@@ -35113,6 +37493,66 @@
     "id": "dpv-risk:reverses",
     "iri": "https://w3id.org/dpv/risk#reverses",
     "label": "reverses"
+  },
+  {
+    "id": "dpv-risk:risk-controls-classes",
+    "iri": "https://w3id.org/dpv/risk#risk-controls-classes",
+    "label": "dpv-risk:risk-controls-classes"
+  },
+  {
+    "id": "dpv-risk:risk-controls-properties",
+    "iri": "https://w3id.org/dpv/risk#risk-controls-properties",
+    "label": "dpv-risk:risk-controls-properties"
+  },
+  {
+    "id": "dpv-risk:risk-levels-classes",
+    "iri": "https://w3id.org/dpv/risk#risk-levels-classes",
+    "label": "dpv-risk:risk-levels-classes"
+  },
+  {
+    "id": "dpv-risk:risk-management-classes",
+    "iri": "https://w3id.org/dpv/risk#risk-management-classes",
+    "label": "dpv-risk:risk-management-classes"
+  },
+  {
+    "id": "dpv-risk:risk-management-properties",
+    "iri": "https://w3id.org/dpv/risk#risk-management-properties",
+    "label": "dpv-risk:risk-management-properties"
+  },
+  {
+    "id": "dpv-risk:risk-matrix-classes",
+    "iri": "https://w3id.org/dpv/risk#risk-matrix-classes",
+    "label": "dpv-risk:risk-matrix-classes"
+  },
+  {
+    "id": "dpv-risk:risk-taxonomy-classes",
+    "iri": "https://w3id.org/dpv/risk#risk-taxonomy-classes",
+    "label": "dpv-risk:risk-taxonomy-classes"
+  },
+  {
+    "id": "dpv-risk:serialisation-html",
+    "iri": "https://w3id.org/dpv/risk#serialisation-html",
+    "label": "dpv-risk:serialisation-html"
+  },
+  {
+    "id": "dpv-risk:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/risk#serialisation-jsonld",
+    "label": "dpv-risk:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-risk:serialisation-n3",
+    "iri": "https://w3id.org/dpv/risk#serialisation-n3",
+    "label": "dpv-risk:serialisation-n3"
+  },
+  {
+    "id": "dpv-risk:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/risk#serialisation-rdf",
+    "label": "dpv-risk:serialisation-rdf"
+  },
+  {
+    "id": "dpv-risk:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/risk#serialisation-ttl",
+    "label": "dpv-risk:serialisation-ttl"
   },
   {
     "id": "dpv-risk:shares",
@@ -35375,6 +37815,36 @@
     "label": "Student Wellbeing Management"
   },
   {
+    "id": "dpv-sector/education:purposes-classes",
+    "iri": "https://w3id.org/dpv/sector/education#purposes-classes",
+    "label": "dpv-sector/education:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/education:serialisation-html",
+    "iri": "https://w3id.org/dpv/sector/education#serialisation-html",
+    "label": "dpv-sector/education:serialisation-html"
+  },
+  {
+    "id": "dpv-sector/education:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/sector/education#serialisation-jsonld",
+    "label": "dpv-sector/education:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-sector/education:serialisation-n3",
+    "iri": "https://w3id.org/dpv/sector/education#serialisation-n3",
+    "label": "dpv-sector/education:serialisation-n3"
+  },
+  {
+    "id": "dpv-sector/education:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/sector/education#serialisation-rdf",
+    "label": "dpv-sector/education:serialisation-rdf"
+  },
+  {
+    "id": "dpv-sector/education:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/sector/education#serialisation-ttl",
+    "label": "dpv-sector/education:serialisation-ttl"
+  },
+  {
     "id": "dpv-sector/finance:AccountManagement",
     "iri": "https://w3id.org/dpv/sector/finance#AccountManagement",
     "label": "Account Management"
@@ -35588,6 +38058,36 @@
     "id": "dpv-sector/finance:WealthManagement",
     "iri": "https://w3id.org/dpv/sector/finance#WealthManagement",
     "label": "Wealth Management"
+  },
+  {
+    "id": "dpv-sector/finance:purposes-classes",
+    "iri": "https://w3id.org/dpv/sector/finance#purposes-classes",
+    "label": "dpv-sector/finance:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/finance:serialisation-html",
+    "iri": "https://w3id.org/dpv/sector/finance#serialisation-html",
+    "label": "dpv-sector/finance:serialisation-html"
+  },
+  {
+    "id": "dpv-sector/finance:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/sector/finance#serialisation-jsonld",
+    "label": "dpv-sector/finance:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-sector/finance:serialisation-n3",
+    "iri": "https://w3id.org/dpv/sector/finance#serialisation-n3",
+    "label": "dpv-sector/finance:serialisation-n3"
+  },
+  {
+    "id": "dpv-sector/finance:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/sector/finance#serialisation-rdf",
+    "label": "dpv-sector/finance:serialisation-rdf"
+  },
+  {
+    "id": "dpv-sector/finance:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/sector/finance#serialisation-ttl",
+    "label": "dpv-sector/finance:serialisation-ttl"
   },
   {
     "id": "dpv-sector/health:AccessManagement",
@@ -35885,6 +38385,36 @@
     "label": "Workforce Management"
   },
   {
+    "id": "dpv-sector/health:purposes-classes",
+    "iri": "https://w3id.org/dpv/sector/health#purposes-classes",
+    "label": "dpv-sector/health:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/health:serialisation-html",
+    "iri": "https://w3id.org/dpv/sector/health#serialisation-html",
+    "label": "dpv-sector/health:serialisation-html"
+  },
+  {
+    "id": "dpv-sector/health:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/sector/health#serialisation-jsonld",
+    "label": "dpv-sector/health:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-sector/health:serialisation-n3",
+    "iri": "https://w3id.org/dpv/sector/health#serialisation-n3",
+    "label": "dpv-sector/health:serialisation-n3"
+  },
+  {
+    "id": "dpv-sector/health:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/sector/health#serialisation-rdf",
+    "label": "dpv-sector/health:serialisation-rdf"
+  },
+  {
+    "id": "dpv-sector/health:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/sector/health#serialisation-ttl",
+    "label": "dpv-sector/health:serialisation-ttl"
+  },
+  {
     "id": "dpv-sector/infra:AviationInfrastructureManagement",
     "iri": "https://w3id.org/dpv/sector/infra#AviationInfrastructureManagement",
     "label": "Aviation Infrastructure Management"
@@ -36118,6 +38648,36 @@
     "id": "dpv-sector/infra:TransportManagement",
     "iri": "https://w3id.org/dpv/sector/infra#TransportManagement",
     "label": "Transport Management"
+  },
+  {
+    "id": "dpv-sector/infra:purposes-classes",
+    "iri": "https://w3id.org/dpv/sector/infra#purposes-classes",
+    "label": "dpv-sector/infra:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/infra:serialisation-html",
+    "iri": "https://w3id.org/dpv/sector/infra#serialisation-html",
+    "label": "dpv-sector/infra:serialisation-html"
+  },
+  {
+    "id": "dpv-sector/infra:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/sector/infra#serialisation-jsonld",
+    "label": "dpv-sector/infra:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-sector/infra:serialisation-n3",
+    "iri": "https://w3id.org/dpv/sector/infra#serialisation-n3",
+    "label": "dpv-sector/infra:serialisation-n3"
+  },
+  {
+    "id": "dpv-sector/infra:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/sector/infra#serialisation-rdf",
+    "label": "dpv-sector/infra:serialisation-rdf"
+  },
+  {
+    "id": "dpv-sector/infra:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/sector/infra#serialisation-ttl",
+    "label": "dpv-sector/infra:serialisation-ttl"
   },
   {
     "id": "dpv-sector/law:CrimeArrestDetention",
@@ -36590,6 +39150,36 @@
     "label": "Unauthorised Migration Prediction"
   },
   {
+    "id": "dpv-sector/law:purposes-classes",
+    "iri": "https://w3id.org/dpv/sector/law#purposes-classes",
+    "label": "dpv-sector/law:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/law:serialisation-html",
+    "iri": "https://w3id.org/dpv/sector/law#serialisation-html",
+    "label": "dpv-sector/law:serialisation-html"
+  },
+  {
+    "id": "dpv-sector/law:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/sector/law#serialisation-jsonld",
+    "label": "dpv-sector/law:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-sector/law:serialisation-n3",
+    "iri": "https://w3id.org/dpv/sector/law#serialisation-n3",
+    "label": "dpv-sector/law:serialisation-n3"
+  },
+  {
+    "id": "dpv-sector/law:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/sector/law#serialisation-rdf",
+    "label": "dpv-sector/law:serialisation-rdf"
+  },
+  {
+    "id": "dpv-sector/law:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/sector/law#serialisation-ttl",
+    "label": "dpv-sector/law:serialisation-ttl"
+  },
+  {
     "id": "dpv-sector/publicservices:HousingWelfareManagement",
     "iri": "https://w3id.org/dpv/sector/publicservices#HousingWelfareManagement",
     "label": "Housing Welfare Management"
@@ -36663,6 +39253,61 @@
     "id": "dpv-sector/publicservices:SocialWelfareRiskAssessment",
     "iri": "https://w3id.org/dpv/sector/publicservices#SocialWelfareRiskAssessment",
     "label": "Social Welfare Risk Assessment"
+  },
+  {
+    "id": "dpv-sector/publicservices:purposes-classes",
+    "iri": "https://w3id.org/dpv/sector/publicservices#purposes-classes",
+    "label": "dpv-sector/publicservices:purposes-classes"
+  },
+  {
+    "id": "dpv-sector/publicservices:serialisation-html",
+    "iri": "https://w3id.org/dpv/sector/publicservices#serialisation-html",
+    "label": "dpv-sector/publicservices:serialisation-html"
+  },
+  {
+    "id": "dpv-sector/publicservices:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/sector/publicservices#serialisation-jsonld",
+    "label": "dpv-sector/publicservices:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-sector/publicservices:serialisation-n3",
+    "iri": "https://w3id.org/dpv/sector/publicservices#serialisation-n3",
+    "label": "dpv-sector/publicservices:serialisation-n3"
+  },
+  {
+    "id": "dpv-sector/publicservices:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/sector/publicservices#serialisation-rdf",
+    "label": "dpv-sector/publicservices:serialisation-rdf"
+  },
+  {
+    "id": "dpv-sector/publicservices:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/sector/publicservices#serialisation-ttl",
+    "label": "dpv-sector/publicservices:serialisation-ttl"
+  },
+  {
+    "id": "dpv-sector:serialisation-html",
+    "iri": "https://w3id.org/dpv/sector#serialisation-html",
+    "label": "dpv-sector:serialisation-html"
+  },
+  {
+    "id": "dpv-sector:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/sector#serialisation-jsonld",
+    "label": "dpv-sector:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-sector:serialisation-n3",
+    "iri": "https://w3id.org/dpv/sector#serialisation-n3",
+    "label": "dpv-sector:serialisation-n3"
+  },
+  {
+    "id": "dpv-sector:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/sector#serialisation-rdf",
+    "label": "dpv-sector:serialisation-rdf"
+  },
+  {
+    "id": "dpv-sector:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/sector#serialisation-ttl",
+    "label": "dpv-sector:serialisation-ttl"
   },
   {
     "id": "dpv-standards/p7012:Agent",
@@ -37345,6 +39990,26 @@
     "label": "Transparency Term"
   },
   {
+    "id": "dpv-standards/p7012:agreement-classes",
+    "iri": "https://w3id.org/dpv/standards/p7012#agreement-classes",
+    "label": "dpv-standards/p7012:agreement-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:data-classes",
+    "iri": "https://w3id.org/dpv/standards/p7012#data-classes",
+    "label": "dpv-standards/p7012:data-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:entities-classes",
+    "iri": "https://w3id.org/dpv/standards/p7012#entities-classes",
+    "label": "dpv-standards/p7012:entities-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:entities-properties",
+    "iri": "https://w3id.org/dpv/standards/p7012#entities-properties",
+    "label": "dpv-standards/p7012:entities-properties"
+  },
+  {
     "id": "dpv-standards/p7012:hasAgent",
     "iri": "https://w3id.org/dpv/standards/p7012#hasAgent",
     "label": "has agent"
@@ -37448,6 +40113,61 @@
     "id": "dpv-standards/p7012:hasTransparencyTerm",
     "iri": "https://w3id.org/dpv/standards/p7012#hasTransparencyTerm",
     "label": "has transparency term"
+  },
+  {
+    "id": "dpv-standards/p7012:privacy-term-classes",
+    "iri": "https://w3id.org/dpv/standards/p7012#privacy-term-classes",
+    "label": "dpv-standards/p7012:privacy-term-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:privacy-term-properties",
+    "iri": "https://w3id.org/dpv/standards/p7012#privacy-term-properties",
+    "label": "dpv-standards/p7012:privacy-term-properties"
+  },
+  {
+    "id": "dpv-standards/p7012:process-classes",
+    "iri": "https://w3id.org/dpv/standards/p7012#process-classes",
+    "label": "dpv-standards/p7012:process-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:process-properties",
+    "iri": "https://w3id.org/dpv/standards/p7012#process-properties",
+    "label": "dpv-standards/p7012:process-properties"
+  },
+  {
+    "id": "dpv-standards/p7012:purpose-classes",
+    "iri": "https://w3id.org/dpv/standards/p7012#purpose-classes",
+    "label": "dpv-standards/p7012:purpose-classes"
+  },
+  {
+    "id": "dpv-standards/p7012:serialisation-html",
+    "iri": "https://w3id.org/dpv/standards/p7012#serialisation-html",
+    "label": "dpv-standards/p7012:serialisation-html"
+  },
+  {
+    "id": "dpv-standards/p7012:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/standards/p7012#serialisation-jsonld",
+    "label": "dpv-standards/p7012:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-standards/p7012:serialisation-n3",
+    "iri": "https://w3id.org/dpv/standards/p7012#serialisation-n3",
+    "label": "dpv-standards/p7012:serialisation-n3"
+  },
+  {
+    "id": "dpv-standards/p7012:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/standards/p7012#serialisation-rdf",
+    "label": "dpv-standards/p7012:serialisation-rdf"
+  },
+  {
+    "id": "dpv-standards/p7012:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/standards/p7012#serialisation-ttl",
+    "label": "dpv-standards/p7012:serialisation-ttl"
+  },
+  {
+    "id": "dpv-standards/p7012:status-classes",
+    "iri": "https://w3id.org/dpv/standards/p7012#status-classes",
+    "label": "dpv-standards/p7012:status-classes"
   },
   {
     "id": "dpv-tech:API",
@@ -38080,6 +40800,36 @@
     "label": "WiFi"
   },
   {
+    "id": "dpv-tech:actors-classes",
+    "iri": "https://w3id.org/dpv/tech#actors-classes",
+    "label": "dpv-tech:actors-classes"
+  },
+  {
+    "id": "dpv-tech:actors-properties",
+    "iri": "https://w3id.org/dpv/tech#actors-properties",
+    "label": "dpv-tech:actors-properties"
+  },
+  {
+    "id": "dpv-tech:comms-classes",
+    "iri": "https://w3id.org/dpv/tech#comms-classes",
+    "label": "dpv-tech:comms-classes"
+  },
+  {
+    "id": "dpv-tech:core-classes",
+    "iri": "https://w3id.org/dpv/tech#core-classes",
+    "label": "dpv-tech:core-classes"
+  },
+  {
+    "id": "dpv-tech:core-properties",
+    "iri": "https://w3id.org/dpv/tech#core-properties",
+    "label": "dpv-tech:core-properties"
+  },
+  {
+    "id": "dpv-tech:docs-classes",
+    "iri": "https://w3id.org/dpv/tech#docs-classes",
+    "label": "dpv-tech:docs-classes"
+  },
+  {
     "id": "dpv-tech:hasAPI",
     "iri": "https://w3id.org/dpv/tech#hasAPI",
     "label": "has api"
@@ -38340,9 +41090,64 @@
     "label": "iOS"
   },
   {
+    "id": "dpv-tech:io-classes",
+    "iri": "https://w3id.org/dpv/tech#io-classes",
+    "label": "dpv-tech:io-classes"
+  },
+  {
     "id": "dpv-tech:isComponentOf",
     "iri": "https://w3id.org/dpv/tech#isComponentOf",
     "label": "is component of"
+  },
+  {
+    "id": "dpv-tech:provision-classes",
+    "iri": "https://w3id.org/dpv/tech#provision-classes",
+    "label": "dpv-tech:provision-classes"
+  },
+  {
+    "id": "dpv-tech:serialisation-html",
+    "iri": "https://w3id.org/dpv/tech#serialisation-html",
+    "label": "dpv-tech:serialisation-html"
+  },
+  {
+    "id": "dpv-tech:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv/tech#serialisation-jsonld",
+    "label": "dpv-tech:serialisation-jsonld"
+  },
+  {
+    "id": "dpv-tech:serialisation-n3",
+    "iri": "https://w3id.org/dpv/tech#serialisation-n3",
+    "label": "dpv-tech:serialisation-n3"
+  },
+  {
+    "id": "dpv-tech:serialisation-rdf",
+    "iri": "https://w3id.org/dpv/tech#serialisation-rdf",
+    "label": "dpv-tech:serialisation-rdf"
+  },
+  {
+    "id": "dpv-tech:serialisation-ttl",
+    "iri": "https://w3id.org/dpv/tech#serialisation-ttl",
+    "label": "dpv-tech:serialisation-ttl"
+  },
+  {
+    "id": "dpv-tech:status-classes",
+    "iri": "https://w3id.org/dpv/tech#status-classes",
+    "label": "dpv-tech:status-classes"
+  },
+  {
+    "id": "dpv-tech:status-properties",
+    "iri": "https://w3id.org/dpv/tech#status-properties",
+    "label": "dpv-tech:status-properties"
+  },
+  {
+    "id": "dpv-tech:tools-classes",
+    "iri": "https://w3id.org/dpv/tech#tools-classes",
+    "label": "dpv-tech:tools-classes"
+  },
+  {
+    "id": "dpv-tech:tools-properties",
+    "iri": "https://w3id.org/dpv/tech#tools-properties",
+    "label": "dpv-tech:tools-properties"
   },
   {
     "id": "dpv:AILiteracy",
@@ -42810,6 +45615,16 @@
     "label": "Systematic Monitoring"
   },
   {
+    "id": "dpv:TOM-classes",
+    "iri": "https://w3id.org/dpv#TOM-classes",
+    "label": "dpv:TOM-classes"
+  },
+  {
+    "id": "dpv:TOM-properties",
+    "iri": "https://w3id.org/dpv#TOM-properties",
+    "label": "dpv:TOM-properties"
+  },
+  {
     "id": "dpv:TargetedAdvertising",
     "iri": "https://w3id.org/dpv#TargetedAdvertising",
     "label": "Targeted Advertising"
@@ -43153,6 +45968,121 @@
     "id": "dpv:ZeroKnowledgeAuthentication",
     "iri": "https://w3id.org/dpv#ZeroKnowledgeAuthentication",
     "label": "Zero Knowledge Authentication"
+  },
+  {
+    "id": "dpv:ai",
+    "iri": "https://w3id.org/dpv/ai",
+    "label": "dpv:ai"
+  },
+  {
+    "id": "dpv:consent-controls-classes",
+    "iri": "https://w3id.org/dpv#consent-controls-classes",
+    "label": "dpv:consent-controls-classes"
+  },
+  {
+    "id": "dpv:consent-properties",
+    "iri": "https://w3id.org/dpv#consent-properties",
+    "label": "dpv:consent-properties"
+  },
+  {
+    "id": "dpv:consent-status-classes",
+    "iri": "https://w3id.org/dpv#consent-status-classes",
+    "label": "dpv:consent-status-classes"
+  },
+  {
+    "id": "dpv:consent-types-classes",
+    "iri": "https://w3id.org/dpv#consent-types-classes",
+    "label": "dpv:consent-types-classes"
+  },
+  {
+    "id": "dpv:context-classes",
+    "iri": "https://w3id.org/dpv#context-classes",
+    "label": "dpv:context-classes"
+  },
+  {
+    "id": "dpv:context-properties",
+    "iri": "https://w3id.org/dpv#context-properties",
+    "label": "dpv:context-properties"
+  },
+  {
+    "id": "dpv:contract-clause-classes",
+    "iri": "https://w3id.org/dpv#contract-clause-classes",
+    "label": "dpv:contract-clause-classes"
+  },
+  {
+    "id": "dpv:contract-control-classes",
+    "iri": "https://w3id.org/dpv#contract-control-classes",
+    "label": "dpv:contract-control-classes"
+  },
+  {
+    "id": "dpv:contract-properties",
+    "iri": "https://w3id.org/dpv#contract-properties",
+    "label": "dpv:contract-properties"
+  },
+  {
+    "id": "dpv:contract-status-classes",
+    "iri": "https://w3id.org/dpv#contract-status-classes",
+    "label": "dpv:contract-status-classes"
+  },
+  {
+    "id": "dpv:contract-types-classes",
+    "iri": "https://w3id.org/dpv#contract-types-classes",
+    "label": "dpv:contract-types-classes"
+  },
+  {
+    "id": "dpv:entities-authority-classes",
+    "iri": "https://w3id.org/dpv#entities-authority-classes",
+    "label": "dpv:entities-authority-classes"
+  },
+  {
+    "id": "dpv:entities-authority-properties",
+    "iri": "https://w3id.org/dpv#entities-authority-properties",
+    "label": "dpv:entities-authority-properties"
+  },
+  {
+    "id": "dpv:entities-classes",
+    "iri": "https://w3id.org/dpv#entities-classes",
+    "label": "dpv:entities-classes"
+  },
+  {
+    "id": "dpv:entities-datasubject-classes",
+    "iri": "https://w3id.org/dpv#entities-datasubject-classes",
+    "label": "dpv:entities-datasubject-classes"
+  },
+  {
+    "id": "dpv:entities-datasubject-properties",
+    "iri": "https://w3id.org/dpv#entities-datasubject-properties",
+    "label": "dpv:entities-datasubject-properties"
+  },
+  {
+    "id": "dpv:entities-legalrole-classes",
+    "iri": "https://w3id.org/dpv#entities-legalrole-classes",
+    "label": "dpv:entities-legalrole-classes"
+  },
+  {
+    "id": "dpv:entities-legalrole-properties",
+    "iri": "https://w3id.org/dpv#entities-legalrole-properties",
+    "label": "dpv:entities-legalrole-properties"
+  },
+  {
+    "id": "dpv:entities-organisation-classes",
+    "iri": "https://w3id.org/dpv#entities-organisation-classes",
+    "label": "dpv:entities-organisation-classes"
+  },
+  {
+    "id": "dpv:entities-properties",
+    "iri": "https://w3id.org/dpv#entities-properties",
+    "label": "dpv:entities-properties"
+  },
+  {
+    "id": "dpv:examples",
+    "iri": "https://w3id.org/dpv/examples",
+    "label": "dpv:examples"
+  },
+  {
+    "id": "dpv:guides",
+    "iri": "https://w3id.org/dpv/guides",
+    "label": "dpv:guides"
   },
   {
     "id": "dpv:hasActiveEntity",
@@ -43865,14 +46795,514 @@
     "label": "is subsidiary of"
   },
   {
+    "id": "dpv:jurisdiction-classes",
+    "iri": "https://w3id.org/dpv#jurisdiction-classes",
+    "label": "dpv:jurisdiction-classes"
+  },
+  {
+    "id": "dpv:jurisdiction-properties",
+    "iri": "https://w3id.org/dpv#jurisdiction-properties",
+    "label": "dpv:jurisdiction-properties"
+  },
+  {
+    "id": "dpv:justifications",
+    "iri": "https://w3id.org/dpv/justifications",
+    "label": "dpv:justifications"
+  },
+  {
+    "id": "dpv:legal",
+    "iri": "https://w3id.org/dpv/legal",
+    "label": "dpv:legal"
+  },
+  {
+    "id": "dpv:legal-basis-classes",
+    "iri": "https://w3id.org/dpv#legal-basis-classes",
+    "label": "dpv:legal-basis-classes"
+  },
+  {
+    "id": "dpv:legal-basis-properties",
+    "iri": "https://w3id.org/dpv#legal-basis-properties",
+    "label": "dpv:legal-basis-properties"
+  },
+  {
+    "id": "dpv:legal-basis-status-classes",
+    "iri": "https://w3id.org/dpv#legal-basis-status-classes",
+    "label": "dpv:legal-basis-status-classes"
+  },
+  {
+    "id": "dpv:legal-measures-classes",
+    "iri": "https://w3id.org/dpv#legal-measures-classes",
+    "label": "dpv:legal-measures-classes"
+  },
+  {
+    "id": "dpv:legal/at",
+    "iri": "https://w3id.org/dpv/legal/at",
+    "label": "dpv:legal/at"
+  },
+  {
+    "id": "dpv:legal/be",
+    "iri": "https://w3id.org/dpv/legal/be",
+    "label": "dpv:legal/be"
+  },
+  {
+    "id": "dpv:legal/bg",
+    "iri": "https://w3id.org/dpv/legal/bg",
+    "label": "dpv:legal/bg"
+  },
+  {
+    "id": "dpv:legal/cy",
+    "iri": "https://w3id.org/dpv/legal/cy",
+    "label": "dpv:legal/cy"
+  },
+  {
+    "id": "dpv:legal/cz",
+    "iri": "https://w3id.org/dpv/legal/cz",
+    "label": "dpv:legal/cz"
+  },
+  {
+    "id": "dpv:legal/de",
+    "iri": "https://w3id.org/dpv/legal/de",
+    "label": "dpv:legal/de"
+  },
+  {
+    "id": "dpv:legal/dk",
+    "iri": "https://w3id.org/dpv/legal/dk",
+    "label": "dpv:legal/dk"
+  },
+  {
+    "id": "dpv:legal/ee",
+    "iri": "https://w3id.org/dpv/legal/ee",
+    "label": "dpv:legal/ee"
+  },
+  {
+    "id": "dpv:legal/es",
+    "iri": "https://w3id.org/dpv/legal/es",
+    "label": "dpv:legal/es"
+  },
+  {
+    "id": "dpv:legal/eu",
+    "iri": "https://w3id.org/dpv/legal/eu",
+    "label": "dpv:legal/eu"
+  },
+  {
+    "id": "dpv:legal/eu/aiact",
+    "iri": "https://w3id.org/dpv/legal/eu/aiact",
+    "label": "dpv:legal/eu/aiact"
+  },
+  {
+    "id": "dpv:legal/eu/dga",
+    "iri": "https://w3id.org/dpv/legal/eu/dga",
+    "label": "dpv:legal/eu/dga"
+  },
+  {
+    "id": "dpv:legal/eu/ehds",
+    "iri": "https://w3id.org/dpv/legal/eu/ehds",
+    "label": "dpv:legal/eu/ehds"
+  },
+  {
+    "id": "dpv:legal/eu/gdpr",
+    "iri": "https://w3id.org/dpv/legal/eu/gdpr",
+    "label": "dpv:legal/eu/gdpr"
+  },
+  {
+    "id": "dpv:legal/eu/nis2",
+    "iri": "https://w3id.org/dpv/legal/eu/nis2",
+    "label": "dpv:legal/eu/nis2"
+  },
+  {
+    "id": "dpv:legal/fi",
+    "iri": "https://w3id.org/dpv/legal/fi",
+    "label": "dpv:legal/fi"
+  },
+  {
+    "id": "dpv:legal/fr",
+    "iri": "https://w3id.org/dpv/legal/fr",
+    "label": "dpv:legal/fr"
+  },
+  {
+    "id": "dpv:legal/gb",
+    "iri": "https://w3id.org/dpv/legal/gb",
+    "label": "dpv:legal/gb"
+  },
+  {
+    "id": "dpv:legal/gr",
+    "iri": "https://w3id.org/dpv/legal/gr",
+    "label": "dpv:legal/gr"
+  },
+  {
+    "id": "dpv:legal/hk",
+    "iri": "https://w3id.org/dpv/legal/hk",
+    "label": "dpv:legal/hk"
+  },
+  {
+    "id": "dpv:legal/hr",
+    "iri": "https://w3id.org/dpv/legal/hr",
+    "label": "dpv:legal/hr"
+  },
+  {
+    "id": "dpv:legal/hu",
+    "iri": "https://w3id.org/dpv/legal/hu",
+    "label": "dpv:legal/hu"
+  },
+  {
+    "id": "dpv:legal/ie",
+    "iri": "https://w3id.org/dpv/legal/ie",
+    "label": "dpv:legal/ie"
+  },
+  {
+    "id": "dpv:legal/in",
+    "iri": "https://w3id.org/dpv/legal/in",
+    "label": "dpv:legal/in"
+  },
+  {
+    "id": "dpv:legal/is",
+    "iri": "https://w3id.org/dpv/legal/is",
+    "label": "dpv:legal/is"
+  },
+  {
+    "id": "dpv:legal/it",
+    "iri": "https://w3id.org/dpv/legal/it",
+    "label": "dpv:legal/it"
+  },
+  {
+    "id": "dpv:legal/jp",
+    "iri": "https://w3id.org/dpv/legal/jp",
+    "label": "dpv:legal/jp"
+  },
+  {
+    "id": "dpv:legal/kr",
+    "iri": "https://w3id.org/dpv/legal/kr",
+    "label": "dpv:legal/kr"
+  },
+  {
+    "id": "dpv:legal/li",
+    "iri": "https://w3id.org/dpv/legal/li",
+    "label": "dpv:legal/li"
+  },
+  {
+    "id": "dpv:legal/lt",
+    "iri": "https://w3id.org/dpv/legal/lt",
+    "label": "dpv:legal/lt"
+  },
+  {
+    "id": "dpv:legal/lu",
+    "iri": "https://w3id.org/dpv/legal/lu",
+    "label": "dpv:legal/lu"
+  },
+  {
+    "id": "dpv:legal/lv",
+    "iri": "https://w3id.org/dpv/legal/lv",
+    "label": "dpv:legal/lv"
+  },
+  {
+    "id": "dpv:legal/mo",
+    "iri": "https://w3id.org/dpv/legal/mo",
+    "label": "dpv:legal/mo"
+  },
+  {
+    "id": "dpv:legal/mt",
+    "iri": "https://w3id.org/dpv/legal/mt",
+    "label": "dpv:legal/mt"
+  },
+  {
+    "id": "dpv:legal/my",
+    "iri": "https://w3id.org/dpv/legal/my",
+    "label": "dpv:legal/my"
+  },
+  {
+    "id": "dpv:legal/nl",
+    "iri": "https://w3id.org/dpv/legal/nl",
+    "label": "dpv:legal/nl"
+  },
+  {
+    "id": "dpv:legal/no",
+    "iri": "https://w3id.org/dpv/legal/no",
+    "label": "dpv:legal/no"
+  },
+  {
+    "id": "dpv:legal/ph",
+    "iri": "https://w3id.org/dpv/legal/ph",
+    "label": "dpv:legal/ph"
+  },
+  {
+    "id": "dpv:legal/pl",
+    "iri": "https://w3id.org/dpv/legal/pl",
+    "label": "dpv:legal/pl"
+  },
+  {
+    "id": "dpv:legal/pt",
+    "iri": "https://w3id.org/dpv/legal/pt",
+    "label": "dpv:legal/pt"
+  },
+  {
+    "id": "dpv:legal/ro",
+    "iri": "https://w3id.org/dpv/legal/ro",
+    "label": "dpv:legal/ro"
+  },
+  {
+    "id": "dpv:legal/se",
+    "iri": "https://w3id.org/dpv/legal/se",
+    "label": "dpv:legal/se"
+  },
+  {
+    "id": "dpv:legal/sg",
+    "iri": "https://w3id.org/dpv/legal/sg",
+    "label": "dpv:legal/sg"
+  },
+  {
+    "id": "dpv:legal/si",
+    "iri": "https://w3id.org/dpv/legal/si",
+    "label": "dpv:legal/si"
+  },
+  {
+    "id": "dpv:legal/sk",
+    "iri": "https://w3id.org/dpv/legal/sk",
+    "label": "dpv:legal/sk"
+  },
+  {
+    "id": "dpv:legal/th",
+    "iri": "https://w3id.org/dpv/legal/th",
+    "label": "dpv:legal/th"
+  },
+  {
+    "id": "dpv:legal/tw",
+    "iri": "https://w3id.org/dpv/legal/tw",
+    "label": "dpv:legal/tw"
+  },
+  {
+    "id": "dpv:legal/us",
+    "iri": "https://w3id.org/dpv/legal/us",
+    "label": "dpv:legal/us"
+  },
+  {
+    "id": "dpv:loc",
+    "iri": "https://w3id.org/dpv/loc",
+    "label": "dpv:loc"
+  },
+  {
     "id": "dpv:mitigatesRisk",
     "iri": "https://w3id.org/dpv#mitigatesRisk",
     "label": "mitigates risk"
   },
   {
+    "id": "dpv:notice-classes",
+    "iri": "https://w3id.org/dpv#notice-classes",
+    "label": "dpv:notice-classes"
+  },
+  {
+    "id": "dpv:notice-properties",
+    "iri": "https://w3id.org/dpv#notice-properties",
+    "label": "dpv:notice-properties"
+  },
+  {
+    "id": "dpv:organisational-measures-classes",
+    "iri": "https://w3id.org/dpv#organisational-measures-classes",
+    "label": "dpv:organisational-measures-classes"
+  },
+  {
+    "id": "dpv:pd",
+    "iri": "https://w3id.org/dpv/pd",
+    "label": "dpv:pd"
+  },
+  {
+    "id": "dpv:personal-data-classes",
+    "iri": "https://w3id.org/dpv#personal-data-classes",
+    "label": "dpv:personal-data-classes"
+  },
+  {
+    "id": "dpv:personal-data-properties",
+    "iri": "https://w3id.org/dpv#personal-data-properties",
+    "label": "dpv:personal-data-properties"
+  },
+  {
+    "id": "dpv:physical-measures-classes",
+    "iri": "https://w3id.org/dpv#physical-measures-classes",
+    "label": "dpv:physical-measures-classes"
+  },
+  {
+    "id": "dpv:primer",
+    "iri": "https://w3id.org/dpv/primer",
+    "label": "dpv:primer"
+  },
+  {
+    "id": "dpv:process-classes",
+    "iri": "https://w3id.org/dpv#process-classes",
+    "label": "dpv:process-classes"
+  },
+  {
+    "id": "dpv:process-properties",
+    "iri": "https://w3id.org/dpv#process-properties",
+    "label": "dpv:process-properties"
+  },
+  {
+    "id": "dpv:processing-classes",
+    "iri": "https://w3id.org/dpv#processing-classes",
+    "label": "dpv:processing-classes"
+  },
+  {
+    "id": "dpv:processing-context-classes",
+    "iri": "https://w3id.org/dpv#processing-context-classes",
+    "label": "dpv:processing-context-classes"
+  },
+  {
+    "id": "dpv:processing-context-properties",
+    "iri": "https://w3id.org/dpv#processing-context-properties",
+    "label": "dpv:processing-context-properties"
+  },
+  {
+    "id": "dpv:processing-properties",
+    "iri": "https://w3id.org/dpv#processing-properties",
+    "label": "dpv:processing-properties"
+  },
+  {
+    "id": "dpv:processing-scale-classes",
+    "iri": "https://w3id.org/dpv#processing-scale-classes",
+    "label": "dpv:processing-scale-classes"
+  },
+  {
+    "id": "dpv:processing-scale-properties",
+    "iri": "https://w3id.org/dpv#processing-scale-properties",
+    "label": "dpv:processing-scale-properties"
+  },
+  {
+    "id": "dpv:purposes-classes",
+    "iri": "https://w3id.org/dpv#purposes-classes",
+    "label": "dpv:purposes-classes"
+  },
+  {
+    "id": "dpv:purposes-properties",
+    "iri": "https://w3id.org/dpv#purposes-properties",
+    "label": "dpv:purposes-properties"
+  },
+  {
+    "id": "dpv:rights-classes",
+    "iri": "https://w3id.org/dpv#rights-classes",
+    "label": "dpv:rights-classes"
+  },
+  {
+    "id": "dpv:rights-properties",
+    "iri": "https://w3id.org/dpv#rights-properties",
+    "label": "dpv:rights-properties"
+  },
+  {
+    "id": "dpv:rights/eu",
+    "iri": "https://w3id.org/dpv/rights/eu",
+    "label": "dpv:rights/eu"
+  },
+  {
+    "id": "dpv:risk",
+    "iri": "https://w3id.org/dpv/risk",
+    "label": "dpv:risk"
+  },
+  {
+    "id": "dpv:risk-classes",
+    "iri": "https://w3id.org/dpv#risk-classes",
+    "label": "dpv:risk-classes"
+  },
+  {
+    "id": "dpv:risk-properties",
+    "iri": "https://w3id.org/dpv#risk-properties",
+    "label": "dpv:risk-properties"
+  },
+  {
+    "id": "dpv:rules-classes",
+    "iri": "https://w3id.org/dpv#rules-classes",
+    "label": "dpv:rules-classes"
+  },
+  {
+    "id": "dpv:rules-properties",
+    "iri": "https://w3id.org/dpv#rules-properties",
+    "label": "dpv:rules-properties"
+  },
+  {
+    "id": "dpv:sector",
+    "iri": "https://w3id.org/dpv/sector",
+    "label": "dpv:sector"
+  },
+  {
+    "id": "dpv:sector/education",
+    "iri": "https://w3id.org/dpv/sector/education",
+    "label": "dpv:sector/education"
+  },
+  {
+    "id": "dpv:sector/finance",
+    "iri": "https://w3id.org/dpv/sector/finance",
+    "label": "dpv:sector/finance"
+  },
+  {
+    "id": "dpv:sector/health",
+    "iri": "https://w3id.org/dpv/sector/health",
+    "label": "dpv:sector/health"
+  },
+  {
+    "id": "dpv:sector/infra",
+    "iri": "https://w3id.org/dpv/sector/infra",
+    "label": "dpv:sector/infra"
+  },
+  {
+    "id": "dpv:sector/law",
+    "iri": "https://w3id.org/dpv/sector/law",
+    "label": "dpv:sector/law"
+  },
+  {
+    "id": "dpv:sector/publicservices",
+    "iri": "https://w3id.org/dpv/sector/publicservices",
+    "label": "dpv:sector/publicservices"
+  },
+  {
+    "id": "dpv:serialisation-html",
+    "iri": "https://w3id.org/dpv#serialisation-html",
+    "label": "dpv:serialisation-html"
+  },
+  {
+    "id": "dpv:serialisation-jsonld",
+    "iri": "https://w3id.org/dpv#serialisation-jsonld",
+    "label": "dpv:serialisation-jsonld"
+  },
+  {
+    "id": "dpv:serialisation-n3",
+    "iri": "https://w3id.org/dpv#serialisation-n3",
+    "label": "dpv:serialisation-n3"
+  },
+  {
+    "id": "dpv:serialisation-rdf",
+    "iri": "https://w3id.org/dpv#serialisation-rdf",
+    "label": "dpv:serialisation-rdf"
+  },
+  {
+    "id": "dpv:serialisation-ttl",
+    "iri": "https://w3id.org/dpv#serialisation-ttl",
+    "label": "dpv:serialisation-ttl"
+  },
+  {
+    "id": "dpv:standards/p7012",
+    "iri": "https://w3id.org/dpv/standards/p7012",
+    "label": "dpv:standards/p7012"
+  },
+  {
+    "id": "dpv:status-classes",
+    "iri": "https://w3id.org/dpv#status-classes",
+    "label": "dpv:status-classes"
+  },
+  {
+    "id": "dpv:status-properties",
+    "iri": "https://w3id.org/dpv#status-properties",
+    "label": "dpv:status-properties"
+  },
+  {
     "id": "dpv:supportsComplianceWith",
     "iri": "https://w3id.org/dpv#supportsComplianceWith",
     "label": "supports Compliance With"
+  },
+  {
+    "id": "dpv:tech",
+    "iri": "https://w3id.org/dpv/tech",
+    "label": "dpv:tech"
+  },
+  {
+    "id": "dpv:technical-measures-classes",
+    "iri": "https://w3id.org/dpv#technical-measures-classes",
+    "label": "dpv:technical-measures-classes"
   },
   {
     "id": "http://purl.org/dc/terms/accessRights",
@@ -43968,5 +47398,10 @@
     "id": "http://xmlns.com/foaf/0.1/page",
     "iri": "http://xmlns.com/foaf/0.1/page",
     "label": "foaf:page"
+  },
+  {
+    "id": "https://w3id.org/dpv",
+    "iri": "https://w3id.org/dpv",
+    "label": "https://w3id.org/dpv"
   }
 ]

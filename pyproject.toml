@@ -40,7 +40,11 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 moose_api = ["static/*"]
-moose = ["data/*.json"]
+moose = [
+  "data/**/*.json",
+  "data/**/*.jsonld",
+  "data/**/*.txt"
+]
 
 [tool.pytest.ini_options]
 addopts = "-q"

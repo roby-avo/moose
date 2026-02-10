@@ -1,0 +1,23 @@
+{
+  "counts": {
+    "concepts": 9481
+  },
+  "generated_at": "2026-01-21T09:12:11.420442+00:00",
+  "label": "W3C Data Privacy Vocabulary (DPV)",
+  "name": "dpv",
+  "paths": {
+    "concept_ancestors": "dpv/concept_ancestors.json",
+    "concept_parents": "dpv/concept_parents.json",
+    "concepts": "dpv/concepts.json"
+  },
+  "source": {
+    "format": "jsonld",
+    "repo": "https://github.com/w3c/dpv"
+  },
+  "subsets": {
+    "dpv_pd_only": {
+      "concept_count": 229
+    }
+  },
+  "version": "2.2"
+}

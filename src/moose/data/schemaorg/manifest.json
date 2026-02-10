@@ -1,0 +1,20 @@
+{
+  "counts": {
+    "classes": 930,
+    "properties": 1520
+  },
+  "generated_at": "2026-01-21T09:12:11.421874+00:00",
+  "label": "schema.org",
+  "name": "schemaorg",
+  "source": {
+    "format": "jsonld",
+    "url": "https://schema.org/version/latest/schemaorg-current-https.jsonld"
+  },
+  "subsets": {
+    "curated_v1": {
+      "class_count": 603,
+      "property_count": 828
+    }
+  },
+  "version": "latest"
+}

@@ -5,6 +5,8 @@ services:
       - "${MOOSE_API_PORT:-8000}:${MOOSE_API_PORT:-8000}"
     volumes:
       - ./src:/app/src
+    environment:
+      - PYTHONPATH=/app/src
     command:
       [
         "uvicorn",
@@ -13,8 +15,7 @@ services:
         "0.0.0.0",
         "--port",
         "${MOOSE_API_PORT:-8000}",
-        "--reload",
-        "--reload-dir",
+        "--app-dir",
         "/app/src"
       ]
     env_file:

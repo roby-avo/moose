@@ -1,0 +1,908 @@
+{
+  "dpv-pd:Accent": [
+    "dpv-pd:Language",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:AccountIdentifier": [
+    "dpv-pd:FinancialAccount",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Acquaintance": [
+    "dpv-pd:SocialNetwork",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Age": [
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:AgeExact": [
+    "dpv-pd:AgeRange",
+    "dpv-pd:Age",
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:AgeRange": [
+    "dpv-pd:Age",
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:ApartmentOwned": [
+    "dpv-pd:HouseOwned",
+    "dpv-pd:Ownership",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Association": [
+    "dpv-pd:SocialNetwork",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Attitude": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Authenticating": [
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:AuthenticationHistory": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:BankAccount": [
+    "dpv-pd:FinancialAccount",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Behavioural": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Biometric": [
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:BirthCountry": [
+    "dpv-pd:BirthPlace",
+    "dpv-pd:Location",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:BirthDate": [
+    "dpv-pd:Age",
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:BirthPlace": [
+    "dpv-pd:Location",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:BloodType": [
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:BrowserFingerprint": [
+    "dpv-pd:DeviceBased",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:BrowserHistory": [
+    "dpv-pd:BrowsingBehaviour",
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:BrowsingBehaviour": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:BrowsingReferral": [
+    "dpv-pd:BrowsingBehaviour",
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:CallLog": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:CarOwned": [
+    "dpv-pd:Ownership",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Character": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Citizenship": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:City": [
+    "dpv-pd:PhysicalAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking",
+    "dpv-pd:Location"
+  ],
+  "dpv-pd:Communication": [
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:CommunicationsMetadata": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Connection": [
+    "dpv-pd:SocialNetwork",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Contact": [
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Country": [
+    "dpv-pd:Location",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Credit": [
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:CreditCapacity": [
+    "dpv-pd:Credit",
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:CreditCardNumber": [
+    "dpv-pd:PaymentCardNumber",
+    "dpv-pd:PaymentCard",
+    "dpv-pd:FinancialAccount",
+    "dpv-pd:Financial",
+    "dpv-pd:AccountIdentifier"
+  ],
+  "dpv-pd:CreditRecord": [
+    "dpv-pd:Credit",
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:CreditScore": [
+    "dpv-pd:CreditWorthiness",
+    "dpv-pd:Credit",
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:CreditStanding": [
+    "dpv-pd:Credit",
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:CreditWorthiness": [
+    "dpv-pd:Credit",
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Criminal": [
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:CriminalCharge": [
+    "dpv-pd:Criminal",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:CriminalConviction": [
+    "dpv-pd:Criminal",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:CriminalOffence": [
+    "dpv-pd:Criminal",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:CriminalPardon": [
+    "dpv-pd:Criminal",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:CurrentEmployment": [
+    "dpv-pd:EmploymentHistory",
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:DNACode": [
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Demeanour": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Demographic": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:DeviceApplications": [
+    "dpv-pd:DeviceSoftware",
+    "dpv-pd:DeviceBased",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:DeviceBased": [
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:DeviceOperatingSystem": [
+    "dpv-pd:DeviceSoftware",
+    "dpv-pd:DeviceBased",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:DeviceSoftware": [
+    "dpv-pd:DeviceBased",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Dialect": [
+    "dpv-pd:Language",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:DigitalFingerprint": [
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Disability": [
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:DisciplinaryAction": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Dislike": [
+    "dpv-pd:Interest",
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Divorce": [
+    "dpv-pd:FamilyStructure",
+    "dpv-pd:Family",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Domicile": [
+    "dpv-pd:Location",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:DrugTestResult": [
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Education": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:EducationExperience": [
+    "dpv-pd:Education",
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:EducationQualification": [
+    "dpv-pd:Education",
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:EmailAddress": [
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:EmailAddressPersonal": [
+    "dpv-pd:EmailAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:EmailAddressWork": [
+    "dpv-pd:EmailAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:EmailContent": [
+    "dpv-pd:Communication",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Emotion": [
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:EmploymentHistory": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:EthnicOrigin": [
+    "dpv-pd:Ethnicity",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Ethnicity": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:External": [],
+  "dpv-pd:FacialExpression": [
+    "dpv-pd:Biometric",
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:FacialPrint": [
+    "dpv-pd:Biometric",
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Family": [
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:FamilyHealthHistory": [
+    "dpv-pd:HealthHistory",
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:FamilyStructure": [
+    "dpv-pd:Family",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Favourite": [
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:FavouriteColour": [
+    "dpv-pd:Favourite",
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:FavouriteFood": [
+    "dpv-pd:Favourite",
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:FavouriteMusic": [
+    "dpv-pd:Favourite",
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Fetish": [
+    "dpv-pd:Sexual",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Financial": [],
+  "dpv-pd:FinancialAccount": [
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:FinancialAccountNumber": [
+    "dpv-pd:AccountIdentifier",
+    "dpv-pd:FinancialAccount",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:FinancialStatus": [
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Fingerprint": [
+    "dpv-pd:Biometric",
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Friend": [
+    "dpv-pd:SocialNetwork",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:GPSCoordinate": [
+    "dpv-pd:Location",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Gender": [
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:GeneralReputation": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Genetic": [
+    "dpv-pd:Health",
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Geographic": [
+    "dpv-pd:Demographic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:GroupMembership": [
+    "dpv-pd:SocialNetwork",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:GroupProfile": [
+    "dpv-pd:Profile"
+  ],
+  "dpv-pd:HairColour": [
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Health": [
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:HealthHistory": [
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:HealthRecord": [
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Height": [
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Historical": [],
+  "dpv-pd:HouseNumber": [
+    "dpv-pd:PhysicalAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking",
+    "dpv-pd:Location"
+  ],
+  "dpv-pd:HouseOwned": [
+    "dpv-pd:Ownership",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Household": [],
+  "dpv-pd:IPAddress": [
+    "dpv-pd:DeviceBased",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Identifier": [
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Identifying": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Income": [
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:IncomeBracket": [
+    "dpv-pd:Demographic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:IndividualHealthHistory": [
+    "dpv-pd:HealthHistory",
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:IndividualProfile": [
+    "dpv-pd:Profile"
+  ],
+  "dpv-pd:Insurance": [
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Intention": [
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Interaction": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Interest": [
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Internal": [],
+  "dpv-pd:Job": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:KnowledgeBelief": [
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Language": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:LifeHistory": [
+    "dpv-pd:Historical"
+  ],
+  "dpv-pd:Like": [
+    "dpv-pd:Interest",
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:LinkClicked": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:LoanRecord": [
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Locality": [
+    "dpv-pd:PhysicalAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking",
+    "dpv-pd:Location"
+  ],
+  "dpv-pd:Location": [
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:MACAddress": [
+    "dpv-pd:DeviceBased",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:MaritalStatus": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Marriage": [
+    "dpv-pd:FamilyStructure",
+    "dpv-pd:Family",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:MedicalHealth": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:MentalHealth": [
+    "dpv-pd:Health",
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Mood": [
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Name": [
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Nationality": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:OfficialID": [
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Offspring": [
+    "dpv-pd:FamilyStructure",
+    "dpv-pd:Family",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Opinion": [
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Ownership": [
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:PINCode": [
+    "dpv-pd:Authenticating",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Parent": [
+    "dpv-pd:FamilyStructure",
+    "dpv-pd:Family",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Passport": [
+    "dpv-pd:OfficialID",
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Password": [
+    "dpv-pd:Authenticating",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:PastEmployment": [
+    "dpv-pd:EmploymentHistory",
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:PaymentCard": [
+    "dpv-pd:FinancialAccount",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:PaymentCardExpiry": [
+    "dpv-pd:PaymentCard",
+    "dpv-pd:FinancialAccount",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:PaymentCardNumber": [
+    "dpv-pd:PaymentCard",
+    "dpv-pd:FinancialAccount",
+    "dpv-pd:Financial",
+    "dpv-pd:AccountIdentifier"
+  ],
+  "dpv-pd:PerformanceAtWork": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External",
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:PersonalDocuments": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:PersonalPossession": [
+    "dpv-pd:Ownership",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Personality": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:PhilosophicalBelief": [
+    "dpv-pd:KnowledgeBelief",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:PhysicalAddress": [
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking",
+    "dpv-pd:Location"
+  ],
+  "dpv-pd:PhysicalCharacteristic": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:PhysicalHealth": [
+    "dpv-pd:Health",
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:PhysicalTrait": [
+    "dpv-pd:Demographic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Picture": [
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Piercing": [
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:PoliticalAffiliation": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:PoliticalOpinion": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:PostalCode": [
+    "dpv-pd:PhysicalAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking",
+    "dpv-pd:Location"
+  ],
+  "dpv-pd:Preference": [
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Prescription": [
+    "dpv-pd:MedicalHealth",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:PrivacyPreference": [
+    "dpv-pd:Preference",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Proclivity": [
+    "dpv-pd:Sexual",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Professional": [
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:ProfessionalCertification": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:ProfessionalEvaluation": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:ProfessionalInterview": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Profile": [],
+  "dpv-pd:PublicLife": [
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:PubliclyAvailableSocialMedia": [
+    "dpv-pd:SocialMedia",
+    "dpv-pd:Communication",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Purchase": [
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:PurchasesAndSpendingHabit": [
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Race": [
+    "dpv-pd:Ethnicity",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Reference": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Region": [
+    "dpv-pd:PhysicalAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking",
+    "dpv-pd:Location"
+  ],
+  "dpv-pd:Relationship": [
+    "dpv-pd:Family",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Reliability": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Religion": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:ReligiousBelief": [
+    "dpv-pd:KnowledgeBelief",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Residency": [
+    "dpv-pd:Location",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Retina": [
+    "dpv-pd:Biometric",
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:RoomNumber": [
+    "dpv-pd:PhysicalAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking",
+    "dpv-pd:Location"
+  ],
+  "dpv-pd:Salary": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Sale": [
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:School": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:SecretText": [
+    "dpv-pd:Authenticating",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:ServiceConsumptionBehaviour": [
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Sexual": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:SexualHistory": [
+    "dpv-pd:Sexual",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:SexualPreference": [
+    "dpv-pd:Sexual",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Sibling": [
+    "dpv-pd:FamilyStructure",
+    "dpv-pd:Family",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:SkinTone": [
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Social": [],
+  "dpv-pd:SocialMedia": [
+    "dpv-pd:Communication",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:SocialMediaCommunication": [
+    "dpv-pd:Communication",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:SocialNetwork": [
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:SocialStatus": [
+    "dpv-pd:PublicLife",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Street": [
+    "dpv-pd:PhysicalAddress",
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking",
+    "dpv-pd:Location"
+  ],
+  "dpv-pd:TVViewingBehaviour": [
+    "dpv-pd:ServiceConsumptionBehaviour",
+    "dpv-pd:Behavioural",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Tattoo": [
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:Tax": [
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:TelephoneNumber": [
+    "dpv-pd:Contact",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Thought": [
+    "dpv-pd:KnowledgeBelief",
+    "dpv-pd:Internal"
+  ],
+  "dpv-pd:Tracking": [],
+  "dpv-pd:TradeUnionMembership": [
+    "dpv-pd:GroupMembership",
+    "dpv-pd:SocialNetwork",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Transaction": [
+    "dpv-pd:Transactional",
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:Transactional": [
+    "dpv-pd:Financial"
+  ],
+  "dpv-pd:TravelHistory": [
+    "dpv-pd:Location",
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:UID": [
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:UserAgent": [
+    "dpv-pd:Tracking"
+  ],
+  "dpv-pd:Username": [
+    "dpv-pd:Identifying",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:VehicalLicenseNumber": [
+    "dpv-pd:VehicleLicense",
+    "dpv-pd:Identifying",
+    "dpv-pd:External",
+    "dpv-pd:Vehicle"
+  ],
+  "dpv-pd:VehicalLicenseRegistration": [
+    "dpv-pd:VehicleLicense",
+    "dpv-pd:Identifying",
+    "dpv-pd:External",
+    "dpv-pd:Vehicle"
+  ],
+  "dpv-pd:Vehicle": [
+    "dpv-pd:External"
+  ],
+  "dpv-pd:VehicleLicense": [
+    "dpv-pd:Identifying",
+    "dpv-pd:External",
+    "dpv-pd:Vehicle"
+  ],
+  "dpv-pd:VehicleUsage": [
+    "dpv-pd:Vehicle",
+    "dpv-pd:External",
+    "dpv-pd:Behavioural"
+  ],
+  "dpv-pd:VoiceCommunicationRecording": [
+    "dpv-pd:Communication",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:VoiceMail": [
+    "dpv-pd:Communication",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:Weight": [
+    "dpv-pd:PhysicalCharacteristic",
+    "dpv-pd:External"
+  ],
+  "dpv-pd:WorkEnvironment": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:WorkHistory": [
+    "dpv-pd:Professional",
+    "dpv-pd:Social"
+  ],
+  "dpv-pd:core-classes": [],
+  "dpv-pd:extended-classes": [],
+  "dpv-pd:serialisation-html": [],
+  "dpv-pd:serialisation-jsonld": [],
+  "dpv-pd:serialisation-n3": [],
+  "dpv-pd:serialisation-rdf": [],
+  "dpv-pd:serialisation-ttl": [],
+  "dpv-pd:specialcategory-classes": []
+}

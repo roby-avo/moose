@@ -1,0 +1,69 @@
+[
+  {
+    "name": "dpv",
+    "label": "DPV",
+    "description": "Data Privacy Vocabulary (W3C).",
+    "type_source": "dpv_full.json",
+    "score_mode": "sparse",
+    "text_intro": "You are a DPV annotation engine.",
+    "table_intro": "You are a DPV classification engine for tabular data.",
+    "prefilter_types": true,
+    "type_alias_prefixes": {
+      "dpv-pd:": "dpv:"
+    }
+  },
+  {
+    "name": "sti",
+    "label": "STI Column Types",
+    "description": "Coarse Semantic Table Interpretation column typing.",
+    "type_source": "sti_types.json",
+    "score_mode": "sparse",
+    "text_intro": "You are a semantic typing engine for tabular data.",
+    "table_intro": "You are a column type classifier for semantic table interpretation. Assign one type per column using the column header and value distribution. First decide NE vs LIT: use NE:* for columns whose values are names of real-world entities that could be linked in a KG (people, organizations, locations, works/titles, products, brands). Use NE:OTHER for entity names that are not PERSON/ORGANIZATION/LOCATION (e.g., movie titles). Use LIT:* only for non-entity attributes like numbers, dates, durations, codes, or descriptive text that is not an entity name. For literals, prefer the most specific xsd:* datatype; use ext:* for common syntactic patterns (email, ipv4/ipv6, phone, uuid, url, postal/country/currency codes); if unsure, use the high-level LIT:STRING, LIT:NUMBER, or LIT:DATETIME. Do not perform entity linking.",
+    "supports_text": false,
+    "type_alias_prefixes": {
+      "XSD:": "xsd:",
+      "EXT:": "ext:"
+    },
+    "coarse_mapping": {
+      "NE:PERSON": "NE:PERSON",
+      "NE:ORGANIZATION": "NE:ORGANIZATION",
+      "NE:LOCATION": "NE:LOCATION",
+      "NE:OTHER": "NE:OTHER",
+      "LIT:STRING": "LIT:STRING",
+      "LIT:NUMBER": "LIT:NUMBER",
+      "LIT:DATETIME": "LIT:DATETIME",
+      "xsd:string": "LIT:STRING",
+      "xsd:boolean": "LIT:STRING",
+      "xsd:integer": "LIT:NUMBER",
+      "xsd:decimal": "LIT:NUMBER",
+      "xsd:date": "LIT:DATETIME",
+      "xsd:dateTime": "LIT:DATETIME",
+      "xsd:anyURI": "LIT:STRING",
+      "ext:email": "LIT:STRING",
+      "ext:ipv4": "LIT:STRING",
+      "ext:ipv6": "LIT:STRING",
+      "ext:phone": "LIT:STRING",
+      "ext:uuid": "LIT:STRING",
+      "ext:url": "LIT:STRING",
+      "ext:postalCode": "LIT:STRING",
+      "ext:countryCode": "LIT:STRING",
+      "ext:currencyCode": "LIT:STRING",
+      "ext:lat": "LIT:NUMBER",
+      "ext:lon": "LIT:NUMBER",
+      "ext:percentage": "LIT:NUMBER",
+      "ext:duration": "LIT:DATETIME"
+    }
+  },
+  {
+    "name": "cpa",
+    "label": "CPA Relationships",
+    "description": "Column property annotation (CPA) / column relationship prediction from a subject column to target columns.",
+    "type_source": "colprops_types.json",
+    "score_mode": "sparse",
+    "supports_text": false,
+    "supports_table": false,
+    "supports_cpa": true,
+    "cpa_intro": "You are a column relationship prediction engine. Your task is to predict the semantic relationship between a SUBJECT column and each TARGET column in a table. Choose ONLY from the provided relationship labels. If none apply, choose CPA:NONE. If a relationship exists but is not in the label set, choose CPA:OTHER."
+  }
+]

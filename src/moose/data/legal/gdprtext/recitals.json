@@ -1,0 +1,53 @@
+[
+  {
+    "alt_labels": [],
+    "definition": "Related to Regulation (EC) No. 45/2001",
+    "id": "gdprtext:R17",
+    "iri": "https://w3id.org/GDPRtEXT#R17",
+    "kind": "recital",
+    "label": "Regulation (EC) No 45/2001",
+    "modules": [
+      "ontology"
+    ],
+    "number": 17,
+    "schemes": [],
+    "text": "Related to Regulation (EC) No. 45/2001",
+    "types": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Exempted as the GDPR does not apply to personal or household activity that does not have a professional or commercial activity associated with it.",
+    "id": "gdprtext:R18",
+    "iri": "https://w3id.org/GDPRtEXT#R18",
+    "kind": "recital",
+    "label": "Personal or Household activity",
+    "modules": [
+      "ontology"
+    ],
+    "number": 18,
+    "schemes": [],
+    "text": "Exempted as the GDPR does not apply to personal or household activity that does not have a professional or commercial activity associated with it.",
+    "types": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ]
+  },
+  {
+    "alt_labels": [],
+    "definition": "Exempted as it involves areas covered by Directive (EU) 2016/680",
+    "id": "gdprtext:R19",
+    "iri": "https://w3id.org/GDPRtEXT#R19",
+    "kind": "recital",
+    "label": "Covered by Directive (EU) 2016/680",
+    "modules": [
+      "ontology"
+    ],
+    "number": 19,
+    "schemes": [],
+    "text": "Exempted as it involves areas covered by Directive (EU) 2016/680",
+    "types": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ]
+  }
+]
