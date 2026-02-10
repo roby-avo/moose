@@ -32,8 +32,6 @@ class BaseNERRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     text: str = Field(min_length=1)
-    include_scores: bool = False
-    strict_offsets: bool = False
     llm: LLMOverrides
 
     @field_validator("text")
@@ -68,7 +66,6 @@ class BaseTabularRequest(BaseModel):
 
     table_id: str | None = None
     sampled_rows: list[dict[str, Any]] = Field(min_length=1)
-    include_scores: bool = False
     llm: LLMOverrides
 
 
@@ -100,8 +97,6 @@ class BaseTabularNERRequest(BaseModel):
 
     strings_only: bool = True
     skip_structured_literals: bool = True
-    include_scores: bool = False
-    strict_offsets: bool = False
     llm: LLMOverrides
 
 
@@ -149,7 +144,6 @@ class BaseCPARequest(BaseModel):
     debug: bool = False
     debug_preview_limit: int = Field(default=20, ge=0, le=200)
 
-    include_scores: bool = False
     llm: LLMOverrides
 
     @field_validator("subject_column")
@@ -426,8 +420,6 @@ async def submit_ner(
     payload = {
         "schema": request.schema,
         "text": request.text,
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("ner", payload)
@@ -447,8 +439,6 @@ async def submit_schema_ner(
     payload = {
         "schema": schema,
         "text": request.text,
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("ner", payload)
@@ -467,8 +457,6 @@ async def submit_dpv_ner(
     payload = {
         "schema": "dpv",
         "text": request.text,
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("ner", payload)
@@ -491,7 +479,6 @@ async def submit_tabular(
         "schema": request.schema,
         "table_id": request.table_id,
         "sampled_rows": request.sampled_rows,
-        "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular", payload)
@@ -512,7 +499,6 @@ async def submit_schema_tabular(
         "schema": schema,
         "table_id": request.table_id,
         "sampled_rows": request.sampled_rows,
-        "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular", payload)
@@ -532,7 +518,6 @@ async def submit_dpv_tabular(
         "schema": "dpv",
         "table_id": request.table_id,
         "sampled_rows": request.sampled_rows,
-        "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular", payload)
@@ -558,8 +543,6 @@ async def submit_tabular_ner(
         "target_columns": request.target_columns,
         "strings_only": request.strings_only,
         "skip_structured_literals": request.skip_structured_literals,
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular_ner", payload)
@@ -583,8 +566,6 @@ async def submit_schema_tabular_ner(
         "target_columns": request.target_columns,
         "strings_only": request.strings_only,
         "skip_structured_literals": request.skip_structured_literals,
-        "include_scores": request.include_scores,
-        "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("tabular_ner", payload)
@@ -613,7 +594,6 @@ async def submit_tabular_cpa(
         "use_sti_signature_cache": request.use_sti_signature_cache,
         "debug": request.debug,
         "debug_preview_limit": request.debug_preview_limit,
-        "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("cpa", payload)
@@ -640,7 +620,6 @@ async def submit_schema_tabular_cpa(
         "use_sti_signature_cache": request.use_sti_signature_cache,
         "debug": request.debug,
         "debug_preview_limit": request.debug_preview_limit,
-        "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
     job_id = await _enqueue_job("cpa", payload)

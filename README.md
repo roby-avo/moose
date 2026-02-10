@@ -183,7 +183,7 @@ For large vocabularies, `"prefilter_types": true` enables two-step type selectio
 
 ## Confidence
 
-For each entity/column, the model returns unnormalized non-negative scores for a fixed hypothesis set that includes a fallback type (e.g., `MISC` in the coarse schema). Moose normalizes these scores to a posterior distribution and returns the selected type with its posterior confidence in `[0,1]`. Set `include_scores: true` in the request to include the full normalized distribution per entity/column.
+For each entity/column, the model returns unnormalized non-negative scores for the configured label set (including fallback labels where present), and Moose returns the selected type with confidence in `[0,1]`.
 
 ## Queue behavior
 

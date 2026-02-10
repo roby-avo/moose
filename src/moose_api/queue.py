@@ -327,8 +327,6 @@ class WorkerPool:
                         [single_task],
                         job.payload["schema"],
                         llm_client,
-                        include_scores=job.payload.get("include_scores", False),
-                        strict_offsets=job.payload.get("strict_offsets", False),
                         settings=self._settings,
                     )
                     result = _unwrap_single_ner_result(raw)
@@ -343,7 +341,6 @@ class WorkerPool:
                         [single_task],
                         job.payload["schema"],
                         llm_client,
-                        include_scores=job.payload.get("include_scores", False),
                         settings=self._settings,
                     )
                     result = _unwrap_single_tabular_result(raw)
@@ -361,8 +358,6 @@ class WorkerPool:
                         [single_task],
                         job.payload["schema"],
                         llm_client,
-                        include_scores=job.payload.get("include_scores", False),
-                        strict_offsets=job.payload.get("strict_offsets", False),
                         settings=self._settings,
                     )
                     result = _unwrap_single_tabular_ner_result(raw)
@@ -397,7 +392,6 @@ class WorkerPool:
                         [single_task],
                         job.payload["schema"],
                         llm_client,
-                        include_scores=job.payload.get("include_scores", False),
                         settings=self._settings,
                     )
                     result = _unwrap_single_cpa_result(raw)

@@ -190,8 +190,6 @@ async def run_text_ner(
     tasks: list[dict],
     schema: str,
     llm_client,
-    include_scores: bool = False,
-    strict_offsets: bool = False,
     settings: Settings | None = None,
 ) -> dict:
     settings = settings or get_settings()
@@ -219,7 +217,7 @@ async def run_text_ner(
             require_all_scores=require_all_scores,
             type_aliases=schema_config.type_aliases,
             type_alias_prefixes=schema_config.type_alias_prefixes,
-            strict_offsets=strict_offsets,
+            strict_offsets=False,
         )
 
     parsed, warnings = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
@@ -230,7 +228,7 @@ async def run_text_ner(
         entities = []
         for entity in item.entities:
             scores = {type_id: float(entity.scores.get(type_id, 0)) for type_id in selected_type_ids}
-            type_id, confidence, distribution = choose_argmax(scores)
+            type_id, confidence, _distribution = choose_argmax(scores)
             output = {
                 "start": entity.start,
                 "end": entity.end,
@@ -240,8 +238,6 @@ async def run_text_ner(
             }
             if schema_config.coarse_mapping:
                 output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
-            if include_scores:
-                output["distribution"] = distribution
             entities.append(output)
         results_by_id[item.task_id] = {"task_id": item.task_id, "entities": entities}
 
@@ -256,7 +252,6 @@ async def run_table_annotate(
     tasks: list[dict],
     schema: str,
     llm_client,
-    include_scores: bool = False,
     settings: Settings | None = None,
 ) -> dict:
     settings = settings or get_settings()
@@ -292,12 +287,10 @@ async def run_table_annotate(
         columns = []
         for column in item.columns:
             scores = {type_id: float(column.scores.get(type_id, 0)) for type_id in selected_type_ids}
-            type_id, confidence, distribution = choose_argmax(scores)
+            type_id, confidence, _distribution = choose_argmax(scores)
             output = {"column": column.column, "type_id": type_id, "confidence": confidence}
             if schema_config.coarse_mapping:
                 output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
-            if include_scores:
-                output["distribution"] = distribution
             columns.append(output)
         results_by_id[item.task_id] = {"task_id": item.task_id, "table_id": task["table_id"], "columns": columns}
 
@@ -309,8 +302,6 @@ async def run_tabular_ner(
     tasks: list[dict],
     schema: str,
     llm_client,
-    include_scores: bool = False,
-    strict_offsets: bool = False,
     settings: Settings | None = None,
 ) -> dict:
     settings = settings or get_settings()
@@ -424,7 +415,7 @@ async def run_tabular_ner(
             require_all_scores=require_all_scores,
             type_aliases=schema_config.type_aliases,
             type_alias_prefixes=schema_config.type_alias_prefixes,
-            strict_offsets=strict_offsets,
+            strict_offsets=False,
         )
 
     parsed, warnings = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
@@ -436,7 +427,7 @@ async def run_tabular_ner(
 
         for entity in item.entities:
             scores = {type_id: float(entity.scores.get(type_id, 0)) for type_id in selected_type_ids}
-            type_id, confidence, distribution = choose_argmax(scores)
+            type_id, confidence, _distribution = choose_argmax(scores)
             output = {
                 "start": entity.start,
                 "end": entity.end,
@@ -446,8 +437,6 @@ async def run_tabular_ner(
             }
             if schema_config.coarse_mapping:
                 output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
-            if include_scores:
-                output["distribution"] = distribution
             entities_out.append(output)
 
         results_by_cell_id[item.task_id] = entities_out

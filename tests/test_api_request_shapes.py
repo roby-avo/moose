@@ -30,6 +30,18 @@ def test_schema_ner_rejects_legacy_tasks_shape() -> None:
         )
 
 
+def test_schema_ner_rejects_removed_debug_flags() -> None:
+    with pytest.raises(ValidationError):
+        SchemaNERRequest.model_validate(
+            {
+                "text": "Alice works at Moose.",
+                "include_scores": True,
+                "strict_offsets": True,
+                "llm": _LLM,
+            }
+        )
+
+
 def test_schema_tabular_accepts_single_payload_shape() -> None:
     request = SchemaTabularRequest.model_validate(
         {"sampled_rows": [{"name": "Alice"}], "llm": _LLM}
@@ -72,6 +84,19 @@ def test_schema_tabular_ner_rejects_legacy_tasks_shape() -> None:
                         "target_columns": ["notes"],
                     }
                 ],
+                "llm": _LLM,
+            }
+        )
+
+
+def test_schema_tabular_ner_rejects_removed_debug_flags() -> None:
+    with pytest.raises(ValidationError):
+        SchemaTabularNERRequest.model_validate(
+            {
+                "sampled_rows": [{"notes": "email alice@example.com"}],
+                "target_columns": ["notes"],
+                "include_scores": True,
+                "strict_offsets": True,
                 "llm": _LLM,
             }
         )

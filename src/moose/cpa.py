@@ -233,7 +233,7 @@ async def _infer_subject_class_via_cta(
     Returns None if unknown or moose:OTHER.
     """
     task = {"task_id": "cta-subject-1", "table_id": "cta-subject", "sampled_rows": sampled_rows}
-    out = await run_table_annotate([task], cta_schema, llm_client, include_scores=False, settings=settings)
+    out = await run_table_annotate([task], cta_schema, llm_client, settings=settings)
     results = out.get("results", [])
     if not results:
         return None
@@ -259,7 +259,7 @@ async def _infer_subject_class_via_cta(
 async def _get_sti_types_for_table(sampled_rows: list[dict[str, Any]], llm_client, settings: Settings) -> dict[str, str]:
     sti_task = {"task_id": "sti-cache-1", "table_id": "sti-cache", "sampled_rows": sampled_rows}
     try:
-        out = await run_table_annotate([sti_task], "sti", llm_client, include_scores=False, settings=settings)
+        out = await run_table_annotate([sti_task], "sti", llm_client, settings=settings)
         results = out.get("results", [])
         if not results:
             return {}
@@ -376,7 +376,6 @@ async def run_table_cpa(
     tasks: list[dict[str, Any]],
     schema: str,
     llm_client,
-    include_scores: bool = False,
     settings: Settings | None = None,
     max_rows_in_prompt: int = 5,
 ) -> dict[str, Any]:
@@ -560,11 +559,9 @@ async def run_table_cpa(
                 rel = item.relationships[0]
 
                 scores = {rid: float(rel.scores.get(rid, 0.0)) for rid in selected_relation_ids}
-                relation_id, confidence, distribution = choose_argmax(scores)
+                relation_id, confidence, _distribution = choose_argmax(scores)
 
                 out: dict[str, Any] = {"target_column": target_col, "relation_id": relation_id, "confidence": confidence}
-                if include_scores:
-                    out["distribution"] = distribution
                 relationships_out[target_col] = out
 
                 if debug:
@@ -643,10 +640,8 @@ async def run_table_cpa(
 
             for rel in item.relationships:
                 scores = {rid: float(rel.scores.get(rid, 0.0)) for rid in relation_ids}
-                relation_id, confidence, distribution = choose_argmax(scores)
+                relation_id, confidence, _distribution = choose_argmax(scores)
                 out: dict[str, Any] = {"target_column": rel.target_column, "relation_id": relation_id, "confidence": confidence}
-                if include_scores:
-                    out["distribution"] = distribution
                 relationships_out[rel.target_column] = out
 
         ordered_relationships = [relationships_out[c] for c in target_columns if c in relationships_out]

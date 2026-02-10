@@ -6,6 +6,7 @@ import pytest
 
 from moose.ner import (
     make_cell_task_id,
+    run_table_annotate,
     run_tabular_ner,
     run_text_ner,
 )
@@ -61,3 +62,29 @@ async def test_run_tabular_ner_prompt_keeps_raw_cell_text_unchanged():
     assert len(llm.calls) == 1
     assert '"text": "  Alice\\u0000"' in llm.calls[0]
     assert out["results"][0]["rows"][0]["cells"][0]["entities"] == []
+
+
+@pytest.mark.asyncio
+async def test_run_text_ner_does_not_return_distribution_field():
+    tasks = [{"task_id": "t1", "text": "Alice"}]
+    llm = _FakeLLM(
+        '[{"task_id":"t1","entities":[{"start":0,"end":5,"text":"Alice","scores":{"PERSON":1.0,"ORGANIZATION":0.0,"LOCATION":0.0,"EVENT":0.0,"WORK":0.0,"PRODUCT":0.0,"CONCEPT":0.0,"MISC":0.0}}]}]'
+    )
+    settings = SimpleNamespace(MOOSE_MAX_RETRIES=0)
+    out = await run_text_ner(tasks, "coarse", llm, settings=settings)
+    entity = out["results"][0]["entities"][0]
+    assert entity["type_id"] == "PERSON"
+    assert "distribution" not in entity
+
+
+@pytest.mark.asyncio
+async def test_run_table_annotate_does_not_return_distribution_field():
+    tasks = [{"task_id": "t1", "table_id": "tbl", "sampled_rows": [{"name": "Alice"}]}]
+    llm = _FakeLLM(
+        '[{"task_id":"t1","table_id":"tbl","columns":[{"column":"name","scores":{"PERSON":1.0,"ORGANIZATION":0.0,"LOCATION":0.0,"EVENT":0.0,"WORK":0.0,"PRODUCT":0.0,"CONCEPT":0.0,"MISC":0.0}}]}]'
+    )
+    settings = SimpleNamespace(MOOSE_MAX_RETRIES=0)
+    out = await run_table_annotate(tasks, "coarse", llm, settings=settings)
+    column = out["results"][0]["columns"][0]
+    assert column["type_id"] == "PERSON"
+    assert "distribution" not in column

@@ -38,13 +38,7 @@ schema = st.selectbox("Schema", schema_names, index=schema_names.index(preferred
 
 raw_text = st.text_area("Text (one sentence per line)", value=DEFAULT_TEXT_SAMPLE, height=160)
 
-col1, col2, col3 = st.columns([1, 1, 1])
-with col1:
-    include_scores = st.checkbox("include_scores", value=False)
-with col2:
-    strict_offsets = st.checkbox("strict_offsets (fail-fast)", value=False)
-with col3:
-    auto_poll = st.checkbox("Auto-poll", value=cfg["auto_poll_default"])
+auto_poll = st.checkbox("Auto-poll", value=cfg["auto_poll_default"])
 
 if st.button("Run NER", type="primary"):
     if err:
@@ -58,8 +52,6 @@ if st.button("Run NER", type="primary"):
 
     payload = {
         "text": text,
-        "include_scores": include_scores,
-        "strict_offsets": strict_offsets,
         "llm": {"provider": cfg["provider"], "model": cfg["model"]},
     }
 

@@ -1087,8 +1087,6 @@ async def run_privacy_analyze(
             ner_input,
             text_schema,
             llm_client,
-            include_scores=False,
-            strict_offsets=False,
             settings=settings,
         )
         for item in ner_out.get("results", []):
@@ -1105,7 +1103,6 @@ async def run_privacy_analyze(
             tab_input,
             table_schema,
             llm_client,
-            include_scores=False,
             settings=settings,
         )
         for item in tab_out.get("results", []):
@@ -1133,8 +1130,6 @@ async def run_privacy_analyze(
             scan_tasks,
             scan_schema,
             llm_client,
-            include_scores=False,
-            strict_offsets=False,
             settings=settings,
         )
         for item in scan_out.get("results", []):
@@ -1311,8 +1306,6 @@ async def run_privacy_analyze(
                             rerun_tasks,
                             esc_text_schema,
                             llm_client,
-                            include_scores=False,
-                            strict_offsets=False,
                             settings=settings,
                         )
                         warnings.extend(ner_out2.get("warnings", []))
@@ -1439,8 +1432,6 @@ async def run_privacy_analyze(
                                 scan_tasks2,
                                 esc_scan_schema,
                                 llm_client,
-                                include_scores=False,
-                                strict_offsets=False,
                                 settings=settings,
                             )
                             warnings.extend(scan_out2.get("warnings", []))
