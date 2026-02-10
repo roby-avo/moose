@@ -51,14 +51,13 @@ if st.button("Run NER", type="primary"):
         st.error(err)
         st.stop()
 
-    lines = [ln.strip() for ln in raw_text.splitlines() if ln.strip()]
-    tasks = [{"task_id": f"t{i+1}", "text": ln} for i, ln in enumerate(lines)]
-    if not tasks:
-        st.error("Provide at least one non-empty line.")
+    text = raw_text.strip()
+    if not text:
+        st.error("Provide non-empty text.")
         st.stop()
 
     payload = {
-        "tasks": tasks,
+        "text": text,
         "include_scores": include_scores,
         "strict_offsets": strict_offsets,
         "llm": {"provider": cfg["provider"], "model": cfg["model"]},

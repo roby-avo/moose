@@ -10,7 +10,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException, Security
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.security import APIKeyHeader, HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from moose.config import Settings, get_settings
 from moose.llm import create_client
@@ -28,16 +28,20 @@ class LLMOverrides(BaseModel):
 # -----------------------
 # Text NER request models
 # -----------------------
-class NERTaskIn(BaseModel):
-    task_id: str
-    text: str
-
-
 class BaseNERRequest(BaseModel):
-    tasks: list[NERTaskIn] = Field(min_length=1)
+    model_config = ConfigDict(extra="forbid")
+
+    text: str = Field(min_length=1)
     include_scores: bool = False
     strict_offsets: bool = False
     llm: LLMOverrides
+
+    @field_validator("text")
+    @classmethod
+    def validate_text(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("text must be non-empty.")
+        return value
 
 
 class NERRequest(BaseNERRequest):
@@ -59,14 +63,11 @@ class NERRequest(BaseNERRequest):
 # -----------------------------
 # Tabular typing request models
 # -----------------------------
-class TabularTaskIn(BaseModel):
-    task_id: str
-    table_id: str
-    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
-
-
 class BaseTabularRequest(BaseModel):
-    tasks: list[TabularTaskIn] = Field(min_length=1)
+    model_config = ConfigDict(extra="forbid")
+
+    table_id: str | None = None
+    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
     include_scores: bool = False
     llm: LLMOverrides
 
@@ -90,22 +91,15 @@ class TabularRequest(BaseTabularRequest):
 # -----------------------------
 # Tabular cell NER models
 # -----------------------------
-class TabularNerTaskIn(BaseModel):
-    task_id: str
-    table_id: str
-    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
+class BaseTabularNERRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
 
-    target_columns: list[str] = Field(
-        min_length=1,
-        description="Columns to run cell-level NER on.",
-    )
+    table_id: str | None = None
+    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
+    target_columns: list[str] = Field(min_length=1)
 
     strings_only: bool = True
     skip_structured_literals: bool = True
-
-
-class BaseTabularNERRequest(BaseModel):
-    tasks: list[TabularNerTaskIn] = Field(min_length=1)
     include_scores: bool = False
     strict_offsets: bool = False
     llm: LLMOverrides
@@ -130,11 +124,11 @@ class TabularNERRequest(BaseTabularNERRequest):
 # -----------------------------
 # CPA (column relationship) request models
 # -----------------------------
-class CPATaskIn(BaseModel):
-    task_id: str
-    table_id: str
-    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
+class BaseCPARequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
 
+    table_id: str | None = None
+    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
     subject_column: str = Field(min_length=1, description="Subject column name (required).")
 
     # OPTIONAL: if known, helps filter schema.org predicates using domainIncludes + class hierarchy.
@@ -155,10 +149,15 @@ class CPATaskIn(BaseModel):
     debug: bool = False
     debug_preview_limit: int = Field(default=20, ge=0, le=200)
 
-class BaseCPARequest(BaseModel):
-    tasks: list[CPATaskIn] = Field(min_length=1)
     include_scores: bool = False
     llm: LLMOverrides
+
+    @field_validator("subject_column")
+    @classmethod
+    def validate_subject_column(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("subject_column must be non-empty.")
+        return value
 
 
 class CPARequest(BaseCPARequest):
@@ -426,7 +425,7 @@ async def submit_ner(
 
     payload = {
         "schema": request.schema,
-        "tasks": [task.model_dump() for task in request.tasks],
+        "text": request.text,
         "include_scores": request.include_scores,
         "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
@@ -447,7 +446,7 @@ async def submit_schema_ner(
 
     payload = {
         "schema": schema,
-        "tasks": [task.model_dump() for task in request.tasks],
+        "text": request.text,
         "include_scores": request.include_scores,
         "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
@@ -467,7 +466,7 @@ async def submit_dpv_ner(
 
     payload = {
         "schema": "dpv",
-        "tasks": [task.model_dump() for task in request.tasks],
+        "text": request.text,
         "include_scores": request.include_scores,
         "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
@@ -490,7 +489,8 @@ async def submit_tabular(
 
     payload = {
         "schema": request.schema,
-        "tasks": [task.model_dump() for task in request.tasks],
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
         "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
@@ -510,7 +510,8 @@ async def submit_schema_tabular(
 
     payload = {
         "schema": schema,
-        "tasks": [task.model_dump() for task in request.tasks],
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
         "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
@@ -529,7 +530,8 @@ async def submit_dpv_tabular(
 
     payload = {
         "schema": "dpv",
-        "tasks": [task.model_dump() for task in request.tasks],
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
         "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
@@ -551,7 +553,11 @@ async def submit_tabular_ner(
 
     payload = {
         "schema": request.schema,
-        "tasks": [task.model_dump() for task in request.tasks],
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
+        "target_columns": request.target_columns,
+        "strings_only": request.strings_only,
+        "skip_structured_literals": request.skip_structured_literals,
         "include_scores": request.include_scores,
         "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
@@ -572,7 +578,11 @@ async def submit_schema_tabular_ner(
 
     payload = {
         "schema": schema,
-        "tasks": [task.model_dump() for task in request.tasks],
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
+        "target_columns": request.target_columns,
+        "strings_only": request.strings_only,
+        "skip_structured_literals": request.skip_structured_literals,
         "include_scores": request.include_scores,
         "strict_offsets": request.strict_offsets,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
@@ -595,11 +605,17 @@ async def submit_tabular_cpa(
 
     payload = {
         "schema": request.schema,
-        "tasks": [task.model_dump() for task in request.tasks],
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
+        "subject_column": request.subject_column,
+        "subject_class": request.subject_class,
+        "target_columns": request.target_columns,
+        "use_sti_signature_cache": request.use_sti_signature_cache,
+        "debug": request.debug,
+        "debug_preview_limit": request.debug_preview_limit,
         "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
-    # Note: subject_class and use_sti_signature_cache are now part of task.model_dump()
     job_id = await _enqueue_job("cpa", payload)
     return JobQueuedResponse(job_id=job_id, status="queued")
 
@@ -616,11 +632,17 @@ async def submit_schema_tabular_cpa(
 
     payload = {
         "schema": schema,
-        "tasks": [task.model_dump() for task in request.tasks],
+        "table_id": request.table_id,
+        "sampled_rows": request.sampled_rows,
+        "subject_column": request.subject_column,
+        "subject_class": request.subject_class,
+        "target_columns": request.target_columns,
+        "use_sti_signature_cache": request.use_sti_signature_cache,
+        "debug": request.debug,
+        "debug_preview_limit": request.debug_preview_limit,
         "include_scores": request.include_scores,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
-    # Note: subject_class and use_sti_signature_cache are now part of task.model_dump()
     job_id = await _enqueue_job("cpa", payload)
     return JobQueuedResponse(job_id=job_id, status="queued")
 

@@ -107,7 +107,8 @@ if operation == "Column typing":
             st.stop()
 
         payload = {
-            "tasks": [{"task_id": "table-1", "table_id": table_id, "sampled_rows": sampled_rows}],
+            "table_id": table_id,
+            "sampled_rows": sampled_rows,
             "include_scores": include_scores,
             "llm": {"provider": cfg["provider"], "model": cfg["model"]},
         }
@@ -163,16 +164,11 @@ elif operation == "Cell NER":
             st.stop()
 
         payload = {
-            "tasks": [
-                {
-                    "task_id": "table-1",
-                    "table_id": table_id,
-                    "sampled_rows": sampled_rows,
-                    "target_columns": target_cols,
-                    "strings_only": strings_only,
-                    "skip_structured_literals": skip_structured_literals,
-                }
-            ],
+            "table_id": table_id,
+            "sampled_rows": sampled_rows,
+            "target_columns": target_cols,
+            "strings_only": strings_only,
+            "skip_structured_literals": skip_structured_literals,
             "include_scores": include_scores,
             "strict_offsets": strict_offsets,
             "llm": {"provider": cfg["provider"], "model": cfg["model"]},
@@ -235,25 +231,20 @@ else:
             st.error("subject_column is required.")
             st.stop()
 
-        task: dict[str, Any] = {
-            "task_id": "cpa-1",
+        payload: dict[str, Any] = {
             "table_id": table_id,
             "sampled_rows": sampled_rows,
             "subject_column": subject_column,
             "debug": debug_flag,
             "use_sti_signature_cache": use_sti_signature_cache,
-        }
-
-        if subject_class:
-            task["subject_class"] = subject_class
-        if target_columns:
-            task["target_columns"] = target_columns
-
-        payload = {
-            "tasks": [task],
             "include_scores": include_scores,
             "llm": {"provider": cfg["provider"], "model": cfg["model"]},
         }
+
+        if subject_class:
+            payload["subject_class"] = subject_class
+        if target_columns:
+            payload["target_columns"] = target_columns
 
         submit_and_render_job(
             cfg=cfg,

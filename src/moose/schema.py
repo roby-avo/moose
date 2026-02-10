@@ -7,44 +7,78 @@ from pathlib import Path
 from typing import Any
 
 COARSE_TYPES = [
-    "NER:PERSON",
-    "NER:ORGANIZATION",
-    "NER:LOCATION",
-    "NER:EVENT",
-    "NER:WORK_OF_ART",
-    "NER:PRODUCT",
-    "NER:DATE_TIME",
-    "NER:NUMBER",
-    "NER:MONEY",
-    "NER:PERCENT",
-    "NER:LAW_OR_REGULATION",
-    "NER:OTHER",
+    "PERSON",
+    "ORGANIZATION",
+    "LOCATION",
+    "EVENT",
+    "WORK",
+    "PRODUCT",
+    "CONCEPT",
+    "MISC",
 ]
 
 FINE_TYPES = [
-    "NER:PERSON.ENTREPRENEUR",
-    "NER:PERSON.POLITICIAN",
-    "NER:ORG.COMPANY",
-    "NER:ORG.UNIVERSITY",
-    "NER:ORG.RESEARCH_INSTITUTE",
-    "NER:LOC.CITY",
-    "NER:LOC.COUNTRY",
-    "NER:PRODUCT.DEVICE",
-    "NER:EVENT.CONFERENCE",
-    "NER:OTHER",
+    "PERSON",
+    "FICTIONAL_CHARACTER",
+    "COMPANY",
+    "NONPROFIT_ORG",
+    "GOVERNMENT_ORG",
+    "EDUCATIONAL_ORG",
+    "SPORTS_TEAM",
+    "COUNTRY",
+    "CITY",
+    "REGION",
+    "LANDMARK",
+    "CELESTIAL_BODY",
+    "CONFLICT",
+    "SPORT_EVENT",
+    "EVENT_GENERIC",
+    "FILM",
+    "BOOK",
+    "MUSIC_WORK",
+    "SOFTWARE",
+    "INTERNET_MEME",
+    "DEVICE",
+    "MEDICATION",
+    "FOOD_BEVERAGE",
+    "PRODUCT_GENERIC",
+    "LANGUAGE",
+    "LAW",
+    "SCIENTIFIC_THEORY",
+    "BIOLOGICAL_TAXON",
+    "ANATOMY",
 ]
 
 FINE_TO_COARSE = {
-    "NER:PERSON.ENTREPRENEUR": "NER:PERSON",
-    "NER:PERSON.POLITICIAN": "NER:PERSON",
-    "NER:ORG.COMPANY": "NER:ORGANIZATION",
-    "NER:ORG.UNIVERSITY": "NER:ORGANIZATION",
-    "NER:ORG.RESEARCH_INSTITUTE": "NER:ORGANIZATION",
-    "NER:LOC.CITY": "NER:LOCATION",
-    "NER:LOC.COUNTRY": "NER:LOCATION",
-    "NER:PRODUCT.DEVICE": "NER:PRODUCT",
-    "NER:EVENT.CONFERENCE": "NER:EVENT",
-    "NER:OTHER": "NER:OTHER",
+    "PERSON": "PERSON",
+    "FICTIONAL_CHARACTER": "PERSON",
+    "COMPANY": "ORGANIZATION",
+    "NONPROFIT_ORG": "ORGANIZATION",
+    "GOVERNMENT_ORG": "ORGANIZATION",
+    "EDUCATIONAL_ORG": "ORGANIZATION",
+    "SPORTS_TEAM": "ORGANIZATION",
+    "COUNTRY": "LOCATION",
+    "CITY": "LOCATION",
+    "REGION": "LOCATION",
+    "LANDMARK": "LOCATION",
+    "CELESTIAL_BODY": "LOCATION",
+    "CONFLICT": "EVENT",
+    "SPORT_EVENT": "EVENT",
+    "EVENT_GENERIC": "EVENT",
+    "FILM": "WORK",
+    "BOOK": "WORK",
+    "MUSIC_WORK": "WORK",
+    "SOFTWARE": "WORK",
+    "INTERNET_MEME": "WORK",
+    "DEVICE": "PRODUCT",
+    "MEDICATION": "PRODUCT",
+    "FOOD_BEVERAGE": "PRODUCT",
+    "PRODUCT_GENERIC": "PRODUCT",
+    "LANGUAGE": "CONCEPT",
+    "LAW": "CONCEPT",
+    "SCIENTIFIC_THEORY": "CONCEPT",
+    "BIOLOGICAL_TAXON": "CONCEPT",
+    "ANATOMY": "CONCEPT",
 }
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
@@ -201,23 +235,26 @@ def _schema_registry() -> dict[str, SchemaConfig]:
             name="fine",
             label="Fine",
             description="Fine-grained NER schema with coarse mapping.",
-            require_all_scores=True,
+            require_all_scores=False,
             text_intro=DEFAULT_TEXT_INTRO,
             table_intro=DEFAULT_TABLE_INTRO,
             cpa_intro=DEFAULT_CPA_INTRO,
             type_ids=tuple(FINE_TYPES),
             coarse_mapping=FINE_TO_COARSE,
+            type_aliases={"HUMAN": "PERSON"},
             supports_cpa=False,
         ),
     }
 
+    seen_registry_names: set[str] = set()
     for entry in _load_vocab_registry_entries():
         name = entry.get("name")
         if not isinstance(name, str) or not name.strip():
             raise ValueError("Vocabulary entry missing a valid name.")
         name = name.strip()
-        if name in registry:
+        if name in seen_registry_names:
             raise ValueError(f"Duplicate schema name: {name}")
+        seen_registry_names.add(name)
         source = entry.get("type_source") or entry.get("data_path") or entry.get("path")
         if not isinstance(source, str) or not source.strip():
             raise ValueError(f"Vocabulary {name} missing type_source path.")

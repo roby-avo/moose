@@ -67,7 +67,7 @@ Use the pages on the left:
 - **Tables**: typing, cell NER, CPA (with optional debug)
 - **Privacy**: profile-driven privacy analysis (with optional legal refs)
 - **Jobs**: poll and view results
-- **Developer**: metadata + diagnostics (enable Developer mode in sidebar)
+- **Developer**: metadata, diagnostics, and prompt debugger (enable Developer mode in sidebar)
 """
 )
 

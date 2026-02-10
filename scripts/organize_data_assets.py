@@ -293,12 +293,12 @@ def update_vocabularies_json(data_dir: Path, dry_run: bool, backup: bool = True)
     upsert(
         {
             "name": "dpv_pd",
-            "label": "DPV Personal Data (Fast)",
-            "description": "DPV personal data subset for fast privacy detection.",
-            "type_source": "dpv/subsets/dpv_pd_only/concepts.json",
+            "label": "DPV Personal Data + AI (Fast)",
+            "description": "DPV personal data + AI concept subset for fast privacy detection.",
+            "type_source": "dpv/subsets/dpv_pd_only/type_ids_pd_ai.json",
             "score_mode": "sparse",
-            "text_intro": "You are a DPV personal data annotation engine.",
-            "table_intro": "You are a DPV personal data classification engine for tabular data.",
+            "text_intro": "You are a DPV personal data and AI annotation engine.",
+            "table_intro": "You are a DPV personal data and AI classification engine for tabular data.",
             "prefilter_types": True,
             "type_alias_prefixes": {}
         }

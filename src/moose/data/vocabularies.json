@@ -1,5 +1,53 @@
 [
   {
+    "description": "Coarse-grained NER schema.",
+    "label": "Coarse",
+    "name": "coarse",
+    "score_mode": "dense",
+    "type_source": "coarse_types.json"
+  },
+  {
+    "coarse_mapping": {
+      "ANATOMY": "CONCEPT",
+      "BIOLOGICAL_TAXON": "CONCEPT",
+      "BOOK": "WORK",
+      "CELESTIAL_BODY": "LOCATION",
+      "CITY": "LOCATION",
+      "COMPANY": "ORGANIZATION",
+      "CONFLICT": "EVENT",
+      "COUNTRY": "LOCATION",
+      "DEVICE": "PRODUCT",
+      "EDUCATIONAL_ORG": "ORGANIZATION",
+      "EVENT_GENERIC": "EVENT",
+      "FICTIONAL_CHARACTER": "PERSON",
+      "FILM": "WORK",
+      "FOOD_BEVERAGE": "PRODUCT",
+      "GOVERNMENT_ORG": "ORGANIZATION",
+      "INTERNET_MEME": "WORK",
+      "LANGUAGE": "CONCEPT",
+      "LANDMARK": "LOCATION",
+      "LAW": "CONCEPT",
+      "MEDICATION": "PRODUCT",
+      "MUSIC_WORK": "WORK",
+      "NONPROFIT_ORG": "ORGANIZATION",
+      "PERSON": "PERSON",
+      "PRODUCT_GENERIC": "PRODUCT",
+      "REGION": "LOCATION",
+      "SCIENTIFIC_THEORY": "CONCEPT",
+      "SOFTWARE": "WORK",
+      "SPORT_EVENT": "EVENT",
+      "SPORTS_TEAM": "ORGANIZATION"
+    },
+    "description": "Fine-grained NER schema with coarse mapping.",
+    "label": "Fine",
+    "name": "fine",
+    "score_mode": "sparse",
+    "type_aliases": {
+      "HUMAN": "PERSON"
+    },
+    "type_source": "fine_types.json"
+  },
+  {
     "cpa_intro": "You are a column relationship prediction engine. Your task is to predict the semantic relationship between a SUBJECT column and each TARGET column in a table. Choose ONLY from the provided relationship labels. If none apply, choose CPA:NONE. If a relationship exists but is not in the label set, choose CPA:OTHER.",
     "description": "Column property annotation (CPA) / column relationship prediction from a subject column to target columns.",
     "label": "CPA Relationships",
@@ -22,15 +70,15 @@
     "type_source": "dpv/concepts.json"
   },
   {
-    "description": "DPV personal data subset for fast privacy detection.",
-    "label": "DPV Personal Data (Fast)",
+    "description": "DPV personal data + AI concept subset for fast privacy detection.",
+    "label": "DPV Personal Data + AI (Fast)",
     "name": "dpv_pd",
     "prefilter_types": true,
     "score_mode": "sparse",
-    "table_intro": "You are a DPV personal data classification engine for tabular data.",
-    "text_intro": "You are a DPV personal data annotation engine.",
+    "table_intro": "You are a DPV personal data and AI classification engine for tabular data.",
+    "text_intro": "You are a DPV personal data and AI annotation engine.",
     "type_alias_prefixes": {},
-    "type_source": "dpv/subsets/dpv_pd_only/concepts.json"
+    "type_source": "dpv/subsets/dpv_pd_only/type_ids_pd_ai.json"
   },
   {
     "cpa_intro": "You are a column relationship prediction engine. Predict the schema.org property relating the SUBJECT column to each TARGET column. Choose ONLY from the provided labels. If no relationship exists, choose moose:NONE. If a relationship exists but is not represented, choose moose:OTHER.",
