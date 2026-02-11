@@ -47,10 +47,9 @@ except Exception as exc:  # noqa: BLE001
     st.stop()
 
 table_schema_names = schemas_supporting(schemas, table=True)
-text_schema_names = schemas_supporting(schemas, text=True)
 cpa_schema_names = schemas_supporting(schemas, cpa=True)
 
-operation = st.radio("Operation", ["Column typing", "Cell NER", "CPA"], horizontal=True)
+operation = st.radio("Operation", ["Column typing", "CPA"], horizontal=True)
 
 default_rows = DEFAULT_CPA_TABLE_SAMPLE if operation == "CPA" else DEFAULT_TABLE_SAMPLE
 
@@ -116,61 +115,6 @@ if operation == "Column typing":
             payload=payload,
             headers=build_llm_headers(cfg),
             label=f"Tabular typing ({schema})",
-            auto_poll=auto_poll,
-        )
-
-# ------------------------
-# Cell NER
-# ------------------------
-elif operation == "Cell NER":
-    if not text_schema_names:
-        st.error("No text-capable schemas returned from API (required for cell NER).")
-        st.stop()
-
-    st.subheader("Cell NER (entities inside selected columns)")
-    st.caption("Use for notes/comments/description-like columns. For structured columns, column typing is usually enough.")
-
-    default_schema = "dpv_pd" if "dpv_pd" in text_schema_names else ("dpv" if "dpv" in text_schema_names else text_schema_names[0])
-    schema = st.selectbox("NER schema", text_schema_names, index=text_schema_names.index(default_schema))
-
-    if not columns:
-        st.warning("No columns detected yet. Fix JSON above to enable column selection.")
-        target_cols = []
-    else:
-        target_cols = st.multiselect("target_columns", options=columns, default=columns[:2])
-
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        strings_only = st.checkbox("strings_only", value=True)
-    with col2:
-        skip_structured_literals = st.checkbox("skip_structured_literals", value=True)
-
-    if st.button("Run cell NER", type="primary"):
-        if err:
-            st.error(err)
-            st.stop()
-        if not isinstance(sampled_rows, list) or not all(isinstance(r, dict) for r in sampled_rows):
-            st.error("sampled_rows must be a JSON array of objects.")
-            st.stop()
-        if not target_cols:
-            st.error("Select at least one target column.")
-            st.stop()
-
-        payload = {
-            "table_id": table_id,
-            "sampled_rows": sampled_rows,
-            "target_columns": target_cols,
-            "strings_only": strings_only,
-            "skip_structured_literals": skip_structured_literals,
-            "llm": {"provider": cfg["provider"], "model": cfg["model"]},
-        }
-
-        submit_and_render_job(
-            cfg=cfg,
-            path=f"/schemas/{schema}/tabular/ner",
-            payload=payload,
-            headers=build_llm_headers(cfg),
-            label=f"Tabular NER ({schema})",
             auto_poll=auto_poll,
         )
 

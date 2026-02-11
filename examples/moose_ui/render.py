@@ -75,6 +75,12 @@ def _render_result(result: dict[str, Any], *, show_raw: bool, show_legal_refs: b
     if kind == "cpa":
         render_cpa_result(result, show_debug=show_debug, show_raw=show_raw)
         return
+    if kind == "tabular_annotate":
+        render_tabular_annotate_result(result, show_raw=show_raw)
+        return
+    if kind == "tabular_ner":
+        render_tabular_ner_result(result, show_raw=show_raw)
+        return
 
     # fallback: keep your existing simple behavior
     st.subheader("Result")
@@ -109,6 +115,96 @@ def render_cpa_result(result: dict[str, Any], *, show_debug: bool, show_raw: boo
             _expander_json("Debug", item.get("debug"), show=True)
 
     _expander_json("Raw CPA result", result, show=show_raw)
+
+
+def render_tabular_annotate_result(result: dict[str, Any], *, show_raw: bool) -> None:
+    st.subheader("Column typing")
+    items = result.get("results")
+    if not isinstance(items, list):
+        items = [result]
+
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        table_id = item.get("table_id")
+        if isinstance(table_id, str) and table_id:
+            st.markdown(f"**table_id:** `{table_id}`")
+
+        columns = item.get("columns", []) or []
+        rows: list[dict[str, Any]] = []
+        for col in columns:
+            if not isinstance(col, dict):
+                continue
+            rows.append(
+                {
+                    "column": col.get("column"),
+                    "type_id": col.get("type_id"),
+                    "coarse_type_id": col.get("coarse_type_id"),
+                    "fine_type_id": col.get("fine_type_id"),
+                    "confidence": col.get("confidence"),
+                    "fine_confidence": col.get("fine_confidence"),
+                }
+            )
+        if rows:
+            st.dataframe(rows, use_container_width=True)
+            if any(row.get("fine_type_id") for row in rows):
+                st.caption("For STI NE columns, both coarse_type_id and fine_type_id are shown.")
+        else:
+            st.info("No columns returned.")
+
+    if result.get("warnings"):
+        _expander_json("Warnings", result.get("warnings"), show=True)
+    _expander_json("Raw tabular typing result", result, show=show_raw)
+
+
+def render_tabular_ner_result(result: dict[str, Any], *, show_raw: bool) -> None:
+    st.subheader("Cell NER")
+    items = result.get("results")
+    if not isinstance(items, list):
+        items = [result]
+
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        table_id = item.get("table_id")
+        if isinstance(table_id, str) and table_id:
+            st.markdown(f"**table_id:** `{table_id}`")
+
+        rows = item.get("rows", []) or []
+        flat_rows: list[dict[str, Any]] = []
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            row_index = row.get("row_index")
+            for cell in row.get("cells", []) or []:
+                if not isinstance(cell, dict):
+                    continue
+                column = cell.get("column")
+                entities = cell.get("entities", []) or []
+                if not entities:
+                    continue
+                for ent in entities:
+                    if not isinstance(ent, dict):
+                        continue
+                    flat_rows.append(
+                        {
+                            "row_index": row_index,
+                            "column": column,
+                            "text": ent.get("text"),
+                            "type_id": ent.get("type_id"),
+                            "coarse_type_id": ent.get("coarse_type_id"),
+                            "confidence": ent.get("confidence"),
+                        }
+                    )
+
+        if flat_rows:
+            st.dataframe(flat_rows, use_container_width=True)
+        else:
+            st.info("No entities returned for selected cells/columns.")
+
+    if result.get("warnings"):
+        _expander_json("Warnings", result.get("warnings"), show=True)
+    _expander_json("Raw tabular NER result", result, show=show_raw)
 
 
 def render_privacy_result(result: dict[str, Any], *, show_legal_refs: bool, show_legal_detail: bool, show_raw: bool) -> None:

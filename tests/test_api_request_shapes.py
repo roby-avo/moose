@@ -6,7 +6,6 @@ from pydantic import ValidationError
 from moose_api.main import (
     SchemaCPARequest,
     SchemaNERRequest,
-    SchemaTabularNERRequest,
     SchemaTabularRequest,
 )
 
@@ -58,49 +57,6 @@ def test_schema_tabular_rejects_legacy_tasks_shape() -> None:
                 "llm": _LLM,
             }
         )
-
-
-def test_schema_tabular_ner_accepts_single_payload_shape() -> None:
-    request = SchemaTabularNERRequest.model_validate(
-        {
-            "sampled_rows": [{"notes": "email alice@example.com"}],
-            "target_columns": ["notes"],
-            "llm": _LLM,
-        }
-    )
-    assert request.target_columns == ["notes"]
-
-
-def test_schema_tabular_ner_rejects_legacy_tasks_shape() -> None:
-    with pytest.raises(ValidationError):
-        SchemaTabularNERRequest.model_validate(
-            {
-                "sampled_rows": [{"notes": "email alice@example.com"}],
-                "target_columns": ["notes"],
-                "tasks": [
-                    {
-                        "task_id": "t1",
-                        "sampled_rows": [{"notes": "email alice@example.com"}],
-                        "target_columns": ["notes"],
-                    }
-                ],
-                "llm": _LLM,
-            }
-        )
-
-
-def test_schema_tabular_ner_rejects_removed_debug_flags() -> None:
-    with pytest.raises(ValidationError):
-        SchemaTabularNERRequest.model_validate(
-            {
-                "sampled_rows": [{"notes": "email alice@example.com"}],
-                "target_columns": ["notes"],
-                "include_scores": True,
-                "strict_offsets": True,
-                "llm": _LLM,
-            }
-        )
-
 
 def test_schema_cpa_accepts_single_payload_shape() -> None:
     request = SchemaCPARequest.model_validate(

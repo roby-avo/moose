@@ -13,13 +13,23 @@ from moose.ner import (
 
 
 class _FakeLLM:
-    def __init__(self, response: str) -> None:
-        self._response = response
+    def __init__(self, response: str | list[str]) -> None:
+        if isinstance(response, list):
+            if not response:
+                raise ValueError("Fake LLM requires at least one response.")
+            self._responses = response
+        else:
+            self._responses = [response]
+        self._cursor = 0
         self.calls: list[str] = []
 
     async def generate(self, prompt: str) -> str:
         self.calls.append(prompt)
-        return self._response
+        if self._cursor < len(self._responses):
+            response = self._responses[self._cursor]
+            self._cursor += 1
+            return response
+        return self._responses[-1]
 
 
 @pytest.mark.asyncio
@@ -98,3 +108,52 @@ async def test_run_table_annotate_does_not_return_distribution_field():
     column = out["results"][0]["columns"][0]
     assert column["type_id"] == "PERSON"
     assert "distribution" not in column
+
+
+@pytest.mark.asyncio
+async def test_run_table_annotate_sti_returns_coarse_and_fine_for_ne_columns_only():
+    tasks = [
+        {
+            "task_id": "t1",
+            "table_id": "tbl",
+            "sampled_rows": [{"name": "Alice", "movie": "Inception", "email": "alice@example.com"}],
+        }
+    ]
+    llm = _FakeLLM(
+        [
+            '[{"task_id":"t1","table_id":"tbl","columns":[{"column":"name","scores":{"NE:PERSON":1.0}},{"column":"movie","scores":{"NE:OTHER":1.0}},{"column":"email","scores":{"ext:email":1.0}}]}]',
+            '[{"task_id":"t1","table_id":"tbl","columns":[{"column":"name","scores":{"PERSON":1.0}}]}]',
+            '[{"task_id":"t1","table_id":"tbl","columns":[{"column":"movie","scores":{"FILM":1.0}}]}]',
+        ]
+    )
+    settings = SimpleNamespace(MOOSE_MAX_RETRIES=0)
+
+    out = await run_table_annotate(tasks, "sti", llm, settings=settings)
+
+    by_col = {c["column"]: c for c in out["results"][0]["columns"]}
+    assert by_col["name"]["coarse_type_id"] == "NE:PERSON"
+    assert by_col["name"]["fine_type_id"] == "PERSON"
+    assert by_col["name"]["fine_confidence"] == 1.0
+    assert by_col["movie"]["coarse_type_id"] == "NE:OTHER"
+    assert by_col["movie"]["fine_type_id"] == "FILM"
+    assert by_col["email"]["coarse_type_id"] == "LIT:STRING"
+    assert "fine_type_id" not in by_col["email"]
+
+
+@pytest.mark.asyncio
+async def test_run_table_annotate_sti_keeps_base_output_if_fine_enrichment_fails():
+    tasks = [{"task_id": "t1", "table_id": "tbl", "sampled_rows": [{"name": "Alice"}]}]
+    llm = _FakeLLM(
+        [
+            '[{"task_id":"t1","table_id":"tbl","columns":[{"column":"name","scores":{"NE:PERSON":1.0}}]}]',
+            "not-json",
+        ]
+    )
+    settings = SimpleNamespace(MOOSE_MAX_RETRIES=0)
+
+    out = await run_table_annotate(tasks, "sti", llm, settings=settings)
+
+    column = out["results"][0]["columns"][0]
+    assert column["type_id"] == "NE:PERSON"
+    assert column["coarse_type_id"] == "NE:PERSON"
+    assert "fine_type_id" not in column

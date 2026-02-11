@@ -43,12 +43,14 @@ class BaseNERRequest(BaseModel):
 
 
 class NERRequest(BaseNERRequest):
-    schema: str = Field(
+    schema_name: str = Field(
+        alias="schema",
+        serialization_alias="schema",
         description="Schema/vocabulary name to annotate against.",
         examples=["coarse", "fine", "dpv", "dpv_pd"],
     )
 
-    @field_validator("schema")
+    @field_validator("schema_name")
     @classmethod
     def validate_schema(cls, value: str) -> str:
         try:
@@ -70,43 +72,14 @@ class BaseTabularRequest(BaseModel):
 
 
 class TabularRequest(BaseTabularRequest):
-    schema: str = Field(
+    schema_name: str = Field(
+        alias="schema",
+        serialization_alias="schema",
         description="Schema/vocabulary name to annotate against.",
         examples=["dpv", "dpv_pd", "sti", "schemaorg_cta_v1"],
     )
 
-    @field_validator("schema")
-    @classmethod
-    def validate_schema(cls, value: str) -> str:
-        try:
-            get_schema_config(value)
-        except ValueError as exc:
-            raise ValueError(str(exc)) from exc
-        return value
-
-
-# -----------------------------
-# Tabular cell NER models
-# -----------------------------
-class BaseTabularNERRequest(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-
-    table_id: str | None = None
-    sampled_rows: list[dict[str, Any]] = Field(min_length=1)
-    target_columns: list[str] = Field(min_length=1)
-
-    strings_only: bool = True
-    skip_structured_literals: bool = True
-    llm: LLMOverrides
-
-
-class TabularNERRequest(BaseTabularNERRequest):
-    schema: str = Field(
-        description="Schema/vocabulary name to annotate against (must support text NER).",
-        examples=["coarse", "fine", "dpv", "dpv_pd"],
-    )
-
-    @field_validator("schema")
+    @field_validator("schema_name")
     @classmethod
     def validate_schema(cls, value: str) -> str:
         try:
@@ -155,13 +128,15 @@ class BaseCPARequest(BaseModel):
 
 
 class CPARequest(BaseCPARequest):
-    schema: str = Field(
+    schema_name: str = Field(
+        alias="schema",
+        serialization_alias="schema",
         default="cpa",
         description="CPA relationship schema name (must support CPA).",
         examples=["cpa", "schemaorg_cpa_v1"],
     )
 
-    @field_validator("schema")
+    @field_validator("schema_name")
     @classmethod
     def validate_schema(cls, value: str) -> str:
         try:
@@ -220,10 +195,6 @@ class SchemaTabularRequest(BaseTabularRequest):
     pass
 
 
-class SchemaTabularNERRequest(BaseTabularNERRequest):
-    pass
-
-
 class SchemaCPARequest(BaseCPARequest):
     pass
 
@@ -249,7 +220,6 @@ STATIC_DIR = Path(__file__).resolve().parent / "static"
 TAG_METADATA = [
     {"name": "NER", "description": "Named entity recognition endpoints."},
     {"name": "Tabular", "description": "Tabular semantic typing endpoints."},
-    {"name": "Tabular NER", "description": "Cell-level NER over selected columns of sampled rows."},
     {"name": "CPA", "description": "Column Property Annotation (CPA) / column relationship prediction."},
     {"name": "Schemas", "description": "Schema-specific annotation endpoints."},
     {"name": "DPV", "description": "DPV classification endpoints."},
@@ -426,10 +396,10 @@ async def submit_ner(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_supported(request.schema, require_text=True)
+    _ensure_schema_supported(request.schema_name, require_text=True)
 
     payload = {
-        "schema": request.schema,
+        "schema": request.schema_name,
         "text": request.text,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
     }
@@ -484,10 +454,10 @@ async def submit_tabular(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_supported(request.schema, require_table=True)
+    _ensure_schema_supported(request.schema_name, require_table=True)
 
     payload = {
-        "schema": request.schema,
+        "schema": request.schema_name,
         "table_id": request.table_id,
         "sampled_rows": request.sampled_rows,
         "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
@@ -536,54 +506,6 @@ async def submit_dpv_tabular(
 
 
 # ------------------------
-# Tabular cell NER APIs
-# ------------------------
-@app.post("/tabular/ner", dependencies=[Depends(require_api_key)], tags=["Tabular NER"], response_model=JobQueuedResponse)
-async def submit_tabular_ner(
-    request: TabularNERRequest,
-    llm_api_key: str | None = Security(llm_api_key_header),
-    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
-):
-    _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_supported(request.schema, require_text=True)
-
-    payload = {
-        "schema": request.schema,
-        "table_id": request.table_id,
-        "sampled_rows": request.sampled_rows,
-        "target_columns": request.target_columns,
-        "strings_only": request.strings_only,
-        "skip_structured_literals": request.skip_structured_literals,
-        "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
-    }
-    job_id = await _enqueue_job("tabular_ner", payload)
-    return JobQueuedResponse(job_id=job_id, status="queued")
-
-
-@app.post("/schemas/{schema}/tabular/ner", dependencies=[Depends(require_api_key)], tags=["Schemas"], response_model=JobQueuedResponse)
-async def submit_schema_tabular_ner(
-    schema: str,
-    request: SchemaTabularNERRequest,
-    llm_api_key: str | None = Security(llm_api_key_header),
-    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
-):
-    _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_supported(schema, require_text=True)
-
-    payload = {
-        "schema": schema,
-        "table_id": request.table_id,
-        "sampled_rows": request.sampled_rows,
-        "target_columns": request.target_columns,
-        "strings_only": request.strings_only,
-        "skip_structured_literals": request.skip_structured_literals,
-        "llm": _build_llm_payload(request.llm, llm_api_key, llm_endpoint),
-    }
-    job_id = await _enqueue_job("tabular_ner", payload)
-    return JobQueuedResponse(job_id=job_id, status="queued")
-
-
-# ------------------------
 # CPA endpoints
 # ------------------------
 @app.post("/tabular/cpa", dependencies=[Depends(require_api_key)], tags=["CPA"], response_model=JobQueuedResponse)
@@ -593,10 +515,10 @@ async def submit_tabular_cpa(
     llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
 ):
     _require_llm_overrides(request.llm, llm_api_key)
-    _ensure_schema_supported(request.schema, require_cpa=True)
+    _ensure_schema_supported(request.schema_name, require_cpa=True)
 
     payload = {
-        "schema": request.schema,
+        "schema": request.schema_name,
         "table_id": request.table_id,
         "sampled_rows": request.sampled_rows,
         "subject_column": request.subject_column,

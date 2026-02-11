@@ -12,7 +12,7 @@ from moose.prompts import (
     build_text_ner_prompt,
     build_tabular_cell_ner_prompt,
 )
-from moose.schema import get_schema_config
+from moose.schema import SchemaConfig, get_schema_config
 from moose.validate import (
     extract_json,
     validate_ner_response_with_warnings,
@@ -54,6 +54,38 @@ def _looks_like_structured_literal(value: str) -> bool:
     if len(v) <= 2:
         return False
     return bool(_STRUCTURED_RE.match(v))
+
+
+_STI_NE_COARSE_TYPES = {"NE:PERSON", "NE:ORGANIZATION", "NE:LOCATION", "NE:OTHER"}
+
+
+def _sti_bucket_for_fine_type(fine_coarse_type: str | None) -> str:
+    if fine_coarse_type == "PERSON":
+        return "NE:PERSON"
+    if fine_coarse_type == "ORGANIZATION":
+        return "NE:ORGANIZATION"
+    if fine_coarse_type == "LOCATION":
+        return "NE:LOCATION"
+    return "NE:OTHER"
+
+
+def _project_rows_to_columns(sampled_rows: list[dict[str, Any]], columns: list[str]) -> list[dict[str, Any]]:
+    return [{column: row.get(column) for column in columns} for row in sampled_rows]
+
+
+def _build_fine_type_buckets() -> dict[str, list[str]]:
+    fine_schema = get_schema_config("fine")
+    fine_coarse_mapping = fine_schema.coarse_mapping or {}
+    buckets: dict[str, list[str]] = {
+        "NE:PERSON": [],
+        "NE:ORGANIZATION": [],
+        "NE:LOCATION": [],
+        "NE:OTHER": [],
+    }
+    for fine_type_id in fine_schema.load_type_ids():
+        coarse = fine_coarse_mapping.get(fine_type_id)
+        buckets[_sti_bucket_for_fine_type(coarse)].append(fine_type_id)
+    return buckets
 
 
 def _coerce_text_ner_output_with_task_ids(raw_text: str, tasks: list[dict[str, Any]]) -> str:
@@ -256,6 +288,153 @@ async def run_text_ner(
     return response
 
 
+async def _run_table_annotate_once(
+    tasks: list[dict[str, Any]],
+    schema_config: SchemaConfig,
+    llm_client,
+    settings: Settings,
+    selected_type_ids: list[str] | None = None,
+) -> dict[str, dict[str, Any]]:
+    type_ids = schema_config.load_type_ids() if selected_type_ids is None else selected_type_ids
+    type_set = set(type_ids)
+    prompt = build_table_prompt(schema_config, tasks, type_ids)
+
+    def validator(raw_text: str):
+        normalized_raw = _coerce_table_output_with_task_ids(raw_text, tasks)
+        return validate_table_response(
+            tasks,
+            normalized_raw,
+            type_set,
+            require_all_scores=schema_config.require_all_scores,
+            type_aliases=schema_config.type_aliases,
+            type_alias_prefixes=schema_config.type_alias_prefixes,
+        )
+
+    parsed = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
+
+    task_lookup = {task["task_id"]: task for task in tasks}
+    results_by_id: dict[str, dict[str, Any]] = {}
+    for item in parsed:
+        task = task_lookup[item.task_id]
+        columns: list[dict[str, Any]] = []
+        for column in item.columns:
+            scores = {type_id: float(column.scores.get(type_id, 0)) for type_id in type_ids}
+            type_id, confidence, _distribution = choose_argmax(scores)
+            output = {"column": column.column, "type_id": type_id, "confidence": confidence}
+            if schema_config.coarse_mapping:
+                output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
+            columns.append(output)
+        results_by_id[item.task_id] = {
+            "task_id": item.task_id,
+            "table_id": task["table_id"],
+            "columns": columns,
+        }
+    return results_by_id
+
+
+async def _augment_sti_ne_columns_with_fine_types(
+    tasks: list[dict[str, Any]],
+    results_by_id: dict[str, dict[str, Any]],
+    llm_client,
+    settings: Settings,
+) -> None:
+    fine_schema = get_schema_config("fine")
+    fine_types_by_bucket = _build_fine_type_buckets()
+
+    bucket_tasks: dict[str, list[dict[str, Any]]] = {
+        "NE:PERSON": [],
+        "NE:ORGANIZATION": [],
+        "NE:LOCATION": [],
+        "NE:OTHER": [],
+    }
+    bucket_columns: dict[str, dict[str, set[str]]] = {
+        "NE:PERSON": {},
+        "NE:ORGANIZATION": {},
+        "NE:LOCATION": {},
+        "NE:OTHER": {},
+    }
+
+    for task in tasks:
+        task_id = task["task_id"]
+        task_result = results_by_id.get(task_id)
+        if not isinstance(task_result, dict):
+            continue
+        columns = task_result.get("columns")
+        if not isinstance(columns, list):
+            continue
+
+        per_bucket: dict[str, list[str]] = {}
+        for col in columns:
+            col_name = col.get("column")
+            if not isinstance(col_name, str):
+                continue
+            coarse_type = col.get("coarse_type_id")
+            if not isinstance(coarse_type, str):
+                continue
+            if coarse_type not in _STI_NE_COARSE_TYPES:
+                continue
+            per_bucket.setdefault(coarse_type, []).append(col_name)
+
+        for bucket, cols in per_bucket.items():
+            projected_rows = _project_rows_to_columns(task["sampled_rows"], cols)
+            bucket_tasks[bucket].append(
+                {
+                    "task_id": task_id,
+                    "table_id": task["table_id"],
+                    "sampled_rows": projected_rows,
+                }
+            )
+            bucket_columns[bucket][task_id] = set(cols)
+
+    for bucket, projected_tasks in bucket_tasks.items():
+        if not projected_tasks:
+            continue
+        selected_fine_types = fine_types_by_bucket.get(bucket, [])
+        if not selected_fine_types:
+            continue
+        try:
+            fine_results_by_id = await _run_table_annotate_once(
+                projected_tasks,
+                fine_schema,
+                llm_client,
+                settings,
+                selected_type_ids=selected_fine_types,
+            )
+        except Exception:  # noqa: BLE001
+            # Keep STI response stable even if enrichment fails.
+            continue
+
+        for task_id, projected_cols in bucket_columns[bucket].items():
+            fine_task = fine_results_by_id.get(task_id, {})
+            fine_columns = fine_task.get("columns", [])
+            if not isinstance(fine_columns, list):
+                continue
+
+            fine_by_col: dict[str, dict[str, Any]] = {}
+            for fine_col in fine_columns:
+                fine_col_name = fine_col.get("column")
+                if isinstance(fine_col_name, str):
+                    fine_by_col[fine_col_name] = fine_col
+
+            original_task = results_by_id.get(task_id, {})
+            original_columns = original_task.get("columns", [])
+            if not isinstance(original_columns, list):
+                continue
+            for original_col in original_columns:
+                col_name = original_col.get("column")
+                if not isinstance(col_name, str) or col_name not in projected_cols:
+                    continue
+                fine_match = fine_by_col.get(col_name)
+                if not fine_match:
+                    continue
+                fine_type_id = fine_match.get("type_id")
+                fine_confidence = fine_match.get("confidence")
+                if isinstance(fine_type_id, str):
+                    original_col["fine_type_id"] = fine_type_id
+                if isinstance(fine_confidence, (int, float)):
+                    original_col["fine_confidence"] = float(fine_confidence)
+
+
 async def run_table_annotate(
     tasks: list[dict],
     schema: str,
@@ -267,40 +446,10 @@ async def run_table_annotate(
     if not schema_config.supports_table:
         raise ValueError(f"Schema '{schema}' does not support tabular annotation.")
 
-    type_ids = schema_config.load_type_ids()
-    require_all_scores = schema_config.require_all_scores
+    results_by_id = await _run_table_annotate_once(tasks, schema_config, llm_client, settings)
 
-    task_lookup = {task["task_id"]: task for task in tasks}
-    results_by_id: dict[str, dict] = {}
-
-    selected_type_ids = type_ids
-    type_set = set(selected_type_ids)
-    prompt = build_table_prompt(schema_config, tasks, selected_type_ids)
-
-    def validator(raw_text: str):
-        normalized_raw = _coerce_table_output_with_task_ids(raw_text, tasks)
-        return validate_table_response(
-            tasks,
-            normalized_raw,
-            type_set,
-            require_all_scores=require_all_scores,
-            type_aliases=schema_config.type_aliases,
-            type_alias_prefixes=schema_config.type_alias_prefixes,
-        )
-
-    parsed = await _run_with_retries(llm_client, prompt, validator, settings.MOOSE_MAX_RETRIES)
-
-    for item in parsed:
-        task = task_lookup[item.task_id]
-        columns = []
-        for column in item.columns:
-            scores = {type_id: float(column.scores.get(type_id, 0)) for type_id in selected_type_ids}
-            type_id, confidence, _distribution = choose_argmax(scores)
-            output = {"column": column.column, "type_id": type_id, "confidence": confidence}
-            if schema_config.coarse_mapping:
-                output["coarse_type_id"] = schema_config.coarse_mapping.get(type_id)
-            columns.append(output)
-        results_by_id[item.task_id] = {"task_id": item.task_id, "table_id": task["table_id"], "columns": columns}
+    if schema_config.name == "sti":
+        await _augment_sti_ne_columns_with_fine_types(tasks, results_by_id, llm_client, settings)
 
     ordered = [results_by_id[task["task_id"]] for task in tasks]
     return {"results": ordered}
