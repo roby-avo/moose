@@ -20,21 +20,12 @@ uvicorn moose_api.main:app --host 0.0.0.0 --port 8000
 ## Quickstart (Docker)
 
 ```bash
-docker compose up --build
+docker compose up -d --build
 ```
 
-If you want to set defaults for the container, copy `.env.example` to `.env` and adjust values (for example, `MOOSE_OPENROUTER_BASE_URL`).
+This is the single, definitive compose setup for Moose. It runs the API with worker processes, MongoDB persistence + health checks, and the Streamlit demo.
+If you want to set defaults for the containers, copy `.env.example` to `.env` and adjust values (for example, `MOOSE_OPENROUTER_BASE_URL`).
 To avoid port conflicts, set `MOOSE_API_PORT` and `MOOSE_DEMO_PORT`.
-
-## Production (Docker Compose)
-
-Use the production compose file to run the API with multiple workers, Mongo persistence, and health checks:
-
-```bash
-docker compose -f docker-compose.prod.yml up -d --build
-```
-
-This production compose file also exposes the Streamlit demo. Configure ports via `MOOSE_API_PORT` and `MOOSE_DEMO_PORT` in `.env`.
 
 ### LLM endpoint configuration
 
@@ -139,7 +130,6 @@ curl -s http://localhost:8000/jobs/<job_id> \
 For single-resource endpoints, `result` is also single-resource:
 - `/ner` -> `{"entities": [...], "warnings": [...]?}`
 - `/tabular/annotate` -> `{"table_id": "...", "columns": [...], "warnings": [...]?}`
-- `/tabular/ner` -> `{"table_id": "...", "rows": [...], "warnings": [...]?}`
 - `/tabular/cpa` -> `{"table_id": "...", "subject_column": "...", "relationships": [...]}`
 
 ### List models
@@ -158,7 +148,7 @@ You can query a single provider via `?provider=ollama` or `?provider=openrouter`
 
 - `coarse`: high-level NER types: PERSON, ORGANIZATION, LOCATION, EVENT, WORK, PRODUCT, CONCEPT, MISC.
 - `fine`: detailed NER types (e.g., PERSON, COMPANY, CITY, LAW, DEVICE, etc.) with parent mapping; responses also include `coarse_type_id`.
-- `sti`: column type classification inventory for STI (NE:* plus high-level LIT:* and a compact `xsd:*` set, with `ext:*` syntactic patterns like email/IP/phone/UUID; see `src/moose/data/sti_types.json`). Tabular-only; text NER endpoints reject it. For literal subtypes, responses include `coarse_type_id` with the matching LIT:STRING/NUMBER/DATETIME.
+- `sti`: column type classification inventory for STI (NE:* plus high-level LIT:* and a compact `xsd:*` set, with `ext:*` syntactic patterns like email/IP/phone/UUID; see `src/moose/data/sti_types.json`). Tabular-only; text NER endpoints reject it. Responses keep STI `type_id`/`coarse_type_id`; for NE columns Moose also adds `fine_type_id` and `fine_confidence`.
 - `dpv`: full DPV vocabulary IDs (loaded from `src/moose/data/dpv_full.json` via the registry).
 
 Custom vocabularies are configured in `src/moose/data/vocabularies.json`. Add a new entry

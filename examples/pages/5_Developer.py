@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 import json
-import re
-from typing import Any
 
 import streamlit as st
 
 from moose.prompts import (
     build_table_prompt,
-    build_tabular_cell_ner_prompt,
     build_text_ner_prompt,
 )
 from moose.schema import get_schema_config
@@ -24,78 +21,6 @@ from moose_ui.metadata import (
 from moose_ui.samples import DEFAULT_TABLE_SAMPLE, DEFAULT_TEXT_SAMPLE
 
 _SINGLE_TABLE_ID = "__single_table__"
-_STRUCTURED_RE = re.compile(
-    r"""^(
-        \d{4}(-\d{2}(-\d{2})?)?
-        | \$?\d+(,\d{3})*(\.\d+)?
-        | \d+(\.\d+)?
-        | [0-9a-fA-F]{8,}
-        | [A-Z0-9_-]{8,}
-    )$""",
-    re.VERBOSE,
-)
-
-
-def _looks_like_structured_literal(value: str) -> bool:
-    v = value.strip()
-    if not v:
-        return True
-    if len(v) <= 2:
-        return False
-    return bool(_STRUCTURED_RE.match(v))
-
-
-def _infer_table_columns(sampled_rows: Any) -> list[str]:
-    columns: list[str] = []
-    seen: set[str] = set()
-    if not isinstance(sampled_rows, list):
-        return columns
-    for row in sampled_rows:
-        if not isinstance(row, dict):
-            continue
-        for key in row:
-            if key not in seen:
-                seen.add(key)
-                columns.append(key)
-    return columns
-
-
-def _build_cell_tasks(
-    table_id: str,
-    sampled_rows: list[dict[str, Any]],
-    target_columns: list[str],
-    strings_only: bool,
-    skip_structured_literals: bool,
-) -> list[dict[str, Any]]:
-    cell_tasks: list[dict[str, Any]] = []
-    for row_index, row in enumerate(sampled_rows):
-        if not isinstance(row, dict):
-            continue
-        for col in target_columns:
-            value = row.get(col)
-            if value is None:
-                text = ""
-            elif strings_only:
-                text = value if isinstance(value, str) else ""
-            else:
-                text = value if isinstance(value, str) else str(value)
-
-            if isinstance(text, str) and skip_structured_literals and _looks_like_structured_literal(
-                text.strip()
-            ):
-                continue
-            if not isinstance(text, str) or not text:
-                continue
-
-            cell_tasks.append(
-                {
-                    "table_id": table_id,
-                    "row_index": row_index,
-                    "column": col,
-                    "text": text,
-                }
-            )
-    return cell_tasks
 
 
 def _show_prompt(prompt: str, *, schema: str, task_count: int, type_count: int) -> None:
@@ -159,7 +84,7 @@ with prompt_tab:
 
     mode = st.radio(
         "Operation",
-        ["Text NER", "Column Typing", "Cell NER"],
+        ["Text NER", "Column Typing"],
         horizontal=True,
     )
 
@@ -240,80 +165,3 @@ with prompt_tab:
             ]
             prompt = build_table_prompt(schema_config, tasks, type_ids)
             _show_prompt(prompt, schema=schema, task_count=len(tasks), type_count=len(type_ids))
-
-    else:
-        schema_names = schemas_supporting(schemas, text=True)
-        if not schema_names:
-            st.error("No text-capable schemas available for cell NER.")
-            st.stop()
-        preferred = (
-            "dpv_pd"
-            if "dpv_pd" in schema_names
-            else ("dpv" if "dpv" in schema_names else schema_names[0])
-        )
-        schema = st.selectbox(
-            "Schema",
-            schema_names,
-            index=schema_names.index(preferred),
-            key="prompt_debug_cell_schema",
-        )
-        table_id = st.text_input("table_id", value="debug-table", key="prompt_debug_cell_table_id")
-        sampled_rows_raw = st.text_area(
-            "sampled_rows JSON",
-            value=DEFAULT_TABLE_SAMPLE,
-            height=220,
-            key="prompt_debug_cell_rows",
-        )
-
-        sampled_rows: Any = None
-        columns: list[str] = []
-        try:
-            sampled_rows = json.loads(sampled_rows_raw)
-            columns = _infer_table_columns(sampled_rows)
-        except Exception as exc:  # noqa: BLE001
-            st.error(f"Invalid JSON: {exc}")
-
-        target_columns = st.multiselect(
-            "target_columns",
-            options=columns,
-            default=columns[:2],
-            key="prompt_debug_cell_targets",
-        )
-        col1, col2 = st.columns([1, 1])
-        with col1:
-            strings_only = st.checkbox("strings_only", value=True, key="prompt_debug_cell_strings")
-        with col2:
-            skip_structured = st.checkbox(
-                "skip_structured_literals",
-                value=True,
-                key="prompt_debug_cell_skip_structured",
-            )
-
-        if st.button("Build prompt", key="prompt_debug_build_cell"):
-            if not isinstance(sampled_rows, list) or not all(
-                isinstance(row, dict) for row in sampled_rows
-            ):
-                st.error("sampled_rows must be a JSON array of objects.")
-                st.stop()
-            if not target_columns:
-                st.error("Select at least one target column.")
-                st.stop()
-
-            resolved_table_id = table_id or _SINGLE_TABLE_ID
-            cell_tasks = _build_cell_tasks(
-                table_id=resolved_table_id,
-                sampled_rows=sampled_rows,
-                target_columns=target_columns,
-                strings_only=strings_only,
-                skip_structured_literals=skip_structured,
-            )
-            if not cell_tasks:
-                st.warning(
-                    "No cells remained after current filters (strings_only/skip_structured_literals)."
-                )
-                st.stop()
-
-            schema_config = get_schema_config(schema)
-            type_ids = schema_config.load_type_ids()
-            prompt = build_tabular_cell_ner_prompt(schema_config, cell_tasks, type_ids)
-            _show_prompt(prompt, schema=schema, task_count=len(cell_tasks), type_count=len(type_ids))

@@ -20,7 +20,7 @@ Jobs are asynchronous: you **submit** work, then **auto-poll** and render result
 
 ---
 
-## Column typing vs Cell NER vs CPA (tables)
+## Column typing vs CPA (tables)
 
 ### Column typing (`/schemas/{schema}/tabular/annotate`)
 - **One label per column** using header + value distribution.
@@ -28,11 +28,6 @@ Jobs are asynchronous: you **submit** work, then **auto-poll** and render result
 - Examples:
   - `email` → `ext:email` (STI)
   - `email` → `dpv-pd:EmailAddress` (DPV personal data)
-
-### Cell NER (`/schemas/{schema}/tabular/ner`)
-- Extracts entities **inside cells** for selected columns (`target_columns`).
-- Best for free-text columns (notes, comments, descriptions).
-- Example: `"Contact alice@example.com"` → entity `alice@example.com`
 
 ### CPA (`/schemas/{schema}/tabular/cpa`)
 - Predicts **relationships** from a **subject column** to each target column.
@@ -54,7 +49,6 @@ Moose supports **profiles** (fast/balanced/deep) to control speed vs accuracy wi
 
 ## Which one should I use?
 - If you have a **table** and want **types per column** → *Tables → Column typing*
-- If you have a **table** and want **entities inside text cells** → *Tables → Cell NER*
 - If you have a **table** and want **predicates/relationships** → *Tables → CPA*
 - If you want **privacy findings + recommendations (+ optional GDPR refs)** → *Privacy*
 
@@ -64,7 +58,7 @@ Moose supports **profiles** (fast/balanced/deep) to control speed vs accuracy wi
 Use the pages on the left:
 
 - **Text**: run NER over text
-- **Tables**: typing, cell NER, CPA (with optional debug)
+- **Tables**: typing and CPA (with optional debug)
 - **Privacy**: profile-driven privacy analysis (with optional legal refs)
 - **Jobs**: poll and view results
 - **Developer**: metadata, diagnostics, and prompt debugger (enable Developer mode in sidebar)
