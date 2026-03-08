@@ -83,6 +83,7 @@ FINE_TO_COARSE = {
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 VOCAB_REGISTRY_PATH = DATA_DIR / "vocabularies.json"
+USER_VOCAB_REGISTRY_PATH = DATA_DIR / "user_vocabularies.json"
 
 DEFAULT_TEXT_INTRO = "You are a high-precision NER engine."
 DEFAULT_TABLE_INTRO = "You are a semantic typing engine for tabular data."
@@ -204,10 +205,10 @@ def _parse_bool_field(entry: dict[str, Any], key: str, default: bool) -> bool:
     return value
 
 
-def _load_vocab_registry_entries() -> list[dict[str, Any]]:
-    if not VOCAB_REGISTRY_PATH.exists():
+def _load_vocab_registry_entries(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
         return []
-    with VOCAB_REGISTRY_PATH.open("r", encoding="utf-8") as handle:
+    with path.open("r", encoding="utf-8") as handle:
         data = json.load(handle)
     if not isinstance(data, list):
         raise ValueError("Vocabulary registry must be a JSON array.")
@@ -247,41 +248,43 @@ def _schema_registry() -> dict[str, SchemaConfig]:
     }
 
     seen_registry_names: set[str] = set()
-    for entry in _load_vocab_registry_entries():
-        name = entry.get("name")
-        if not isinstance(name, str) or not name.strip():
-            raise ValueError("Vocabulary entry missing a valid name.")
-        name = name.strip()
-        if name in seen_registry_names:
-            raise ValueError(f"Duplicate schema name: {name}")
-        seen_registry_names.add(name)
-        source = entry.get("type_source") or entry.get("data_path") or entry.get("path")
-        if not isinstance(source, str) or not source.strip():
-            raise ValueError(f"Vocabulary {name} missing type_source path.")
-        data_path = Path(source.strip())
-        if not data_path.is_absolute():
-            data_path = DATA_DIR / data_path
-        label = entry.get("label")
-        description = entry.get("description")
-        registry[name] = SchemaConfig(
-            name=name,
-            label=label.strip() if isinstance(label, str) and label.strip() else name,
-            description=description.strip() if isinstance(description, str) else None,
-            require_all_scores=_parse_score_mode(entry),
-            text_intro=_normalize_intro(entry.get("text_intro"), DEFAULT_TEXT_INTRO),
-            table_intro=_normalize_intro(entry.get("table_intro"), DEFAULT_TABLE_INTRO),
-            cpa_intro=_normalize_intro(entry.get("cpa_intro"), DEFAULT_CPA_INTRO),
-            data_path=data_path,
-            type_aliases=_parse_alias_mapping(entry.get("type_aliases"), "type_aliases"),
-            type_alias_prefixes=_parse_alias_mapping(
-                entry.get("type_alias_prefixes"), "type_alias_prefixes"
-            ),
-            coarse_mapping=_parse_coarse_mapping(entry.get("coarse_mapping")),
-            prefilter_types=_parse_bool_field(entry, "prefilter_types", False),
-            supports_text=_parse_bool_field(entry, "supports_text", True),
-            supports_table=_parse_bool_field(entry, "supports_table", True),
-            supports_cpa=_parse_bool_field(entry, "supports_cpa", False),
-        )
+    registry_paths = [VOCAB_REGISTRY_PATH, USER_VOCAB_REGISTRY_PATH]
+    for registry_path in registry_paths:
+        for entry in _load_vocab_registry_entries(registry_path):
+            name = entry.get("name")
+            if not isinstance(name, str) or not name.strip():
+                raise ValueError("Vocabulary entry missing a valid name.")
+            name = name.strip()
+            if name in seen_registry_names:
+                raise ValueError(f"Duplicate schema name: {name}")
+            seen_registry_names.add(name)
+            source = entry.get("type_source") or entry.get("data_path") or entry.get("path")
+            if not isinstance(source, str) or not source.strip():
+                raise ValueError(f"Vocabulary {name} missing type_source path.")
+            data_path = Path(source.strip())
+            if not data_path.is_absolute():
+                data_path = DATA_DIR / data_path
+            label = entry.get("label")
+            description = entry.get("description")
+            registry[name] = SchemaConfig(
+                name=name,
+                label=label.strip() if isinstance(label, str) and label.strip() else name,
+                description=description.strip() if isinstance(description, str) else None,
+                require_all_scores=_parse_score_mode(entry),
+                text_intro=_normalize_intro(entry.get("text_intro"), DEFAULT_TEXT_INTRO),
+                table_intro=_normalize_intro(entry.get("table_intro"), DEFAULT_TABLE_INTRO),
+                cpa_intro=_normalize_intro(entry.get("cpa_intro"), DEFAULT_CPA_INTRO),
+                data_path=data_path,
+                type_aliases=_parse_alias_mapping(entry.get("type_aliases"), "type_aliases"),
+                type_alias_prefixes=_parse_alias_mapping(
+                    entry.get("type_alias_prefixes"), "type_alias_prefixes"
+                ),
+                coarse_mapping=_parse_coarse_mapping(entry.get("coarse_mapping")),
+                prefilter_types=_parse_bool_field(entry, "prefilter_types", False),
+                supports_text=_parse_bool_field(entry, "supports_text", True),
+                supports_table=_parse_bool_field(entry, "supports_table", True),
+                supports_cpa=_parse_bool_field(entry, "supports_cpa", False),
+            )
     return registry
 
 
@@ -289,10 +292,21 @@ def list_schema_names() -> list[str]:
     return sorted(_schema_registry())
 
 
+def reload_schema_registry() -> list[str]:
+    _load_vocab_file.cache_clear()
+    _schema_registry.cache_clear()
+    return list_schema_names()
+
+
 def get_schema_config(schema: str) -> SchemaConfig:
     registry = _schema_registry()
     if schema not in registry:
-        known = ", ".join(list_schema_names())
+        # In multi-worker deployments, one worker may ingest a schema while another
+        # still has a stale in-memory cache. Refresh once before failing.
+        reload_schema_registry()
+        registry = _schema_registry()
+    if schema not in registry:
+        known = ", ".join(sorted(registry.keys()))
         raise ValueError(f"Unknown schema '{schema}'. Available schemas: {known}")
     return registry[schema]
 

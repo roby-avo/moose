@@ -32,6 +32,23 @@ def table_to_markdown(sampled_rows: list[dict[str, Any]], columns: list[str], ma
         lines.append("| " + " | ".join(_escape_md_cell(row.get(c)) for c in cols) + " |")
     return "\n".join(lines)
 
+
+def _ordered_union_columns(sampled_rows: list[dict[str, Any]]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for row in sampled_rows:
+        if not isinstance(row, dict):
+            continue
+        for key in row.keys():
+            if not isinstance(key, str):
+                continue
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(key)
+    return out
+
+
 def build_cpa_prompt(schema: SchemaConfig, task: dict[str, Any], relation_ids: list[str], max_rows: int = 5) -> str:
     subject = task["subject_column"]
     targets: list[str] = task["target_columns"]
@@ -386,6 +403,7 @@ def build_table_prompt(schema: SchemaConfig, tasks: list[dict], type_ids: list[s
     payload = [
         {
             "table_id": t["table_id"],
+            "observed_columns": _ordered_union_columns(t["sampled_rows"]),
             "sampled_rows": t["sampled_rows"],
         }
         for t in tasks
@@ -416,7 +434,9 @@ def build_table_prompt(schema: SchemaConfig, tasks: list[dict], type_ids: list[s
             "]\n",
             "Rules:\n",
             "- Return EXACTLY one item per input table and keep input order.\n",
-            "- Return one entry per observed column name from the sampled_rows union.\n",
+            "- Return one entry per observed column name from observed_columns.\n",
+            "- Column names in output MUST match observed_columns exactly (including case, underscores, and punctuation).\n",
+            "- Do not rename, normalize, split, or merge column names.\n",
             score_rule,
             "- At least one score must be > 0 per column.\n",
             "No extra text around the JSON.\n\n",

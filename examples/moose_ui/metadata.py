@@ -34,6 +34,14 @@ def fetch_assets(base_url: str, api_key: str) -> dict[str, Any]:
     return api_get(base_url, api_key, "/assets")
 
 
+def clear_metadata_caches() -> None:
+    fetch_health.clear()
+    fetch_schemas.clear()
+    fetch_policy_packs.clear()
+    fetch_privacy_profiles.clear()
+    fetch_assets.clear()
+
+
 def schemas_supporting(
     schemas: list[dict[str, Any]], *, text: bool = False, table: bool = False, cpa: bool = False
 ) -> list[str]:

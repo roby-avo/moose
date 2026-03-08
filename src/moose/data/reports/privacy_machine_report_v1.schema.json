@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "MachineReportFinding": {
+      "properties": {
+        "assessment": {
+          "title": "Assessment",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "issue": {
+          "title": "Issue",
+          "type": "string"
+        },
+        "legal_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Legal Refs",
+          "type": "array"
+        },
+        "legal_refs_detail": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Legal Refs Detail",
+          "type": "array"
+        },
+        "mitigation_plan": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Mitigation Plan",
+          "type": "array"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "recommended_actions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Recommended Actions",
+          "type": "array"
+        },
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "severity": {
+          "title": "Severity",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "violation_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Violation Reasons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rule_id",
+        "issue",
+        "severity",
+        "status",
+        "assessment",
+        "rationale"
+      ],
+      "title": "MachineReportFinding",
+      "type": "object"
+    },
+    "MachineReportSummary": {
+      "properties": {
+        "action_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Action Counts",
+          "type": "object"
+        },
+        "assessment_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Assessment Counts",
+          "type": "object"
+        },
+        "finding_count": {
+          "title": "Finding Count",
+          "type": "integer"
+        },
+        "severity_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Severity Counts",
+          "type": "object"
+        },
+        "status_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Status Counts",
+          "type": "object"
+        },
+        "task_count": {
+          "title": "Task Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "task_count",
+        "finding_count"
+      ],
+      "title": "MachineReportSummary",
+      "type": "object"
+    },
+    "MachineReportTask": {
+      "properties": {
+        "finding_count": {
+          "title": "Finding Count",
+          "type": "integer"
+        },
+        "findings": {
+          "items": {
+            "$ref": "#/$defs/MachineReportFinding"
+          },
+          "title": "Findings",
+          "type": "array"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "table_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Id"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_id",
+        "kind",
+        "finding_count"
+      ],
+      "title": "MachineReportTask",
+      "type": "object"
+    }
+  },
+  "$id": "moose.privacy.machine_report.v1",
+  "properties": {
+    "escalations": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Escalations",
+      "type": "array"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "policy_pack": {
+      "title": "Policy Pack",
+      "type": "string"
+    },
+    "profile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Profile"
+    },
+    "report_type": {
+      "const": "privacy_analysis",
+      "default": "privacy_analysis",
+      "title": "Report Type",
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "moose.privacy.machine_report.v1",
+      "default": "moose.privacy.machine_report.v1",
+      "title": "Schema Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "summary": {
+      "$ref": "#/$defs/MachineReportSummary"
+    },
+    "tasks": {
+      "items": {
+        "$ref": "#/$defs/MachineReportTask"
+      },
+      "title": "Tasks",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "generated_at",
+    "policy_pack",
+    "summary"
+  ],
+  "title": "MachinePrivacyReport",
+  "type": "object",
+  "x-schema-version": "1.0.0"
+}

@@ -7,6 +7,7 @@ import streamlit as st
 
 from moose_ui.config import build_llm_headers, sidebar, validate_common
 from moose_ui.metadata import fetch_policy_packs, fetch_privacy_profiles, fetch_schemas, schemas_supporting
+from moose_ui.render import render_job
 from moose_ui.samples import DEFAULT_TABLE_SAMPLE
 from moose_ui.submit import submit_and_render_job
 
@@ -101,6 +102,7 @@ if not cfg.get("api_key"):
     st.stop()
 
 st.caption(f"Provider: {cfg['provider']} | Model: {cfg['model']}")
+PERSIST_RESULT_KEY = "privacy_last_job"
 
 # Metadata
 try:
@@ -213,6 +215,7 @@ with st.expander("Profile & configuration details", expanded=False):
     )
 
 tab_text, tab_table = st.tabs(["Text privacy", "Table privacy"])
+ran_submission = False
 
 with tab_text:
     st.subheader("Text privacy analysis")
@@ -256,7 +259,9 @@ with tab_text:
             headers=build_llm_headers(cfg),
             label=f"Privacy analyze (text) [{profile}]",
             auto_poll=auto_poll,
+            persist_result_key=PERSIST_RESULT_KEY,
         )
+        ran_submission = True
 
 with tab_table:
     st.subheader("Table privacy analysis")
@@ -278,6 +283,7 @@ with tab_table:
         st.caption(f"Detected columns: {cols or '(none)'}")
 
     scan_columns = st.multiselect("scan_columns (optional)", options=cols, default=[])
+    st.caption("If left empty, privacy scan will automatically analyze all detected columns.")
 
     if st.button("Run privacy analysis (table)", type="primary"):
         if err:
@@ -317,4 +323,25 @@ with tab_table:
             headers=build_llm_headers(cfg),
             label=f"Privacy analyze (table) [{profile}]",
             auto_poll=auto_poll,
+            persist_result_key=PERSIST_RESULT_KEY,
+        )
+        ran_submission = True
+
+if not ran_submission:
+    saved_job = st.session_state.get(PERSIST_RESULT_KEY)
+    if isinstance(saved_job, dict) and saved_job:
+        st.markdown("---")
+        c1, c2 = st.columns([4, 1])
+        with c1:
+            st.subheader("Last privacy result (persisted)")
+        with c2:
+            if st.button("Clear saved result"):
+                st.session_state.pop(PERSIST_RESULT_KEY, None)
+                st.rerun()
+        render_job(
+            saved_job,
+            show_raw=cfg.get("show_raw", False),
+            show_legal_refs=cfg.get("show_legal_refs", True),
+            show_legal_detail=cfg.get("show_legal_detail", True),
+            show_debug=cfg.get("show_debug", False),
         )

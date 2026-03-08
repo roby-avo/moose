@@ -26,6 +26,23 @@ def test_table_prompt_has_no_task_id_field() -> None:
     assert "task_id" not in prompt
 
 
+def test_table_prompt_includes_observed_columns_contract() -> None:
+    schema = get_schema_config("coarse")
+    prompt = build_table_prompt(
+        schema,
+        [
+            {
+                "task_id": "t1",
+                "table_id": "tbl",
+                "sampled_rows": [{"patient_name": "Alice", "mrn": "1"}],
+            }
+        ],
+        schema.load_type_ids(),
+    )
+    assert '"observed_columns": ["patient_name", "mrn"]' in prompt
+    assert "Column names in output MUST match observed_columns exactly" in prompt
+
+
 def test_tabular_cell_prompt_has_no_task_id_field() -> None:
     schema = get_schema_config("coarse")
     prompt = build_tabular_cell_ner_prompt(

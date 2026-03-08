@@ -6,7 +6,7 @@ from typing import Any
 import streamlit as st
 
 from moose_ui.config import build_llm_headers, sidebar, validate_common
-from moose_ui.metadata import fetch_schemas, schemas_supporting
+from moose_ui.metadata import clear_metadata_caches, fetch_schemas, schemas_supporting
 from moose_ui.samples import DEFAULT_CPA_TABLE_SAMPLE, DEFAULT_TABLE_SAMPLE
 from moose_ui.submit import submit_and_render_job
 
@@ -38,6 +38,9 @@ if not cfg.get("api_key"):
     st.stop()
 
 st.caption(f"Provider: {cfg['provider']} | Model: {cfg['model']}")
+if st.button("Refresh schema list", key="tables_refresh_schemas"):
+    clear_metadata_caches()
+    st.rerun()
 
 # Metadata
 try:
@@ -48,6 +51,7 @@ except Exception as exc:  # noqa: BLE001
 
 table_schema_names = schemas_supporting(schemas, table=True)
 cpa_schema_names = schemas_supporting(schemas, cpa=True)
+table_only_schema_names = sorted(set(table_schema_names).difference(cpa_schema_names))
 
 operation = st.radio("Operation", ["Column typing", "CPA"], horizontal=True)
 
@@ -127,6 +131,11 @@ else:
         st.stop()
 
     st.subheader("CPA (subject-column relationships)")
+    if table_only_schema_names:
+        st.info(
+            "Some schemas support table typing but not CPA and are only shown under 'Column typing'. "
+            f"Examples: {', '.join(table_only_schema_names[:6])}"
+        )
     st.caption(
         "CPA-lite (schema=cpa) is fast and generic. schemaorg_cpa_v1 is deeper and supports moose:NONE. "
         "For schemaorg_cpa_v1, subject_class is inferred by default (CTA) and domain filtering reduces candidates."

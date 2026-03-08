@@ -13,10 +13,11 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from moose.config import Settings, get_settings
+from moose.ingest import delete_user_schema, preview_schema_payload, update_user_schema_metadata
 from moose.llm import create_client
 from moose.pipelines import load_privacy_profiles
-from moose.schema import get_schema_config, list_schema_names
-from moose.privacy import list_policy_packs
+from moose.schema import get_schema_config, list_schema_names, reload_schema_registry
+from moose.privacy import get_machine_report_json_schema, list_policy_packs
 from moose_api.queue import JobRecord, WorkerPool, build_backends, utc_now
 
 
@@ -207,12 +208,76 @@ class DpvTabularRequest(BaseTabularRequest):
     pass
 
 
+class SchemaIngestRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    name: str = Field(min_length=1, description="Schema registry name.")
+    label: str | None = None
+    description: str | None = None
+
+    source_type: Literal["url", "github", "file"] = "url"
+    source_url: str | None = None
+    source_path: str | None = None
+    github_repo: str | None = None
+    github_ref: str | None = "main"
+    github_path: str | None = None
+
+    use_llm_fallback: bool = False
+    llm: LLMOverrides | None = None
+
+    score_mode: Literal["dense", "sparse"] = "sparse"
+    prefilter_types: bool = False
+    supports_text: bool = True
+    supports_table: bool = True
+    supports_cpa: bool = False
+    text_intro: str | None = None
+    table_intro: str | None = None
+    cpa_intro: str | None = None
+    expected_source_sha256: str | None = None
+    expected_mapping_sha256: str | None = None
+
+
+class SchemaPatchRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    label: str | None = None
+    description: str | None = None
+    score_mode: Literal["dense", "sparse"] | None = None
+    prefilter_types: bool | None = None
+    supports_text: bool | None = None
+    supports_table: bool | None = None
+    supports_cpa: bool | None = None
+    text_intro: str | None = None
+    table_intro: str | None = None
+    cpa_intro: str | None = None
+
+
 # -------------
 # Job responses
 # -------------
 class JobQueuedResponse(BaseModel):
     job_id: str
     status: Literal["queued"]
+
+
+class SchemaIngestPreviewResponse(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    schema_name: str = Field(alias="schema", serialization_alias="schema")
+    label: str
+    description: str
+    type_count: int
+    sample_type_ids: list[str]
+    source: dict[str, Any]
+    source_sha256: str
+    mapping_sha256: str
+    mapping_strategy: Literal["deterministic", "llm_fallback"]
+    mapping_confidence: float | None = None
+    mapping: dict[str, Any]
+    warnings: list[dict[str, Any]] = Field(default_factory=list)
+    guardrails: dict[str, Any] = Field(default_factory=dict)
+    can_activate: bool = True
+    activated: bool = False
 
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
@@ -384,6 +449,77 @@ def _build_llm_payload(
         llm_payload["endpoint"] = llm_endpoint
 
     return llm_payload
+
+
+def _settings_with_llm_payload(settings: Settings, llm_payload: dict[str, Any]) -> Settings:
+    update: dict[str, Any] = {}
+    provider = str(llm_payload.get("provider") or settings.MOOSE_LLM_PROVIDER).lower()
+
+    if llm_payload.get("provider"):
+        update["MOOSE_LLM_PROVIDER"] = provider
+    if llm_payload.get("model"):
+        update["MOOSE_MODEL"] = llm_payload["model"]
+
+    if llm_payload.get("ollama_token"):
+        update["MOOSE_OLLAMA_TOKEN"] = llm_payload["ollama_token"]
+    if llm_payload.get("openrouter_api_key"):
+        update["MOOSE_OPENROUTER_API_KEY"] = llm_payload["openrouter_api_key"]
+    if llm_payload.get("deepinfra_api_key"):
+        update["MOOSE_DEEPINFRA_API_KEY"] = llm_payload["deepinfra_api_key"]
+    if llm_payload.get("deepseek_api_key"):
+        update["MOOSE_DEEPSEEK_API_KEY"] = llm_payload["deepseek_api_key"]
+
+    endpoint = llm_payload.get("endpoint")
+    if endpoint:
+        if provider == "openrouter":
+            update["MOOSE_OPENROUTER_BASE_URL"] = endpoint
+        elif provider == "ollama":
+            update["MOOSE_OLLAMA_HOST"] = endpoint
+        elif provider == "deepinfra":
+            update["MOOSE_DEEPINFRA_BASE_URL"] = endpoint
+        elif provider == "deepseek":
+            update["MOOSE_DEEPSEEK_BASE_URL"] = endpoint
+
+    if not update:
+        return settings
+    return settings.model_copy(update=update)
+
+
+def _validate_schema_ingest_request(request: SchemaIngestRequest) -> None:
+    if request.source_type == "url" and not request.source_url:
+        raise HTTPException(status_code=400, detail="source_url is required when source_type='url'.")
+    if request.source_type == "file" and not request.source_path:
+        raise HTTPException(status_code=400, detail="source_path is required when source_type='file'.")
+    if request.source_type == "github" and (not request.github_repo or not request.github_path):
+        raise HTTPException(
+            status_code=400,
+            detail="github_repo and github_path are required when source_type='github'.",
+        )
+
+
+def _build_schema_ingest_payload(request: SchemaIngestRequest) -> dict[str, Any]:
+    return {
+        "name": request.name,
+        "label": request.label,
+        "description": request.description,
+        "source_type": request.source_type,
+        "source_url": request.source_url,
+        "source_path": request.source_path,
+        "github_repo": request.github_repo,
+        "github_ref": request.github_ref,
+        "github_path": request.github_path,
+        "use_llm_fallback": request.use_llm_fallback,
+        "score_mode": request.score_mode,
+        "prefilter_types": request.prefilter_types,
+        "supports_text": request.supports_text,
+        "supports_table": request.supports_table,
+        "supports_cpa": request.supports_cpa,
+        "text_intro": request.text_intro,
+        "table_intro": request.table_intro,
+        "cpa_intro": request.cpa_intro,
+        "expected_source_sha256": request.expected_source_sha256,
+        "expected_mapping_sha256": request.expected_mapping_sha256,
+    }
 
 
 # -------------
@@ -589,6 +725,90 @@ async def submit_privacy_analyze(
     return JobQueuedResponse(job_id=job_id, status="queued")
 
 
+@app.post("/schemas/ingest", dependencies=[Depends(require_api_key)], tags=["Schemas"], response_model=JobQueuedResponse)
+async def submit_schema_ingest(
+    request: SchemaIngestRequest,
+    llm_api_key: str | None = Security(llm_api_key_header),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
+):
+    _validate_schema_ingest_request(request)
+
+    llm_payload: dict[str, Any] | None = None
+    if request.llm is not None:
+        _require_llm_overrides(request.llm, llm_api_key)
+        llm_payload = _build_llm_payload(request.llm, llm_api_key, llm_endpoint)
+    elif request.use_llm_fallback:
+        raise HTTPException(status_code=400, detail="llm is required when use_llm_fallback=true.")
+
+    payload = _build_schema_ingest_payload(request)
+    if llm_payload:
+        payload["llm"] = llm_payload
+
+    job_id = await _enqueue_job("schema_ingest", payload)
+    return JobQueuedResponse(job_id=job_id, status="queued")
+
+
+@app.post(
+    "/schemas/ingest/preview",
+    dependencies=[Depends(require_api_key)],
+    tags=["Schemas"],
+    response_model=SchemaIngestPreviewResponse,
+)
+async def preview_schema_ingest(
+    request: SchemaIngestRequest,
+    llm_api_key: str | None = Security(llm_api_key_header),
+    llm_endpoint: str | None = Header(default=None, alias="X-LLM-Endpoint"),
+):
+    _validate_schema_ingest_request(request)
+
+    llm_payload: dict[str, Any] | None = None
+    if request.llm is not None:
+        _require_llm_overrides(request.llm, llm_api_key)
+        llm_payload = _build_llm_payload(request.llm, llm_api_key, llm_endpoint)
+    elif request.use_llm_fallback:
+        raise HTTPException(status_code=400, detail="llm is required when use_llm_fallback=true.")
+
+    payload = _build_schema_ingest_payload(request)
+    llm_client = None
+    try:
+        if llm_payload:
+            settings = _settings_with_llm_payload(app.state.settings, llm_payload)
+            llm_client = create_client(settings)
+        preview = await preview_schema_payload(payload, llm_client=llm_client)
+        return SchemaIngestPreviewResponse.model_validate(preview)
+    except HTTPException:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    finally:
+        if llm_client is not None:
+            await llm_client.close()
+
+
+@app.patch("/schemas/{schema_name}", dependencies=[Depends(require_api_key)], tags=["Schemas"])
+async def patch_user_schema(schema_name: str, request: SchemaPatchRequest) -> dict[str, Any]:
+    updates = request.model_dump()
+    if not any(value is not None for value in updates.values()):
+        raise HTTPException(status_code=400, detail="At least one field must be provided.")
+    try:
+        return {"status": "ok", **update_user_schema_metadata(schema_name, updates)}
+    except ValueError as exc:
+        detail = str(exc)
+        status = 404 if "not found" in detail.lower() else 400
+        raise HTTPException(status_code=status, detail=detail) from exc
+
+
+@app.delete("/schemas/{schema_name}", dependencies=[Depends(require_api_key)], tags=["Schemas"])
+async def delete_schema(schema_name: str, remove_files: bool = True) -> dict[str, Any]:
+    try:
+        result = delete_user_schema(schema_name, remove_files=remove_files)
+        return {"status": "ok", **result}
+    except ValueError as exc:
+        detail = str(exc)
+        status = 404 if "not found" in detail.lower() else 400
+        raise HTTPException(status_code=status, detail=detail) from exc
+
+
 # ----------
 # Metadata / jobs
 # ----------
@@ -610,6 +830,31 @@ async def get_job(job_id: str):
     if job.status == "failed":
         response["error"] = job.error
     return response
+
+
+@app.get("/jobs/{job_id}/privacy-report", dependencies=[Depends(require_api_key)], tags=["Metadata"])
+async def get_job_privacy_report(job_id: str) -> dict[str, Any]:
+    job_store = app.state.job_store
+    job = await job_store.get_job(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    if job.status != "completed":
+        raise HTTPException(status_code=409, detail=f"Job is not completed (status={job.status}).")
+
+    result = job.result if isinstance(job.result, dict) else {}
+    reports = result.get("reports")
+    if not isinstance(reports, dict):
+        raise HTTPException(status_code=404, detail="No reports found for this job.")
+
+    machine = reports.get("machine_readable")
+    if not isinstance(machine, dict):
+        raise HTTPException(status_code=404, detail="Machine-readable report is not available for this job.")
+
+    content = machine.get("content")
+    if not isinstance(content, dict):
+        raise HTTPException(status_code=404, detail="Machine-readable report content is missing or invalid.")
+
+    return content
 
 
 @app.get("/schemas", dependencies=[Depends(require_api_key)], tags=["Metadata"])
@@ -636,6 +881,12 @@ async def list_schemas(include_type_count: bool = False) -> dict[str, Any]:
     return {"schemas": schemas}
 
 
+@app.post("/schemas/reload", dependencies=[Depends(require_api_key)], tags=["Metadata"])
+async def reload_schemas() -> dict[str, Any]:
+    names = reload_schema_registry()
+    return {"status": "ok", "schema_count": len(names), "schemas": names}
+
+
 @app.get("/policy-packs", dependencies=[Depends(require_api_key)], tags=["Metadata"])
 async def list_policy_packs_endpoint() -> dict[str, Any]:
     return {"policy_packs": list_policy_packs()}
@@ -647,6 +898,11 @@ async def get_privacy_profiles_endpoint() -> dict[str, Any]:
     Return pipelines/privacy_profiles.json so frontends can show available profiles.
     """
     return load_privacy_profiles()
+
+
+@app.get("/privacy/reports/schema", dependencies=[Depends(require_api_key)], tags=["Metadata"])
+async def get_privacy_report_schema_endpoint() -> dict[str, Any]:
+    return get_machine_report_json_schema()
 
 
 @app.get("/health", dependencies=[Depends(require_api_key)], tags=["Metadata"])
@@ -669,6 +925,73 @@ def _parse_price(value: Any) -> float | None:
         return float(value)
     except (TypeError, ValueError):
         return None
+
+
+def _load_user_schema_assets(data_dir: Path) -> list[dict[str, Any]]:
+    registry_path = data_dir / "user_vocabularies.json"
+    if not registry_path.exists():
+        return []
+    try:
+        raw = json.loads(registry_path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return []
+    if not isinstance(raw, list):
+        return []
+
+    out: list[dict[str, Any]] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            continue
+        name = entry.get("name")
+        if not isinstance(name, str) or not name.strip():
+            continue
+        name = name.strip()
+
+        type_source = entry.get("type_source")
+        type_count: int | None = None
+        if isinstance(type_source, str) and type_source.strip():
+            type_path = Path(type_source.strip())
+            if not type_path.is_absolute():
+                type_path = data_dir / type_path
+            try:
+                payload = json.loads(type_path.read_text(encoding="utf-8"))
+                if isinstance(payload, list):
+                    type_count = len(payload)
+            except Exception:  # noqa: BLE001
+                type_count = None
+
+        manifest_path = data_dir / "user" / name / "manifest.json"
+        manifest: dict[str, Any] | None = None
+        if manifest_path.exists():
+            try:
+                loaded = json.loads(manifest_path.read_text(encoding="utf-8"))
+                if isinstance(loaded, dict):
+                    manifest = loaded
+            except Exception:  # noqa: BLE001
+                manifest = None
+
+        item: dict[str, Any] = {
+            "name": name,
+            "label": entry.get("label"),
+            "description": entry.get("description"),
+            "type_source": entry.get("type_source"),
+            "score_mode": entry.get("score_mode"),
+            "supports_text": bool(entry.get("supports_text", True)),
+            "supports_table": bool(entry.get("supports_table", True)),
+            "supports_cpa": bool(entry.get("supports_cpa", False)),
+            "prefilter_types": bool(entry.get("prefilter_types", False)),
+            "type_count": type_count,
+            "manifest": str(manifest_path.relative_to(data_dir).as_posix()) if manifest_path.exists() else None,
+        }
+        if manifest:
+            item["source"] = manifest.get("source")
+            item["generated_at"] = manifest.get("generated_at")
+            counts = manifest.get("counts")
+            if isinstance(counts, dict) and isinstance(counts.get("types"), int):
+                item["type_count"] = counts["types"]
+        out.append(item)
+
+    return sorted(out, key=lambda x: x["name"])
 
 
 @app.get("/models", dependencies=[Depends(require_api_key)], tags=["Metadata"])
@@ -758,7 +1081,19 @@ async def get_assets_index() -> dict:
     path = DATA_DIR / "assets_index.json"
     if not path.exists():
         raise HTTPException(status_code=500, detail=f"assets_index.json not found at {path}")
-    return json.loads(path.read_text(encoding="utf-8"))
+    assets = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(assets, dict):
+        raise HTTPException(status_code=500, detail=f"assets_index.json is invalid at {path}")
+
+    assets.setdefault("registries", {})
+    if isinstance(assets["registries"], dict):
+        assets["registries"]["user_vocabularies"] = "user_vocabularies.json"
+
+    assets.setdefault("assets", {})
+    if isinstance(assets["assets"], dict):
+        assets["assets"]["user_schemas"] = _load_user_schema_assets(DATA_DIR)
+
+    return assets
 
 
 @app.get("/docs", include_in_schema=False)

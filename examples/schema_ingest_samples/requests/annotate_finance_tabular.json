@@ -1,0 +1,28 @@
+{
+  "table_id": "transactions",
+  "sampled_rows": [
+    {
+      "account_id": "ACC-00291",
+      "customer_id": "CUST-918",
+      "transaction_date": "2026-02-14",
+      "amount": "57.42",
+      "merchant": "Coffee House Roma",
+      "payment_method": "card",
+      "card_last4": "4421"
+    },
+    {
+      "account_id": "ACC-00291",
+      "customer_id": "CUST-918",
+      "transaction_date": "2026-02-15",
+      "amount": "128.00",
+      "merchant": "City Grocery",
+      "payment_method": "card",
+      "card_last4": "4421"
+    }
+  ],
+  "llm": {
+    "provider": "openrouter",
+    "model": "anthropic/claude-3.5-sonnet"
+  }
+}
+

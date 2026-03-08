@@ -27,6 +27,8 @@ services:
     depends_on:
       mongo:
         condition: service_healthy
+    volumes:
+      - ./examples/schema_ingest_samples:/app/examples/schema_ingest_samples:ro
     restart: unless-stopped
     healthcheck:
       test:

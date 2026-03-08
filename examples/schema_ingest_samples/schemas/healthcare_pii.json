@@ -1,0 +1,35 @@
+{
+  "types": [
+    {
+      "id": "HC:FULL_NAME",
+      "label": "Full Name",
+      "description": "A person's full legal name.",
+      "aliases": ["name", "patient name"]
+    },
+    {
+      "id": "HC:EMAIL",
+      "label": "Email Address",
+      "description": "Personal or work email address.",
+      "aliases": ["email", "mail"]
+    },
+    {
+      "id": "HC:PHONE",
+      "label": "Phone Number",
+      "description": "Contact telephone number.",
+      "aliases": ["mobile", "telephone"]
+    },
+    {
+      "id": "HC:DATE_OF_BIRTH",
+      "label": "Date of Birth",
+      "description": "Birth date for a person.",
+      "aliases": ["dob", "birth date"]
+    },
+    {
+      "id": "HC:MEDICAL_RECORD_ID",
+      "label": "Medical Record Identifier",
+      "description": "Internal patient or chart identifier.",
+      "aliases": ["mrn", "record id"]
+    }
+  ]
+}
+

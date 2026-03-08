@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce_fields",
+  "label": "E-commerce Product Fields",
+  "description": "Schema for product and catalog attribute annotation.",
+  "source_type": "file",
+  "source_path": "examples/schema_ingest_samples/schemas/ecommerce_nested_ambiguous.json",
+  "supports_text": false,
+  "supports_table": true,
+  "score_mode": "sparse",
+  "use_llm_fallback": true,
+  "llm": {
+    "provider": "openrouter",
+    "model": "anthropic/claude-3.5-sonnet"
+  }
+}
