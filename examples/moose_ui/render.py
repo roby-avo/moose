@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
+import pandas as pd
 import streamlit as st
 
 
@@ -75,6 +76,9 @@ def _render_result(result: dict[str, Any], *, show_raw: bool, show_legal_refs: b
     if kind == "schema_ingest":
         render_schema_ingest_result(result, show_raw=show_raw)
         return
+    if kind == "text_ner":
+        render_text_ner_result(result, show_raw=show_raw)
+        return
     if kind == "privacy":
         render_privacy_result(result, show_legal_refs=show_legal_refs, show_legal_detail=show_legal_detail, show_raw=show_raw)
         return
@@ -108,6 +112,87 @@ def render_schema_ingest_result(result: dict[str, Any], *, show_raw: bool) -> No
     if source:
         _expander_json("Source details", source, show=True)
     _expander_json("Raw schema ingest result", result, show=show_raw)
+
+
+def _entity_type_group(type_id: str | None) -> str:
+    t = str(type_id or "")
+    tl = t.lower()
+    if tl.startswith("dpv-pd:") or tl in {"ne:person", "ext:email", "ext:phone"}:
+        return "direct_identifier"
+    if "ip" in tl or tl in {"ext:ipv4", "ext:ipv6"}:
+        return "network_identifier"
+    if "recipient" in tl or "processor" in tl or tl.startswith("dpv:recipient") or tl.startswith("dpv:dataprocessor"):
+        return "recipient"
+    if "date" in tl or "age" in tl or "postal" in tl:
+        return "quasi_identifier"
+    return "other"
+
+
+def _group_color(group: str) -> str:
+    return {
+        "direct_identifier": "#f8d7da",
+        "network_identifier": "#fde2c8",
+        "recipient": "#d9edf7",
+        "quasi_identifier": "#fff3cd",
+        "other": "#f1f3f5",
+    }.get(group, "#f1f3f5")
+
+
+def render_text_ner_result(result: dict[str, Any], *, show_raw: bool) -> None:
+    st.subheader("Text entities")
+
+    items = result.get("results")
+    if not isinstance(items, list):
+        items = [result]
+
+    rows: list[dict[str, Any]] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        task_id = item.get("task_id")
+        entities = item.get("entities", []) or []
+        for ent in entities:
+            if not isinstance(ent, dict):
+                continue
+            rows.append(
+                {
+                    "task_id": task_id,
+                    "start": ent.get("start"),
+                    "end": ent.get("end"),
+                    "text": ent.get("text"),
+                    "type_id": ent.get("type_id"),
+                    "type_group": _entity_type_group(ent.get("type_id")),
+                    "coarse_type_id": ent.get("coarse_type_id"),
+                    "confidence": ent.get("confidence"),
+                }
+            )
+
+    if rows:
+        df = pd.DataFrame(rows)
+        if not df.empty and "type_group" in df.columns:
+            st.dataframe(
+                df.style.apply(
+                    lambda r: [
+                        f"background-color: {_group_color(str(r.get('type_group', 'other')))}"
+                        if c in {"type_id", "type_group"}
+                        else ""
+                        for c in df.columns
+                    ],
+                    axis=1,
+                ),
+                use_container_width=True,
+            )
+            st.caption(
+                "Color legend: red=direct identifier, orange=network identifier, blue=recipient, yellow=quasi identifier."
+            )
+        else:
+            st.dataframe(df, use_container_width=True)
+    else:
+        st.info("No entities returned.")
+
+    if result.get("warnings"):
+        _expander_json("Warnings", result.get("warnings"), show=True)
+    _expander_json("Raw text NER result", result, show=show_raw)
 
 
 def render_cpa_result(result: dict[str, Any], *, show_debug: bool, show_raw: bool) -> None:
