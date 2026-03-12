@@ -2,205 +2,181 @@
 
 ![Moose](src/moose_api/static/moose-readme.png)
 
-Moose is a prototype library and API for asynchronous, high-throughput NER and tabular semantic typing. Requests are queued and processed by workers; clients receive a `job_id` immediately and poll for results.
+Moose is an async API + Streamlit demo for:
+- text annotation (NER),
+- table column typing,
+- BYO schema ingestion,
+- privacy analysis with human/machine reports.
 
-## Quickstart (local)
+Use this README as a quick usage guide. For deep technical details, see the docs linked at the end.
+
+## Quick Start
+
+### Option A: Docker (recommended)
+
+```bash
+docker compose up -d --build
+```
+
+Default local endpoints:
+- API: `http://localhost:8000`
+- Frontend (Streamlit): `http://localhost:8501`
+
+### Option B: Local API only
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
 
-export MOOSE_API_KEY=your_api_key
-export MOOSE_OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
-
+export MOOSE_API_KEY=test-dev-key
 uvicorn moose_api.main:app --host 0.0.0.0 --port 8000
 ```
 
-## Quickstart (Docker)
+## Auth Headers
+
+All API calls require:
+- `X-API-Key: <your-key>`
+
+LLM-backed operations also require:
+- `X-LLM-API-Key: <provider-key>` (required for OpenRouter/DeepInfra/DeepSeek; optional for Ollama)
+- optional `X-LLM-Endpoint: <override-url>`
+
+Default provider in this project is typically **OpenRouter**, but you can use any supported provider per request via:
+- `llm.provider`: `openrouter | ollama | deepinfra | deepseek`
+- `llm.model`: provider-specific model name
+
+## Core Usage (curl)
+
+### 1) List available schemas
 
 ```bash
-docker compose up -d --build
+curl -sS "http://localhost:8000/schemas?include_type_count=true" \
+  -H "X-API-Key: test-dev-key"
 ```
 
-This is the single, definitive compose setup for Moose. It runs the API with worker processes, MongoDB persistence + health checks, and the Streamlit demo.
-If you want to set defaults for the containers, copy `.env.example` to `.env` and adjust values (for example, `MOOSE_OPENROUTER_BASE_URL`).
-To avoid port conflicts, set `MOOSE_API_PORT` and `MOOSE_DEMO_PORT`.
-
-### LLM endpoint configuration
-
-Moose supports OpenRouter and Ollama. Configure base URLs in `.env`:
+### 2) Text annotation (schema-specific)
 
 ```bash
-MOOSE_OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
-MOOSE_OLLAMA_HOST=http://localhost:11434
-```
-
-Provide `llm.provider` and `llm.model` in each request payload, and pass provider credentials via the `X-LLM-API-Key` header.
-When `provider=openrouter`, the header is required; for Ollama it is optional.
-You can override the provider endpoint per request with `X-LLM-Endpoint`.
-
-## API
-
-All endpoints require `X-API-Key` or `Authorization: Bearer <key>`.
-Swagger UI is available at `/docs`.
-
-### DPV endpoints
-
-For convenience (legacy), the API exposes DPV-specific endpoints that fix `schema` to `dpv`:
-
-- `POST /dpv/ner`
-- `POST /dpv/tabular/annotate`
-
-Preferred: use the schema-specific endpoints below for any vocabulary.
-
-### Schema endpoints
-
-Use the schema name in the path to target any registered vocabulary:
-
-- `POST /schemas/{schema}/ner`
-- `POST /schemas/{schema}/tabular/annotate`
-
-You can also keep using `POST /ner` and `POST /tabular/annotate` with `schema` in the body.
-
-### Runtime LLM configuration (required)
-
-Provide `llm.provider` and `llm.model` per request. Provider credentials are passed via the `X-LLM-API-Key` header.
-Set `X-LLM-Endpoint` to override `MOOSE_OPENROUTER_BASE_URL` or `MOOSE_OLLAMA_HOST` for that request.
-In Swagger UI (`/docs`), set `X-LLM-API-Key` once via the **Authorize** dialog; keep `X-LLM-Endpoint` as an optional per-request override parameter.
-
-```json
-{
-  "schema": "coarse",
-  "text": "Roberto founded Moose.",
-  "llm": {
-    "provider": "openrouter",
-    "model": "anthropic/claude-3.5-sonnet"
-  }
-}
-```
-
-### Submit NER job
-
-```bash
-curl -s http://localhost:8000/ner \
-  -H 'X-API-Key: your_api_key' \
-  -H 'X-LLM-API-Key: your_llm_key' \
-  -H 'X-LLM-Endpoint: https://your-llm-endpoint' \
-  -H 'Content-Type: application/json' \
+curl -sS -X POST "http://localhost:8000/schemas/coarse/ner" \
+  -H "X-API-Key: test-dev-key" \
+  -H "X-LLM-API-Key: <llm-key>" \
+  -H "Content-Type: application/json" \
   -d '{
-    "schema":"coarse",
-    "text":"Roberto Avogadro founded Moose in 2024.",
-    "llm":{
-      "provider":"openrouter",
-      "model":"anthropic/claude-3.5-sonnet"
-    }
+    "text": "Maria Rossi works at Acme in Milan.",
+    "llm": {"provider": "openrouter", "model": "anthropic/claude-3.5-sonnet"}
   }'
 ```
 
-### Submit tabular typing job
+### 3) Table annotation (schema-specific)
 
 ```bash
-curl -s http://localhost:8000/tabular/annotate \
-  -H 'X-API-Key: your_api_key' \
-  -H 'X-LLM-API-Key: your_llm_key' \
-  -H 'X-LLM-Endpoint: https://your-llm-endpoint' \
-  -H 'Content-Type: application/json' \
+curl -sS -X POST "http://localhost:8000/schemas/sti/tabular/annotate" \
+  -H "X-API-Key: test-dev-key" \
+  -H "X-LLM-API-Key: <llm-key>" \
+  -H "Content-Type: application/json" \
   -d '{
-    "schema":"coarse",
-    "table_id":"employees",
+    "table_id":"patients",
     "sampled_rows":[
-      {"name":"Alice Smith","email":"alice@example.com","age":"29"},
-      {"name":"Bob Jones","email":"bob@example.com","age":"41"}
+      {"patient_name":"Alice Smith","email":"alice@example.com","medical_record_number":"MRN-100245"},
+      {"patient_name":"Bob Jones","email":"bob@example.com","medical_record_number":"MRN-100246"}
     ],
-    "llm":{
-      "provider":"openrouter",
-      "model":"anthropic/claude-3.5-sonnet"
-    }
+    "llm": {"provider": "openrouter", "model": "anthropic/claude-3.5-sonnet"}
   }'
 ```
 
-### Poll job status/results
+### 4) BYO schema preview (dry run)
 
 ```bash
-curl -s http://localhost:8000/jobs/<job_id> \
-  -H 'X-API-Key: your_api_key'
+curl -sS -X POST "http://localhost:8000/schemas/ingest/preview" \
+  -H "X-API-Key: test-dev-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name":"healthcare_pii",
+    "label":"Healthcare PII",
+    "source_type":"file",
+    "source_path":"examples/schema_ingest_samples/schemas/healthcare_pii.json",
+    "supports_text":true,
+    "supports_table":true,
+    "score_mode":"sparse"
+  }'
 ```
 
-For single-resource endpoints, `result` is also single-resource:
-- `/ner` -> `{"entities": [...], "warnings": [...]?}`
-- `/tabular/annotate` -> `{"table_id": "...", "columns": [...], "warnings": [...]?}`
-- `/tabular/cpa` -> `{"table_id": "...", "subject_column": "...", "relationships": [...]}`
-
-### List models
+### 5) BYO schema ingest (activate)
 
 ```bash
-curl -s http://localhost:8000/models \
-  -H 'X-API-Key: your_api_key' \
-  -H 'X-LLM-API-Key: your_llm_key' \
-  -H 'X-LLM-Endpoint: https://your-llm-endpoint'
+curl -sS -X POST "http://localhost:8000/schemas/ingest" \
+  -H "X-API-Key: test-dev-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name":"healthcare_pii",
+    "label":"Healthcare PII",
+    "source_type":"file",
+    "source_path":"examples/schema_ingest_samples/schemas/healthcare_pii.json",
+    "supports_text":true,
+    "supports_table":true,
+    "score_mode":"sparse"
+  }'
 ```
 
-`/models` returns provider models. For OpenRouter, `X-LLM-API-Key` is required. For Ollama, `X-LLM-API-Key` is optional.
-You can query a single provider via `?provider=ollama` or `?provider=openrouter`, or use `?provider=all`.
-
-## Schemas
-
-- `coarse`: high-level NER types: PERSON, ORGANIZATION, LOCATION, EVENT, WORK, PRODUCT, CONCEPT, MISC.
-- `fine`: detailed NER types (e.g., PERSON, COMPANY, CITY, LAW, DEVICE, etc.) with parent mapping; responses also include `coarse_type_id`.
-- `sti`: column type classification inventory for STI (NE:* plus high-level LIT:* and a compact `xsd:*` set, with `ext:*` syntactic patterns like email/IP/phone/UUID; see `src/moose/data/sti_types.json`). Tabular-only; text NER endpoints reject it. Responses keep STI `type_id`/`coarse_type_id`; for NE columns Moose also adds `fine_type_id` and `fine_confidence`.
-- `dpv`: full DPV vocabulary IDs (loaded from `src/moose/data/dpv_full.json` via the registry).
-
-Custom vocabularies are configured in `src/moose/data/vocabularies.json`. Add a new entry
-with a `name`, `type_source` (a JSON file in `src/moose/data`), and optional prompt and
-score settings. The vocabulary JSON can be a list of string IDs or objects containing an
-`id` field.
-
-Example registry entry:
-
-```json
-{
-  "name": "my-vocab",
-  "label": "My Vocab",
-  "type_source": "my_vocab.json",
-  "score_mode": "sparse",
-  "text_intro": "You are a My Vocab annotation engine.",
-  "table_intro": "You are a My Vocab classification engine for tabular data."
-}
-```
-
-For large vocabularies, `"prefilter_types": true` enables two-step type selection where implemented
-(currently used in CPA flows). NER/text and table typing use a single prompt per request.
-
-## Confidence
-
-For each entity/column, the model returns unnormalized non-negative scores for the configured label set (including fallback labels where present), and Moose returns the selected type with confidence in `[0,1]`.
-
-## Queue behavior
-
-- Jobs are enqueued and processed asynchronously by workers.
-- Backpressure is enforced when the queue size exceeds `MOOSE_QUEUE_MAXSIZE` (HTTP 429).
-- If `MOOSE_MONGO_URL` is set and reachable, MongoDB is used for queue + job storage; otherwise Moose falls back to in-memory queues (not durable across restarts).
-
-## Configuration
-
-- `MOOSE_OPENROUTER_BASE_URL`: defaults to `https://openrouter.ai/api/v1`
-- `MOOSE_OLLAMA_HOST`: Ollama host URL
-- `MOOSE_MONGO_URL`: MongoDB connection string
-- `MOOSE_MONGO_DB`: MongoDB database name
-- `MOOSE_API_KEY`: required API key for all endpoints
-- `MOOSE_WORKER_COUNT`: worker concurrency
-- `MOOSE_QUEUE_MAXSIZE`: max queue length for backpressure
-- `MOOSE_MAX_RETRIES`: retries for invalid LLM output
-
-### Provider setup examples
+### 6) Privacy analysis
 
 ```bash
-export MOOSE_OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
-export MOOSE_OLLAMA_HOST=http://localhost:11434
+curl -sS -X POST "http://localhost:8000/privacy/analyze" \
+  -H "X-API-Key: test-dev-key" \
+  -H "X-LLM-API-Key: <llm-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "profile":"balanced",
+    "tasks":[
+      {
+        "kind":"text",
+        "task_id":"t1",
+        "text":"We collect patient names and emails and share with billing processor."
+      }
+    ],
+    "llm": {"provider": "openrouter", "model": "anthropic/claude-3.5-sonnet"}
+  }'
 ```
 
-## Examples
+### Provider variants (same payload shape)
 
-- `examples/submit_ner.py`
-- `examples/submit_tabular.py`
+Use the same endpoints and payload structure; only change `llm.provider` and `llm.model`.
+
+- OpenRouter (default): `{\"provider\":\"openrouter\",\"model\":\"anthropic/claude-3.5-sonnet\"}`
+- Ollama: `{\"provider\":\"ollama\",\"model\":\"llama3.1:8b\"}`
+- DeepInfra: `{\"provider\":\"deepinfra\",\"model\":\"Qwen/Qwen3-Next-80B-A3B-Instruct\"}`
+- DeepSeek: `{\"provider\":\"deepseek\",\"model\":\"deepseek-chat\"}`
+
+### 7) Poll a job
+
+```bash
+curl -sS "http://localhost:8000/jobs/<job_id>" \
+  -H "X-API-Key: test-dev-key"
+```
+
+### 8) Get machine-readable privacy report from a completed privacy job
+
+```bash
+curl -sS "http://localhost:8000/jobs/<job_id>/privacy-report" \
+  -H "X-API-Key: test-dev-key"
+```
+
+## Frontend (Streamlit)
+
+If running with Docker Compose, open:
+- `http://localhost:8501`
+
+The demo UI supports:
+- text annotation,
+- table annotation,
+- BYO schema ingestion,
+- privacy analysis,
+- report downloads (human-readable `.md` and machine-readable `.json`).
+
+## Detailed Documentation
+
+- System blueprint: [docs/BLUEPRINT.md](docs/BLUEPRINT.md)
+- Developer deep dive: [docs/DEVELOPER_DEEP_DIVE.md](docs/DEVELOPER_DEEP_DIVE.md)
+- Privacy operation details: [docs/PRIVACY_OPERATION.md](docs/PRIVACY_OPERATION.md)
+- BYO schema design + guardrails: [docs/BYO_SCHEMA_DESIGN.md](docs/BYO_SCHEMA_DESIGN.md)

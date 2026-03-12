@@ -43,6 +43,13 @@ DCT_DESCRIPTION = "http://purl.org/dc/terms/description"
 DCT_IDENTIFIER = "http://purl.org/dc/terms/identifier"
 RDF_VALUE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#value"
 SCHEMA_TEXT = "http://schema.org/text"
+ELI_DESCRIPTION = "http://data.europa.eu/eli/ontology#description"
+ELI_NUMBER = "http://data.europa.eu/eli/ontology#number"
+ELI_TITLE_ALT = "http://data.europa.eu/eli/ontology#title_alternative"
+ELI_IS_PART_OF = "http://data.europa.eu/eli/ontology#is_part_of"
+GDPRTEXT_IS_PART_OF_ARTICLE = "http://purl.org/adaptcentre/ontologies/GDPRtEXT#isPartOfArticle"
+GDPRTEXT_IS_PART_OF_CHAPTER = "http://purl.org/adaptcentre/ontologies/GDPRtEXT#isPartOfChapter"
+GDPRTEXT_IS_PART_OF_POINT = "http://purl.org/adaptcentre/ontologies/GDPRtEXT#isPartOfPoint"
 
 
 # -----------------------
@@ -234,7 +241,19 @@ def pick_lang_value(values: Any, lang: str = "en") -> str | None:
 
 
 def extract_labels(entry: dict[str, Any]) -> tuple[str | None, list[str]]:
-    label = pick_lang_value(entry.get(SKOS_PREF_LABEL)) or pick_lang_value(entry.get(RDFS_LABEL))
+    label = (
+        pick_lang_value(entry.get(SKOS_PREF_LABEL))
+        or pick_lang_value(entry.get(RDFS_LABEL))
+        or pick_lang_value(entry.get(ELI_TITLE_ALT))
+        or pick_lang_value(entry.get(DCT_IDENTIFIER))
+    )
+    if not label:
+        iri = entry.get("@id")
+        if isinstance(iri, str):
+            if "#" in iri:
+                label = iri.rsplit("#", 1)[1].strip() or None
+            elif "/" in iri:
+                label = iri.rstrip("/").rsplit("/", 1)[-1].strip() or None
     alt_values = entry.get(SKOS_ALT_LABEL)
     alt_labels: list[str] = []
     if alt_values:
@@ -254,7 +273,11 @@ def extract_labels(entry: dict[str, Any]) -> tuple[str | None, list[str]]:
 
 
 def extract_definition(entry: dict[str, Any]) -> str | None:
-    return pick_lang_value(entry.get(SKOS_DEFINITION)) or pick_lang_value(entry.get(RDFS_COMMENT))
+    return (
+        pick_lang_value(entry.get(SKOS_DEFINITION))
+        or pick_lang_value(entry.get(RDFS_COMMENT))
+        or pick_lang_value(entry.get(ELI_DESCRIPTION))
+    )
 
 
 def extract_types(entry: dict[str, Any]) -> list[str]:
@@ -316,6 +339,18 @@ def shorten_gdpr_iri(iri: str) -> str:
     for base in ("https://w3id.org/GDPRtEXT#", "http://w3id.org/GDPRtEXT#"):
         if iri.startswith(base):
             return f"gdprtext:{iri[len(base):]}"
+    for base in (
+        "http://purl.org/adaptcentre/resources/GDPRtEXT#",
+        "https://purl.org/adaptcentre/resources/GDPRtEXT#",
+    ):
+        if iri.startswith(base):
+            return f"gdprtext:{iri[len(base):]}"
+    for base in (
+        "http://purl.org/adaptcentre/ontologies/GDPRtEXT#",
+        "https://purl.org/adaptcentre/ontologies/GDPRtEXT#",
+    ):
+        if iri.startswith(base):
+            return f"gdprtext:{iri[len(base):]}"
     return iri
 
 
@@ -338,6 +373,12 @@ def classify_concept(label: str | None, concept_id: str) -> tuple[str, int | Non
     m = re.search(r":R(\d+)\b", concept_id)
     if m:
         return "recital", int(m.group(1))
+    m = re.search(r"(?i):article(\d+)(?:[-:].*)?$", concept_id)
+    if m:
+        return "article", int(m.group(1))
+    m = re.search(r"(?i):recital(\d+)(?:[-:].*)?$", concept_id)
+    if m:
+        return "recital", int(m.group(1))
 
     return "concept", None
 
@@ -346,7 +387,7 @@ def extract_text(entry: dict[str, Any]) -> str | None:
     """
     Try common fields where GDPRtEXT might store the legal text.
     """
-    for key in (SCHEMA_TEXT, RDF_VALUE, DCT_DESCRIPTION, RDFS_COMMENT):
+    for key in (SCHEMA_TEXT, RDF_VALUE, DCT_DESCRIPTION, RDFS_COMMENT, ELI_DESCRIPTION):
         t = pick_lang_value(entry.get(key))
         if t:
             return t
@@ -446,6 +487,10 @@ def build_gdpr_artifacts(
 
             broader = extract_id_refs(entry, SKOS_BROADER, shorten=shorten_gdpr_iri)
             subclass = extract_id_refs(entry, RDFS_SUBCLASS_OF, shorten=shorten_gdpr_iri)
+            is_part_of = extract_id_refs(entry, ELI_IS_PART_OF, shorten=shorten_gdpr_iri)
+            part_of_article = extract_id_refs(entry, GDPRTEXT_IS_PART_OF_ARTICLE, shorten=shorten_gdpr_iri)
+            part_of_chapter = extract_id_refs(entry, GDPRTEXT_IS_PART_OF_CHAPTER, shorten=shorten_gdpr_iri)
+            part_of_point = extract_id_refs(entry, GDPRTEXT_IS_PART_OF_POINT, shorten=shorten_gdpr_iri)
             in_scheme = extract_id_refs(entry, SKOS_IN_SCHEME, shorten=shorten_gdpr_iri)
             top_of = extract_id_refs(entry, SKOS_TOP_CONCEPT_OF, shorten=shorten_gdpr_iri)
 
@@ -499,7 +544,7 @@ def build_gdpr_artifacts(
                         concepts[cid].setdefault("schemes", []).append(s)
                         existing_schemes.add(s)
 
-            for p in broader + subclass:
+            for p in broader + subclass + is_part_of + part_of_article + part_of_chapter + part_of_point:
                 if p not in parents[cid]:
                     parents[cid].append(p)
 
@@ -565,8 +610,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build structured GDPR artifacts (GDPRtEXT) for Moose.")
     parser.add_argument(
         "--out-dir",
-        default="src/moose/data/policies/gdpr",
-        help="Output directory (requested: src/moose/data/policies/gdpr)",
+        default="src/moose/data/legal/gdprtext",
+        help="Output directory for runtime legal assets (default: src/moose/data/legal/gdprtext).",
     )
     parser.add_argument("--no-cache-raw", action="store_true", help="Do not cache raw downloaded files")
     parser.add_argument(

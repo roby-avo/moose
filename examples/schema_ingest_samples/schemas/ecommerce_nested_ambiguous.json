@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "domain": "ecommerce",
+    "version": "v1"
+  },
+  "payload": {
+    "entries": [
+      {
+        "token": "EC:PRODUCT_TITLE",
+        "display": "Product Title",
+        "notes": "Title or marketed name of product."
+      },
+      {
+        "token": "EC:BRAND",
+        "display": "Brand",
+        "notes": "Brand or manufacturer name."
+      },
+      {
+        "token": "EC:SKU",
+        "display": "SKU",
+        "notes": "Stock keeping unit identifier."
+      },
+      {
+        "token": "EC:PRICE",
+        "display": "Price",
+        "notes": "Product listed price."
+      },
+      {
+        "token": "EC:CURRENCY",
+        "display": "Currency",
+        "notes": "Currency code for price."
+      }
+    ]
+  }
+}
+

@@ -85,6 +85,10 @@ def normalize_legal_ref(source: str, ref: str) -> str:
             "http://w3id.org/GDPRtEXT#",
             "https://w3id.org/GDPRtEXT/",
             "http://w3id.org/GDPRtEXT/",
+            "http://purl.org/adaptcentre/resources/GDPRtEXT#",
+            "https://purl.org/adaptcentre/resources/GDPRtEXT#",
+            "http://purl.org/adaptcentre/ontologies/GDPRtEXT#",
+            "https://purl.org/adaptcentre/ontologies/GDPRtEXT#",
         ):
             if r.startswith(prefix):
                 local = r[len(prefix) :]

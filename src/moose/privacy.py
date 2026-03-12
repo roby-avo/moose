@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime, timezone
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
@@ -18,6 +19,8 @@ from moose.validate import extract_json
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 POLICY_DIR = DATA_DIR / "policies"
+REPORTS_DIR = DATA_DIR / "reports"
+MACHINE_REPORT_SCHEMA_PATH = REPORTS_DIR / "privacy_machine_report_v1.schema.json"
 
 
 def list_policy_packs() -> list[str]:
@@ -32,10 +35,25 @@ def list_policy_packs() -> list[str]:
     return sorted(set(packs))
 
 
+def get_machine_report_json_schema() -> dict[str, Any]:
+    if MACHINE_REPORT_SCHEMA_PATH.exists():
+        try:
+            payload = json.loads(MACHINE_REPORT_SCHEMA_PATH.read_text(encoding="utf-8"))
+            if isinstance(payload, dict):
+                return payload
+        except Exception:  # noqa: BLE001
+            pass
+    schema = MachinePrivacyReport.model_json_schema()
+    schema["$id"] = "moose.privacy.machine_report.v1"
+    schema["x-schema-version"] = "1.0.0"
+    return schema
+
+
 # -------------------------
 # Policy pack models/schema
 # -------------------------
 Severity = Literal["low", "medium", "high"]
+AssessmentLevel = Literal["compliance_risk", "possible_violation"]
 
 
 class PolicyAction(BaseModel):
@@ -228,6 +246,14 @@ class EvidenceScanSummary(BaseModel):
 Evidence = EvidenceEntity | EvidenceColumn | EvidenceScanSummary
 
 
+class MitigationStep(BaseModel):
+    action_id: str
+    label: str
+    description: str | None = None
+    priority: int
+    targets: list[str] = Field(default_factory=list)
+
+
 class FindingCandidate(BaseModel):
     rule_id: str
     issue: str
@@ -246,6 +272,9 @@ class FindingOut(BaseModel):
     recommended_actions: list[str]
     rationale: str
     evidence: list[Evidence] = Field(default_factory=list)
+    assessment: AssessmentLevel = "compliance_risk"
+    violation_reasons: list[str] = Field(default_factory=list)
+    mitigation_plan: list[MitigationStep] = Field(default_factory=list)
 
     legal_refs: list[str] = Field(default_factory=list)
     legal_refs_detail: list[dict[str, Any]] = Field(default_factory=list)
@@ -261,6 +290,67 @@ class AssessedFinding(BaseModel):
 
 class AssessorResponse(BaseModel):
     findings: list[AssessedFinding] = Field(default_factory=list)
+
+
+class MachineReportSummary(BaseModel):
+    task_count: int
+    finding_count: int
+    severity_counts: dict[str, int] = Field(default_factory=dict)
+    status_counts: dict[str, int] = Field(default_factory=dict)
+    assessment_counts: dict[str, int] = Field(default_factory=dict)
+    action_counts: dict[str, int] = Field(default_factory=dict)
+
+
+class MachineReportFinding(BaseModel):
+    rule_id: str
+    issue: str
+    severity: str
+    status: str
+    assessment: str
+    rationale: str
+    recommended_actions: list[str] = Field(default_factory=list)
+    mitigation_plan: list[dict[str, Any]] = Field(default_factory=list)
+    violation_reasons: list[str] = Field(default_factory=list)
+    legal_refs: list[str] = Field(default_factory=list)
+    legal_refs_detail: list[dict[str, Any]] = Field(default_factory=list)
+    evidence: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class MachineReportTask(BaseModel):
+    task_id: str
+    kind: str
+    table_id: str | None = None
+    finding_count: int
+    findings: list[MachineReportFinding] = Field(default_factory=list)
+
+
+class MachinePrivacyReport(BaseModel):
+    report_type: Literal["privacy_analysis"] = "privacy_analysis"
+    schema_id: Literal["moose.privacy.machine_report.v1"] = "moose.privacy.machine_report.v1"
+    schema_version: Literal["1.0.0"] = "1.0.0"
+    generated_at: str
+    profile: str | None = None
+    policy_pack: str
+    summary: MachineReportSummary
+    tasks: list[MachineReportTask] = Field(default_factory=list)
+    warnings: list[dict[str, Any]] = Field(default_factory=list)
+    escalations: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class HumanReadableReport(BaseModel):
+    format: Literal["markdown"] = "markdown"
+    content: str
+
+
+class MachineReadableReport(BaseModel):
+    schema_id: Literal["moose.privacy.machine_report.v1"] = "moose.privacy.machine_report.v1"
+    schema_version: Literal["1.0.0"] = "1.0.0"
+    content: dict[str, Any]
+
+
+class PrivacyReports(BaseModel):
+    human_readable: HumanReadableReport
+    machine_readable: MachineReadableReport
 
 
 # -------------------------
@@ -508,8 +598,10 @@ def build_table_facts(
 
                     for c in cats:
                         cats_any.add(c)
+                        category_counts_any[c] = category_counts_any.get(c, 0) + 1
                         if not low:
                             cats_conf.add(c)
+                            category_counts_conf[c] = category_counts_conf.get(c, 0) + 1
 
                     per_col_type_counts.setdefault(col_name, {})
                     per_col_type_counts[col_name][type_id] = per_col_type_counts[col_name].get(type_id, 0) + 1
@@ -843,6 +935,163 @@ def _build_legal_for_rule(pack: PolicyPack, rule_id: str) -> tuple[list[str], li
     return ids, details
 
 
+def _severity_priority(severity: Severity) -> int:
+    return {"high": 1, "medium": 2, "low": 3}.get(severity, 3)
+
+
+def _summarize_targets(evidence: list[Evidence]) -> list[str]:
+    targets: list[str] = []
+    seen: set[str] = set()
+    for ev in evidence:
+        if isinstance(ev, EvidenceEntity):
+            candidate = f"text[{ev.start}:{ev.end}] {ev.type_id}"
+        elif isinstance(ev, EvidenceColumn):
+            candidate = f"column:{ev.column} ({ev.type_id})"
+        elif isinstance(ev, EvidenceScanSummary):
+            candidate = f"column:{ev.column} (scan)"
+        else:
+            candidate = "dataset"
+        if candidate in seen:
+            continue
+        seen.add(candidate)
+        targets.append(candidate)
+    if not targets:
+        return ["dataset"]
+    return targets
+
+
+def _build_mitigation_plan(
+    pack: PolicyPack,
+    recommended_actions: list[str],
+    evidence: list[Evidence],
+    severity: Severity,
+) -> list[MitigationStep]:
+    action_map = {a.action_id: a for a in pack.actions}
+    priority = _severity_priority(severity)
+    targets = _summarize_targets(evidence)
+    steps: list[MitigationStep] = []
+    for action_id in recommended_actions:
+        action = action_map.get(action_id)
+        if action is None:
+            continue
+        steps.append(
+            MitigationStep(
+                action_id=action.action_id,
+                label=action.label,
+                description=action.description,
+                priority=priority,
+                targets=targets,
+            )
+        )
+    return steps
+
+
+def _as_boolish(value: Any) -> bool | None:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        lowered = value.strip().lower()
+        if lowered in {"true", "1", "yes"}:
+            return True
+        if lowered in {"false", "0", "no"}:
+            return False
+    return None
+
+
+def _classify_assessment(task: dict[str, Any], status: str) -> tuple[AssessmentLevel, list[str]]:
+    if status != "confirmed":
+        return "compliance_risk", []
+
+    context = task.get("context")
+    if not isinstance(context, dict):
+        return "compliance_risk", []
+
+    flags = {
+        "has_lawful_basis": "Missing lawful basis in processing context.",
+        "has_dpa": "Missing processor agreement (DPA) in processing context.",
+        "purpose_limited": "Purpose limitation not confirmed in processing context.",
+        "has_access_controls": "Access controls not confirmed in processing context.",
+        "has_retention_policy": "Retention policy not confirmed in processing context.",
+    }
+    reasons: list[str] = []
+    for key, reason in flags.items():
+        if key not in context:
+            continue
+        parsed = _as_boolish(context.get(key))
+        if parsed is False:
+            reasons.append(reason)
+
+    if reasons:
+        return "possible_violation", reasons
+    return "compliance_risk", []
+
+
+def _build_finding_out(
+    *,
+    pack: PolicyPack,
+    task: dict[str, Any],
+    candidate: FindingCandidate,
+    status: Literal["confirmed", "rejected", "uncertain"],
+    severity: Severity,
+    recommended_actions: list[str],
+    rationale: str,
+) -> FindingOut:
+    legal_refs, legal_refs_detail = _build_legal_for_rule(pack, candidate.rule_id)
+    assessment, violation_reasons = _classify_assessment(task, status)
+    mitigation_plan = _build_mitigation_plan(pack, recommended_actions, candidate.evidence, severity)
+    return FindingOut(
+        rule_id=candidate.rule_id,
+        issue=candidate.issue,
+        status=status,
+        severity=severity,
+        recommended_actions=recommended_actions,
+        rationale=rationale,
+        evidence=candidate.evidence,
+        assessment=assessment,
+        violation_reasons=violation_reasons,
+        mitigation_plan=mitigation_plan,
+        legal_refs=legal_refs,
+        legal_refs_detail=legal_refs_detail,
+    )
+
+
+def _infer_table_columns(sampled_rows: list[dict[str, Any]]) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+    for row in sampled_rows:
+        if not isinstance(row, dict):
+            continue
+        for key in row.keys():
+            if not isinstance(key, str):
+                continue
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(key)
+    return out
+
+
+def _resolve_scan_columns(task: dict[str, Any]) -> list[str]:
+    explicit = task.get("scan_columns")
+    if isinstance(explicit, list):
+        cleaned: list[str] = []
+        seen: set[str] = set()
+        for item in explicit:
+            if not isinstance(item, str):
+                continue
+            name = item.strip()
+            if not name or name in seen:
+                continue
+            seen.add(name)
+            cleaned.append(name)
+        if cleaned:
+            return cleaned
+    sampled_rows = task.get("sampled_rows")
+    if isinstance(sampled_rows, list):
+        return _infer_table_columns(sampled_rows)
+    return []
+
+
 async def _compute_findings_for_text_task(
     *,
     pack: PolicyPack,
@@ -858,18 +1107,19 @@ async def _compute_findings_for_text_task(
     # baseline
     findings: list[FindingOut] = []
     for c in candidates:
-        legal_refs, legal_refs_detail = _build_legal_for_rule(pack, c.rule_id)
         findings.append(
-            FindingOut(
-                rule_id=c.rule_id,
-                issue=c.issue,
+            _build_finding_out(
+                pack=pack,
+                task=task,
+                candidate=c,
                 status=("uncertain" if c.needs_llm else "confirmed"),
                 severity=c.severity,
                 recommended_actions=list(c.default_actions),
-                rationale=(c.reason_needs_llm if c.needs_llm and c.reason_needs_llm else "Generated by deterministic policy rule."),
-                evidence=c.evidence,
-                legal_refs=legal_refs,
-                legal_refs_detail=legal_refs_detail,
+                rationale=(
+                    c.reason_needs_llm
+                    if c.needs_llm and c.reason_needs_llm
+                    else "Generated by deterministic policy rule."
+                ),
             )
         )
 
@@ -880,21 +1130,18 @@ async def _compute_findings_for_text_task(
 
         merged: list[FindingOut] = []
         for c in candidates:
-            legal_refs, legal_refs_detail = _build_legal_for_rule(pack, c.rule_id)
             a = assessed_by_id.get(c.rule_id)
 
             if a is None:
                 merged.append(
-                    FindingOut(
-                        rule_id=c.rule_id,
-                        issue=c.issue,
+                    _build_finding_out(
+                        pack=pack,
+                        task=task,
+                        candidate=c,
                         status=("uncertain" if c.needs_llm else "confirmed"),
                         severity=c.severity,
                         recommended_actions=list(c.default_actions),
                         rationale="No LLM assessment returned; using deterministic default.",
-                        evidence=c.evidence,
-                        legal_refs=legal_refs,
-                        legal_refs_detail=legal_refs_detail,
                     )
                 )
                 continue
@@ -903,16 +1150,14 @@ async def _compute_findings_for_text_task(
                 continue
 
             merged.append(
-                FindingOut(
-                    rule_id=c.rule_id,
-                    issue=c.issue,
+                _build_finding_out(
+                    pack=pack,
+                    task=task,
+                    candidate=c,
                     status=a.status,
                     severity=a.severity,
                     recommended_actions=a.recommended_actions or list(c.default_actions),
                     rationale=a.rationale or "Assessed by LLM.",
-                    evidence=c.evidence,
-                    legal_refs=legal_refs,
-                    legal_refs_detail=legal_refs_detail,
                 )
             )
 
@@ -943,18 +1188,19 @@ async def _compute_findings_for_table_task(
 
     findings: list[FindingOut] = []
     for c in candidates:
-        legal_refs, legal_refs_detail = _build_legal_for_rule(pack, c.rule_id)
         findings.append(
-            FindingOut(
-                rule_id=c.rule_id,
-                issue=c.issue,
+            _build_finding_out(
+                pack=pack,
+                task=task,
+                candidate=c,
                 status=("uncertain" if c.needs_llm else "confirmed"),
                 severity=c.severity,
                 recommended_actions=list(c.default_actions),
-                rationale=(c.reason_needs_llm if c.needs_llm and c.reason_needs_llm else "Generated by deterministic policy rule."),
-                evidence=c.evidence,
-                legal_refs=legal_refs,
-                legal_refs_detail=legal_refs_detail,
+                rationale=(
+                    c.reason_needs_llm
+                    if c.needs_llm and c.reason_needs_llm
+                    else "Generated by deterministic policy rule."
+                ),
             )
         )
 
@@ -964,21 +1210,18 @@ async def _compute_findings_for_table_task(
 
         merged: list[FindingOut] = []
         for c in candidates:
-            legal_refs, legal_refs_detail = _build_legal_for_rule(pack, c.rule_id)
             a = assessed_by_id.get(c.rule_id)
 
             if a is None:
                 merged.append(
-                    FindingOut(
-                        rule_id=c.rule_id,
-                        issue=c.issue,
+                    _build_finding_out(
+                        pack=pack,
+                        task=task,
+                        candidate=c,
                         status=("uncertain" if c.needs_llm else "confirmed"),
                         severity=c.severity,
                         recommended_actions=list(c.default_actions),
                         rationale="No LLM assessment returned; using deterministic default.",
-                        evidence=c.evidence,
-                        legal_refs=legal_refs,
-                        legal_refs_detail=legal_refs_detail,
                     )
                 )
                 continue
@@ -987,16 +1230,14 @@ async def _compute_findings_for_table_task(
                 continue
 
             merged.append(
-                FindingOut(
-                    rule_id=c.rule_id,
-                    issue=c.issue,
+                _build_finding_out(
+                    pack=pack,
+                    task=task,
+                    candidate=c,
                     status=a.status,
                     severity=a.severity,
                     recommended_actions=a.recommended_actions or list(c.default_actions),
                     rationale=a.rationale or "Assessed by LLM.",
-                    evidence=c.evidence,
-                    legal_refs=legal_refs,
-                    legal_refs_detail=legal_refs_detail,
                 )
             )
         findings = merged
@@ -1017,6 +1258,265 @@ def _extract_profile_escalation(profile_cfg: dict[str, Any] | None) -> list[dict
         return []
     esc = profile_cfg.get("escalation") or []
     return esc if isinstance(esc, list) else []
+
+
+def _inc_count(counter: dict[str, int], key: str) -> None:
+    counter[key] = counter.get(key, 0) + 1
+
+
+def _sorted_counts(counter: dict[str, int]) -> dict[str, int]:
+    return dict(sorted(counter.items(), key=lambda kv: (-kv[1], kv[0])))
+
+
+def _build_machine_privacy_report(
+    *,
+    generated_at: str,
+    profile_name: str | None,
+    policy_pack: str,
+    results_out: list[dict[str, Any]],
+    warnings: list[dict[str, Any]],
+    escalations_out: list[dict[str, Any]],
+) -> dict[str, Any]:
+    severity_counts: dict[str, int] = {}
+    status_counts: dict[str, int] = {}
+    assessment_counts: dict[str, int] = {}
+    action_counts: dict[str, int] = {}
+
+    tasks_out: list[MachineReportTask] = []
+    total_findings = 0
+
+    for task in results_out:
+        task_id = str(task.get("task_id") or "")
+        kind = str(task.get("kind") or "unknown")
+        table_id = task.get("table_id")
+        table_id_val = str(table_id) if isinstance(table_id, str) and table_id.strip() else None
+
+        findings = task.get("findings") or []
+        finding_items: list[MachineReportFinding] = []
+        for finding in findings:
+            if not isinstance(finding, dict):
+                continue
+            severity = str(finding.get("severity") or "unknown")
+            status = str(finding.get("status") or "unknown")
+            assessment = str(finding.get("assessment") or "compliance_risk")
+            actions = [str(a) for a in (finding.get("recommended_actions") or [])]
+
+            _inc_count(severity_counts, severity)
+            _inc_count(status_counts, status)
+            _inc_count(assessment_counts, assessment)
+            for action in actions:
+                _inc_count(action_counts, action)
+
+            evidence = finding.get("evidence") or []
+            legal_refs_detail = finding.get("legal_refs_detail") or []
+            mitigation_plan = finding.get("mitigation_plan") or []
+            violation_reasons = finding.get("violation_reasons") or []
+            legal_refs = finding.get("legal_refs") or []
+
+            finding_items.append(
+                MachineReportFinding(
+                    rule_id=str(finding.get("rule_id") or ""),
+                    issue=str(finding.get("issue") or ""),
+                    severity=severity,
+                    status=status,
+                    assessment=assessment,
+                    rationale=str(finding.get("rationale") or ""),
+                    recommended_actions=actions,
+                    mitigation_plan=[m for m in mitigation_plan if isinstance(m, dict)],
+                    violation_reasons=[str(v) for v in violation_reasons],
+                    legal_refs=[str(r) for r in legal_refs],
+                    legal_refs_detail=[d for d in legal_refs_detail if isinstance(d, dict)],
+                    evidence=[e for e in evidence if isinstance(e, dict)],
+                )
+            )
+
+        total_findings += len(finding_items)
+        tasks_out.append(
+            MachineReportTask(
+                task_id=task_id,
+                kind=kind,
+                table_id=table_id_val,
+                finding_count=len(finding_items),
+                findings=finding_items,
+            )
+        )
+
+    report = MachinePrivacyReport(
+        generated_at=generated_at,
+        profile=profile_name,
+        policy_pack=policy_pack,
+        summary=MachineReportSummary(
+            task_count=len(tasks_out),
+            finding_count=total_findings,
+            severity_counts=_sorted_counts(severity_counts),
+            status_counts=_sorted_counts(status_counts),
+            assessment_counts=_sorted_counts(assessment_counts),
+            action_counts=_sorted_counts(action_counts),
+        ),
+        tasks=tasks_out,
+        warnings=warnings,
+        escalations=escalations_out,
+    )
+    return report.model_dump()
+
+
+def _format_counts_for_md(counter: dict[str, int]) -> str:
+    if not counter:
+        return "none"
+    return ", ".join(f"{k}: {v}" for k, v in counter.items())
+
+
+def _summarize_evidence_for_md(item: dict[str, Any]) -> str:
+    kind = str(item.get("kind") or "unknown")
+    if kind == "entity":
+        text = str(item.get("text") or "")
+        type_id = str(item.get("type_id") or "")
+        conf = item.get("confidence")
+        return f"entity `{type_id}` (confidence={conf}) text=\"{text}\""
+    if kind == "column":
+        column = str(item.get("column") or "")
+        type_id = str(item.get("type_id") or "")
+        conf = item.get("confidence")
+        return f"column `{column}` typed as `{type_id}` (confidence={conf})"
+    if kind == "scan_summary":
+        column = str(item.get("column") or "")
+        cats = item.get("category_counts") or {}
+        return f"scan summary for column `{column}` categories={cats}"
+    return json.dumps(item, ensure_ascii=True)
+
+
+def _build_human_privacy_markdown(machine_report: dict[str, Any]) -> str:
+    summary = machine_report.get("summary") or {}
+    lines: list[str] = []
+    lines.append("# Privacy Analysis Report")
+    lines.append("")
+    lines.append(f"- Generated at (UTC): {machine_report.get('generated_at')}")
+    lines.append(f"- Profile: `{machine_report.get('profile')}`")
+    lines.append(f"- Policy pack: `{machine_report.get('policy_pack')}`")
+    lines.append("")
+    lines.append("## Summary")
+    lines.append(f"- Tasks analyzed: {summary.get('task_count', 0)}")
+    lines.append(f"- Findings identified: {summary.get('finding_count', 0)}")
+    lines.append(f"- Severity distribution: {_format_counts_for_md(summary.get('severity_counts') or {})}")
+    lines.append(f"- Status distribution: {_format_counts_for_md(summary.get('status_counts') or {})}")
+    lines.append(f"- Assessment distribution: {_format_counts_for_md(summary.get('assessment_counts') or {})}")
+    lines.append(f"- Action frequency: {_format_counts_for_md(summary.get('action_counts') or {})}")
+    lines.append("")
+
+    for task in machine_report.get("tasks") or []:
+        if not isinstance(task, dict):
+            continue
+        task_id = task.get("task_id")
+        kind = task.get("kind")
+        table_id = task.get("table_id")
+        title = f"## Task `{task_id}` ({kind})"
+        if table_id:
+            title += f" table_id=`{table_id}`"
+        lines.append(title)
+        lines.append(f"- Findings: {task.get('finding_count', 0)}")
+
+        findings = task.get("findings") or []
+        if not findings:
+            lines.append("- No findings for this task.")
+            lines.append("")
+            continue
+
+        for idx, finding in enumerate(findings, start=1):
+            if not isinstance(finding, dict):
+                continue
+            lines.append(
+                f"### {idx}. {str(finding.get('severity') or '').upper()} | "
+                f"{finding.get('issue')} (`{finding.get('rule_id')}`)"
+            )
+            lines.append(f"- Status: `{finding.get('status')}`")
+            lines.append(f"- Assessment: `{finding.get('assessment')}`")
+            lines.append(f"- Rationale: {finding.get('rationale')}")
+
+            actions = finding.get("recommended_actions") or []
+            if actions:
+                lines.append(f"- Recommended actions: {', '.join(str(a) for a in actions)}")
+
+            reasons = finding.get("violation_reasons") or []
+            if reasons:
+                lines.append(f"- Violation signals: {', '.join(str(r) for r in reasons)}")
+
+            mitigation = finding.get("mitigation_plan") or []
+            if mitigation:
+                lines.append("- Mitigation plan:")
+                for step in mitigation:
+                    if not isinstance(step, dict):
+                        continue
+                    lines.append(
+                        f"  - (p{step.get('priority')}) `{step.get('action_id')}`: "
+                        f"{step.get('label')} targets={step.get('targets') or []}"
+                    )
+
+            legal_detail = finding.get("legal_refs_detail") or []
+            legal_refs = finding.get("legal_refs") or []
+            if legal_detail:
+                lines.append("- GDPR/legal references:")
+                for ref in legal_detail:
+                    if not isinstance(ref, dict):
+                        continue
+                    label = ref.get("label") or ref.get("id")
+                    lines.append(f"  - {label} ({ref.get('id')})")
+            elif legal_refs:
+                lines.append(f"- GDPR/legal references: {', '.join(str(x) for x in legal_refs)}")
+
+            evidence = finding.get("evidence") or []
+            if evidence:
+                lines.append("- Evidence:")
+                for e in evidence:
+                    if not isinstance(e, dict):
+                        continue
+                    lines.append(f"  - {_summarize_evidence_for_md(e)}")
+            lines.append("")
+
+    warnings = machine_report.get("warnings") or []
+    if warnings:
+        lines.append("## Warnings")
+        for w in warnings:
+            if not isinstance(w, dict):
+                continue
+            code = w.get("code") or "warning"
+            lines.append(f"- {code}: {json.dumps(w, ensure_ascii=True)}")
+        lines.append("")
+
+    escalations = machine_report.get("escalations") or []
+    if escalations:
+        lines.append("## Escalations")
+        for e in escalations:
+            if not isinstance(e, dict):
+                continue
+            lines.append(f"- {json.dumps(e, ensure_ascii=True)}")
+        lines.append("")
+
+    return "\n".join(lines).strip() + "\n"
+
+
+def _build_privacy_reports(
+    *,
+    profile_name: str | None,
+    policy_pack: str,
+    results_out: list[dict[str, Any]],
+    warnings: list[dict[str, Any]],
+    escalations_out: list[dict[str, Any]],
+) -> dict[str, Any]:
+    generated_at = datetime.now(timezone.utc).isoformat()
+    machine_content = _build_machine_privacy_report(
+        generated_at=generated_at,
+        profile_name=profile_name,
+        policy_pack=policy_pack,
+        results_out=results_out,
+        warnings=warnings,
+        escalations_out=escalations_out,
+    )
+    human_md = _build_human_privacy_markdown(machine_content)
+    reports = PrivacyReports(
+        human_readable=HumanReadableReport(content=human_md),
+        machine_readable=MachineReadableReport(content=machine_content),
+    )
+    return reports.model_dump()
 
 
 # -------------------------
@@ -1110,8 +1610,12 @@ async def run_privacy_analyze(
 
     # optional scan pass 1 (only if scan_columns provided)
     scan_tasks = []
+    resolved_scan_columns: dict[str, list[str]] = {}
     for t in table_tasks:
-        scan_cols = t.get("scan_columns") or []
+        scan_cols = _resolve_scan_columns(t)
+        task_id = t.get("task_id")
+        if isinstance(task_id, str):
+            resolved_scan_columns[task_id] = scan_cols
         if scan_cols:
             scan_tasks.append(
                 {
@@ -1126,15 +1630,25 @@ async def run_privacy_analyze(
 
     table_scan_by_id: dict[str, dict[str, Any]] = {}
     if scan_tasks:
-        scan_out = await run_tabular_ner(
-            scan_tasks,
-            scan_schema,
-            llm_client,
-            settings=settings,
-        )
-        for item in scan_out.get("results", []):
-            table_scan_by_id[item["task_id"]] = item
-        warnings.extend(scan_out.get("warnings", []))
+        try:
+            scan_out = await run_tabular_ner(
+                scan_tasks,
+                scan_schema,
+                llm_client,
+                settings=settings,
+            )
+            for item in scan_out.get("results", []):
+                table_scan_by_id[item["task_id"]] = item
+            warnings.extend(scan_out.get("warnings", []))
+        except Exception as exc:  # noqa: BLE001
+            warnings.append(
+                {
+                    "code": "table_scan_failed",
+                    "schema": scan_schema,
+                    "task_ids": [t.get("task_id") for t in scan_tasks if isinstance(t, dict)],
+                    "error": str(exc),
+                }
+            )
 
     # -------------------------
     # Analysis pass 1
@@ -1400,8 +1914,7 @@ async def run_privacy_analyze(
                         if not only_if_scan_columns_present:
                             uncertain_table_ids.append(tid)
                         else:
-                            task_obj = task_by_id.get(tid, {})
-                            scan_cols = task_obj.get("scan_columns") or []
+                            scan_cols = resolved_scan_columns.get(tid) or []
                             if scan_cols:
                                 uncertain_table_ids.append(tid)
 
@@ -1412,7 +1925,7 @@ async def run_privacy_analyze(
                         t = task_by_id.get(tid)
                         if not t:
                             continue
-                        scan_cols = t.get("scan_columns") or []
+                        scan_cols = resolved_scan_columns.get(tid) or _resolve_scan_columns(t)
                         if not scan_cols and only_if_scan_columns_present:
                             continue
                         scan_tasks2.append(
@@ -1512,6 +2025,13 @@ async def run_privacy_analyze(
         "policy_pack": pack.name,
         "action_catalog": [a.model_dump() for a in pack.actions],
         "results": results_out,
+        "reports": _build_privacy_reports(
+            profile_name=profile_name,
+            policy_pack=pack.name,
+            results_out=results_out,
+            warnings=warnings,
+            escalations_out=escalations_out,
+        ),
     }
     if warnings:
         response["warnings"] = warnings

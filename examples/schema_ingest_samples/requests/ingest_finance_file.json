@@ -1,0 +1,10 @@
+{
+  "name": "finance_ops",
+  "label": "Finance Ops Fields",
+  "description": "Basic finance operations schema from simple type id list.",
+  "source_type": "file",
+  "source_path": "examples/schema_ingest_samples/schemas/finance_simple_list.json",
+  "supports_text": false,
+  "supports_table": true,
+  "score_mode": "sparse"
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 from pydantic import BaseModel, TypeAdapter
@@ -44,6 +45,9 @@ class CPATaskModel(BaseModel):
     relationships: list[CPARelationshipModel]
 
 
+_COLUMN_CANON_RE = re.compile(r"[^a-z0-9]+")
+
+
 def extract_json(text: str) -> Any:
     text = text.strip()
     if not text:
@@ -58,7 +62,12 @@ def extract_json(text: str) -> Any:
     return obj
 
 
-def _validate_scores(scores: dict[str, float], allowed_types: set[str], require_all: bool = True) -> None:
+def _validate_scores(
+    scores: dict[str, float],
+    allowed_types: set[str],
+    require_all: bool = True,
+    require_positive: bool = True,
+) -> None:
     if require_all:
         missing = allowed_types.difference(scores.keys())
         if missing:
@@ -68,7 +77,7 @@ def _validate_scores(scores: dict[str, float], allowed_types: set[str], require_
             raise ValueError(f"Unexpected score key: {key}")
         if value < 0:
             raise ValueError("Scores must be non-negative")
-    if not scores or all(value <= 0 for value in scores.values()):
+    if require_positive and (not scores or all(value <= 0 for value in scores.values())):
         raise ValueError("At least one score must be > 0")
 
 
@@ -77,6 +86,19 @@ def _drop_unknown_score_keys(scores: dict[str, float], allowed_types: set[str]) 
     for key in unknown:
         scores.pop(key, None)
     return unknown
+
+
+def _repair_all_zero_scores(scores: dict[str, float], allowed_types: set[str]) -> bool:
+    candidates = [key for key in scores.keys() if key in allowed_types]
+    if not candidates and allowed_types:
+        # Sparse outputs may omit/empty scores entirely; seed a small deterministic prior.
+        candidates = sorted(allowed_types)[:8]
+    if not candidates:
+        return False
+    value = 1.0 / len(candidates)
+    for key in candidates:
+        scores[key] = value
+    return True
 
 
 def _normalize_scores(
@@ -321,6 +343,60 @@ def validate_ner_response(
     return parsed
 
 
+def _ordered_union_columns(sampled_rows: list[dict[str, Any]]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for row in sampled_rows:
+        if not isinstance(row, dict):
+            continue
+        for key in row.keys():
+            if not isinstance(key, str):
+                continue
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(key)
+    return out
+
+
+def _canonicalize_column_name(value: str) -> str:
+    return _COLUMN_CANON_RE.sub("", value.strip().lower())
+
+
+def _remap_output_columns(
+    output_columns: list[str],
+    expected_ordered_columns: list[str],
+) -> list[str] | None:
+    expected_set = set(expected_ordered_columns)
+    if set(output_columns) == expected_set and len(output_columns) == len(set(output_columns)):
+        return output_columns
+
+    expected_by_canon: dict[str, list[str]] = {}
+    for name in expected_ordered_columns:
+        canon = _canonicalize_column_name(name)
+        expected_by_canon.setdefault(canon, []).append(name)
+
+    used: set[str] = set()
+    mapped: list[str] = []
+    for raw_name in output_columns:
+        if raw_name in expected_set and raw_name not in used:
+            mapped_name = raw_name
+        else:
+            canon = _canonicalize_column_name(raw_name)
+            candidates = expected_by_canon.get(canon, [])
+            if len(candidates) != 1:
+                return None
+            mapped_name = candidates[0]
+            if mapped_name in used:
+                return None
+        mapped.append(mapped_name)
+        used.add(mapped_name)
+
+    if set(mapped) != expected_set or len(mapped) != len(expected_set):
+        return None
+    return mapped
+
+
 def validate_table_response(
     tasks: list[dict],
     raw_text: str,
@@ -343,14 +419,16 @@ def validate_table_response(
         task = task_lookup[item.task_id]
         if item.table_id != task["table_id"]:
             raise ValueError("table_id mismatch in table response")
-        columns = set()
-        for row in task["sampled_rows"]:
-            columns.update(row.keys())
-        output_columns = [col.column for col in item.columns]
-        if set(output_columns) != columns:
-            raise ValueError("Column names mismatch in table response")
-        if len(output_columns) != len(set(output_columns)):
-            raise ValueError("Duplicate columns in table response")
+        expected_columns = _ordered_union_columns(task["sampled_rows"])
+        remapped = _remap_output_columns([col.column for col in item.columns], expected_columns)
+        if remapped is None:
+            output_columns = [col.column for col in item.columns]
+            raise ValueError(
+                "Column names mismatch in table response. "
+                f"Expected={expected_columns}; Got={output_columns}"
+            )
+        for index, canonical_name in enumerate(remapped):
+            item.columns[index].column = canonical_name
         for column in item.columns:
             normalized = _normalize_scores(
                 column.scores,
@@ -361,7 +439,27 @@ def validate_table_response(
             if normalized is not column.scores:
                 column.scores.clear()
                 column.scores.update(normalized)
-            _validate_scores(column.scores, allowed_types, require_all=require_all_scores)
+            if not require_all_scores:
+                _drop_unknown_score_keys(column.scores, allowed_types)
+                if not column.scores or all(value <= 0 for value in column.scores.values()):
+                    _repair_all_zero_scores(column.scores, allowed_types)
+            try:
+                _validate_scores(
+                    column.scores,
+                    allowed_types,
+                    require_all=require_all_scores,
+                    require_positive=require_all_scores,
+                )
+            except ValueError as exc:
+                if "At least one score must be > 0" in str(exc) and _repair_all_zero_scores(column.scores, allowed_types):
+                    _validate_scores(
+                        column.scores,
+                        allowed_types,
+                        require_all=require_all_scores,
+                        require_positive=require_all_scores,
+                    )
+                else:
+                    raise
 
     return parsed
 

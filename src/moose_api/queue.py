@@ -5,12 +5,9 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any
 
-import motor.motor_asyncio as motor
-from pymongo import ASCENDING
-from pymongo.errors import DuplicateKeyError
-
 from moose.config import Settings
 from moose.cpa import run_table_cpa
+from moose.ingest import ingest_schema_payload
 from moose.llm import LLMClient, create_client
 from moose.ner import run_table_annotate, run_tabular_ner, run_text_ner
 from moose.privacy import run_privacy_analyze
@@ -209,12 +206,14 @@ class MongoQueue(QueueBackend):
         self._shutdown: asyncio.Event | None = None
 
     async def ensure_indexes(self) -> None:
-        await self._queue.create_index([("created_at", ASCENDING)])
+        await self._queue.create_index([("created_at", 1)])
 
     def set_shutdown_event(self, event: asyncio.Event) -> None:
         self._shutdown = event
 
     async def enqueue(self, job_id: str) -> None:
+        from pymongo.errors import DuplicateKeyError
+
         doc = {"_id": job_id, "job_id": job_id, "created_at": utc_now()}
         try:
             await self._queue.insert_one(doc)
@@ -225,7 +224,7 @@ class MongoQueue(QueueBackend):
         while True:
             if self._shutdown and self._shutdown.is_set():
                 raise asyncio.CancelledError
-            doc = await self._queue.find_one_and_delete({}, sort=[("created_at", ASCENDING)])
+            doc = await self._queue.find_one_and_delete({}, sort=[("created_at", 1)])
             if doc:
                 return doc["job_id"]
             await asyncio.sleep(self._poll_interval)
@@ -315,13 +314,12 @@ class WorkerPool:
                     llm_client = create_client(job_settings)
                     owns_client = True
 
-                if llm_client is None:
-                    raise RuntimeError(
-                        "LLM client not configured. Provide per-request llm overrides with credentials "
-                        "(X-LLM-API-Key) or configure default provider credentials in env."
-                    )
-
                 if job.endpoint_type == "ner":
+                    if llm_client is None:
+                        raise RuntimeError(
+                            "LLM client not configured. Provide per-request llm overrides with credentials "
+                            "(X-LLM-API-Key) or configure default provider credentials in env."
+                        )
                     single_task = {"task_id": _SINGLE_TASK_ID, "text": job.payload["text"]}
                     raw = await run_text_ner(
                         [single_task],
@@ -332,6 +330,11 @@ class WorkerPool:
                     result = _unwrap_single_ner_result(raw)
 
                 elif job.endpoint_type == "tabular":
+                    if llm_client is None:
+                        raise RuntimeError(
+                            "LLM client not configured. Provide per-request llm overrides with credentials "
+                            "(X-LLM-API-Key) or configure default provider credentials in env."
+                        )
                     single_task = {
                         "task_id": _SINGLE_TASK_ID,
                         "table_id": job.payload.get("table_id") or _SINGLE_TABLE_ID,
@@ -346,6 +349,11 @@ class WorkerPool:
                     result = _unwrap_single_tabular_result(raw)
 
                 elif job.endpoint_type == "tabular_ner":
+                    if llm_client is None:
+                        raise RuntimeError(
+                            "LLM client not configured. Provide per-request llm overrides with credentials "
+                            "(X-LLM-API-Key) or configure default provider credentials in env."
+                        )
                     single_task = {
                         "task_id": _SINGLE_TASK_ID,
                         "table_id": job.payload.get("table_id") or _SINGLE_TABLE_ID,
@@ -363,6 +371,11 @@ class WorkerPool:
                     result = _unwrap_single_tabular_ner_result(raw)
 
                 elif job.endpoint_type == "privacy_analyze":
+                    if llm_client is None:
+                        raise RuntimeError(
+                            "LLM client not configured. Provide per-request llm overrides with credentials "
+                            "(X-LLM-API-Key) or configure default provider credentials in env."
+                        )
                     result = await run_privacy_analyze(
                         tasks=job.payload["tasks"],
                         policy_pack=job.payload.get("policy_pack"),
@@ -377,6 +390,11 @@ class WorkerPool:
                     )
 
                 elif job.endpoint_type == "cpa":
+                    if llm_client is None:
+                        raise RuntimeError(
+                            "LLM client not configured. Provide per-request llm overrides with credentials "
+                            "(X-LLM-API-Key) or configure default provider credentials in env."
+                        )
                     single_task = {
                         "task_id": _SINGLE_TASK_ID,
                         "table_id": job.payload.get("table_id") or _SINGLE_TABLE_ID,
@@ -395,6 +413,9 @@ class WorkerPool:
                         settings=self._settings,
                     )
                     result = _unwrap_single_cpa_result(raw)
+
+                elif job.endpoint_type == "schema_ingest":
+                    result = await ingest_schema_payload(job.payload, llm_client=llm_client)
 
                 else:
                     raise ValueError(f"Unknown endpoint_type: {job.endpoint_type}")
@@ -422,6 +443,11 @@ class WorkerPool:
 async def build_backends(settings: Settings) -> tuple[JobStore, QueueBackend, dict]:
     info: dict[str, Any] = {"queue_backend": "memory"}
     if settings.MOOSE_MONGO_URL:
+        try:
+            import motor.motor_asyncio as motor
+        except ImportError:
+            return InMemoryJobStore(), InMemoryQueue(settings.MOOSE_QUEUE_MAXSIZE), info
+
         timeout_ms = max(1, int(settings.MOOSE_MONGO_TIMEOUT_SECS * 1000))
         client = motor.AsyncIOMotorClient(
             settings.MOOSE_MONGO_URL,

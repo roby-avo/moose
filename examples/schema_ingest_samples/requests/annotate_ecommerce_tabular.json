@@ -1,0 +1,24 @@
+{
+  "table_id": "products",
+  "sampled_rows": [
+    {
+      "title": "Noise Cancelling Headphones X200",
+      "brand": "Acoustiq",
+      "sku": "ACQ-X200-BLK",
+      "price": "199.99",
+      "currency": "USD"
+    },
+    {
+      "title": "Wireless Keyboard K77",
+      "brand": "TypeWorks",
+      "sku": "TW-K77-WHT",
+      "price": "89.50",
+      "currency": "USD"
+    }
+  ],
+  "llm": {
+    "provider": "openrouter",
+    "model": "anthropic/claude-3.5-sonnet"
+  }
+}
+

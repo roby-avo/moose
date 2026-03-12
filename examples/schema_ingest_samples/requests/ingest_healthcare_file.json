@@ -1,0 +1,10 @@
+{
+  "name": "healthcare_pii",
+  "label": "Healthcare PII",
+  "description": "Healthcare-focused personal data vocabulary.",
+  "source_type": "file",
+  "source_path": "examples/schema_ingest_samples/schemas/healthcare_pii.json",
+  "supports_text": true,
+  "supports_table": true,
+  "score_mode": "sparse"
+}

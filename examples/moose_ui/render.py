@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import json
 from typing import Any
 
+import pandas as pd
 import streamlit as st
 
 
@@ -38,6 +40,8 @@ def render_job(job: dict[str, Any], *, show_raw: bool, show_legal_refs: bool, sh
 def _detect_kind(result: dict[str, Any]) -> str:
     if not isinstance(result, dict):
         return "unknown"
+    if "schema" in result and "mapping_strategy" in result and "activated" in result:
+        return "schema_ingest"
     if "entities" in result:
         return "text_ner"
     if "columns" in result:
@@ -69,6 +73,12 @@ def _detect_kind(result: dict[str, Any]) -> str:
 
 def _render_result(result: dict[str, Any], *, show_raw: bool, show_legal_refs: bool, show_legal_detail: bool, show_debug: bool) -> None:
     kind = _detect_kind(result)
+    if kind == "schema_ingest":
+        render_schema_ingest_result(result, show_raw=show_raw)
+        return
+    if kind == "text_ner":
+        render_text_ner_result(result, show_raw=show_raw)
+        return
     if kind == "privacy":
         render_privacy_result(result, show_legal_refs=show_legal_refs, show_legal_detail=show_legal_detail, show_raw=show_raw)
         return
@@ -85,6 +95,104 @@ def _render_result(result: dict[str, Any], *, show_raw: bool, show_legal_refs: b
     # fallback: keep your existing simple behavior
     st.subheader("Result")
     st.json(result) if show_raw else st.write(result)
+
+
+def render_schema_ingest_result(result: dict[str, Any], *, show_raw: bool) -> None:
+    st.subheader("Schema ingest")
+    st.markdown(
+        f"**schema:** `{result.get('schema')}`  \n"
+        f"**label:** `{result.get('label')}`  \n"
+        f"**type_count:** `{result.get('type_count')}`  \n"
+        f"**mapping_strategy:** `{result.get('mapping_strategy')}`  \n"
+        f"**activated:** `{result.get('activated')}`"
+    )
+    if result.get("activated"):
+        st.success("Schema is active and should now be visible in schema selectors.")
+    source = result.get("source")
+    if source:
+        _expander_json("Source details", source, show=True)
+    _expander_json("Raw schema ingest result", result, show=show_raw)
+
+
+def _entity_type_group(type_id: str | None) -> str:
+    t = str(type_id or "")
+    tl = t.lower()
+    if tl.startswith("dpv-pd:") or tl in {"ne:person", "ext:email", "ext:phone"}:
+        return "direct_identifier"
+    if "ip" in tl or tl in {"ext:ipv4", "ext:ipv6"}:
+        return "network_identifier"
+    if "recipient" in tl or "processor" in tl or tl.startswith("dpv:recipient") or tl.startswith("dpv:dataprocessor"):
+        return "recipient"
+    if "date" in tl or "age" in tl or "postal" in tl:
+        return "quasi_identifier"
+    return "other"
+
+
+def _group_color(group: str) -> str:
+    return {
+        "direct_identifier": "#f8d7da",
+        "network_identifier": "#fde2c8",
+        "recipient": "#d9edf7",
+        "quasi_identifier": "#fff3cd",
+        "other": "#f1f3f5",
+    }.get(group, "#f1f3f5")
+
+
+def render_text_ner_result(result: dict[str, Any], *, show_raw: bool) -> None:
+    st.subheader("Text entities")
+
+    items = result.get("results")
+    if not isinstance(items, list):
+        items = [result]
+
+    rows: list[dict[str, Any]] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        task_id = item.get("task_id")
+        entities = item.get("entities", []) or []
+        for ent in entities:
+            if not isinstance(ent, dict):
+                continue
+            rows.append(
+                {
+                    "task_id": task_id,
+                    "start": ent.get("start"),
+                    "end": ent.get("end"),
+                    "text": ent.get("text"),
+                    "type_id": ent.get("type_id"),
+                    "type_group": _entity_type_group(ent.get("type_id")),
+                    "coarse_type_id": ent.get("coarse_type_id"),
+                    "confidence": ent.get("confidence"),
+                }
+            )
+
+    if rows:
+        df = pd.DataFrame(rows)
+        if not df.empty and "type_group" in df.columns:
+            st.dataframe(
+                df.style.apply(
+                    lambda r: [
+                        f"background-color: {_group_color(str(r.get('type_group', 'other')))}"
+                        if c in {"type_id", "type_group"}
+                        else ""
+                        for c in df.columns
+                    ],
+                    axis=1,
+                ),
+                use_container_width=True,
+            )
+            st.caption(
+                "Color legend: red=direct identifier, orange=network identifier, blue=recipient, yellow=quasi identifier."
+            )
+        else:
+            st.dataframe(df, use_container_width=True)
+    else:
+        st.info("No entities returned.")
+
+    if result.get("warnings"):
+        _expander_json("Warnings", result.get("warnings"), show=True)
+    _expander_json("Raw text NER result", result, show=show_raw)
 
 
 def render_cpa_result(result: dict[str, Any], *, show_debug: bool, show_raw: bool) -> None:
@@ -207,9 +315,99 @@ def render_tabular_ner_result(result: dict[str, Any], *, show_raw: bool) -> None
     _expander_json("Raw tabular NER result", result, show=show_raw)
 
 
+def _render_privacy_extraction(task: dict[str, Any], *, show_raw: bool) -> None:
+    extraction = task.get("extraction")
+    if not isinstance(extraction, dict):
+        return
+
+    kind = task.get("kind")
+    if kind == "text":
+        ents = extraction.get("entities", []) or []
+        if ents:
+            rows: list[dict[str, Any]] = []
+            for ent in ents:
+                if not isinstance(ent, dict):
+                    continue
+                rows.append(
+                    {
+                        "text": ent.get("text"),
+                        "type_id": ent.get("type_id"),
+                        "confidence": ent.get("confidence"),
+                        "start": ent.get("start"),
+                        "end": ent.get("end"),
+                    }
+                )
+            if rows:
+                with st.expander(f"Extraction entities ({len(rows)})", expanded=False):
+                    st.dataframe(rows, use_container_width=True)
+    elif kind == "table":
+        cols = extraction.get("columns", []) or []
+        if cols:
+            rows = []
+            for col in cols:
+                if not isinstance(col, dict):
+                    continue
+                rows.append(
+                    {
+                        "column": col.get("column"),
+                        "type_id": col.get("type_id"),
+                        "coarse_type_id": col.get("coarse_type_id"),
+                        "fine_type_id": col.get("fine_type_id"),
+                        "confidence": col.get("confidence"),
+                    }
+                )
+            if rows:
+                with st.expander(f"Extraction typed columns ({len(rows)})", expanded=False):
+                    st.dataframe(rows, use_container_width=True)
+
+    _expander_json("Extraction (raw)", extraction, show=show_raw)
+
+
+def _render_privacy_reports(result: dict[str, Any]) -> None:
+    reports = result.get("reports")
+    if not isinstance(reports, dict):
+        return
+
+    human = reports.get("human_readable") if isinstance(reports.get("human_readable"), dict) else {}
+    machine = reports.get("machine_readable") if isinstance(reports.get("machine_readable"), dict) else {}
+
+    human_content = str(human.get("content") or "")
+    machine_content = machine.get("content") if isinstance(machine.get("content"), dict) else {}
+
+    if not human_content and not machine_content:
+        return
+
+    st.markdown("### Reports")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.download_button(
+            "Download human report (.md)",
+            data=human_content or "# Privacy Analysis Report\n",
+            file_name="privacy_report.md",
+            mime="text/markdown",
+            use_container_width=True,
+        )
+    with col2:
+        st.download_button(
+            "Download machine report (.json)",
+            data=json.dumps(machine_content or {}, indent=2, ensure_ascii=True),
+            file_name="privacy_report.json",
+            mime="application/json",
+            use_container_width=True,
+        )
+
+    if human_content:
+        with st.expander("Human report preview", expanded=False):
+            st.markdown(human_content)
+    if machine_content:
+        with st.expander("Machine report preview", expanded=False):
+            st.json(machine_content)
+
+
 def render_privacy_result(result: dict[str, Any], *, show_legal_refs: bool, show_legal_detail: bool, show_raw: bool) -> None:
     st.subheader("Privacy findings")
     st.caption(f"profile: {result.get('profile')} | policy_pack: {result.get('policy_pack')}")
+    _render_privacy_reports(result)
 
     for task in result.get("results", []) or []:
         st.markdown(f"### {task.get('kind')} task `{task.get('task_id')}`")
@@ -219,47 +417,95 @@ def render_privacy_result(result: dict[str, Any], *, show_legal_refs: bool, show
             st.info("No findings.")
             continue
 
-        table_rows = []
+        severity_counts: dict[str, int] = {}
+        status_counts: dict[str, int] = {}
+        for f in findings:
+            sev = str(f.get("severity") or "unknown")
+            stat = str(f.get("status") or "unknown")
+            severity_counts[sev] = severity_counts.get(sev, 0) + 1
+            status_counts[stat] = status_counts.get(stat, 0) + 1
+
+        sev_summary = ", ".join(f"{k}:{v}" for k, v in severity_counts.items()) or "none"
+        status_summary = ", ".join(f"{k}:{v}" for k, v in status_counts.items()) or "none"
+        st.caption(f"{len(findings)} finding(s) | severity [{sev_summary}] | status [{status_summary}]")
+
+        summary_rows = []
         for f in findings:
             row = {
                 "severity": f.get("severity"),
                 "status": f.get("status"),
+                "assessment": f.get("assessment", "compliance_risk"),
                 "rule_id": f.get("rule_id"),
                 "issue": f.get("issue"),
-                "recommended_actions": ", ".join(f.get("recommended_actions") or []),
-                "rationale": f.get("rationale"),
+                "actions": ", ".join(f.get("recommended_actions") or []),
             }
             if show_legal_refs:
-                # show short labels if detail available, otherwise IDs
-                if show_legal_detail and f.get("legal_refs_detail"):
-                    row["legal_refs"] = "; ".join([d.get("label") or d.get("id") for d in f["legal_refs_detail"]])
-                else:
-                    row["legal_refs"] = "; ".join(f.get("legal_refs") or [])
-            table_rows.append(row)
+                row["legal_ref_count"] = len(f.get("legal_refs") or [])
+            summary_rows.append(row)
 
-        st.dataframe(table_rows, use_container_width=True)
+        st.dataframe(summary_rows, use_container_width=True)
 
-        with st.expander("Details (findings)", expanded=False):
-            for f in findings:
-                st.markdown(f"**{f.get('rule_id')}** — {f.get('issue')}")
-                st.caption(f"severity={f.get('severity')} status={f.get('status')}")
+        for idx, f in enumerate(findings, start=1):
+            sev = str(f.get("severity") or "unknown").upper()
+            stat = str(f.get("status") or "unknown")
+            title = f"{idx}. [{sev}] [{stat}] {f.get('rule_id')} - {f.get('issue')}"
+            with st.expander(title, expanded=False):
+                st.caption(
+                    f"assessment={f.get('assessment', 'compliance_risk')} | "
+                    f"severity={f.get('severity')} | status={f.get('status')}"
+                )
                 st.write(f.get("rationale"))
 
-                if f.get("recommended_actions"):
-                    st.write("Actions:", f.get("recommended_actions"))
+                actions = f.get("recommended_actions") or []
+                if actions:
+                    st.write("Recommended actions:", ", ".join(str(a) for a in actions))
+                if f.get("violation_reasons"):
+                    st.write("Violation signals:", "; ".join(str(x) for x in (f.get("violation_reasons") or [])))
 
-                _expander_json("Evidence", f.get("evidence"), show=True)
+                mitigation = f.get("mitigation_plan") or []
+                if mitigation:
+                    rows = []
+                    for step in mitigation:
+                        if not isinstance(step, dict):
+                            continue
+                        rows.append(
+                            {
+                                "action_id": step.get("action_id"),
+                                "label": step.get("label"),
+                                "priority": step.get("priority"),
+                                "targets": ", ".join(step.get("targets") or []),
+                            }
+                        )
+                    if rows:
+                        st.dataframe(rows, use_container_width=True)
+
+                if f.get("evidence"):
+                    _expander_json("Evidence", f.get("evidence"), show=True)
 
                 if show_legal_refs:
                     if show_legal_detail:
-                        _expander_json("Legal refs (detail)", f.get("legal_refs_detail"), show=True)
+                        details = f.get("legal_refs_detail") or []
+                        if isinstance(details, list) and details:
+                            detail_rows = []
+                            for d in details:
+                                if not isinstance(d, dict):
+                                    continue
+                                detail_rows.append(
+                                    {
+                                        "id": d.get("id"),
+                                        "label": d.get("label"),
+                                        "kind": d.get("kind"),
+                                        "number": d.get("number"),
+                                    }
+                                )
+                            if detail_rows:
+                                st.dataframe(detail_rows, use_container_width=True)
                     else:
-                        _expander_json("Legal refs (ids)", f.get("legal_refs"), show=True)
+                        refs = f.get("legal_refs") or []
+                        if refs:
+                            st.write("Legal refs:", ", ".join(str(x) for x in refs))
 
-                st.divider()
-
-        if "extraction" in task:
-            _expander_json("Extraction (raw)", task.get("extraction"), show=show_raw)
+        _render_privacy_extraction(task, show_raw=show_raw)
 
     if result.get("warnings"):
         _expander_json("Warnings", result.get("warnings"), show=True)

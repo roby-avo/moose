@@ -7,7 +7,7 @@
         "include_extraction": true,
         "policy_pack": "gdpr_basic",
         "scan_schema": "dpv_pd",
-        "table_schema": "sti",
+        "table_schema": "dpv_pd",
         "text_schema": "dpv_pd"
       },
       "description": "Balanced accuracy/cost. Uses dpv_pd + assessor; escalates selectively.",
@@ -27,7 +27,7 @@
         "include_extraction": true,
         "policy_pack": "gdpr_basic",
         "scan_schema": "dpv",
-        "table_schema": "sti",
+        "table_schema": "dpv",
         "text_schema": "dpv"
       },
       "description": "Deep semantic privacy analysis (slow). Uses full DPV by default.",
@@ -39,7 +39,7 @@
         "include_extraction": true,
         "policy_pack": "gdpr_basic",
         "scan_schema": "dpv_pd",
-        "table_schema": "sti",
+        "table_schema": "dpv_pd",
         "text_schema": "dpv_pd"
       },
       "description": "Fast, low-cost privacy scan. Uses small vocabularies and rules only.",

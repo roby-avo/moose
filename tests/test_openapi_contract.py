@@ -25,6 +25,9 @@ def test_openapi_has_current_core_post_endpoints() -> None:
         "/tabular/cpa",
         "/schemas/{schema}/tabular/cpa",
         "/privacy/analyze",
+        "/schemas/ingest/preview",
+        "/jobs/{job_id}/privacy-report",
+        "/privacy/reports/schema",
     }
     assert expected.issubset(paths)
 
