@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Moose Architecture</title>
+  <desc id="desc">High-level architecture diagram for Moose showing interfaces, API, worker pool, semantic assets, model backends, persistence, and outputs.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5f8fc"/>
+      <stop offset="100%" stop-color="#e8eef6"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 34px Arial, sans-serif; fill: #17324d; }
+      .label { font: 700 22px Arial, sans-serif; fill: #17324d; }
+      .body { font: 500 18px Arial, sans-serif; fill: #27496b; }
+      .box { fill: #ffffff; stroke: #2f6ea5; stroke-width: 2.5; rx: 18; }
+      .accent { fill: #dbe9f6; stroke: #2f6ea5; stroke-width: 2.5; rx: 18; }
+      .line { stroke: #2f6ea5; stroke-width: 3; fill: none; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f6ea5"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="680" fill="url(#bg)"/>
+  <text x="60" y="70" class="title">Moose Architecture</text>
+
+  <rect x="60" y="120" width="220" height="90" class="accent"/>
+  <text x="90" y="160" class="label">Interfaces</text>
+  <text x="90" y="190" class="body">FastAPI docs and</text>
+  <text x="90" y="215" class="body">Streamlit demo</text>
+
+  <rect x="360" y="120" width="260" height="110" class="box"/>
+  <text x="395" y="165" class="label">Moose API</text>
+  <text x="395" y="195" class="body">Async job submission,</text>
+  <text x="395" y="220" class="body">schema routing, metadata</text>
+
+  <rect x="710" y="100" width="400" height="130" class="box"/>
+  <text x="745" y="145" class="label">Semantic and Privacy Assets</text>
+  <text x="745" y="175" class="body">coarse/fine NER, DPV, STI, schema.org,</text>
+  <text x="745" y="200" class="body">policy packs, privacy profiles, user schemas</text>
+
+  <rect x="360" y="310" width="260" height="120" class="accent"/>
+  <text x="392" y="355" class="label">Worker Pool</text>
+  <text x="392" y="385" class="body">Queued execution for</text>
+  <text x="392" y="410" class="body">annotation and analysis jobs</text>
+
+  <rect x="60" y="500" width="260" height="110" class="box"/>
+  <text x="95" y="545" class="label">Model Backends</text>
+  <text x="95" y="575" class="body">OpenRouter, Ollama,</text>
+  <text x="95" y="600" class="body">DeepInfra, DeepSeek</text>
+
+  <rect x="470" y="500" width="230" height="110" class="box"/>
+  <text x="500" y="545" class="label">Persistence</text>
+  <text x="500" y="575" class="body">MongoDB job store</text>
+  <text x="500" y="600" class="body">and queue state</text>
+
+  <rect x="820" y="500" width="300" height="110" class="accent"/>
+  <text x="855" y="545" class="label">Outputs</text>
+  <text x="855" y="575" class="body">NER, table typing, CPA,</text>
+  <text x="855" y="600" class="body">privacy reports</text>
+
+  <path d="M 280 165 L 360 165" class="line" marker-end="url(#arrow)"/>
+  <path d="M 620 175 L 710 175" class="line" marker-end="url(#arrow)"/>
+  <path d="M 490 230 L 490 310" class="line" marker-end="url(#arrow)"/>
+  <path d="M 360 370 L 190 500" class="line" marker-end="url(#arrow)"/>
+  <path d="M 490 430 L 585 500" class="line" marker-end="url(#arrow)"/>
+  <path d="M 620 370 L 820 500" class="line" marker-end="url(#arrow)"/>
+</svg>
