@@ -1,6 +1,12 @@
-# Moose
+<p align="center">
+  <img src="./docs/images/SINTEF_logo-JPG-blue-RGB.jpg" alt="SINTEF logo" width="220">
+</p>
 
-![Moose](src/moose_api/static/moose-readme.png)
+<h1 align="center">Moose</h1>
+
+<p align="center">
+  <img src="./src/moose_api/static/moose-readme.png" alt="Moose demo" width="900">
+</p>
 
 Moose is an async API + Streamlit demo for:
 - text annotation (NER),
